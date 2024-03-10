@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
+import 'package:npark_buddy/login.dart';
 
-class Login extends StatefulWidget {
-  Login({super.key});
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +35,7 @@ class _LoginState extends State<Login> {
           SizedBox(height: 100),
           Center(
             child: Text(
-              'Welcome back',
+              'Register',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 35,
@@ -50,17 +44,27 @@ class _LoginState extends State<Login> {
           ),
           SizedBox(height: 10),
           Text(
-            'Login to your account',
+            'Create your new account',
             style: TextStyle(
               fontSize: 20,
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(70, 50, 70, 10),
+            padding: EdgeInsets.fromLTRB(70, 20, 70, 10),
             child: TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Username or email',
+                hintText: 'Username',
+              ),
+              style: TextStyle(height: 0.1),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(70, 0, 70, 10),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'E-mail',
               ),
               style: TextStyle(height: 0.1),
             ),
@@ -79,10 +83,11 @@ class _LoginState extends State<Login> {
           Padding(
             padding: EdgeInsets.fromLTRB(70, 0, 70, 20),
             child: Align(
-              alignment: Alignment.centerRight,
               child: Text(
-                  'Forgot Password ?',
-                style: TextStyle(color: Color(0xFF023307),fontWeight: FontWeight.w500),
+                'By signing up you agree to our Terms & Conditions and Privacy Policy',
+                style: TextStyle(
+                  fontSize: 11,
+                ),
               ),
             ),
           ),
@@ -101,29 +106,32 @@ class _LoginState extends State<Login> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 )),
             child: Text(
-              'Log In',
+              'Sign Up',
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
             ),
           ),
           Row(
             children: [
               Padding(
-                  padding: EdgeInsets.fromLTRB(80, 200, 0, 20),
+                  padding: EdgeInsets.fromLTRB(100, 150, 0, 20),
                   child: Text(
-                    'Don\'t have an Account? ',
+                    'Already have an Account? ',
                     style: TextStyle(fontSize: 14),
                   )),
               GestureDetector(
                 child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 200, 0, 20),
+                    padding: EdgeInsets.fromLTRB(0, 150, 0, 20),
                     child: Text(
-                      'Create Account',
-                      style: TextStyle(fontSize: 14, color: Color(0xFF5F7B5D)),
+                      'Log in',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFFF38808),
+                      ),
                     )),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Register()),
+                    MaterialPageRoute(builder: (context) => Login()),
                   );
                 },
               ),

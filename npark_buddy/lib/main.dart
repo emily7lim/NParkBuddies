@@ -52,7 +52,7 @@ class Landing extends StatelessWidget {
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
                 ),
-              ),v
+              ),
             ),
           ),
           SizedBox(height: 50),
