@@ -15,21 +15,34 @@ class Landing extends StatelessWidget {
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),
-              margin: EdgeInsets.fromLTRB(0, 100, 0, 0),
-              child: Text(
-                'ParkBuddy',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(50,0,0,0),
+                    child: Container(
+                      child: Image.asset(
+                        'assets/logo.png',
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'ParkBuddy',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
           SizedBox(height: 50),
           Center(
             child: Container(
-              padding: const EdgeInsets.fromLTRB(90, 0, 90, 0),
+              padding: const EdgeInsets.fromLTRB(90, 0, 90, 50),
               child: Text(
                 'Your one-stop app for parks in Singapore',
                 textAlign: TextAlign.center,
@@ -81,10 +94,24 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Color(0xFCF9F9E8),
       appBar: AppBar(
-        title: Text('ParkBuddy'),
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(60,0,0,0),
+              child: Container(
+                child: Image.asset(
+                    'assets/logo.png',
+                  height: 50,
+                  width: 50,
+                ),
+              ),
+            ),
+            Text('ParkBuddy'),
+          ],
+        ),
         backgroundColor: Colors.green[900],
         foregroundColor: Colors.white,
-        centerTitle: true,
+        toolbarHeight: 100,
       ),
 
       body: Column(
