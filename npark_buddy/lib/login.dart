@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'btmNavBar.dart';
 import 'resetPW.dart';
 import 'allStyle.dart';
 
@@ -99,10 +100,10 @@ class _LoginState extends State<Login> {
           ),
           TextButton(
             onPressed: () {
-              // Navigator.push(
-              // context,
-              // MaterialPageRoute(builder: (context) => Home()),
-              // );
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+              );
             },
             style: TextButton.styleFrom(
                 minimumSize: const Size(280, 0),
