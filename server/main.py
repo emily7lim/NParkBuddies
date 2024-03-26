@@ -1,8 +1,19 @@
 """ Main module for the server. """
+# Install required packages manually
+# Run the following command in the terminal:
+# pip install -r requirements.txt
+
 from flask import Flask, request, jsonify
-from database.database import park_db, Park, Facility, init_db
+from flask_sqlalchemy import SQLAlchemy
+from database.database import park_db, init_db
+from model.facility import Facility, FacilityType
+from model.park import Park
 
 app = Flask(__name__)
+
+# Configure database URL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parks.db'
+app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
 
 @app.route('/')
 def hello():
@@ -147,5 +158,5 @@ def delete_facility(park_id, facility_id):
     return jsonify(facility)    
 
 if __name__ == '__main__':
-    init_db()
+    init_db(app)
     app.run(host='127.0.0.1', port=5000, debug=True)

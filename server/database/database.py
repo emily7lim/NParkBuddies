@@ -1,17 +1,10 @@
-""" Module to define the database models for the parks and facilities"""
+from enum import Enum
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
 from model.facility import FacilityType
 
-# Create Flask application instance
-app = Flask(__name__)
+park_db = SQLAlchemy()
 
-# Configure databases
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parks.db'
-park_db = SQLAlchemy(app)
-
-app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
-
+""" Module to define the database models for the parks and facilities"""
 class Facility(park_db.Model):
     """ Class to represent a facility
 
@@ -54,6 +47,10 @@ class Park(park_db.Model):
     def __repr__(self):
         return f'<Park {self.id}>'
 
-def init_db():
+def init_db(app):
     """ Function to initialize the database"""
-    park_db.create_all()
+    park_db.init_app(app)
+    with app.app_context():
+        park_db.create_all()
+        park_db.session.commit()
+        print('Database initialized')
