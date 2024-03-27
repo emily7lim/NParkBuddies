@@ -1,26 +1,22 @@
 import logging
+import sys
 
-def prepare_logger() -> logging.Logger:
-    # Creates a logger that is able to both print to console and save to file
-    log_format = logging.Formatter(
-        '%(asctime)s :: %(levelname)s :: %(message)s')
-    
-    logger =   logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
-    
-    if not logger.hasHandlers():
-        # Create console handler
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.DEBUG)
-        console_handler.setFormatter(log_format)
-        
-        # Create file handler
-        file_handler = logging.FileHandler('logfile.txt')
-        file_handler.setLevel(logging.DEBUG)
-        file_handler.setFormatter(log_format)
-        
-        # Add handlers to logger
-        logger.addHandler(console_handler)
-        logger.addHandler(file_handler)
-    
+# Configure logger
+def prepare_logger():
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    # Create file handler
+    file_handler = logging.FileHandler('server/server.log')
+    file_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    # Create console handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
     return logger

@@ -3,13 +3,18 @@
 # Run the following command in the terminal:
 # pip install -r requirements.txt
 
-import logging
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from classes.facility import FacilityType
 from logger import prepare_logger
+import requests
+import time
+import threading
+import signal
+import sys
 
 app = Flask(__name__)
+
 logger = prepare_logger()
 
 # Configure database URL
@@ -18,7 +23,9 @@ app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
 
 park_db = SQLAlchemy(app)
 
+
 """ Module to define the database models for the parks and facilities"""
+'''
 class Facility(park_db.Model):
     """ Class to represent a facility
 
@@ -38,11 +45,11 @@ class Facility(park_db.Model):
     num_ratings = park_db.Column(park_db.Integer)
     reviews = park_db.Column(park_db.String)
 
-    logger.info('Facility db ready')
+    #logger.info('Facility db ready')
 
     def __repr__(self):
         return f'<Facility {self.id}>'
-
+'''
 class Park(park_db.Model):
     """ Class to represent a park
 
@@ -60,7 +67,7 @@ class Park(park_db.Model):
     latitude = park_db.Column(park_db.Float)
     facilities = park_db.relationship('Facility', backref='park', lazy=True)
 
-    logger.info('Park db ready')
+    #logger.info('Park db ready')
 
     # Display header rows for the database
     def __str__(self):
@@ -69,7 +76,6 @@ class Park(park_db.Model):
     def __repr__(self):
         return f'<Park {self.id}>'
 
-'''
 @app.route('/')
 def hello():
     """ Method to say hello
@@ -79,6 +85,7 @@ def hello():
     """
     return 'This is the server for NParkBuddy'
 
+'''
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
     """ API endpoint to get all parks
@@ -213,7 +220,60 @@ def delete_facility(park_id, facility_id):
     return jsonify(facility)
 '''
 
-if __name__ == '__main__':
-    logger.info('Starting server...')
+# Flag to check if the server has been initialized
+server_initialized = False
 
-    app.run(host='127.0.0.1', port=5000, debug=True)
+# Flag to check if the server has been shutdown
+server_shutdown = False
+
+@app.before_request
+def init_server():
+    """ Method to initialize the server
+    """
+    global server_initialized
+    if not server_initialized:
+        logger.info('Initializing server...')
+        park_db.create_all()
+        server_initialized = True
+        logger.info('Server initialized')
+
+def trigger_request():
+    """ Method to trigger a request to the server
+    """
+    try:
+        logger.info('Triggering request to server...')
+        time.sleep(1)
+        response = requests.get('http://127.0.0.1:5000/')
+        if response.status_code == 200:
+            logger.info('Server is running')
+        else:
+            logger.error('Server is not running')
+    except requests.exceptions.ConnectionError:
+        logger.error('Error connecting to server')
+
+# Function to handle shutdown signal
+def shutdown_signal_handler(signal, frame):
+    logger.info('Shutting down server...')
+
+# Register signal handler for SIGINT (Ctrl+C) and SIGTERM
+signal.signal(signal.SIGINT, shutdown_signal_handler)
+signal.signal(signal.SIGTERM, shutdown_signal_handler)
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_signal_handler(signal.SIGINT, None)
+    global server_shutdown
+    server_shutdown = True
+    return 'Server shutting down...'
+
+if __name__ == '__main__':
+    flask_thread = threading.Thread(target=app.run, kwargs={'host': '127.0.0.1', 'port' : 5000, 'debug': True, 'use_reloader': False})
+    flask_thread.start()
+
+    trigger_request()
+
+    flask_thread.join()
+
+    if server_shutdown:
+        logger.info('Server shutdown complete')
+        sys.exit(0)
