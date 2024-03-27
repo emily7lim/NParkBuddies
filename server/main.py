@@ -3,18 +3,73 @@
 # Run the following command in the terminal:
 # pip install -r requirements.txt
 
+import logging
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from database.database import park_db, init_db
-from model.facility import Facility, FacilityType
-from model.park import Park
+from classes.facility import FacilityType
+from logger import prepare_logger
 
 app = Flask(__name__)
+logger = prepare_logger()
 
 # Configure database URL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parks.db'
 app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
 
+park_db = SQLAlchemy(app)
+
+""" Module to define the database models for the parks and facilities"""
+class Facility(park_db.Model):
+    """ Class to represent a facility
+
+    Args:
+        park_db (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    __bind_key__ = 'facilities'
+    __tablename__ = 'facilities'
+
+    id = park_db.Column(park_db.Integer, primary_key=True)
+    park_id = park_db.Column(park_db.Integer, park_db.ForeignKey('parks.id'))
+    type = park_db.Column(park_db.Enum(FacilityType))
+    avg_rating = park_db.Column(park_db.Float)
+    num_ratings = park_db.Column(park_db.Integer)
+    reviews = park_db.Column(park_db.String)
+
+    logger.info('Facility db ready')
+
+    def __repr__(self):
+        return f'<Facility {self.id}>'
+
+class Park(park_db.Model):
+    """ Class to represent a park
+
+    Args:
+        park_db (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    __tablename__ = 'parks'
+
+    id = park_db.Column(park_db.Integer, primary_key=True)
+    name = park_db.Column(park_db.String)
+    longitude = park_db.Column(park_db.Float)
+    latitude = park_db.Column(park_db.Float)
+    facilities = park_db.relationship('Facility', backref='park', lazy=True)
+
+    logger.info('Park db ready')
+
+    # Display header rows for the database
+    def __str__(self):
+        return f'<Park {self.id} {self.name} {self.latitude} {self.longitude}>'
+
+    def __repr__(self):
+        return f'<Park {self.id}>'
+
+'''
 @app.route('/')
 def hello():
     """ Method to say hello
@@ -32,7 +87,7 @@ def get_parks():
     """
     parks_data = Park.query.all() # Fetch all parks from the database
     return jsonify(parks_data)
-    
+
 @app.route('/api/parks/<int:park_id>', methods=['GET'])
 def get_park(park_id):
     """ API endpoint to get a park by id
@@ -155,8 +210,10 @@ def delete_facility(park_id, facility_id):
     facility = Facility.query.get(facility_id)
     park_db.session.delete(facility)
     park_db.session.commit()
-    return jsonify(facility)    
+    return jsonify(facility)
+'''
 
 if __name__ == '__main__':
-    init_db(app)
+    logger.info('Starting server...')
+
     app.run(host='127.0.0.1', port=5000, debug=True)

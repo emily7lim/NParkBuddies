@@ -1,56 +1,134 @@
-from enum import Enum
-from flask_sqlalchemy import SQLAlchemy
-from model.facility import FacilityType
+""" This file reads geojson data from the database and returns it as a JSON response
+"""
+import json
+from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import text
 
-park_db = SQLAlchemy()
+# Create a SQLAlchemy engine
+engine = create_engine('sqlite:///parks.db')
 
-""" Module to define the database models for the parks and facilities"""
-class Facility(park_db.Model):
-    """ Class to represent a facility
+base = declarative_base()
 
-    Args:
-        park_db (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
-    __bind_key__ = 'facilities'
-    __tablename__ = 'facilities'
-
-    id = park_db.Column(park_db.Integer, primary_key=True)
-    park_id = park_db.Column(park_db.Integer, park_db.ForeignKey('parks.id'))
-    type = park_db.Column(park_db.Enum(FacilityType))
-    avg_rating = park_db.Column(park_db.Float)
-    num_ratings = park_db.Column(park_db.Integer)
-    reviews = park_db.Column(park_db.String)
-
-    def __repr__(self):
-        return f'<Facility {self.id}>'
-
-class Park(park_db.Model):
-    """ Class to represent a park
+class GeoData(base):
+    """ Summary of the class
 
     Args:
-        park_db (_type_): _description_
-
-    Returns:
-        _type_: _description_
+        base (_type_): _description_
     """
     __tablename__ = 'parks'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
 
-    id = park_db.Column(park_db.Integer, primary_key=True)
-    name = park_db.Column(park_db.String)
-    latitude = park_db.Column(park_db.Float)
-    longitude = park_db.Column(park_db.Float)
-    facilities = park_db.relationship('Facility', backref='park', lazy=True)
+# Create tables in database
+base.metadata.create_all(engine)
 
-    def __repr__(self):
-        return f'<Park {self.id}>'
+# Read GEOjson file
+def read_geojson(filename):
+    '''Reads a GEOjson file and returns the data as a dictionary
 
-def init_db(app):
-    """ Function to initialize the database"""
-    park_db.init_app(app)
-    with app.app_context():
-        park_db.create_all()
-        park_db.session.commit()
-        print('Database initialized')
+    Args:
+        filename (str): The name of the file to read
+
+    Returns:
+        data (dict): The data read from the file
+    '''
+    with open(filename, 'r') as file:
+        data = json.load(file)
+    return data
+
+# Parse GEOjson data and store in database
+def parse_and_store(data):
+    '''Parses GEOjson data and stores it in the database
+
+    Args:
+        data (dict): The data to parse and store
+
+    Raises:
+        ValueError: If the park name is not found
+    '''
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    for index, entry in enumerate(data['features']):
+        id = index+1
+        name = extract_park_name(entry)
+        if name:
+            longitude = entry['geometry']['coordinates'][0]
+            latitude = entry['geometry']['coordinates'][1]
+
+            # Insert ID value along with other data into the 'parks' table
+            sql = text('INSERT INTO parks (id, name, latitude, longitude) VALUES (:id, :name, :longitude, :latitude)')
+            session.execute(sql, {'id': id, 'name': name, 'longitude': longitude, 'latitude': latitude})
+        else:
+            raise ValueError('Park name not found')
+
+    session.commit()
+    session.close()
+
+# Parse GeoJSON data and extract the park name
+def extract_park_name(geojson_entry):
+    ''' Extracts the park name from a GEOjson entry
+
+    Args:
+        geojson_entry (dict): The GEOjson entry to extract the park name from
+
+    Returns:
+        name_tag (str): The park name
+    '''
+    properties = geojson_entry.get('properties', {})
+    description = properties.get('Description', '')
+    start = description.find('NAME')
+    description = description[start+14:]
+    end = description.find('<')
+    name_tag = description[:end]
+    if name_tag:
+        return name_tag
+    else:
+        return None
+
+def display_parks():
+    ''' Displays all parks in the database
+    '''
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    sql = text('SELECT * FROM parks')
+    result = session.execute(sql)
+
+    # Print results by park
+    for row in result:
+        print(row)
+
+    session.close()
+
+def delete_parks():
+    ''' Deletes all parks from the database
+    '''
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    sql = text('DELETE FROM parks')
+    session.execute(sql)
+
+    session.commit()
+    session.close()
+
+if __name__ == '__main__':
+    data = read_geojson('Parks.geojson')
+
+    function = input('Enter the function to run'
+                     '\n1: Parse and store data'
+                     '\n2: Display parks'
+                     '\n3: Delete parks\n')
+
+    if function == '1':
+        parse_and_store(data)
+    elif function == '3':
+        delete_parks()
+
+    display_parks()
