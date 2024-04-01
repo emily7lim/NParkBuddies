@@ -31,72 +31,74 @@ class ResetPW extends StatelessWidget {
         toolbarHeight: 110,
       ),
 
-      body: Column(
-        children: <Widget>[
-          const SizedBox(height: 190),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 70, 0),
-            child: Text(
-              'Create New Password',
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                fontSize: 20,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 190),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 70, 0),
+              child: Text(
+                'Create New Password',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 85, 0),
-            child: Text(
-              'Enter new password',
-              style: TextStyle(
-                fontSize: 20,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 85, 0),
+              child: Text(
+                'Enter new password',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(70, 20, 70, 10),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                enabledBorder: TextFieldStyle.unclickedTF,
-                focusedBorder: TextFieldStyle.clickedTF,
-                hintText: 'Enter New password',
+            const Padding(
+              padding: EdgeInsets.fromLTRB(70, 20, 70, 10),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  enabledBorder: TextFieldStyle.unclickedTF,
+                  focusedBorder: TextFieldStyle.clickedTF,
+                  hintText: 'Enter New password',
+                ),
+                style: TextStyle(height: 0.1),
               ),
-              style: TextStyle(height: 0.1),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(70, 0, 70, 30),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                enabledBorder: TextFieldStyle.unclickedTF,
-                focusedBorder: TextFieldStyle.clickedTF,
-                hintText: 'Confirm password',
+            const Padding(
+              padding: EdgeInsets.fromLTRB(70, 0, 70, 30),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  enabledBorder: TextFieldStyle.unclickedTF,
+                  focusedBorder: TextFieldStyle.clickedTF,
+                  hintText: 'Confirm password',
+                ),
+                style: TextStyle(height: 0.1),
               ),
-              style: TextStyle(height: 0.1),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Login()),
-              );
-            },
-            style: TextButton.styleFrom(
-                minimumSize: const Size(280, 0),
-                backgroundColor: Colors.green[900],
-                foregroundColor: Colors.white,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                )),
-            child: const Text(
-              'Submit',
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              },
+              style: TextButton.styleFrom(
+                  minimumSize: const Size(280, 0),
+                  backgroundColor: Colors.green[900],
+                  foregroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  )),
+              child: const Text(
+                'Submit',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       // Image(
       //   image: AssetImage(),
