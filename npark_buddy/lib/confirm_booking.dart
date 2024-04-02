@@ -34,129 +34,131 @@ class ConfirmBooking extends StatelessWidget {
         toolbarHeight: 110,
       ),
 
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(0,100,0,50),
-            child: Center(
-              child: Text(
-                'Confirm Booking',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w900                  
-                )
-              ),
-            ),
-          ),
-
-          Container(
-            width: 350,
-            height: 200,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              color: const Color(0xFCF9F9E8),
-              border: Border.all(color: Colors.black),
-            ),
-
-            child: const Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Text(
-                    'BBQ Pits',
-                    style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900                  
-                  )
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                  child: Text(
-                    'East Coast Park',
-                    style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w900                  
-                  )
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Date:\t\t\t\t1 January 2025',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900                  
-                      )
-                    ),
-                    Text(
-                      'Time:\t\t\t6:00 PM',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900                  
-                      )
-                    )
-                  ],
-                ),
-                
-              ],
-            )
-          ),
-          
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0,120,0,0),
-            child: SizedBox(
-              width: 300,
-              height: 50,
-              child: OutlinedButton(
-                onPressed: (){},
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.green[900],
-                  side: const BorderSide(color: Color(0x008b0000)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  )
-                ),
-                child: const Text(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0,100,0,50),
+              child: Center(
+                child: Text(
                   'Confirm Booking',
                   style: TextStyle(
-                    fontSize: 20, 
-                    fontWeight: FontWeight.w500, 
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0,20,0,0),
-            child: SizedBox(
-              width: 300,
-              height: 50,
-              child: OutlinedButton(
-                onPressed: (){},
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xFCF9F9E8),
-                  side: const BorderSide(color: Colors.black),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                    
+                    fontSize: 35,
+                    fontWeight: FontWeight.w900                  
                   )
                 ),
-                child: const Text(
-                  'Back',
-                  style: TextStyle(
-                    fontSize: 20, 
-                    fontWeight: FontWeight.w500, 
-                    color: Colors.black,
+              ),
+            ),
+        
+            Container(
+              width: 350,
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                color: const Color(0xFCF9F9E8),
+                border: Border.all(color: Colors.black),
+              ),
+        
+              child: const Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: Text(
+                      'BBQ Pits',
+                      style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900                  
+                    )
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    child: Text(
+                      'East Coast Park',
+                      style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900                  
+                    )
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Date:\t\t\t\t1 January 2025',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900                  
+                        )
+                      ),
+                      Text(
+                        'Time:\t\t\t6:00 PM',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900                  
+                        )
+                      )
+                    ],
+                  ),
+                  
+                ],
+              )
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,120,0,0),
+              child: SizedBox(
+                width: 300,
+                height: 50,
+                child: OutlinedButton(
+                  onPressed: (){},
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.green[900],
+                    side: const BorderSide(color: Color(0x008b0000)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                    )
+                  ),
+                  child: const Text(
+                    'Confirm Booking',
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.w500, 
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ]
+        
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,20,0,0),
+              child: SizedBox(
+                width: 300,
+                height: 50,
+                child: OutlinedButton(
+                  onPressed: (){},
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: const Color(0xFCF9F9E8),
+                    side: const BorderSide(color: Colors.black),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
+                      
+                    )
+                  ),
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.w500, 
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ]
+        ),
       )
 
 
