@@ -1,15 +1,19 @@
 # Description: This file contains the controller for user management, including creating, deleting, and updating users.
 
 from flask import Flask, request, jsonify
-from server.classes import profile
-from flask_sqlalchemy import SQLAlchemy
-from server.database import db 
 
+import os, sys
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
+import profile
+from flask_sqlalchemy import SQLAlchemy
+from server.database import userdb_helper
+import re
 
 #class LoginManager(db.Model):
 
 class LoginManager:
 
+    @staticmethod
     def signup(username, email, password):
         """
         Creates a new user profile with username, email, password.
@@ -62,6 +66,7 @@ class LoginManager:
         elif(password.lower() == username.lower()):
             return jsonify({"error": "Invalid password. Your password should not be the same as your username"})
 
+        #new_user
         # Create user object
         #new_user = user_model.User(name=name, email=email, username=username, password=None, user_profile=None, location=location)
 
@@ -210,3 +215,7 @@ class LoginManager:
         mongo.db.User.update_one({"_id": friend['_id']}, {"$set": friend})
 
         return jsonify({"message": "Friend removed successfully!"}), 200
+    
+if __name__ == "__main__":
+    login = LoginManager()
+    login.signup('abcdefg12345', 'abc@google.com', 'password123!')
