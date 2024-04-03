@@ -1,7 +1,7 @@
 """ Module to represent a booking"""
 
-from server.classes.park import Park
-from server.classes.facility import Facility
+from park import Park
+from facility import Facility
 
 class Booking:
     """ Class to represent a booking

@@ -1,15 +1,29 @@
 """ Module to represent a park"""
-
-from server.classes.facility import Facility
-
 class Park:
     """ Class to represent a park
     """
-    def __init__(self):
-        self.name = None
-        self.latitude = None
-        self.longitude = None
-        self.facilities = None
+    def __init__(self, id=None, name=None, latitude=None, longitude=None):
+        self.id = id
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.facilities = []
+
+    def get_id(self):
+        """ Method to get the id of the park
+
+        Returns:
+            int: id of the park
+        """
+        return self.id
+
+    def set_id(self, id):
+        """ Method to set the id of the park
+
+        Args:
+            id (int): id of the park
+        """
+        self.id = id
 
     def get_name(self):
         """ Method to get the name of the park
@@ -76,6 +90,7 @@ class Park:
         Raises:
             ValueError: Invalid facility
         """
+        from classes.facility import Facility
         for facil in facilities:
             if isinstance(facil, Facility):
                 self.facilities.append(facil)

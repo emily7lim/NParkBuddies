@@ -1,5 +1,6 @@
 """ Module to represent a facility """
 
+
 from enum import Enum
 
 class FacilityType(Enum):
@@ -15,13 +16,14 @@ class FacilityType(Enum):
 class Facility:
     """ Class to represent a facility
     """
-    def __init__(self):
-        self.id = None
-        self.park = None
-        self.type = None
-        self.avg_rating = None
-        self.num_ratings = None
-        self.reviews = None
+    def __init__(self, id, name, park, type, avg_rating, num_ratings):
+        self.set_id(id)
+        self.set_name(name)
+        self.set_park(park)
+        self.set_type(type)
+        self.set_avg_rating(avg_rating)
+        self.set_num_ratings(num_ratings)
+        self.reviews = []
 
     def get_id(self):
         """ Method to get the id of the facility
@@ -38,6 +40,23 @@ class Facility:
             id (int): id of the facility
         """
         self.id = id
+
+    def get_name(self):
+        """ Method to get the name of the facility
+
+        Returns:
+            string: name of the facility
+        """
+        return self.name
+
+    def set_name(self, name):
+        """ Method to set the name of the facility
+
+        Args:
+            name (string): name of the facility
+        """
+        self.name = name
+
 
     def get_park(self):
         """ Method to get the park of the facility
@@ -56,7 +75,8 @@ class Facility:
         Raises:
             ValueError: [description]
         """
-        if isinstance(park, park.Park):
+        from classes.park import Park
+        if isinstance(park, Park):
             self.park = park
         else:
             raise ValueError('Invalid park')

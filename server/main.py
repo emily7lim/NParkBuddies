@@ -4,9 +4,11 @@
 # pip install -r requirements.txt
 
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from server.classes.facility import FacilityType
-from server.logger import prepare_logger
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker, relationship
+from classes.park import Park
+from classes.facility import Facility, FacilityType
+from logger import prepare_logger
 import requests
 import time
 import threading
@@ -17,11 +19,67 @@ app = Flask(__name__)
 
 logger = prepare_logger()
 
-# Configure database URL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parks.db'
-app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
+# Create a SQLAlchemy engine
+engine = create_engine('sqlite:///database/nparkbuddy.db', echo=True)
 
-park_db = SQLAlchemy(app)
+class Database:
+    """ Class to represent the database
+    """
+    def __init__(self):
+        """ Method to initialize the database
+        """
+        self.Session = sessionmaker(bind=engine)
+        self.session = self.Session()
+        self.parks = []
+        self.facilities = []
+        self.bookings = []
+        self.reviews = []
+        self.profiles = []
+
+    def init_db(self):
+        """ Method to create all objects
+        """
+        # Query parks table from the database and create a list of Park objects
+        sql = text('SELECT * FROM parks')
+        result = self.session.execute(sql)
+        for row in result:
+            park = Park(id=row[0], name=row[1], latitude=row[2], longitude=row[3])
+            self.parks.append(park)
+
+        sql = text('SELECT * FROM facilities')
+        result = self.session.execute(sql)
+        for row in result:
+            print(row)
+            park_id = row[2]
+            type = convert_to_enum(row[3])
+            #print(type.value)
+            park = next((park for park in self.parks if park.get_id() == park_id), None)
+            if park:
+                facility = Facility(id=row[0], name=row[1], park=park, type=type, avg_rating=row[4], num_ratings=row[5])
+                park.set_facilities(facility)
+                self.facilities.append(facility)
+            else:
+                logger.error(f'Park with id {park_id} not found')
+
+        for park in self.parks:
+            print(park.get_name())
+            for facility in park.get_facilities():
+                print(facility.get_name())
+
+def convert_to_enum(value) -> FacilityType:
+    """ Method to convert a string to an enum
+    Args:
+        value (string): string to convert
+    Returns:
+        FacilityType: enum value
+    """
+    if value == 'BBQ Pit':
+        return FacilityType.BBQ_PIT
+    elif value == 'Campsite':
+        return FacilityType.CAMPSITE
+    elif value == 'Venues':
+        return FacilityType.VENUES
+
 
 """ Module to define the database models for the parks and facilities"""
 '''
@@ -48,7 +106,7 @@ class Facility(park_db.Model):
 
     def __repr__(self):
         return f'<Facility {self.id}>'
-'''
+
 class Park(park_db.Model):
     """ Class to represent a park
 
@@ -74,6 +132,7 @@ class Park(park_db.Model):
 
     def __repr__(self):
         return f'<Park {self.id}>'
+'''
 
 @app.route('/')
 def hello():
@@ -225,16 +284,16 @@ server_initialized = False
 # Flag to check if the server has been shutdown
 server_shutdown = False
 
-@app.before_request
-def init_server():
-    """ Method to initialize the server
-    """
-    global server_initialized
-    if not server_initialized:
-        logger.info('Initializing server...')
-        park_db.create_all()
-        server_initialized = True
-        logger.info('Server initialized')
+#@app.before_request
+#def init_server(db):
+#    """ Method to initialize the server
+#    """
+#    global server_initialized
+#    if not server_initialized:
+#        logger.info('Initializing server...')
+#
+#        server_initialized = True
+#        logger.info('Server initialized')
 
 def trigger_request():
     """ Method to trigger a request to the server
@@ -266,12 +325,15 @@ def shutdown():
     return 'Server shutting down...'
 
 if __name__ == '__main__':
-    flask_thread = threading.Thread(target=app.run, kwargs={'host': '127.0.0.1', 'port' : 5000, 'debug': True, 'use_reloader': False})
-    flask_thread.start()
+    db = Database()
+    ##flask_thread = threading.Thread(target=app.run, kwargs={'host': '127.0.0.1', 'port' : 5000, 'debug': True, 'use_reloader': False})
+    ##flask_thread.start()
+    #app.run(host='127.0.0.1', port=5000, debug=True)
+    db.init_db()
+    print(db.parks)
+    #trigger_request()
 
-    trigger_request()
-
-    flask_thread.join()
+    #flask_thread.join()
 
     if server_shutdown:
         logger.info('Server shutdown complete')

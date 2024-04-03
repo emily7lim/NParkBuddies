@@ -1,0 +1,2 @@
+printf "Commit id,Author,Date,Comment,Changed files,Insertions,Deletions" > log.csv
+git log --all --pretty="%x40%h%x2C%an%x2C%ad%x2C%x22%s%x22%x2C" --shortstat | tr "\n" " " | tr "@" "\n" | sed -e 's/ files changed//g' -e 's/ file changed//g' -e 's/ insertions(+)//g' -e 's/ insertion(+)//g' -e 's/ deletions(-)//g' -e 's/ deletion(-)//g' >> log.csv
