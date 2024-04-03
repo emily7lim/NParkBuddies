@@ -1,30 +1,18 @@
 """ This file reads geojson data from the database and returns it as a JSON response
 """
 import json
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
+from fuzzywuzzy import process
+from server.classes.facility import FacilityType
 
 # Create a SQLAlchemy engine
-engine = create_engine('sqlite:///parks.db')
+engine = create_engine('sqlite:///nparkbuddy.db', echo=True)
 
-base = declarative_base()
-
-class GeoData(base):
-    """ Summary of the class
-
-    Args:
-        base (_type_): _description_
-    """
-    __tablename__ = 'parks'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    latitude = Column(Float)
-    longitude = Column(Float)
-
-# Create tables in database
-base.metadata.create_all(engine)
+# Create a sessionmaker bound to engine
+Session = sessionmaker(bind=engine)
+session = Session()
 
 # Read GEOjson file
 def read_geojson(filename):
@@ -53,21 +41,46 @@ def parse_and_store(data):
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for index, entry in enumerate(data['features']):
-        id = index+1
+    id = 1
+
+    for entry in data['features']:
         name = extract_park_name(entry)
-        if name:
+
+        # Check if park name is part of list
+        available_parks = ['Pasir Ris Park',
+                           'Sembawang Park',
+                           'Changi Beach Park',
+                           'Labrador Nature Reserve',
+                           'West Coast Park',
+                           'East Coast Park',
+                           'Pulau Ubin and Chek Jawa',
+                           'Bedok Reservoir Park',
+                           'Bishan-Ang Mo Kio Park (River Plains)',
+                           'Dhouby Ghaut Green',
+                           'Kallang Riverside Park',
+                           'one-north Park']
+
+        # Check if park name is close to any of the available parks
+        if name and process.extractOne(name, available_parks)[1] > 90:
+            print(f'Park name found: {name}')
             longitude = entry['geometry']['coordinates'][0]
             latitude = entry['geometry']['coordinates'][1]
+            name = name.title().replace('Pk', 'Park').replace('And Chek Jawa', '').replace('(River Plains)', '')
 
             # Insert ID value along with other data into the 'parks' table
             sql = text('INSERT INTO parks (id, name, latitude, longitude) VALUES (:id, :name, :longitude, :latitude)')
             session.execute(sql, {'id': id, 'name': name, 'longitude': longitude, 'latitude': latitude})
-        else:
-            raise ValueError('Park name not found')
+            id += 1
 
     session.commit()
     session.close()
+
+def insert_facilities():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
 
 # Parse GeoJSON data and extract the park name
 def extract_park_name(geojson_entry):
@@ -121,14 +134,20 @@ def delete_parks():
 if __name__ == '__main__':
     data = read_geojson('Parks.geojson')
 
-    function = input('Enter the function to run'
-                     '\n1: Parse and store data'
-                     '\n2: Display parks'
-                     '\n3: Delete parks\n')
+    while True:
+        option = input("Enter the function to run"
+                        "\n1. Parse and store data"
+                       "\n2. Display parks"
+                       "\n3. Delete parks"
+                       "\n4. Exit\n")
 
-    if function == '1':
-        parse_and_store(data)
-    elif function == '3':
-        delete_parks()
-
-    display_parks()
+        if option == '1':
+            parse_and_store(data)
+        elif option == '2':
+            display_parks()
+        elif option == '3':
+            delete_parks()
+        elif option == '4':
+            exit()
+        else:
+            print('Invalid option')

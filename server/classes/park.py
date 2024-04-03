@@ -1,4 +1,7 @@
 """ Module to represent a park"""
+
+from server.classes.facility import Facility
+
 class Park:
     """ Class to represent a park
     """
@@ -60,7 +63,7 @@ class Park:
         """ Method to get the facilities of the park
 
         Returns:
-            string: facilities of the park
+            list: facilities of the park
         """
         return self.facilities
 
@@ -68,7 +71,13 @@ class Park:
         """ Method to set the facilities of the park
 
         Args:
-            *facilities (tuple): tuple of facilities of the park
+            facilities (tuple): facilities of the park
+
+        Raises:
+            ValueError: Invalid facility
         """
-        self.facilities = list(facilities)
-    
+        for facil in facilities:
+            if isinstance(facil, Facility):
+                self.facilities.append(facil)
+            else:
+                raise ValueError('Invalid facility')

@@ -16,11 +16,28 @@ class Facility:
     """ Class to represent a facility
     """
     def __init__(self):
+        self.id = None
         self.park = None
         self.type = None
         self.avg_rating = None
         self.num_ratings = None
         self.reviews = None
+
+    def get_id(self):
+        """ Method to get the id of the facility
+
+        Returns:
+            int: id of the facility
+        """
+        return self.id
+
+    def set_id(self, id):
+        """ Method to set the id of the facility
+
+        Args:
+            id (int): id of the facility
+        """
+        self.id = id
 
     def get_park(self):
         """ Method to get the park of the facility

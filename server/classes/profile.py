@@ -1,5 +1,6 @@
 """ Module to represent a user profile"""
-import booking
+
+from server.classes.booking import Booking
 
 class Profile:
     """ Class to represent a user profile
@@ -8,7 +9,7 @@ class Profile:
         self.id = None
         self.username = None
         self.email = None
-        self.bookings = None
+        self.bookings = []
         self.password = None
 
     def get_id(self):
@@ -69,17 +70,18 @@ class Profile:
 
     def set_bookings(self, *new_booking):
         """ Method to set the bookings of the profile
-        
+
         Args:
             *new_booking (tuple): tuple of bookings of the profile
 
         Raises:
-            ValueError: [description]
+            ValueError: "Invalid booking"
         """
         for booking_item in new_booking:
-            if not isinstance(booking_item, booking.Booking):
+            if isinstance(booking_item, Booking):
+                self.bookings.append(booking_item)
+            else:
                 raise ValueError('Invalid booking')
-        self.bookings = list(new_booking)
 
     def get_password(self):
         """ Method to get the password of the profile

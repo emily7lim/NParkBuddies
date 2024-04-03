@@ -1,8 +1,7 @@
 """ Module to represent a booking"""
 
-import park
-import facility
-import profile
+from server.classes.park import Park
+from server.classes.facility import Facility
 
 class Booking:
     """ Class to represent a booking
@@ -19,23 +18,18 @@ class Booking:
         """ Method to get the booker of the booking
 
         Returns:
-            string: booker of the booking
+            int: booker id of the booking
         """
         return self.booker
 
-    def set_booker(self, booker):
+    def set_booker(self, booker_id):
         """ Method to set the booker of the booking
 
         Args:
-            booker (Profile): booker of the booking
-
-        Raises:
-            ValueError: [description]
+            booker_id (string): booker of the booking
         """
-        if isinstance(booker, profile.Profile):
-            self.booker = booker
-        else:
-            raise ValueError('Invalid booker')
+        self.booker = booker_id
+
 
     def get_date(self):
         """ Method to get the date of the booking
@@ -100,9 +94,9 @@ class Booking:
             new_park (Park): park of the booking
 
         Raises:
-            ValueError: [description]
+            ValueError: "Invalid park"
         """
-        if isinstance(new_park, park.Park):
+        if isinstance(new_park, Park):
             self.park = new_park
         else:
             raise ValueError('Invalid park')
@@ -122,10 +116,9 @@ class Booking:
             facility (Facility): facility of the booking
 
         Raises:
-            ValueError: [description]
+            ValueError: "Invalid facility"
         """
-        if isinstance(new_facility, facility.Facility):
+        if isinstance(new_facility, Facility):
             self.facility = new_facility
         else:
             raise ValueError('Invalid facility')
-    

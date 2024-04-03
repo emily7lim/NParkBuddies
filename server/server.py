@@ -4,9 +4,12 @@
 # pip install -r requirements.txt
 
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from server.classes.facility import FacilityType
-from server.logger import prepare_logger
+from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import text
+from classes import park, facility, facility_type, booking, review, profile, weather
+from logger import prepare_logger
 import requests
 import time
 import threading
@@ -17,11 +20,30 @@ app = Flask(__name__)
 
 logger = prepare_logger()
 
-# Configure database URL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parks.db'
-app.config['SQLALCHEMY_BINDS'] = {'facilities' : 'sqlite:///facilities.db'}
+engine = create_engine('sqlite:///parks.db')
 
-park_db = SQLAlchemy(app)
+base = declarative_base()
+
+class Park(base):
+    """
+    Class to represent a park
+
+    Args:
+        base (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    __tablename__ = 'parks'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
+    facilities = Column(Integer)
+
+    def __repr__(self):
+        return f'<Park {self.id} {self.name} {self.latitude} {self.longitude} {self.facilities}>'
+
 
 """ Module to define the database models for the parks and facilities"""
 '''
@@ -48,7 +70,7 @@ class Facility(park_db.Model):
 
     def __repr__(self):
         return f'<Facility {self.id}>'
-'''
+
 class Park(park_db.Model):
     """ Class to represent a park
 
@@ -74,6 +96,7 @@ class Park(park_db.Model):
 
     def __repr__(self):
         return f'<Park {self.id}>'
+'''
 
 @app.route('/')
 def hello():

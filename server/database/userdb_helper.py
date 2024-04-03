@@ -1,5 +1,5 @@
 import os, sys
-sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2])+'database')
 import profile
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base

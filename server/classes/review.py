@@ -1,6 +1,6 @@
 """ Module to represent a review of a booking"""
 
-import booking
+from server.classes.booking import Booking
 
 class Review():
     """ Class to represent a review of a booking
@@ -55,11 +55,11 @@ class Review():
 
         Args:
             booking (Booking): booking of the review
-        
+
         Raises:
             ValueError: [description]
         """
-        if isinstance(new_booking, booking.Booking):
+        if isinstance(new_booking, Booking):
             self.booking = new_booking
         else:
             raise ValueError('Invalid booking')
