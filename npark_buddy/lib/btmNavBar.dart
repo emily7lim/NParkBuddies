@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
 /// Flutter code sample for [BottomNavigationBar].
 
@@ -42,10 +43,7 @@ class _BottomNavigationBarExampleState
       'Index 2: School',
       style: optionStyle,
     ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {
@@ -57,7 +55,7 @@ class _BottomNavigationBarExampleState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFCF9F9E8),
+      backgroundColor: const Color(0xFFFEFBEA),
       appBar: AppBar(
         title: Row(
           children: [
@@ -75,7 +73,7 @@ class _BottomNavigationBarExampleState
             ),
           ],
         ),
-        backgroundColor: Colors.green[900],
+        backgroundColor: Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
