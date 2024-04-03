@@ -222,6 +222,24 @@ def display_parks():
             print('Id:', facility[0], 'Name:', facility[1], 'Type:', facility[3], 'Avg Rating:', facility[4], 'Num Ratings:', facility[5])
         print()
 
+    # Export parks to CSV
+    sql = text('SELECT * FROM parks')
+    results = session.execute(sql)
+    parks = []
+    for park in results:
+        parks.append(park)
+    parks_df = pd.DataFrame(parks, columns=['id', 'name', 'latitude', 'longitude'])
+    parks_df.to_csv('parks.csv', index=False)
+
+    # Export facilities to CSV
+    sql = text('SELECT * FROM facilities')
+    results = session.execute(sql)
+    facilities = []
+    for facility in results:
+        facilities.append(facility)
+    facilities_df = pd.DataFrame(facilities, columns=['id', 'name', 'park_id', 'type', 'avg_rating', 'num_ratings'])
+    facilities_df.to_csv('facilities.csv', index=False)
+
     session.close()
 
 def delete_parks():
