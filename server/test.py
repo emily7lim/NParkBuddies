@@ -5,35 +5,25 @@ import json
 
 
 def test():
-    # Query server for parks
-    response = requests.get('http://localhost:5000/parks')
+    _ = ['parks', 'facilities', 'profiles', 'bookings', 'reviews']
+    for item in _:
+        response = requests.get(f'http://localhost:5000/{item}')
+        if response.status_code == 200:
+            process_json(response.text)
+        else:
+            print(f"Error: {response.status_code}")
 
+def test2():
+    response = requests.get('http://localhost:5000/parks/East Coast Park')
     if response.status_code == 200:
         process_json(response.text)
-
-    # Query server for facilities
-    response = requests.get('http://localhost:5000/facilities')
-
+    else:
+        print(f"Error: {response.status_code}")
+    response = requests.get('http://localhost:5000/parks/East Coast Park/facilities')
     if response.status_code == 200:
         process_json(response.text)
-
-    # Query server for profiles
-    response = requests.get('http://localhost:5000/profiles')
-
-    if response.status_code == 200:
-        process_json(response.text)
-
-    # Query server for bookings
-    response = requests.get('http://localhost:5000/bookings')
-
-    if response.status_code == 200:
-        process_json(response.text)
-
-    # Query server for reviews
-    response = requests.get('http://localhost:5000/reviews')
-
-    if response.status_code == 200:
-        process_json(response.text)
+    else:
+        print(f"Error: {response.status_code}")
 
 def process_json(json_message):
     # Load the JSON message
@@ -42,7 +32,12 @@ def process_json(json_message):
     # Iterate through each dictionary in the list
     for item in data:
         # Print each dictionary
-        for key, value in item.items():
-            print(f"{key}: {value}")
+        if isinstance(item, dict):
+            for key, value in item.items():
+                print(f"{key}: {value}")
+        elif isinstance(item, list):
+            for i in item:
+                for key, value in i.items():
+                    print(f"{key}: {value}")
 
-test()
+test2()

@@ -1,36 +1,101 @@
-2024-04-04 15:46:22,129 :: INFO :: Database initialized
-2024-04-04 15:48:07,731 :: INFO :: Database initialized
-2024-04-04 15:48:47,122 :: INFO :: Database initialized
-2024-04-04 15:49:26,546 :: INFO :: Database initialized
-2024-04-04 15:49:29,763 :: INFO :: Request: GET /parks
-2024-04-04 15:49:31,796 :: INFO :: Request: GET /facilities
-2024-04-04 15:49:33,921 :: INFO :: Request: GET /profiles
-2024-04-04 15:49:35,972 :: INFO :: Request: GET /bookings
-2024-04-04 15:49:38,302 :: INFO :: Request: GET /reviews
-2024-04-04 15:50:01,857 :: INFO :: Database initialized
-2024-04-04 15:50:04,632 :: INFO :: Request: GET /parks b''
-2024-04-04 15:50:06,679 :: INFO :: Request: GET /facilities b''
-2024-04-04 15:50:08,800 :: INFO :: Request: GET /profiles b''
-2024-04-04 15:50:10,885 :: INFO :: Request: GET /bookings b''
-2024-04-04 15:50:13,202 :: INFO :: Request: GET /reviews b''
-2024-04-04 15:50:51,449 :: INFO :: Database initialized
-2024-04-04 15:50:53,798 :: INFO :: Request: GET /parks http://localhost:5000/
-2024-04-04 15:50:55,820 :: INFO :: Request: GET /facilities http://localhost:5000/
-2024-04-04 15:50:57,944 :: INFO :: Request: GET /profiles http://localhost:5000/
-2024-04-04 15:51:00,025 :: INFO :: Request: GET /bookings http://localhost:5000/
-2024-04-04 15:51:02,366 :: INFO :: Request: GET /reviews http://localhost:5000/
-2024-04-04 15:51:43,083 :: INFO :: Database initialized
-2024-04-04 15:51:45,459 :: INFO :: Request: GET /parks None
-2024-04-04 15:51:47,508 :: INFO :: Request: GET /facilities None
-2024-04-04 15:51:49,658 :: INFO :: Request: GET /profiles None
-2024-04-04 15:51:51,717 :: INFO :: Request: GET /bookings None
-2024-04-04 15:51:54,033 :: INFO :: Request: GET /reviews None
-2024-04-04 15:52:00,071 :: INFO :: Database initialized
-2024-04-04 15:52:58,870 :: INFO :: Database initialized
-2024-04-04 15:53:01,701 :: INFO :: Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
-2024-04-04 15:53:03,750 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
-2024-04-04 15:53:05,886 :: INFO :: Request: GET /profiles - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
-2024-04-04 15:53:07,968 :: INFO :: Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
-2024-04-04 15:53:10,289 :: INFO :: Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
-2024-04-04 15:53:31,141 :: INFO :: Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-04 15:53:31,220 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:41:37,074 :: INFO :: Database initialized
+2024-04-04 16:42:00,185 :: INFO :: Database initialized
+2024-04-04 16:42:42,639 :: INFO :: Database initialized
+2024-04-04 16:43:33,256 :: INFO :: Database initialized
+2024-04-04 16:43:41,763 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:43:41,763 :: INFO :: Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:43:41,827 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 16:43:41,827 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:45:25,987 :: INFO :: Database initialized
+2024-04-04 16:46:03,266 :: INFO :: Database initialized
+2024-04-04 16:46:05,668 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:46:05,669 :: INFO :: Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:46:09,790 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:46:09,791 :: INFO :: Request: GET /profiles - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:46:11,891 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:46:11,892 :: INFO :: Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:46:14,285 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:46:14,285 :: INFO :: Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:46:33,443 :: INFO :: Database initialized
+2024-04-04 16:46:36,951 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:46:36,951 :: INFO :: Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:48:14,977 :: INFO :: Database initialized
+2024-04-04 16:48:17,566 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:48:17,567 :: INFO :: Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 16:49:01,935 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 16:49:01,936 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:50:06,850 :: INFO :: Database initialized
+2024-04-04 16:50:54,531 :: INFO :: Database initialized
+2024-04-04 16:51:35,023 :: INFO :: Database initialized
+2024-04-04 16:51:43,191 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:51:43,191 :: INFO :: Request: GET / - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:51:43,295 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 16:51:43,295 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:52:07,418 :: INFO :: Database initialized
+2024-04-04 16:52:16,366 :: INFO :: Database initialized
+2024-04-04 16:52:59,867 :: INFO :: Database initialized
+2024-04-04 16:54:25,116 :: INFO :: Database initialized
+2024-04-04 16:56:08,250 :: INFO :: Database initialized
+2024-04-04 16:56:08,876 :: INFO :: Database initialized
+2024-04-04 16:56:13,031 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:56:13,031 :: INFO :: Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:56:15,049 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:56:15,049 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:58:20,100 :: INFO :: Database initialized
+2024-04-04 16:58:22,213 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:58:22,213 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 16:58:53,387 :: INFO :: Database initialized
+2024-04-04 16:59:30,784 :: INFO :: Database initialized
+2024-04-04 16:59:32,935 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 16:59:32,936 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:00:40,727 :: INFO :: Database initialized
+2024-04-04 17:01:02,810 :: INFO :: Database initialized
+2024-04-04 17:01:05,711 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:01:05,711 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:01:27,198 :: INFO :: Database initialized
+2024-04-04 17:01:27,395 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:01:27,396 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:01:54,418 :: INFO :: Database initialized
+2024-04-04 17:01:55,803 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:01:55,804 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:03:18,645 :: INFO :: Database initialized
+2024-04-04 17:04:28,571 :: INFO :: Database initialized
+2024-04-04 17:04:53,774 :: INFO :: Database initialized
+2024-04-04 17:06:35,297 :: INFO :: Database initialized
+2024-04-04 17:07:45,312 :: INFO :: Database initialized
+2024-04-04 17:11:08,666 :: INFO :: Database initialized
+2024-04-04 17:11:24,414 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:11:24,415 :: INFO :: Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:11:37,656 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:11:37,657 :: INFO :: Request: GET /profiles - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:12:10,794 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:12:10,795 :: INFO :: Request: GET /profiles/jiawei07 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:12:22,003 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:12:22,004 :: INFO :: Request: GET /profiles/jiawei07/bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:13:06,627 :: INFO :: Database initialized
+2024-04-04 17:14:19,786 :: INFO :: Database initialized
+2024-04-04 17:14:20,960 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:14:20,961 :: INFO :: Request: GET /profiles/jiawei07/bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:14:26,549 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:14:26,549 :: INFO :: Request: GET /profiles/jiawei07/bookings/10 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:14:28,393 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:14:28,394 :: INFO :: Request: GET /profiles/jiawei07/bookings/10 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:14:31,730 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:14:31,731 :: INFO :: Request: GET /profiles/jiawei07/bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:15:11,389 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:15:11,389 :: INFO :: Request: GET /profiles/jiawei07/bookings/15 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:15:42,674 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:15:42,674 :: INFO :: Request: GET /profiles/jiawei07/bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:15:53,116 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:15:53,116 :: INFO :: Request: GET /profiles/jiawei07/bookings/0 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:16:04,303 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:16:04,304 :: INFO :: Request: GET /profiles/jiawei07/bookings/10 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:16:14,007 :: INFO :: Response: GET - Status Code: 404
+2024-04-04 17:16:14,008 :: INFO :: Request: GET /profiles/jiawei07/bookings/'10' - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:16:18,531 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:16:18,531 :: INFO :: Request: GET /profiles/jiawei07/bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:16:42,348 :: INFO :: Database initialized
+2024-04-04 17:16:45,212 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:16:45,212 :: INFO :: Request: GET /profiles/jiawei07/bookings/10 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:16:51,190 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 17:16:51,190 :: INFO :: Request: GET /profiles/jiawei07/bookings/10/reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0

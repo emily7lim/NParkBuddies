@@ -134,8 +134,7 @@ class Facility:
         """
         self.num_ratings = num_ratings
 
-    from classes.review import Review
-    def get_reviews(self) -> Review:
+    def get_reviews(self) -> list:
         """ Method to get the reviews of the facility
 
         Returns:
@@ -144,14 +143,15 @@ class Facility:
 
         return self.reviews
 
-    def set_reviews(self, reviews) -> None:
+    def set_reviews(self, *reviews) -> None:
         """ Method to set the reviews of the facility
 
         Args:
             reviews (Reviews): reviews of the facility
         """
         from classes.review import Review
-        if isinstance(reviews, Review):
-            self.reviews = reviews
-        else:
-            raise ValueError('Invalid reviews')
+        for review in reviews:
+            if isinstance(review, Review):
+                self.reviews.append(review)
+            else:
+                raise ValueError('Invalid reviews')

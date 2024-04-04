@@ -2,9 +2,26 @@
 class Review():
     """ Class to represent a review of a booking
     """
-    def __init__(self, rating=None, comment=None) -> None:
+    def __init__(self, id=None, rating=None, comment=None) -> None:
+        self.set_id(id)
         self.set_rating(rating)
         self.set_comment(comment)
+
+    def get_id(self) -> int:
+        """ Method to get the id of the review
+
+        Returns:
+            int: id of the review
+        """
+        return self.id
+
+    def set_id(self, id) -> None:
+        """ Method to set the id of the review
+
+        Args:
+            id (int): id of the review
+        """
+        self.id = id
 
     def get_rating(self) -> int:
         """ Method to get the rating of the review
