@@ -1,20 +1,36 @@
 """ Module to represent a booking"""
 
-from park import Park
-from facility import Facility
+from datetime import datetime
 
 class Booking:
     """ Class to represent a booking
     """
-    def __init__(self):
-        self.booker = None
-        self.date = None
-        self.time = None
-        self.cancelled = False
-        self.park = None
-        self.facility = None
+    def __init__(self, id=None, booker=None, datetime=None, cancelled=None, park=None, facility=None) -> None:
+        self.set_id(id)
+        self.set_booker(booker)
+        self.set_datetime(datetime)
+        self.set_cancelled(cancelled)
+        self.set_park(park)
+        self.set_facility(facility)
+        self.reviews = []
 
-    def get_booker(self):
+    def get_id(self) -> int:
+        """ Method to get the id of the booking
+
+        Returns:
+            int: id of the booking
+        """
+        return self.id
+
+    def set_id(self, id_no) -> None:
+        """ Method to set the id of the booking
+
+        Args:
+            id_no (int): id of the booking
+        """
+        self.id = id_no
+
+    def get_booker(self) -> int:
         """ Method to get the booker of the booking
 
         Returns:
@@ -22,7 +38,7 @@ class Booking:
         """
         return self.booker
 
-    def set_booker(self, booker_id):
+    def set_booker(self, booker_id) -> None:
         """ Method to set the booker of the booking
 
         Args:
@@ -30,40 +46,23 @@ class Booking:
         """
         self.booker = booker_id
 
-
-    def get_date(self):
-        """ Method to get the date of the booking
-
-        Returns:
-            date: date of the booking
-        """
-        return self.date
-
-    def set_date(self, date):
-        """ Method to set the date of the booking
-
-        Args:
-            date (date): date of the booking
-        """
-        self.date = date
-
-    def get_time(self):
-        """ Method to get the time of the booking
+    def get_datetime(self) -> datetime:
+        """ Method to get the datetime of the booking
 
         Returns:
-            time: time of the booking
+            datetime: datetime of the booking
         """
-        return self.time
+        return self.datetime
 
-    def set_time(self, time):
-        """ Method to set the time of the booking
+    def set_datetime(self, datetime) -> None:
+        """ Method to set the datetime of the booking
 
         Args:
-            time (time): time of the booking
+            datetime (datetime): datetime of the booking
         """
-        self.time = time
+        self.datetime = datetime
 
-    def get_cancelled(self):
+    def get_cancelled(self) -> bool:
         """ Method to get the cancelled status of the booking
 
         Returns:
@@ -71,15 +70,19 @@ class Booking:
         """
         return self.cancelled
 
-    def set_cancelled(self, cancelled):
+    def set_cancelled(self, cancelled) -> None:
         """ Method to set the cancelled status of the booking
 
         Args:
             cancelled (bool): cancelled status of the booking
         """
-        self.cancelled = cancelled
+        if isinstance(cancelled, bool):
+            self.cancelled = cancelled
+        else:
+            raise ValueError('Invalid cancelled status')
 
-    def get_park(self):
+    from classes.park import Park
+    def get_park(self) -> Park:
         """ Method to get the park of the booking
 
         Returns:
@@ -87,7 +90,7 @@ class Booking:
         """
         return self.park
 
-    def set_park(self, new_park):
+    def set_park(self, new_park) -> None:
         """ Method to set the park of the booking
 
         Args:
@@ -96,12 +99,14 @@ class Booking:
         Raises:
             ValueError: "Invalid park"
         """
+        from classes.park import Park
         if isinstance(new_park, Park):
             self.park = new_park
         else:
             raise ValueError('Invalid park')
 
-    def get_facility(self):
+    from classes.facility import Facility
+    def get_facility(self) -> Facility:
         """ Method to get the facility of the booking
 
         Returns:
@@ -109,7 +114,7 @@ class Booking:
         """
         return self.facility
 
-    def set_facility(self, new_facility):
+    def set_facility(self, new_facility) -> None:
         """ Method to set the facility of the booking
 
         Args:
@@ -118,7 +123,28 @@ class Booking:
         Raises:
             ValueError: "Invalid facility"
         """
+        from classes.facility import Facility
         if isinstance(new_facility, Facility):
             self.facility = new_facility
         else:
             raise ValueError('Invalid facility')
+
+    def get_reviews(self) -> list:
+        """ Method to get the reviews of the booking
+
+        Returns:
+            list: reviews of the booking
+        """
+        return self.reviews
+
+    def set_reviews(self, *reviews) -> None:
+        """ Method to add a review to the booking
+
+        Args:
+            *reviews (tuple): tuple of reviews of the booking"""
+        from classes.review import Review
+        for review in reviews:
+            if isinstance(review, Review):
+                self.reviews.append(review)
+            else:
+                raise ValueError('Invalid review')

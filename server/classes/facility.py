@@ -1,6 +1,5 @@
 """ Module to represent a facility """
 
-
 from enum import Enum
 
 class FacilityType(Enum):
@@ -16,7 +15,7 @@ class FacilityType(Enum):
 class Facility:
     """ Class to represent a facility
     """
-    def __init__(self, id, name, park, type, avg_rating, num_ratings):
+    def __init__(self, id=None, name=None, park=None, type=None, avg_rating=None, num_ratings=None) -> None:
         self.set_id(id)
         self.set_name(name)
         self.set_park(park)
@@ -25,7 +24,7 @@ class Facility:
         self.set_num_ratings(num_ratings)
         self.reviews = []
 
-    def get_id(self):
+    def get_id(self) -> int:
         """ Method to get the id of the facility
 
         Returns:
@@ -33,7 +32,7 @@ class Facility:
         """
         return self.id
 
-    def set_id(self, id):
+    def set_id(self, id) -> None:
         """ Method to set the id of the facility
 
         Args:
@@ -41,7 +40,7 @@ class Facility:
         """
         self.id = id
 
-    def get_name(self):
+    def get_name(self) -> str:
         """ Method to get the name of the facility
 
         Returns:
@@ -49,7 +48,7 @@ class Facility:
         """
         return self.name
 
-    def set_name(self, name):
+    def set_name(self, name) -> None:
         """ Method to set the name of the facility
 
         Args:
@@ -57,8 +56,8 @@ class Facility:
         """
         self.name = name
 
-
-    def get_park(self):
+    from classes.park import Park
+    def get_park(self) -> Park:
         """ Method to get the park of the facility
 
         Returns:
@@ -66,7 +65,7 @@ class Facility:
         """
         return self.park
 
-    def set_park(self, park):
+    def set_park(self, park) -> None:
         """ Method to set the park of the facility
 
         Args:
@@ -81,7 +80,7 @@ class Facility:
         else:
             raise ValueError('Invalid park')
 
-    def get_type(self):
+    def get_type(self) -> FacilityType:
         """ Method to get the type of the facility
 
         Returns:
@@ -89,7 +88,7 @@ class Facility:
         """
         return self.type
 
-    def set_type(self, park_type):
+    def set_type(self, park_type) -> None:
         """ Method to set the type of the facility
 
         Args:
@@ -103,7 +102,7 @@ class Facility:
         else:
             raise ValueError('Invalid park type')
 
-    def get_avg_rating(self):
+    def get_avg_rating(self) -> float:
         """ Method to get the average rating of the facility
 
         Returns:
@@ -111,7 +110,7 @@ class Facility:
         """
         return self.avg_rating
 
-    def set_avg_rating(self, avg_rating):
+    def set_avg_rating(self, avg_rating) -> None:
         """ Method to set the average rating of the facility
 
         Args:
@@ -119,7 +118,7 @@ class Facility:
         """
         self.avg_rating = avg_rating
 
-    def get_num_ratings(self):
+    def get_num_ratings(self) -> int:
         """ Method to get the number of ratings of the facility
 
         Returns:
@@ -127,7 +126,7 @@ class Facility:
         """
         return self.num_ratings
 
-    def set_num_ratings(self, num_ratings):
+    def set_num_ratings(self, num_ratings) -> None:
         """ Method to set the number of ratings of the facility
 
         Args:
@@ -135,18 +134,24 @@ class Facility:
         """
         self.num_ratings = num_ratings
 
-    def get_reviews(self):
+    from classes.review import Review
+    def get_reviews(self) -> Review:
         """ Method to get the reviews of the facility
 
         Returns:
-            string: reviews of the facility
+            Review: reviews of the facility
         """
+
         return self.reviews
 
-    def set_reviews(self, reviews):
+    def set_reviews(self, reviews) -> None:
         """ Method to set the reviews of the facility
 
         Args:
-            reviews (string): reviews of the facility
+            reviews (Reviews): reviews of the facility
         """
-        self.reviews = reviews
+        from classes.review import Review
+        if isinstance(reviews, Review):
+            self.reviews = reviews
+        else:
+            raise ValueError('Invalid reviews')

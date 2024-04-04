@@ -1,18 +1,15 @@
 """ Module to represent a user profile"""
-
-from server.classes.booking import Booking
-
 class Profile:
     """ Class to represent a user profile
     """
-    def __init__(self):
-        self.id = None
-        self.username = None
-        self.email = None
+    def __init__(self, id=None, username=None, email=None, password=None) -> None:
+        self.set_id(id)
+        self.set_username(username)
+        self.set_email(email)
         self.bookings = []
-        self.password = None
+        self.set_password(password)
 
-    def get_id(self):
+    def get_id(self) -> int:
         """ Method to get the id of the profile
 
         Returns:
@@ -20,7 +17,7 @@ class Profile:
         """
         return self.id
 
-    def set_id(self, id_no):
+    def set_id(self, id_no) -> None:
         """ Method to set the id of the profile
 
         Args:
@@ -28,7 +25,7 @@ class Profile:
         """
         self.id = id_no
 
-    def get_username(self):
+    def get_username(self) -> str:
         """ Method to get the username of the profile
 
         Returns:
@@ -36,7 +33,7 @@ class Profile:
         """
         return self.username
 
-    def set_username(self, username):
+    def set_username(self, username) -> None:
         """ Method to set the username of the profile
 
         Args:
@@ -44,7 +41,7 @@ class Profile:
         """
         self.username = username
 
-    def get_email(self):
+    def get_email(self) -> str:
         """ Method to get the email of the profile
 
         Returns:
@@ -52,7 +49,7 @@ class Profile:
         """
         return self.email
 
-    def set_email(self, email):
+    def set_email(self, email) -> None:
         """ Method to set the email of the profile
 
         Args:
@@ -60,7 +57,7 @@ class Profile:
         """
         self.email = email
 
-    def get_bookings(self):
+    def get_bookings(self) -> list:
         """ Method to get the bookings of the profile
 
         Returns:
@@ -68,7 +65,7 @@ class Profile:
         """
         return self.bookings
 
-    def set_bookings(self, *new_booking):
+    def set_bookings(self, *new_booking) -> None:
         """ Method to set the bookings of the profile
 
         Args:
@@ -77,13 +74,14 @@ class Profile:
         Raises:
             ValueError: "Invalid booking"
         """
+        from classes.booking import Booking
         for booking_item in new_booking:
             if isinstance(booking_item, Booking):
                 self.bookings.append(booking_item)
             else:
                 raise ValueError('Invalid booking')
 
-    def get_password(self):
+    def get_password(self) -> str:
         """ Method to get the password of the profile
 
         Returns:
@@ -91,7 +89,7 @@ class Profile:
         """
         return self.password
 
-    def set_password(self, password):
+    def set_password(self, password) -> None:
         """ Method to set the password of the profile
 
         Args:
@@ -99,7 +97,7 @@ class Profile:
         """
         self.password = password
 
-    def validate(self, username, password):
+    def validate(self, username, password) -> bool:
         """ Method to validate the profile
 
         Args:
@@ -109,7 +107,7 @@ class Profile:
         Returns:
             bool: True if the profile is valid, False otherwise
         """
-        if self.username == username and self.password == password:
+        if self.get_username() == username and self.get_password() == password:
             return True
         else:
             return False

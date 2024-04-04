@@ -2,14 +2,14 @@
 class Park:
     """ Class to represent a park
     """
-    def __init__(self, id=None, name=None, latitude=None, longitude=None):
+    def __init__(self, id=None, name=None, latitude=None, longitude=None) -> None:
         self.id = id
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.facilities = []
 
-    def get_id(self):
+    def get_id(self) -> int:
         """ Method to get the id of the park
 
         Returns:
@@ -17,7 +17,7 @@ class Park:
         """
         return self.id
 
-    def set_id(self, id):
+    def set_id(self, id) -> None:
         """ Method to set the id of the park
 
         Args:
@@ -25,7 +25,7 @@ class Park:
         """
         self.id = id
 
-    def get_name(self):
+    def get_name(self) -> str:
         """ Method to get the name of the park
 
         Returns:
@@ -33,7 +33,7 @@ class Park:
         """
         return self.name
 
-    def set_name(self, name):
+    def set_name(self, name) -> None:
         """ Method to set the name of the park
 
         Args:
@@ -41,7 +41,7 @@ class Park:
         """
         self.name = name
 
-    def get_latitude(self):
+    def get_latitude(self) -> float:
         """ Method to get the latitude of the park
 
         Returns:
@@ -49,7 +49,7 @@ class Park:
         """
         return self.latitude
 
-    def set_latitude(self, latitude):
+    def set_latitude(self, latitude) -> None:
         """ Method to set the latitude of the park
 
         Args:
@@ -57,7 +57,7 @@ class Park:
         """
         self.latitude = latitude
 
-    def get_longitude(self):
+    def get_longitude(self) -> float:
         """ Method to get the longitude of the park
 
         Returns:
@@ -65,7 +65,7 @@ class Park:
         """
         return self.longitude
 
-    def set_longitude(self, longitude):
+    def set_longitude(self, longitude) -> None:
         """ Method to set the longitude of the park
 
         Args:
@@ -73,7 +73,7 @@ class Park:
         """
         self.longitude = longitude
 
-    def get_facilities(self):
+    def get_facilities(self) -> list:
         """ Method to get the facilities of the park
 
         Returns:
@@ -81,7 +81,7 @@ class Park:
         """
         return self.facilities
 
-    def set_facilities(self, *facilities):
+    def set_facilities(self, *facilities) -> None:
         """ Method to set the facilities of the park
 
         Args:
