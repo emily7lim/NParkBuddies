@@ -99,3 +99,12 @@
 2024-04-04 17:16:45,212 :: INFO :: Request: GET /profiles/jiawei07/bookings/10 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
 2024-04-04 17:16:51,190 :: INFO :: Response: GET - Status Code: 200
 2024-04-04 17:16:51,190 :: INFO :: Request: GET /profiles/jiawei07/bookings/10/reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-04 17:35:42,309 :: INFO :: Database initialized
+2024-04-04 17:37:46,693 :: INFO :: Database initialized
+2024-04-04 17:40:15,207 :: INFO :: Database initialized
+2024-04-04 17:40:51,632 :: INFO :: Database initialized
+2024-04-04 17:41:58,698 :: INFO :: Database initialized
+2024-04-04 17:42:44,279 :: INFO :: Database initialized
+2024-04-04 17:43:07,376 :: INFO :: Database initialized
+2024-04-04 17:46:32,583 :: INFO :: Database initialized
+2024-04-04 17:46:44,488 :: INFO :: Database initialized

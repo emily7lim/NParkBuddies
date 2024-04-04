@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>classes.park &#8212; NParkBuddy 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for classes.park</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Module to represent a park&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Park">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park">[docs]</a>
+<span class="k">class</span> <span class="nc">Park</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Class to represent a park</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latitude</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">latitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">longitude</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Park.get_id">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.get_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to get the id of the park</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: id of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span></div>
+
+
+<div class="viewcode-block" id="Park.set_id">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.set_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to set the id of the park</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (int): id of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span></div>
+
+
+<div class="viewcode-block" id="Park.get_name">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.get_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to get the name of the park</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            string: name of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="Park.set_name">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.set_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to set the name of the park</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (string): name of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="Park.get_latitude">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.get_latitude">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_latitude</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to get the latitude of the park</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: latitude of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span></div>
+
+
+<div class="viewcode-block" id="Park.set_latitude">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.set_latitude">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_latitude</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latitude</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to set the latitude of the park</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            latitude (float): latitude of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">latitude</span></div>
+
+
+<div class="viewcode-block" id="Park.get_longitude">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.get_longitude">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_longitude</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to get the longitude of the park</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: longitude of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span></div>
+
+
+<div class="viewcode-block" id="Park.set_longitude">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.set_longitude">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_longitude</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to set the longitude of the park</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            longitude (float): longitude of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">longitude</span></div>
+
+
+<div class="viewcode-block" id="Park.get_facilities">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.get_facilities">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_facilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to get the facilities of the park</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: facilities of the park</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span></div>
+
+
+<div class="viewcode-block" id="Park.set_facilities">
+<a class="viewcode-back" href="../../classes.park.html#classes.park.Park.set_facilities">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_facilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">facilities</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to set the facilities of the park</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            facilities (tuple): facilities of the park</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: Invalid facility</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">classes.facility</span> <span class="kn">import</span> <span class="n">Facility</span>
+        <span class="k">for</span> <span class="n">facil</span> <span class="ow">in</span> <span class="n">facilities</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">facil</span><span class="p">,</span> <span class="n">Facility</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facil</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid facility&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">NParkBuddy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../server.html">server</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../classes.html">classes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, zhihao.hong.52.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
