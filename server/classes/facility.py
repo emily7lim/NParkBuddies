@@ -155,3 +155,17 @@ class Facility:
                 self.reviews.append(review)
             else:
                 raise ValueError('Invalid reviews')
+
+def convert_to_enum(value) -> FacilityType:
+    """ Method to convert a string to an enum
+    Args:
+        value (string): string to convert
+    Returns:
+        FacilityType: enum value
+    """
+    if value == 'BBQ Pit':
+        return FacilityType.BBQ_PIT
+    elif value == 'Campsite':
+        return FacilityType.CAMPSITE
+    elif value == 'Venues':
+        return FacilityType.VENUES

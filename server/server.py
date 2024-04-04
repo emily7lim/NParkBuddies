@@ -3,111 +3,24 @@
 # Run the following command in the terminal:
 # pip install -r requirements.txt
 
-from flask import Flask, request, jsonify
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker, relationship
-from classes.park import Park
-from classes.facility import Facility, FacilityType
-from classes.profile import Profile
-from classes.booking import Booking
-from classes.review import Review
-from logger import prepare_logger
+from flask import Flask, request, jsonify, Response
 import requests
 import time
 #import threading
 import signal
 import sys
 from functools import wraps
+from data_store import db
+from classes.facility import convert_to_enum
+from controllers.login_manager import LoginManager
+from controllers.home_manager import HomeManager
+from controllers.bookings_manager import BookingsManager
+from controllers.facility_manager import FacilityManager
+from logger import prepare_logger
 
 app = Flask(__name__)
 
 logger = prepare_logger()
-
-# Create a SQLAlchemy engine
-engine = create_engine('sqlite:///database/nparkbuddy.db', echo=True)
-
-class Database:
-    """ Class to represent the database
-    """
-    def __init__(self):
-        """ Method to initialize the database
-        """
-        self.Session = sessionmaker(bind=engine)
-        self.session = self.Session()
-        self.parks = []
-        self.facilities = []
-        self.bookings = []
-        self.reviews = []
-        self.profiles = []
-
-    def init_db(self):
-        """ Method to create all objects
-        """
-        # Query parks table from the database and create a list of Park objects
-        sql = text('SELECT * FROM parks')
-        result = self.session.execute(sql)
-        for row in result:
-            park = Park(id=row[0], name=row[1], latitude=row[2], longitude=row[3])
-            self.parks.append(park)
-
-        sql = text('SELECT * FROM facilities')
-        result = self.session.execute(sql)
-        for row in result:
-            park_id = row[2]
-            park = next((park for park in self.parks if park.get_id() == park_id), None)
-            if park:
-                facility = Facility(id=row[0], name=row[1], park=park, type=convert_to_enum(row[3]), avg_rating=row[4], num_ratings=row[5])
-                park.set_facilities(facility)
-                self.facilities.append(facility)
-            else:
-                logger.error(f'Park with id {park_id} not found')
-
-        sql = text('SELECT * FROM profiles')
-        result = self.session.execute(sql)
-        for row in result:
-            profile = Profile(id=row[0], username=row[1], email=row[2], password=row[3])
-            self.profiles.append(profile)
-
-        sql = text('SELECT * FROM bookings')
-        result = self.session.execute(sql)
-        for row in result:
-            booker_id = row[1]
-            booker = next((profile for profile in self.profiles if profile.get_id() == booker_id), None)
-            park_id = row[4]
-            park = next((park for park in self.parks if park.get_id() == park_id), None)
-            facility_id = row[5]
-            facility = next((facility for facility in self.facilities if facility.get_id() == facility_id), None)
-            booking = Booking(id=row[0], booker=booker, datetime=row[2], cancelled=bool(row[3]), park=park, facility=facility)
-            booker.set_bookings(booking)
-            self.bookings.append(booking)
-
-        sql = text('SELECT * FROM reviews')
-        result = self.session.execute(sql)
-        for row in result:
-            booking_id = row[3]
-            booking = next((booking for booking in self.bookings if booking.get_id() == booking_id), None)
-            facility_id = row[4]
-            facility = next((facility for facility in self.facilities if facility.get_id() == facility_id), None)
-            review = Review(id=booking_id, rating=row[1], comment=row[2])
-            booking.set_reviews(review)
-            facility.set_reviews(review)
-            self.reviews.append(review)
-
-        logger.info('Database initialized')
-
-def convert_to_enum(value) -> FacilityType:
-    """ Method to convert a string to an enum
-    Args:
-        value (string): string to convert
-    Returns:
-        FacilityType: enum value
-    """
-    if value == 'BBQ Pit':
-        return FacilityType.BBQ_PIT
-    elif value == 'Campsite':
-        return FacilityType.CAMPSITE
-    elif value == 'Venues':
-        return FacilityType.VENUES
 
 # Log all requests
 @app.after_request
@@ -145,6 +58,7 @@ def log_responses(response):
     logger.info('Response: %s - Status Code: %s', request.method, response.status_code)
     return response
 
+@staticmethod
 @app.route('/')
 def hello():
     """ Method to say hello
@@ -154,44 +68,178 @@ def hello():
     """
     return 'This is the server for NParkBuddy'
 
+@staticmethod
+@app.route('/login', methods=['POST'])
+def login():
+    """ Method to login
+
+    Returns:
+        string: This is the server for NParkBuddy
+    """
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    login_manager = LoginManager()
+    if login_manager.login(username, password):
+        return jsonify({'message': 'Login successful'})
+    else:
+        return jsonify({'message': 'Login failed'})
+
+# Home routes
 @app.route('/parks', methods=['GET'])
-def get_parks():
+def get_parks() -> Response:
     """ Method to get all parks
 
     Returns:
-        json: list of parks
+        Response: JSON response containing all parks
     """
-    parks = []
-    for park in db.parks:
-        parks.append({'id': park.get_id(),
-                      'name': park.get_name(),
-                      'latitude': park.get_latitude(),
-                      'longitude': park.get_longitude(),
-                      'facilities': [facility.get_name() for facility in park.get_facilities()]
-                      })
+    parks = HomeManager.view_parks()
     return jsonify(parks)
 
 @app.route('/parks/<string:park_name>', methods=['GET'])
-def get_park(park_name):
+def get_park(park_name) -> Response:
     """ Method to get a park by name
 
     Args:
         park_name (string): name of the park
 
     Returns:
-        json: park details
+        Response: JSON response containing the park
     """
-    park = next((park for park in db.parks if park.get_name() == park_name), None)
+    park = HomeManager.select_park(park_name)
     if park:
-        return jsonify({'id': park.get_id(),
-                        'name': park.get_name(),
-                        'latitude': park.get_latitude(),
-                        'longitude': park.get_longitude(),
-                        'facilities': [facility.get_name() for facility in park.get_facilities()]
-                        })
+        return jsonify(park)
     else:
         return jsonify({'error': 'Park not found'})
 
+@app.route('/bookings', methods=['POST'])
+def create_booking() -> Response:
+    """ Method to create a booking
+
+    Args:
+        user_id (int): The id of the user
+        park_id (int): The id of the park
+        facility_id (int): The id of the facility
+        datetime (datetime): The date and time of the booking
+
+    Returns:
+        Response: JSON response with status of the booking
+    """
+    # Extract data from request payload
+    payload = request.json
+    print(payload)
+    user_id = payload.get('user_id')
+    park_id = payload.get('park_id')
+    facility_id = payload.get('facility_id')
+    datetime = payload.get('datetime')
+
+    # Check if all required fields are present
+    if user_id is None or park_id is None or facility_id is None or datetime is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    booking = HomeManager.create_booking(user_id, park_id, facility_id, datetime)
+    if 'error' in booking:
+        return jsonify({'error': booking['error']}), 400
+    else:
+        return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
+
+# Bookings routes
+@app.route('/profiles/<string:username>/bookings', methods=['GET'])
+def get_bookings(username) -> Response:
+    """ Method to get all bookings by profile
+
+    Args:
+        username (string): username of the profile
+
+    Returns:
+        Response: JSON response containing all bookings
+    """
+    bookings = BookingsManager.view_bookings(username)
+    return jsonify(bookings)
+
+@app.route('/bookings/cancel', methods=['POST'])
+def cancel_booking():
+    """ Method to cancel a booking
+
+    Returns:
+        Response: JSON response with status of the booking
+    """
+    # Extract data from request payload
+    payload = request.json
+    username = payload.get('username')
+    park = payload.get('park')
+    facility = payload.get('facility')
+    datetime = payload.get('datetime')
+
+    # Check if all required fields are present
+    if username is None or park is None or facility is None or datetime is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    booking = BookingsManager.cancel_booking(username, park, facility, datetime)
+    if booking:
+        return jsonify({'message': 'Booking cancelled', 'booking': booking}), 200
+    else:
+        return jsonify({'error': 'Booking not found'}), 404
+
+@app.route('/reviews', methods=['POST'])
+def review_booking():
+    """ Method to review a booking
+
+    Returns:
+        Response: JSON response with status of the review
+    """
+    # Extract data from request payload
+    payload = request.json
+    username = payload.get('username')
+    park = payload.get('park')
+    facility = payload.get('facility')
+    datetime = payload.get('datetime')
+    rating = payload.get('rating')
+    comment = payload.get('comment')
+
+    # Check if all required fields are present
+    if username is None or park is None or facility is None or datetime is None or rating is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    review = BookingsManager.review_booking(username, park, facility, datetime, rating, comment)
+    if review:
+        return jsonify({'message': 'Review submitted', 'review': review}), 200
+    else:
+        return jsonify({'error': 'Booking not found'}), 404
+
+# Facility routes
+@app.route('/facilities', methods=['GET'])
+def view_facilities():
+    """ Method to view all facilities
+
+    Returns:
+        json: list of facilities
+    """
+    facilities = FacilityManager.view_facilities()
+    return jsonify(facilities)
+
+@app.route('/facilities/filter/<string:type>', methods=['GET'])
+def filter_facilities():
+    """ Method to filter facilities
+
+    Returns:
+        json: list of facilities
+    """
+    facility_type = convert_to_enum(type)
+    facilities = FacilityManager.filter_facilities(facility_type)
+    return jsonify(facilities)
+
+@app.route('/reviews/<string:park_name>/<string:facility_name>', methods=['GET'])
+def view_reviews(park_name, facility_name):
+    """ Method to view reviews
+
+    Returns:
+        json: list of reviews
+    """
+    reviews = FacilityManager.view_reviews(park_name, facility_name)
+    return jsonify(reviews)
+
+# Admin routes
 @app.route('/parks/<string:park_name>/facilities', methods=['GET'])
 def get_facilities_by_park(park_name):
     """ Method to get all facilities by park
@@ -207,36 +255,18 @@ def get_facilities_by_park(park_name):
         facilities = []
         for facility in park.get_facilities():
             facilities.append({'id': facility.get_id(),
-                               'name': facility.get_name(),
-                               'park': facility.get_park().get_name(),
-                               'type': facility.get_type().value,
-                               'avg_rating': facility.get_avg_rating(),
-                               'num_ratings': facility.get_num_ratings(),
-                               'reviews': [review.get_rating() for review in facility.get_reviews()]
-                               })
+                            'name': facility.get_name(),
+                            'park': facility.get_park().get_name(),
+                            'type': facility.get_type().value,
+                            'avg_rating': facility.get_avg_rating(),
+                            'num_ratings': facility.get_num_ratings(),
+                            'reviews': [review.get_rating() for review in facility.get_reviews()]
+                            })
         return jsonify(facilities)
     else:
         return jsonify({'error': 'Park not found'})
 
-@app.route('/facilities', methods=['GET'])
-def get_facilities():
-    """ Method to get all facilities
-
-    Returns:
-        json: list of facilities
-    """
-    facilities = []
-    for facility in db.facilities:
-        facilities.append({'id': facility.get_id(),
-                           'name': facility.get_name(),
-                           'park': facility.get_park().get_name(),
-                           'type': facility.get_type().value,
-                           'avg_rating': facility.get_avg_rating(),
-                           'num_ratings': facility.get_num_ratings(),
-                           'reviews': [review.get_rating() for review in facility.get_reviews()]
-                           })
-    return jsonify(facilities)
-
+@staticmethod
 @app.route('/parks/<string:park_name>/facility/<string:facility_name>', methods=['GET'])
 def get_facility_by_name(park_name, facility_name):
     """ Method to get a facility by name
@@ -265,6 +295,7 @@ def get_facility_by_name(park_name, facility_name):
     else:
         return jsonify({'error': 'Park not found'})
 
+@staticmethod
 @app.route('/profiles', methods=['GET'])
 def get_profiles():
     """ Method to get all profiles
@@ -275,12 +306,13 @@ def get_profiles():
     profiles = []
     for profile in db.profiles:
         profiles.append({'id': profile.get_id(),
-                         'username': profile.get_username(),
-                         'email': profile.get_email(),
-                         'bookings': [booking.get_id() for booking in profile.get_bookings()] if profile.get_bookings() else 'No bookings available'
-                         })
+                        'username': profile.get_username(),
+                        'email': profile.get_email(),
+                        'bookings': [booking.get_id() for booking in profile.get_bookings()] if profile.get_bookings() else 'No bookings available'
+                        })
     return jsonify(profiles)
 
+@staticmethod
 @app.route('/profiles/<string:username>', methods=['GET'])
 def get_profile(username):
     """ Method to get a profile by username
@@ -301,31 +333,7 @@ def get_profile(username):
     else:
         return jsonify({'error': 'Profile not found'})
 
-@app.route('/profiles/<string:username>/bookings', methods=['GET'])
-def get_bookings_by_profile(username):
-    """ Method to get all bookings by profile
-
-    Args:
-        username (string): username of the profile
-
-    Returns:
-        json: list of bookings
-    """
-    profile = next((profile for profile in db.profiles if profile.get_username() == username), None)
-    if profile:
-        bookings = []
-        for booking in profile.get_bookings():
-            bookings.append({'id': booking.get_id(),
-                             'datetime': booking.get_datetime(),
-                             'cancelled': booking.get_cancelled(),
-                             'park': booking.get_park().get_name(),
-                             'facility': booking.get_facility().get_name(),
-                             'reviews': [review.get_id() for review in booking.get_reviews()] if booking.get_reviews() else 'No reviews available'
-                             })
-        return jsonify(bookings)
-    else:
-        return jsonify({'error': 'Profile not found'})
-
+@staticmethod
 @app.route('/profiles/<string:username>/bookings/<int:booking_id>', methods=['GET'])
 def get_booking_by_profile(username, booking_id):
     """ Method to get a booking by profile
@@ -346,13 +354,14 @@ def get_booking_by_profile(username, booking_id):
                             'cancelled': booking.get_cancelled(),
                             'park': booking.get_park().get_name(),
                             'facility': booking.get_facility().get_name(),
-                            'reviews': [review.get_id() for review in booking.get_reviews()] if booking.get_reviews() else 'No reviews available'
+                            'reviews': booking.get_review().get_id() if booking.get_review() else 'No reviews available'
                             })
         else:
             return jsonify({'error': 'Booking not found'})
     else:
         return jsonify({'error': 'Profile not found'})
 
+@staticmethod
 @app.route('/profiles/<string:username>/bookings/<int:booking_id>/reviews', methods=['GET'])
 def get_review_by_profile(username, booking_id):
     """ Method to get review by profile
@@ -380,8 +389,9 @@ def get_review_by_profile(username, booking_id):
     else:
         return jsonify({'error': 'Profile not found'})
 
+@staticmethod
 @app.route('/bookings', methods=['GET'])
-def get_bookings():
+def view_bookings():
     """ Method to get all bookings
 
     Returns:
@@ -390,15 +400,16 @@ def get_bookings():
     bookings = []
     for booking in db.bookings:
         bookings.append({'id': booking.get_id(),
-                         'booker': booking.get_booker().get_username(),
-                         'datetime': booking.get_datetime(),
-                         'cancelled': booking.get_cancelled(),
-                         'park': booking.get_park().get_name(),
-                         'facility': booking.get_facility().get_name(),
-                         'reviews': [review.get_id() for review in booking.get_reviews()] if booking.get_reviews() else 'No reviews available'
-                         })
+                        'booker': booking.get_booker().get_username(),
+                        'datetime': booking.get_datetime(),
+                        'cancelled': booking.get_cancelled(),
+                        'park': booking.get_park().get_name(),
+                        'facility': booking.get_facility().get_name(),
+                        'reviews': booking.get_review().get_id() if booking.get_review() else 'No reviews available'
+                        })
     return jsonify(bookings)
 
+@staticmethod
 @app.route('/bookings/<int:booking_id>', methods=['GET'])
 def get_booking(booking_id):
     """ Method to get a booking by id
@@ -417,11 +428,12 @@ def get_booking(booking_id):
                         'cancelled': booking.get_cancelled(),
                         'park': booking.get_park().get_name(),
                         'facility': booking.get_facility().get_name(),
-                        'reviews': [review.get_id() for review in booking.get_reviews()] if booking.get_reviews() else 'No reviews available'
+                        'reviews': booking.get_review().get_id() if booking.get_review() else 'No reviews available'
                         })
     else:
         return jsonify({'error': 'Booking not found'})
 
+@staticmethod
 @app.route('/bookings/<int:booking_id>/reviews', methods=['GET'])
 def get_review_by_booking(booking_id):
     """ Method to get review by booking
@@ -444,6 +456,7 @@ def get_review_by_booking(booking_id):
     else:
         return jsonify({'error': 'Booking not found'})
 
+@staticmethod
 @app.route('/reviews', methods=['GET'])
 def get_reviews():
     """ Method to get all reviews
@@ -457,6 +470,7 @@ def get_reviews():
                         'comment': review.get_comment()})
     return jsonify(reviews)
 
+@staticmethod
 @app.route('/reviews/<int:review_id>', methods=['GET'])
 def get_review(review_id):
     """ Method to get a review by id
@@ -521,10 +535,8 @@ def shutdown():
     return 'Server shutting down...'
 
 if __name__ == '__main__':
-    db = Database()
     ##flask_thread = threading.Thread(target=app.run, kwargs={'host': '127.0.0.1', 'port' : 5000, 'debug': True, 'use_reloader': False})
     ##flask_thread.start()
-
     db.init_db()
     app.run(host='127.0.0.1', port=5000, debug=True)
     #trigger_request()

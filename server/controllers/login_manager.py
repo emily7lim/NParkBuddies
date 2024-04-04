@@ -6,7 +6,6 @@ import os, sys
 sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
 import profile
 from flask_sqlalchemy import SQLAlchemy
-from server.database import userdb_helper
 import re
 
 #class LoginManager(db.Model):
@@ -21,47 +20,47 @@ class LoginManager:
         """
         # Check if user already exists
         # existing_user = mongo.db.User.find_one({"email": email})
-        
-        # Whether all the fields are filled in 
+
+        # Whether all the fields are filled in
         if len(username.strip()) == 0 or len(password.strip()) == 0 or len(email.strip()) == 0:
             return jsonify({'error': 'Please fill in all the text fields'})
-        
+
         # Username should only contain alphanumeric characters
         elif not re.match("^[a-zA-Z0-9]+$", username):
             return jsonify({'error': 'Username must contain only alphanumeric characters'})
-    
+
         # Username should be unique
         #elif mongo.db.User.find_one({"username": username}):
         #    return jsonify({"error": "Please choose another username"})
         elif  profile.query.filter_by(email=email).first():
             return jsonify({"error": "Please choose another username"})
-        
+
         # Username length should be between 1 and 10
         elif (not (1 <= len(username) <= 10)):
-            print(len(username)) 
+            print(len(username))
             return jsonify({"error": "Username should be between 1 and 10 characters"})
 
         # Email should be valid
         elif not("@" in email) or not(".com" in email):
             return jsonify({"error": "Email invalid"})
-        
+
         # Email has already been registered
         #elif db.Profile.find_one({"email": email}):
         elif profile.query.filter_by(email=email).first():
             return jsonify({"error": "Email already registered"})
-        
+
         # Password between 8 and 512 characters
-        elif (not (8 <= len(password) <= 512)): 
+        elif (not (8 <= len(password) <= 512)):
             return jsonify({"error": "Invalid password. Your password should be between 8 and 512 characters"})
 
         # Password should contain only alphanumeric characters
-        elif (not re.match("^[a-zA-Z0-9]+$", password)): 
+        elif (not re.match("^[a-zA-Z0-9]+$", password)):
             return jsonify({"error": "Invalid password. Your password should contain alphanumeric characters only"})
-        
+
         # Password should contain at least 1 letter and digit
         elif not (re.match("(?=.*[a-zA-Z])(?=.*\d).+", password)):
             return jsonify({"error": "Invalid password. Your password should contain at least one letter and one digit"})
-        
+
         # Password should not match the username
         elif(password.lower() == username.lower()):
             return jsonify({"error": "Invalid password. Your password should not be the same as your username"})
@@ -82,18 +81,18 @@ class LoginManager:
         # Create analytics object and save it
         # new_analytics = analytics_model.Analytics(user=name, user_id=user_id, avg_speed=0, total_distance=0, routes=[])
         # analytics_id = new_analytics.save()
-                                    
-        db.session.add(new_profile)
-        db.session.commit()      
 
-        
+        db.session.add(new_profile)
+        db.session.commit()
+
+
         return jsonify({"message": "User created successfully!", "user_id": str(user_id)}), 201
 
     @staticmethod
     def delete_user(user_obj_id, profile_id):
         """
         Deletes a user along with their associated profile, analytics, and gamification documents.
-        
+
         :param user_obj_id: The ObjectId of the user in MongoDB.
         :param profile_id: The ObjectId of the user's profile in MongoDB.
         :return: A Flask response object with a JSON payload indicating success.
@@ -115,7 +114,7 @@ class LoginManager:
             # Delete the user's profile document
             print("Deleting Profile")
             mongo.db.User_Profile.delete_one({"_id": profile['_id']})
-        
+
         # Finally, delete the user document
         print("Deleting User")
         mongo.db.User.delete_one({"_id": user_obj_id})
@@ -126,7 +125,7 @@ class LoginManager:
     def update_user(user_id, fields):
         """
         Updates the fields of a user document in MongoDB.
-        
+
         :param user_id: The ObjectId of the user in MongoDB.
         :param fields: A dictionary containing the fields to update.
         :return: True if the update was successful, False otherwise.
@@ -142,7 +141,7 @@ class LoginManager:
     def check_user_password(user_id, password):
         """
         Checks if the provided password matches the stored password of the user.
-        
+
         :param user_id: The ObjectId of the user in MongoDB.
         :param password: The password to check.
         :return: True if the password matches, False otherwise.
@@ -156,7 +155,7 @@ class LoginManager:
     def get_user_by_email(email):
         """
         Retrieves a user document from MongoDB based on their email address.
-        
+
         :param email: The email address of the user.
         :return: The user document if found, None otherwise.
         """
@@ -166,7 +165,7 @@ class LoginManager:
     def get_user_by_id(user_id):
         """
         Retrieves a user document from MongoDB based on their ObjectId.
-        
+
         :param user_id: The ObjectId of the user in MongoDB.
         :return: The user document if found, None otherwise.
         """
@@ -215,7 +214,7 @@ class LoginManager:
         mongo.db.User.update_one({"_id": friend['_id']}, {"$set": friend})
 
         return jsonify({"message": "Friend removed successfully!"}), 200
-    
+
 if __name__ == "__main__":
     login = LoginManager()
     login.signup('abcdefg12345', 'abc@google.com', 'password123!')

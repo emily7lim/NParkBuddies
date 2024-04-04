@@ -12,7 +12,7 @@ class Booking:
         self.set_cancelled(cancelled)
         self.set_park(park)
         self.set_facility(facility)
-        self.reviews = []
+        self.review = None
 
     def get_id(self) -> int:
         """ Method to get the id of the booking
@@ -129,22 +129,26 @@ class Booking:
         else:
             raise ValueError('Invalid facility')
 
-    def get_reviews(self) -> list:
+    from classes.review import Review
+    def get_review(self) -> Review:
         """ Method to get the reviews of the booking
 
         Returns:
-            list: reviews of the booking
+            Review: reviews of the booking
         """
-        return self.reviews
+        return self.review
 
-    def set_reviews(self, *reviews) -> None:
-        """ Method to add a review to the booking
+    def set_review(self, review) -> None:
+        """ Method to set the reviews of the booking
 
         Args:
-            *reviews (tuple): tuple of reviews of the booking"""
+            review (Review): reviews of the booking
+
+        Raises:
+            ValueError: "Invalid review"
+        """
         from classes.review import Review
-        for review in reviews:
-            if isinstance(review, Review):
-                self.reviews.append(review)
-            else:
-                raise ValueError('Invalid review')
+        if isinstance(review, Review):
+            self.review = review
+        else:
+            raise ValueError('Invalid review')

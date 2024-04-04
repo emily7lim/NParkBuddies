@@ -1,4 +1,4 @@
-
+# Description: Test the OpenAI API with the OpenAI Python client.
 
 from openai import OpenAI
 from dotenv import dotenv_values

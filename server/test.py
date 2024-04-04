@@ -1,8 +1,8 @@
 import requests
 import json
+import datetime
 
 # Format for JSON GET requests
-
 
 def test():
     _ = ['parks', 'facilities', 'profiles', 'bookings', 'reviews']
@@ -25,6 +25,29 @@ def test2():
     else:
         print(f"Error: {response.status_code}")
 
+def test_booking():
+    url = 'http://localhost:5000/bookings'
+
+    user_id = 1
+    park_id = 1
+    facility_id = 1
+    booking_datetime = datetime.datetime(2024, 12, 25, 12, 0, 0)
+
+    payload = {
+        'user_id': user_id,
+        'park_id': park_id,
+        'facility_id': facility_id,
+        'datetime': booking_datetime.isoformat()
+    }
+
+    response = requests.post(url, json=payload)
+
+    if response.status_code == 200:
+        booking_info = json.loads(response.text)
+        print(booking_info)
+    else:
+        print(f"Error: {response.status_code}")
+
 def process_json(json_message):
     # Load the JSON message
     data = json.loads(json_message)
@@ -40,4 +63,4 @@ def process_json(json_message):
                 for key, value in i.items():
                     print(f"{key}: {value}")
 
-test2()
+test_booking()

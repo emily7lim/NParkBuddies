@@ -108,3 +108,1551 @@
 2024-04-04 17:43:07,376 :: INFO :: Database initialized
 2024-04-04 17:46:32,583 :: INFO :: Database initialized
 2024-04-04 17:46:44,488 :: INFO :: Database initialized
+2024-04-04 22:28:03,661 :: INFO :: Database initialized
+2024-04-04 22:28:04,242 :: INFO :: Database initialized
+2024-04-04 22:28:20,300 :: INFO :: Database initialized
+2024-04-04 22:28:30,998 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 22:28:31,000 :: INFO :: Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 22:28:33,039 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 22:28:33,040 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 22:28:35,180 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 22:28:35,181 :: INFO :: Request: GET /profiles - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 22:28:37,263 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 22:28:37,263 :: INFO :: Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 22:28:39,638 :: INFO :: Response: GET - Status Code: 200
+2024-04-04 22:28:39,639 :: INFO :: Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-04 22:29:07,016 :: INFO :: Database initialized
+2024-04-04 22:29:25,148 :: INFO :: Database initialized
+2024-04-05 03:24:42,698 :: INFO :: Database initialized
+2024-04-05 03:25:05,832 :: INFO :: Database initialized
+2024-04-05 03:25:36,125 :: INFO :: Database initialized
+2024-04-05 03:25:38,895 :: INFO :: Database initialized
+2024-04-05 03:29:46,671 :: INFO :: Database initialized
+2024-04-05 03:29:53,513 :: INFO :: Database initialized
+2024-04-05 03:35:50,965 :: INFO :: Database initialized
+2024-04-05 03:35:50,965 :: INFO :: Database initialized
+2024-04-05 03:35:51,570 :: INFO :: Database initialized
+2024-04-05 03:35:51,570 :: INFO :: Database initialized
+2024-04-05 03:37:50,949 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:37:50,949 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:37:50,950 :: INFO :: Request: GET / - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:37:50,950 :: INFO :: Request: GET / - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:37:51,065 :: INFO :: Response: GET - Status Code: 404
+2024-04-05 03:37:51,065 :: INFO :: Response: GET - Status Code: 404
+2024-04-05 03:37:51,066 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:37:51,066 :: INFO :: Request: GET /favicon.ico - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:37:55,943 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:37:55,943 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:37:55,944 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:37:55,944 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:42:47,658 :: INFO :: Database initialized
+2024-04-05 03:42:47,658 :: INFO :: Database initialized
+2024-04-05 03:42:53,126 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:42:53,126 :: INFO :: Response: GET - Status Code: 200
+2024-04-05 03:42:53,127 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:42:53,127 :: INFO :: Request: GET /facilities - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 03:43:37,451 :: INFO :: Database initialized
+2024-04-05 03:43:37,451 :: INFO :: Database initialized
+2024-04-05 03:43:46,497 :: INFO :: Database initialized
+2024-04-05 03:43:46,497 :: INFO :: Database initialized
+2024-04-05 03:47:11,690 :: INFO :: Database initialized
+2024-04-05 03:47:11,690 :: INFO :: Database initialized
+2024-04-05 03:48:47,397 :: INFO :: Database initialized
+2024-04-05 03:48:47,397 :: INFO :: Database initialized
+2024-04-05 03:48:56,248 :: INFO :: Database initialized
+2024-04-05 03:48:56,248 :: INFO :: Database initialized
+2024-04-05 03:50:09,344 :: INFO :: Database initialized
+2024-04-05 03:50:09,344 :: INFO :: Database initialized
+2024-04-05 03:50:09,914 :: INFO :: Database initialized
+2024-04-05 03:50:09,914 :: INFO :: Database initialized
+2024-04-05 03:50:38,223 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:50:38,223 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:53:18,144 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:53:18,144 :: INFO :: Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00080s] ()
+SELECT * FROM facilities
+[generated in 0.00064s] ()
+SELECT * FROM profiles
+[generated in 0.00079s] ()
+SELECT * FROM bookings
+[generated in 0.00056s] ()
+SELECT * FROM reviews
+[generated in 0.00085s] ()
+2024-04-05 03:57:42,785 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:57:42,785 :: INFO :: Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00067s] ()
+SELECT * FROM facilities
+[generated in 0.00044s] ()
+SELECT * FROM profiles
+[generated in 0.00042s] ()
+SELECT * FROM bookings
+[generated in 0.00068s] ()
+SELECT * FROM reviews
+[generated in 0.00058s] ()
+2024-04-05 03:58:18,222 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:58:18,222 :: INFO :: Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00042s] ()
+SELECT * FROM facilities
+[generated in 0.00053s] ()
+SELECT * FROM profiles
+[generated in 0.00051s] ()
+SELECT * FROM bookings
+[generated in 0.00047s] ()
+SELECT * FROM reviews
+[generated in 0.00074s] ()
+2024-04-05 03:58:44,501 :: INFO :: Database initialized in data_store.py
+2024-04-05 03:58:44,501 :: INFO :: Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00085s] ()
+SELECT * FROM facilities
+[generated in 0.00066s] ()
+SELECT * FROM profiles
+[generated in 0.00061s] ()
+SELECT * FROM bookings
+[generated in 0.00051s] ()
+SELECT * FROM reviews
+[generated in 0.00050s] ()
+2024-04-05 03:59:25,041 INFO Database initialized in data_store.py
+2024-04-05 03:59:25,041 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00035s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00034s] ()
+SELECT * FROM bookings
+[generated in 0.00024s] ()
+SELECT * FROM reviews
+[generated in 0.00043s] ()
+2024-04-05 03:59:52,245 INFO Database initialized in data_store.py
+2024-04-05 03:59:52,245 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00061s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00033s] ()
+SELECT * FROM bookings
+[generated in 0.00033s] ()
+SELECT * FROM reviews
+[generated in 0.00040s] ()
+2024-04-05 03:59:58,089 INFO Database initialized in data_store.py
+2024-04-05 03:59:58,089 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00066s] ()
+SELECT * FROM facilities
+[generated in 0.00067s] ()
+SELECT * FROM profiles
+[generated in 0.00045s] ()
+SELECT * FROM bookings
+[generated in 0.00042s] ()
+SELECT * FROM reviews
+[generated in 0.00168s] ()
+2024-04-05 04:00:25,270 INFO Database initialized in data_store.py
+2024-04-05 04:00:25,270 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00060s] ()
+SELECT * FROM facilities
+[generated in 0.00032s] ()
+SELECT * FROM profiles
+[generated in 0.00035s] ()
+SELECT * FROM bookings
+[generated in 0.00042s] ()
+SELECT * FROM reviews
+[generated in 0.00048s] ()
+2024-04-05 04:01:30,245 INFO Database initialized in data_store.py
+2024-04-05 04:01:30,245 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00070s] ()
+SELECT * FROM facilities
+[generated in 0.00063s] ()
+SELECT * FROM profiles
+[generated in 0.00068s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00055s] ()
+2024-04-05 04:01:49,356 INFO Database initialized in data_store.py
+2024-04-05 04:01:49,356 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00049s] ()
+SELECT * FROM facilities
+[generated in 0.00027s] ()
+SELECT * FROM profiles
+[generated in 0.00038s] ()
+SELECT * FROM bookings
+[generated in 0.00029s] ()
+SELECT * FROM reviews
+[generated in 0.00073s] ()
+2024-04-05 04:02:20,822 INFO Database initialized in data_store.py
+2024-04-05 04:02:20,822 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00031s] ()
+SELECT * FROM facilities
+[generated in 0.00035s] ()
+SELECT * FROM profiles
+[generated in 0.00036s] ()
+SELECT * FROM bookings
+[generated in 0.00052s] ()
+SELECT * FROM reviews
+[generated in 0.00062s] ()
+2024-04-05 04:02:58,296 INFO Database initialized in data_store.py
+2024-04-05 04:02:58,296 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00042s] ()
+SELECT * FROM profiles
+[generated in 0.00040s] ()
+SELECT * FROM bookings
+[generated in 0.00064s] ()
+SELECT * FROM reviews
+[generated in 0.00056s] ()
+2024-04-05 04:03:22,441 INFO Database initialized in data_store.py
+2024-04-05 04:03:22,441 INFO Database initialized in data_store.py
+2024-04-05 04:03:39,361 INFO Response: GET - Status Code: 200
+2024-04-05 04:03:39,361 INFO Response: GET - Status Code: 200
+2024-04-05 04:03:39,362 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:03:39,362 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00065s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00033s] ()
+SELECT * FROM bookings
+[generated in 0.00032s] ()
+SELECT * FROM reviews
+[generated in 0.00046s] ()
+2024-04-05 04:05:54,615 INFO Database initialized in data_store.py
+2024-04-05 04:05:54,615 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00048s] ()
+SELECT * FROM facilities
+[generated in 0.00045s] ()
+SELECT * FROM profiles
+[generated in 0.00091s] ()
+SELECT * FROM bookings
+[generated in 0.00061s] ()
+SELECT * FROM reviews
+[generated in 0.00095s] ()
+2024-04-05 04:07:23,259 INFO Database initialized in data_store.py
+2024-04-05 04:07:23,259 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00047s] ()
+SELECT * FROM profiles
+[generated in 0.00092s] ()
+SELECT * FROM bookings
+[generated in 0.00059s] ()
+SELECT * FROM reviews
+[generated in 0.00078s] ()
+2024-04-05 04:08:31,583 INFO Database initialized in data_store.py
+2024-04-05 04:08:31,583 INFO Database initialized in data_store.py
+2024-04-05 04:08:33,997 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:08:33,997 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00079s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00047s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00059s] ()
+2024-04-05 04:08:59,938 INFO Database initialized in data_store.py
+2024-04-05 04:08:59,938 INFO Database initialized in data_store.py
+2024-04-05 04:09:01,890 INFO Response: GET - Status Code: 200
+2024-04-05 04:09:01,890 INFO Response: GET - Status Code: 200
+2024-04-05 04:09:01,890 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:09:01,890 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00033s] ()
+SELECT * FROM facilities
+[generated in 0.00043s] ()
+SELECT * FROM profiles
+[generated in 0.00056s] ()
+SELECT * FROM bookings
+[generated in 0.00049s] ()
+SELECT * FROM reviews
+[generated in 0.00570s] ()
+2024-04-05 04:10:00,287 INFO Database initialized in data_store.py
+2024-04-05 04:10:00,287 INFO Database initialized in data_store.py
+2024-04-05 04:10:01,891 INFO Response: GET - Status Code: 200
+2024-04-05 04:10:01,891 INFO Response: GET - Status Code: 200
+2024-04-05 04:10:01,892 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:10:01,892 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:10:01,892 INFO Request Headers: Host: 127.0.0.1:5000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Dnt: 1
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+2024-04-05 04:10:01,892 INFO Request Headers: Host: 127.0.0.1:5000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Dnt: 1
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+
+
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00046s] ()
+SELECT * FROM facilities
+[generated in 0.00052s] ()
+SELECT * FROM profiles
+[generated in 0.00054s] ()
+SELECT * FROM bookings
+[generated in 0.00043s] ()
+SELECT * FROM reviews
+[generated in 0.00053s] ()
+2024-04-05 04:10:31,629 INFO Database initialized in data_store.py
+2024-04-05 04:10:31,629 INFO Database initialized in data_store.py
+2024-04-05 04:10:34,732 INFO Response: GET - Status Code: 200
+2024-04-05 04:10:34,732 INFO Response: GET - Status Code: 200
+2024-04-05 04:10:34,733 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:10:34,733 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:10:34,734 INFO Response: <werkzeug.wsgi.ClosingIterator object at 0x000001F765D58910>
+2024-04-05 04:10:34,734 INFO Response: <werkzeug.wsgi.ClosingIterator object at 0x000001F765D58910>
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00030s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00028s] ()
+SELECT * FROM bookings
+[generated in 0.00034s] ()
+SELECT * FROM reviews
+[generated in 0.00047s] ()
+2024-04-05 04:11:09,139 INFO Database initialized in data_store.py
+2024-04-05 04:11:09,139 INFO Database initialized in data_store.py
+2024-04-05 04:11:12,093 INFO Response: GET - Status Code: 200
+2024-04-05 04:11:12,093 INFO Response: GET - Status Code: 200
+2024-04-05 04:11:12,094 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:11:12,094 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00042s] ()
+SELECT * FROM profiles
+[generated in 0.00042s] ()
+SELECT * FROM bookings
+[generated in 0.00044s] ()
+SELECT * FROM reviews
+[generated in 0.00072s] ()
+2024-04-05 04:11:48,724 INFO Database initialized in data_store.py
+2024-04-05 04:11:48,724 INFO Database initialized in data_store.py
+2024-04-05 04:12:27,399 INFO Response: GET - Status Code: 200
+2024-04-05 04:12:27,399 INFO Response: GET - Status Code: 200
+2024-04-05 04:12:27,399 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:12:27,399 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00063s] ()
+SELECT * FROM facilities
+[generated in 0.00033s] ()
+SELECT * FROM profiles
+[generated in 0.00030s] ()
+SELECT * FROM bookings
+[generated in 0.00035s] ()
+SELECT * FROM reviews
+[generated in 0.00062s] ()
+2024-04-05 04:13:45,931 INFO Database initialized in data_store.py
+2024-04-05 04:13:45,931 INFO Database initialized in data_store.py
+2024-04-05 04:13:49,496 INFO Response: GET - Status Code: 200
+2024-04-05 04:13:49,496 INFO Response: GET - Status Code: 200
+2024-04-05 04:13:49,496 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:13:49,496 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00071s] ()
+SELECT * FROM facilities
+[generated in 0.00048s] ()
+SELECT * FROM profiles
+[generated in 0.00063s] ()
+SELECT * FROM bookings
+[generated in 0.00065s] ()
+SELECT * FROM reviews
+[generated in 0.00053s] ()
+2024-04-05 04:14:19,312 INFO Database initialized in data_store.py
+2024-04-05 04:14:19,312 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00046s] ()
+SELECT * FROM facilities
+[generated in 0.00027s] ()
+SELECT * FROM profiles
+[generated in 0.00057s] ()
+SELECT * FROM bookings
+[generated in 0.00051s] ()
+SELECT * FROM reviews
+[generated in 0.00043s] ()
+2024-04-05 04:14:37,388 INFO Database initialized in data_store.py
+2024-04-05 04:14:37,388 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00048s] ()
+SELECT * FROM facilities
+[generated in 0.00053s] ()
+SELECT * FROM profiles
+[generated in 0.00025s] ()
+SELECT * FROM bookings
+[generated in 0.00046s] ()
+SELECT * FROM reviews
+[generated in 0.00063s] ()
+2024-04-05 04:15:35,092 INFO Database initialized in data_store.py
+2024-04-05 04:15:35,092 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00024s] ()
+SELECT * FROM facilities
+[generated in 0.00031s] ()
+SELECT * FROM profiles
+[generated in 0.00036s] ()
+SELECT * FROM bookings
+[generated in 0.00026s] ()
+SELECT * FROM reviews
+[generated in 0.00054s] ()
+2024-04-05 04:15:35,712 INFO Database initialized in data_store.py
+2024-04-05 04:15:35,712 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00046s] ()
+SELECT * FROM facilities
+[generated in 0.00036s] ()
+SELECT * FROM profiles
+[generated in 0.00025s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00054s] ()
+2024-04-05 04:16:25,437 INFO Database initialized in data_store.py
+2024-04-05 04:16:25,437 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00033s] ()
+SELECT * FROM facilities
+[generated in 0.00033s] ()
+SELECT * FROM profiles
+[generated in 0.00031s] ()
+SELECT * FROM bookings
+[generated in 0.00040s] ()
+SELECT * FROM reviews
+[generated in 0.00041s] ()
+2024-04-05 04:17:30,418 INFO Database initialized in data_store.py
+2024-04-05 04:17:30,418 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00052s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00036s] ()
+SELECT * FROM bookings
+[generated in 0.00052s] ()
+SELECT * FROM reviews
+[generated in 0.00052s] ()
+2024-04-05 04:17:50,525 INFO Database initialized in data_store.py
+2024-04-05 04:17:50,525 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00058s] ()
+SELECT * FROM facilities
+[generated in 0.00057s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00079s] ()
+2024-04-05 04:18:46,429 INFO Database initialized in data_store.py
+2024-04-05 04:18:46,429 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00064s] ()
+SELECT * FROM facilities
+[generated in 0.00038s] ()
+SELECT * FROM profiles
+[generated in 0.00044s] ()
+SELECT * FROM bookings
+[generated in 0.00030s] ()
+SELECT * FROM reviews
+[generated in 0.00050s] ()
+2024-04-05 04:22:06,176 INFO Database initialized in data_store.py
+2024-04-05 04:22:06,176 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00071s] ()
+SELECT * FROM facilities
+[generated in 0.00054s] ()
+SELECT * FROM profiles
+[generated in 0.00035s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00062s] ()
+2024-04-05 04:22:33,412 INFO Database initialized in data_store.py
+2024-04-05 04:22:33,412 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00072s] ()
+SELECT * FROM facilities
+[generated in 0.01136s] ()
+SELECT * FROM profiles
+[generated in 0.00059s] ()
+SELECT * FROM bookings
+[generated in 0.00056s] ()
+SELECT * FROM reviews
+[generated in 0.00151s] ()
+2024-04-05 04:48:28,694 INFO Database initialized in data_store.py
+2024-04-05 04:48:28,694 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00073s] ()
+SELECT * FROM facilities
+[generated in 0.00056s] ()
+SELECT * FROM profiles
+[generated in 0.00074s] ()
+SELECT * FROM bookings
+[generated in 0.00060s] ()
+SELECT * FROM reviews
+[generated in 0.00071s] ()
+2024-04-05 04:49:46,000 INFO Database initialized in data_store.py
+2024-04-05 04:49:46,000 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00053s] ()
+SELECT * FROM facilities
+[generated in 0.00054s] ()
+SELECT * FROM profiles
+[generated in 0.00065s] ()
+SELECT * FROM bookings
+[generated in 0.00048s] ()
+SELECT * FROM reviews
+[generated in 0.00061s] ()
+2024-04-05 04:49:50,829 INFO Database initialized in data_store.py
+2024-04-05 04:49:50,829 INFO Database initialized in data_store.py
+2024-04-05 04:51:35,728 INFO Response: GET - Status Code: 200
+2024-04-05 04:51:35,728 INFO Response: GET - Status Code: 200
+2024-04-05 04:51:35,729 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:51:35,729 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00056s] ()
+SELECT * FROM facilities
+[generated in 0.00041s] ()
+SELECT * FROM profiles
+[generated in 0.00047s] ()
+SELECT * FROM bookings
+[generated in 0.00049s] ()
+SELECT * FROM reviews
+[generated in 0.00096s] ()
+2024-04-05 04:53:44,004 INFO Database initialized in data_store.py
+2024-04-05 04:53:44,004 INFO Database initialized in data_store.py
+2024-04-05 04:53:48,966 INFO Response: GET - Status Code: 200
+2024-04-05 04:53:48,966 INFO Response: GET - Status Code: 200
+2024-04-05 04:53:48,967 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:53:48,967 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:54:02,188 INFO Response: GET - Status Code: 200
+2024-04-05 04:54:02,188 INFO Response: GET - Status Code: 200
+2024-04-05 04:54:02,190 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:54:02,190 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00058s] ()
+SELECT * FROM facilities
+[generated in 0.00036s] ()
+SELECT * FROM profiles
+[generated in 0.00044s] ()
+SELECT * FROM bookings
+[generated in 0.00040s] ()
+SELECT * FROM reviews
+[generated in 0.00055s] ()
+2024-04-05 04:54:45,102 INFO Database initialized in data_store.py
+2024-04-05 04:54:45,102 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00029s] ()
+SELECT * FROM facilities
+[generated in 0.00056s] ()
+SELECT * FROM profiles
+[generated in 0.00036s] ()
+SELECT * FROM bookings
+[generated in 0.00025s] ()
+SELECT * FROM reviews
+[generated in 0.00048s] ()
+2024-04-05 04:55:04,382 INFO Database initialized in data_store.py
+2024-04-05 04:55:04,382 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00039s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00040s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00032s] ()
+2024-04-05 04:55:48,077 INFO Database initialized in data_store.py
+2024-04-05 04:55:48,077 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00041s] ()
+SELECT * FROM facilities
+[generated in 0.00029s] ()
+SELECT * FROM profiles
+[generated in 0.00049s] ()
+SELECT * FROM bookings
+[generated in 0.00041s] ()
+SELECT * FROM reviews
+[generated in 0.00077s] ()
+2024-04-05 04:55:55,958 INFO Database initialized in data_store.py
+2024-04-05 04:55:55,958 INFO Database initialized in data_store.py
+2024-04-05 04:55:59,073 INFO Response: GET - Status Code: 200
+2024-04-05 04:55:59,073 INFO Response: GET - Status Code: 200
+2024-04-05 04:55:59,074 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 04:55:59,074 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00059s] ()
+SELECT * FROM facilities
+[generated in 0.00059s] ()
+SELECT * FROM profiles
+[generated in 0.00064s] ()
+SELECT * FROM bookings
+[generated in 0.00069s] ()
+SELECT * FROM reviews
+[generated in 0.00083s] ()
+2024-04-05 04:58:21,709 INFO Database initialized in data_store.py
+2024-04-05 04:58:21,709 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00086s] ()
+SELECT * FROM facilities
+[generated in 0.00083s] ()
+SELECT * FROM profiles
+[generated in 0.00100s] ()
+SELECT * FROM bookings
+[generated in 0.00070s] ()
+SELECT * FROM reviews
+[generated in 0.00085s] ()
+2024-04-05 04:59:46,122 INFO Database initialized in data_store.py
+2024-04-05 04:59:46,122 INFO Database initialized in data_store.py
+2024-04-05 05:00:10,591 INFO Response: GET - Status Code: 200
+2024-04-05 05:00:10,591 INFO Response: GET - Status Code: 200
+2024-04-05 05:00:10,592 INFO Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 05:00:10,592 INFO Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00058s] ()
+SELECT * FROM facilities
+[generated in 0.00053s] ()
+SELECT * FROM profiles
+[generated in 0.00051s] ()
+SELECT * FROM bookings
+[generated in 0.00048s] ()
+SELECT * FROM reviews
+[generated in 0.00060s] ()
+2024-04-05 05:00:43,040 INFO Database initialized in data_store.py
+2024-04-05 05:00:43,040 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00052s] ()
+SELECT * FROM facilities
+[generated in 0.00043s] ()
+SELECT * FROM profiles
+[generated in 0.00043s] ()
+SELECT * FROM bookings
+[generated in 0.00052s] ()
+SELECT * FROM reviews
+[generated in 0.00109s] ()
+2024-04-05 05:01:17,464 INFO Database initialized in data_store.py
+2024-04-05 05:01:17,464 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00051s] ()
+SELECT * FROM facilities
+[generated in 0.00043s] ()
+SELECT * FROM profiles
+[generated in 0.00039s] ()
+SELECT * FROM bookings
+[generated in 0.00031s] ()
+SELECT * FROM reviews
+[generated in 0.00052s] ()
+2024-04-05 05:02:04,210 INFO Database initialized in data_store.py
+2024-04-05 05:02:04,210 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00071s] ()
+SELECT * FROM facilities
+[generated in 0.00063s] ()
+SELECT * FROM profiles
+[generated in 0.00065s] ()
+SELECT * FROM bookings
+[generated in 0.00055s] ()
+SELECT * FROM reviews
+[generated in 0.00059s] ()
+2024-04-05 05:04:14,785 INFO Database initialized in data_store.py
+2024-04-05 05:04:14,785 INFO Database initialized in data_store.py
+2024-04-05 05:05:33,966 INFO Response: GET - Status Code: 200
+2024-04-05 05:05:33,966 INFO Response: GET - Status Code: 200
+2024-04-05 05:05:33,966 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 05:05:33,966 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00051s] ()
+SELECT * FROM facilities
+[generated in 0.00048s] ()
+SELECT * FROM profiles
+[generated in 0.00046s] ()
+SELECT * FROM bookings
+[generated in 0.00050s] ()
+SELECT * FROM reviews
+[generated in 0.00043s] ()
+2024-04-05 05:07:05,377 INFO Database initialized in data_store.py
+2024-04-05 05:07:05,377 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00038s] ()
+SELECT * FROM facilities
+[generated in 0.00029s] ()
+SELECT * FROM profiles
+[generated in 0.00052s] ()
+SELECT * FROM bookings
+[generated in 0.00035s] ()
+SELECT * FROM reviews
+[generated in 0.00047s] ()
+2024-04-05 05:07:18,356 INFO Database initialized in data_store.py
+2024-04-05 05:07:18,356 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00033s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00040s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00037s] ()
+2024-04-05 05:07:24,324 INFO Database initialized in data_store.py
+2024-04-05 05:07:24,324 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00068s] ()
+SELECT * FROM facilities
+[generated in 0.00051s] ()
+SELECT * FROM profiles
+[generated in 0.00048s] ()
+SELECT * FROM bookings
+[generated in 0.00045s] ()
+SELECT * FROM reviews
+[generated in 0.00052s] ()
+2024-04-05 05:07:37,305 INFO Database initialized in data_store.py
+2024-04-05 05:07:37,305 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00065s] ()
+SELECT * FROM facilities
+[generated in 0.00041s] ()
+SELECT * FROM profiles
+[generated in 0.00042s] ()
+SELECT * FROM bookings
+[generated in 0.00042s] ()
+SELECT * FROM reviews
+[generated in 0.00050s] ()
+2024-04-05 05:07:52,310 INFO Database initialized in data_store.py
+2024-04-05 05:07:52,310 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00048s] ()
+SELECT * FROM facilities
+[generated in 0.00027s] ()
+SELECT * FROM profiles
+[generated in 0.00032s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00049s] ()
+2024-04-05 05:08:35,884 INFO Database initialized in data_store.py
+2024-04-05 05:08:35,884 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00024s] ()
+SELECT * FROM facilities
+[generated in 0.00045s] ()
+SELECT * FROM profiles
+[generated in 0.00034s] ()
+SELECT * FROM bookings
+[generated in 0.00042s] ()
+SELECT * FROM reviews
+[generated in 0.00057s] ()
+2024-04-05 05:08:56,002 INFO Database initialized in data_store.py
+2024-04-05 05:08:56,002 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00053s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00059s] ()
+SELECT * FROM bookings
+[generated in 0.00035s] ()
+SELECT * FROM reviews
+[generated in 0.00067s] ()
+2024-04-05 05:09:13,070 INFO Database initialized in data_store.py
+2024-04-05 05:09:13,070 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00039s] ()
+SELECT * FROM facilities
+[generated in 0.00031s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00055s] ()
+SELECT * FROM reviews
+[generated in 0.00069s] ()
+2024-04-05 05:09:53,576 INFO Database initialized in data_store.py
+2024-04-05 05:09:53,576 INFO Database initialized in data_store.py
+2024-04-05 05:10:17,260 INFO Shutting down server...
+2024-04-05 05:10:17,260 INFO Shutting down server...
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00065s] ()
+SELECT * FROM facilities
+[generated in 0.00047s] ()
+SELECT * FROM profiles
+[generated in 0.00044s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00091s] ()
+2024-04-05 05:10:31,253 INFO Database initialized in data_store.py
+2024-04-05 05:10:31,253 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00056s] ()
+SELECT * FROM facilities
+[generated in 0.00058s] ()
+SELECT * FROM profiles
+[generated in 0.00047s] ()
+SELECT * FROM bookings
+[generated in 0.00033s] ()
+SELECT * FROM reviews
+[generated in 0.00057s] ()
+2024-04-05 05:10:31,880 INFO Database initialized in data_store.py
+2024-04-05 05:10:31,880 INFO Database initialized in data_store.py
+2024-04-05 05:11:57,274 INFO Shutting down server...
+2024-04-05 05:11:57,274 INFO Shutting down server...
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00027s] ()
+SELECT * FROM facilities
+[generated in 0.00033s] ()
+SELECT * FROM profiles
+[generated in 0.00038s] ()
+SELECT * FROM bookings
+[generated in 0.00026s] ()
+SELECT * FROM reviews
+[generated in 0.00048s] ()
+2024-04-05 05:11:57,874 INFO Database initialized in data_store.py
+2024-04-05 05:11:57,874 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00062s] ()
+SELECT * FROM profiles
+[generated in 0.00062s] ()
+SELECT * FROM bookings
+[generated in 0.00055s] ()
+SELECT * FROM reviews
+[generated in 0.00081s] ()
+2024-04-05 05:11:58,450 INFO Database initialized in data_store.py
+2024-04-05 05:11:58,450 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00082s] ()
+SELECT * FROM facilities
+[generated in 0.00065s] ()
+SELECT * FROM profiles
+[generated in 0.00108s] ()
+SELECT * FROM bookings
+[generated in 0.00061s] ()
+SELECT * FROM reviews
+[generated in 0.00061s] ()
+2024-04-05 05:15:35,871 INFO Database initialized in data_store.py
+2024-04-05 05:15:35,871 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00059s] ()
+SELECT * FROM facilities
+[generated in 0.00039s] ()
+SELECT * FROM profiles
+[generated in 0.00050s] ()
+SELECT * FROM bookings
+[generated in 0.00035s] ()
+SELECT * FROM reviews
+[generated in 0.00065s] ()
+2024-04-05 05:16:35,946 INFO Database initialized in data_store.py
+2024-04-05 05:16:35,946 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00062s] ()
+SELECT * FROM facilities
+[generated in 0.00060s] ()
+SELECT * FROM profiles
+[generated in 0.00076s] ()
+SELECT * FROM bookings
+[generated in 0.00055s] ()
+SELECT * FROM reviews
+[generated in 0.00056s] ()
+2024-04-05 05:17:32,855 INFO Database initialized in data_store.py
+2024-04-05 05:17:32,855 INFO Database initialized in data_store.py
+2024-04-05 05:17:43,613 INFO Response: POST - Status Code: 200
+2024-04-05 05:17:43,613 INFO Response: POST - Status Code: 200
+2024-04-05 05:17:43,615 INFO Request: POST /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-05 05:17:43,615 INFO Request: POST /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00059s] ()
+SELECT * FROM facilities
+[generated in 0.00050s] ()
+SELECT * FROM profiles
+[generated in 0.00063s] ()
+SELECT * FROM bookings
+[generated in 0.00043s] ()
+SELECT * FROM reviews
+[generated in 0.00046s] ()
+2024-04-05 05:18:39,079 INFO Database initialized in data_store.py
+2024-04-05 05:18:39,079 INFO Database initialized in data_store.py
+2024-04-05 05:18:45,885 INFO Response: GET - Status Code: 200
+2024-04-05 05:18:45,885 INFO Response: GET - Status Code: 200
+2024-04-05 05:18:45,885 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 05:18:45,885 INFO Request: GET /parks - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00049s] ()
+SELECT * FROM facilities
+[generated in 0.00050s] ()
+SELECT * FROM profiles
+[generated in 0.00048s] ()
+SELECT * FROM bookings
+[generated in 0.00040s] ()
+SELECT * FROM reviews
+[generated in 0.00071s] ()
+2024-04-05 05:19:25,723 INFO Database initialized in data_store.py
+2024-04-05 05:19:25,723 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00086s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00048s] ()
+SELECT * FROM bookings
+[generated in 0.00048s] ()
+SELECT * FROM reviews
+[generated in 0.00088s] ()
+2024-04-05 05:28:47,360 INFO Database initialized in data_store.py
+2024-04-05 05:28:47,360 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00055s] ()
+SELECT * FROM facilities
+[generated in 0.00063s] ()
+SELECT * FROM profiles
+[generated in 0.00072s] ()
+SELECT * FROM bookings
+[generated in 0.00061s] ()
+SELECT * FROM reviews
+[generated in 0.00093s] ()
+2024-04-05 05:33:17,622 INFO Database initialized in data_store.py
+2024-04-05 05:33:17,622 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00067s] ()
+SELECT * FROM facilities
+[generated in 0.00051s] ()
+SELECT * FROM profiles
+[generated in 0.00074s] ()
+SELECT * FROM bookings
+[generated in 0.00074s] ()
+SELECT * FROM reviews
+[generated in 0.00102s] ()
+2024-04-05 05:33:29,534 INFO Database initialized in data_store.py
+2024-04-05 05:33:29,534 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00061s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00052s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00073s] ()
+2024-04-05 05:33:49,641 INFO Database initialized in data_store.py
+2024-04-05 05:33:49,641 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00038s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00037s] ()
+SELECT * FROM bookings
+[generated in 0.00045s] ()
+SELECT * FROM reviews
+[generated in 0.00072s] ()
+2024-04-05 05:43:31,198 INFO Database initialized in data_store.py
+2024-04-05 05:43:31,198 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00038s] ()
+SELECT * FROM profiles
+[generated in 0.00035s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00065s] ()
+2024-04-05 05:43:31,883 INFO Database initialized in data_store.py
+2024-04-05 05:43:31,883 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00049s] ()
+SELECT * FROM facilities
+[generated in 0.00041s] ()
+SELECT * FROM profiles
+[generated in 0.00033s] ()
+SELECT * FROM bookings
+[generated in 0.00044s] ()
+SELECT * FROM reviews
+[generated in 0.00123s] ()
+2024-04-05 05:48:39,369 INFO Database initialized in data_store.py
+2024-04-05 05:48:39,369 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00045s] ()
+SELECT * FROM profiles
+[generated in 0.00030s] ()
+SELECT * FROM bookings
+[generated in 0.00047s] ()
+SELECT * FROM reviews
+[generated in 0.00053s] ()
+2024-04-05 05:48:48,191 INFO Database initialized in data_store.py
+2024-04-05 05:48:48,191 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00051s] ()
+SELECT * FROM facilities
+[generated in 0.00060s] ()
+SELECT * FROM profiles
+[generated in 0.00043s] ()
+SELECT * FROM bookings
+[generated in 0.00066s] ()
+SELECT * FROM reviews
+[generated in 0.00068s] ()
+2024-04-05 05:49:00,127 INFO Database initialized in data_store.py
+2024-04-05 05:49:00,127 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00050s] ()
+SELECT * FROM facilities
+[generated in 0.00054s] ()
+SELECT * FROM profiles
+[generated in 0.00054s] ()
+SELECT * FROM bookings
+[generated in 0.00025s] ()
+SELECT * FROM reviews
+[generated in 0.00062s] ()
+2024-04-05 05:50:14,443 INFO Database initialized in data_store.py
+2024-04-05 05:50:14,443 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00061s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00064s] ()
+SELECT * FROM reviews
+[generated in 0.00063s] ()
+2024-04-05 05:50:47,853 INFO Database initialized in data_store.py
+2024-04-05 05:50:47,853 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00050s] ()
+SELECT * FROM facilities
+[generated in 0.00024s] ()
+SELECT * FROM profiles
+[generated in 0.00039s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00085s] ()
+2024-04-05 05:50:58,835 INFO Database initialized in data_store.py
+2024-04-05 05:50:58,835 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00059s] ()
+SELECT * FROM facilities
+[generated in 0.00062s] ()
+SELECT * FROM profiles
+[generated in 0.00056s] ()
+SELECT * FROM bookings
+[generated in 0.00062s] ()
+SELECT * FROM reviews
+[generated in 0.00367s] ()
+2024-04-05 05:53:59,281 INFO Database initialized in data_store.py
+2024-04-05 05:53:59,281 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00048s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00037s] ()
+SELECT * FROM bookings
+[generated in 0.00040s] ()
+SELECT * FROM reviews
+[generated in 0.00067s] ()
+2024-04-05 05:56:55,706 INFO Database initialized in data_store.py
+2024-04-05 05:56:55,706 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00071s] ()
+SELECT * FROM facilities
+[generated in 0.00055s] ()
+SELECT * FROM profiles
+[generated in 0.00057s] ()
+SELECT * FROM bookings
+[generated in 0.00049s] ()
+SELECT * FROM reviews
+[generated in 0.00080s] ()
+2024-04-05 05:57:15,836 INFO Database initialized in data_store.py
+2024-04-05 05:57:15,836 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00076s] ()
+SELECT * FROM facilities
+[generated in 0.00043s] ()
+SELECT * FROM profiles
+[generated in 0.00043s] ()
+SELECT * FROM bookings
+[generated in 0.00034s] ()
+SELECT * FROM reviews
+[generated in 0.00080s] ()
+2024-04-05 05:58:19,848 INFO Database initialized in data_store.py
+2024-04-05 05:58:19,848 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00161s] ()
+SELECT * FROM facilities
+[generated in 0.00068s] ()
+SELECT * FROM profiles
+[generated in 0.00044s] ()
+SELECT * FROM bookings
+[generated in 0.00045s] ()
+SELECT * FROM reviews
+[generated in 0.00048s] ()
+2024-04-05 06:00:45,515 INFO Database initialized in data_store.py
+2024-04-05 06:00:45,515 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00053s] ()
+SELECT * FROM facilities
+[generated in 0.00042s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00036s] ()
+SELECT * FROM reviews
+[generated in 0.00046s] ()
+2024-04-05 06:01:16,908 INFO Database initialized in data_store.py
+2024-04-05 06:01:16,908 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00028s] ()
+SELECT * FROM profiles
+[generated in 0.00033s] ()
+SELECT * FROM bookings
+[generated in 0.00034s] ()
+SELECT * FROM reviews
+[generated in 0.00043s] ()
+2024-04-05 06:01:30,947 INFO Database initialized in data_store.py
+2024-04-05 06:01:30,947 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00068s] ()
+SELECT * FROM facilities
+[generated in 0.00044s] ()
+SELECT * FROM profiles
+[generated in 0.00067s] ()
+SELECT * FROM bookings
+[generated in 0.00052s] ()
+SELECT * FROM reviews
+[generated in 0.00050s] ()
+2024-04-05 06:02:01,309 INFO Database initialized in data_store.py
+2024-04-05 06:02:01,309 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00035s] ()
+SELECT * FROM profiles
+[generated in 0.00034s] ()
+SELECT * FROM bookings
+[generated in 0.00041s] ()
+SELECT * FROM reviews
+[generated in 0.00073s] ()
+2024-04-05 06:02:27,620 INFO Database initialized in data_store.py
+2024-04-05 06:02:27,620 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00058s] ()
+SELECT * FROM facilities
+[generated in 0.00055s] ()
+SELECT * FROM profiles
+[generated in 0.00043s] ()
+SELECT * FROM bookings
+[generated in 0.00048s] ()
+SELECT * FROM reviews
+[generated in 0.00045s] ()
+2024-04-05 06:03:20,404 INFO Database initialized in data_store.py
+2024-04-05 06:03:20,404 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00032s] ()
+SELECT * FROM facilities
+[generated in 0.00042s] ()
+SELECT * FROM profiles
+[generated in 0.00031s] ()
+SELECT * FROM bookings
+[generated in 0.00024s] ()
+SELECT * FROM reviews
+[generated in 0.00047s] ()
+2024-04-05 06:04:43,933 INFO Database initialized in data_store.py
+2024-04-05 06:04:43,933 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00034s] ()
+SELECT * FROM facilities
+[generated in 0.00064s] ()
+SELECT * FROM profiles
+[generated in 0.00039s] ()
+SELECT * FROM bookings
+[generated in 0.00033s] ()
+SELECT * FROM reviews
+[generated in 0.00045s] ()
+2024-04-05 06:05:05,122 INFO Database initialized in data_store.py
+2024-04-05 06:05:05,122 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00064s] ()
+SELECT * FROM facilities
+[generated in 0.00061s] ()
+SELECT * FROM profiles
+[generated in 0.00059s] ()
+SELECT * FROM bookings
+[generated in 0.00032s] ()
+SELECT * FROM reviews
+[generated in 0.00051s] ()
+2024-04-05 06:05:20,169 INFO Database initialized in data_store.py
+2024-04-05 06:05:20,169 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00040s] ()
+SELECT * FROM facilities
+[generated in 0.00054s] ()
+SELECT * FROM profiles
+[generated in 0.00039s] ()
+SELECT * FROM bookings
+[generated in 0.00032s] ()
+SELECT * FROM reviews
+[generated in 0.00071s] ()
+2024-04-05 06:06:34,418 INFO Database initialized in data_store.py
+2024-04-05 06:06:34,418 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00044s] ()
+SELECT * FROM profiles
+[generated in 0.00059s] ()
+SELECT * FROM bookings
+[generated in 0.00050s] ()
+SELECT * FROM reviews
+[generated in 0.00055s] ()
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00077s] ()
+SELECT * FROM facilities
+[generated in 0.00052s] ()
+SELECT * FROM profiles
+[generated in 0.00067s] ()
+SELECT * FROM bookings
+[generated in 0.00080s] ()
+SELECT * FROM reviews
+[generated in 0.00061s] ()
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00045s] ()
+SELECT * FROM facilities
+[generated in 0.00050s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00042s] ()
+SELECT * FROM reviews
+[generated in 0.00077s] ()
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00056s] ()
+SELECT * FROM facilities
+[generated in 0.00067s] ()
+SELECT * FROM profiles
+[generated in 0.00051s] ()
+SELECT * FROM bookings
+[generated in 0.00025s] ()
+SELECT * FROM reviews
+[generated in 0.00053s] ()
+2024-04-05 06:14:29,142 INFO Database initialized in data_store.py
+2024-04-05 06:14:29,142 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00054s] ()
+SELECT * FROM facilities
+[generated in 0.00042s] ()
+SELECT * FROM profiles
+[generated in 0.00028s] ()
+SELECT * FROM bookings
+[generated in 0.00033s] ()
+SELECT * FROM reviews
+[generated in 0.00039s] ()
+2024-04-05 06:14:29,755 INFO Database initialized in data_store.py
+2024-04-05 06:14:29,755 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00039s] ()
+SELECT * FROM facilities
+[generated in 0.00033s] ()
+SELECT * FROM profiles
+[generated in 0.00032s] ()
+SELECT * FROM bookings
+[generated in 0.00024s] ()
+SELECT * FROM reviews
+[generated in 0.00067s] ()
+2024-04-05 06:15:03,143 INFO Database initialized in data_store.py
+2024-04-05 06:15:03,143 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00041s] ()
+SELECT * FROM bookings
+[generated in 0.00038s] ()
+SELECT * FROM reviews
+[generated in 0.00051s] ()
+2024-04-05 06:15:15,086 INFO Database initialized in data_store.py
+2024-04-05 06:15:15,086 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00047s] ()
+SELECT * FROM facilities
+[generated in 0.00054s] ()
+SELECT * FROM profiles
+[generated in 0.00061s] ()
+SELECT * FROM bookings
+[generated in 0.00032s] ()
+SELECT * FROM reviews
+[generated in 0.00059s] ()
+2024-04-05 06:16:37,656 INFO Database initialized in data_store.py
+2024-04-05 06:16:37,656 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00039s] ()
+SELECT * FROM facilities
+[generated in 0.00034s] ()
+SELECT * FROM profiles
+[generated in 0.00050s] ()
+SELECT * FROM bookings
+[generated in 0.00069s] ()
+SELECT * FROM reviews
+[generated in 0.00042s] ()
+2024-04-05 06:18:10,712 INFO Database initialized in data_store.py
+2024-04-05 06:18:10,712 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00052s] ()
+SELECT * FROM facilities
+[generated in 0.00056s] ()
+SELECT * FROM profiles
+[generated in 0.00035s] ()
+SELECT * FROM bookings
+[generated in 0.00069s] ()
+SELECT * FROM reviews
+[generated in 0.00070s] ()
+2024-04-05 06:18:25,821 INFO Database initialized in data_store.py
+2024-04-05 06:18:25,821 INFO Database initialized in data_store.py
+2024-04-05 06:18:40,875 INFO Response: GET - Status Code: 404
+2024-04-05 06:18:40,875 INFO Response: GET - Status Code: 404
+2024-04-05 06:18:40,876 INFO Request: GET /reviews/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:18:40,876 INFO Request: GET /reviews/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:18:43,074 INFO Response: GET - Status Code: 404
+2024-04-05 06:18:43,074 INFO Response: GET - Status Code: 404
+2024-04-05 06:18:43,075 INFO Request: GET /reviews/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:18:43,075 INFO Request: GET /reviews/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:18:55,950 INFO Response: GET - Status Code: 200
+2024-04-05 06:18:55,950 INFO Response: GET - Status Code: 200
+2024-04-05 06:18:55,951 INFO Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:18:55,951 INFO Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:19:14,853 INFO Response: GET - Status Code: 200
+2024-04-05 06:19:14,853 INFO Response: GET - Status Code: 200
+2024-04-05 06:19:14,854 INFO Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:19:14,854 INFO Request: GET /parks/East Coast Park - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00030s] ()
+SELECT * FROM facilities
+[generated in 0.00023s] ()
+SELECT * FROM profiles
+[generated in 0.00038s] ()
+SELECT * FROM bookings
+[generated in 0.00050s] ()
+SELECT * FROM reviews
+[generated in 0.00068s] ()
+2024-04-05 06:20:30,289 INFO Database initialized in data_store.py
+2024-04-05 06:20:30,289 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00040s] ()
+SELECT * FROM facilities
+[generated in 0.00055s] ()
+SELECT * FROM profiles
+[generated in 0.00038s] ()
+SELECT * FROM bookings
+[generated in 0.00056s] ()
+SELECT * FROM reviews
+[generated in 0.00045s] ()
+2024-04-05 06:21:32,450 INFO Database initialized in data_store.py
+2024-04-05 06:21:32,450 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00040s] ()
+SELECT * FROM facilities
+[generated in 0.00039s] ()
+SELECT * FROM profiles
+[generated in 0.00026s] ()
+SELECT * FROM bookings
+[generated in 0.00037s] ()
+SELECT * FROM reviews
+[generated in 0.00048s] ()
+2024-04-05 06:21:44,666 INFO Database initialized in data_store.py
+2024-04-05 06:21:44,666 INFO Database initialized in data_store.py
+2024-04-05 06:21:45,276 INFO Response: GET - Status Code: 200
+2024-04-05 06:21:45,276 INFO Response: GET - Status Code: 200
+2024-04-05 06:21:45,276 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:21:45,276 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00059s] ()
+SELECT * FROM facilities
+[generated in 0.00049s] ()
+SELECT * FROM profiles
+[generated in 0.00035s] ()
+SELECT * FROM bookings
+[generated in 0.00036s] ()
+SELECT * FROM reviews
+[generated in 0.00068s] ()
+2024-04-05 06:22:11,948 INFO Database initialized in data_store.py
+2024-04-05 06:22:11,948 INFO Database initialized in data_store.py
+2024-04-05 06:22:14,354 INFO Response: GET - Status Code: 200
+2024-04-05 06:22:14,354 INFO Response: GET - Status Code: 200
+2024-04-05 06:22:14,354 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:22:14,354 INFO Request: GET /bookings - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:22:48,914 INFO Response: GET - Status Code: 200
+2024-04-05 06:22:48,914 INFO Response: GET - Status Code: 200
+2024-04-05 06:22:48,915 INFO Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:22:48,915 INFO Request: GET /reviews - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00053s] ()
+SELECT * FROM facilities
+[generated in 0.00040s] ()
+SELECT * FROM profiles
+[generated in 0.00051s] ()
+SELECT * FROM bookings
+[generated in 0.00050s] ()
+SELECT * FROM reviews
+[generated in 0.00057s] ()
+2024-04-05 06:24:41,814 INFO Database initialized in data_store.py
+2024-04-05 06:24:41,814 INFO Database initialized in data_store.py
+BEGIN (implicit)
+SELECT * FROM parks
+[generated in 0.00042s] ()
+SELECT * FROM facilities
+[generated in 0.00041s] ()
+SELECT * FROM profiles
+[generated in 0.00047s] ()
+SELECT * FROM bookings
+[generated in 0.00076s] ()
+SELECT * FROM reviews
+[generated in 0.00065s] ()
+2024-04-05 06:24:54,787 INFO Database initialized in data_store.py
+2024-04-05 06:24:54,787 INFO Database initialized in data_store.py
+2024-04-05 06:24:57,426 INFO Response: GET - Status Code: 200
+2024-04-05 06:24:57,426 INFO Response: GET - Status Code: 200
+2024-04-05 06:24:57,427 INFO Request: GET /reviews/East Coast Park/BBQ Pit 47 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-05 06:24:57,427 INFO Request: GET /reviews/East Coast Park/BBQ Pit 47 - Remote Address: 127.0.0.1 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
