@@ -16,6 +16,7 @@ from controllers.login_manager import LoginManager
 from controllers.home_manager import HomeManager
 from controllers.bookings_manager import BookingsManager
 from controllers.facility_manager import FacilityManager
+from controllers.profile_manager import ProfileManager
 from logger import prepare_logger
 
 app = Flask(__name__)
@@ -313,6 +314,168 @@ def get_profiles():
     return jsonify(profiles)
 
 @staticmethod
+@app.route('/profiles/create', methods=['POST'])
+def CreateAccount() -> Response:
+    """ Method to create a profile
+
+    Args:
+        username (string): The username of the profile
+        email (string): The email of the profile
+        password (string): The password of the profile
+
+    Returns:
+        Response: JSON response with status of the profile creation
+    """
+    # Extract data from request payload
+    payload = request.json
+    username = payload.get('username')
+    email = payload.get('email')
+    password = payload.get('password')
+
+    # Check if all required fields are present
+    if username is None or email is None or password is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    profile = LoginManager.CreateAccount(username, email, password)
+    if 'error' in profile:
+        return jsonify({'error': profile['error']}), 400
+    else:
+        return jsonify({'message': 'Profile created successfully', 'profile': profile}), 200
+
+@staticmethod
+@app.route('/profiles/login', methods=['POST'])
+def Login() -> Response:
+    """ Method to login
+
+    Args:
+        user_identifer (string): The username or email of the profile
+        password (string): The password of the profile
+
+    Returns:
+        Response: JSON response with status of the login
+    """
+    # Extract data from request payload
+    payload = request.json
+    user_identifier = payload.get('user_identifier')
+    password = payload.get('password')
+
+    # Check if all required fields are present
+    if user_identifier is None or password is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    login = LoginManager.Login(user_identifier, password)
+    if 'error' in login:
+        return jsonify({'error': login['error']}), 400
+    else:
+        return jsonify(login), 200
+    
+@staticmethod
+@app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
+def changePassword() -> Response:
+    """Method to change a user's password
+
+    Args:
+        user_identifier (string): The username or email of the profile
+        new_password (string): The new password of the profile
+
+    Returns:
+        Response: JSON response with status of the password change
+    """
+    # Extract data from request payload
+    payload = request.json
+    user_identifier = payload.get('user_identifier')
+    new_password = payload.get('new_password')
+
+    # Check if all required fields are present
+    if user_identifier is None or new_password is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    result = LoginManager.changePassword(user_identifier, new_password)
+    if 'error' in result:
+        return jsonify({'error': result['error']}), 400
+    else:
+        return jsonify(result), 200
+    
+@staticmethod
+@app.route('/profiles/<string:username>/change_username', methods=['POST'])
+def changeUsername() -> Response:
+    """Method to change a user's username
+
+    Args:
+        old_username (string): The username of the profile
+        new_username (string): The new username of the profile
+
+    Returns:
+        Response: JSON response with status of the username change
+    """
+    # Extract data from request payload
+    payload = request.json
+    old_username = payload.get('old_username')
+    new_username = payload.get('new_username')
+
+    # Check if all required fields are present
+    if old_username is None or new_username is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    result = ProfileManager.changeUsername(old_username, new_username)
+    if 'error' in result:
+        return jsonify({'error': result['error']}), 400
+    else:
+        return jsonify(result), 200
+    
+@staticmethod
+@app.route('/profiles/<string:username>/change_email', methods=['POST'])
+def changeEmail() -> Response:
+    """Method to change a user's email
+
+    Args:
+        old_email (string): The email of the profile
+        new_email (string): The new email of the profile
+
+    Returns:
+        Response: JSON response with status of the email change
+    """
+    # Extract data from request payload
+    payload = request.json
+    old_email = payload.get('old_email')
+    new_email = payload.get('new_email')
+
+    # Check if all required fields are present
+    if old_email is None or new_email is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    result = ProfileManager.changeEmail(old_email, new_email)
+    if 'error' in result:
+        return jsonify({'error': result['error']}), 400
+    else:
+        return jsonify(result), 200
+
+@staticmethod
+@app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
+def deleteAccount() -> Response:
+    """Method to delete a user's account
+
+    Args:
+        user_identifier (string): The username or email of the profile
+
+    Returns:
+        Response: JSON response with status of the account deletion
+    """
+    # Extract data from request payload
+    payload = request.json
+    user_identifier = payload.get('user_identifier')
+
+    # Check if all required fields are present
+    if user_identifier is None:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    result = ProfileManager.deleteAccount(user_identifier)
+    if 'error' in result:
+        return jsonify({'error': result['error']}), 400
+    else:
+        return jsonify(result), 200
+    
+@staticmethod
 @app.route('/profiles/<string:username>', methods=['GET'])
 def get_profile(username):
     """ Method to get a profile by username
@@ -332,6 +495,10 @@ def get_profile(username):
                         })
     else:
         return jsonify({'error': 'Profile not found'})
+    
+
+
+
 
 @staticmethod
 @app.route('/profiles/<string:username>/bookings/<int:booking_id>', methods=['GET'])

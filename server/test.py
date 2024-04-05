@@ -63,4 +63,27 @@ def process_json(json_message):
                 for key, value in i.items():
                     print(f"{key}: {value}")
 
+#def test3():
+#    url = 'http://localhost:5000/profiles/create'
+
+#    username = 'testuser'
+#    password = 'testpassword'
+#    email = 'testemail'
+
+#    payload = {
+#        'username': username,
+#        'email': email,
+#        'password': password,
+#    }
+
+#    response = requests.post(url, json=payload)
+
+#    if response.status_code == 200:
+#        profile_info = json.loads(response.text)
+#        print(profile_info)
+#    else:
+#        print(f"Error: {response.status_code}")
+
+print("1")
 test_booking()
+#test3()

@@ -1,5 +1,9 @@
+import sys, os
+#sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
 from data_store import db
 from classes.booking import Booking
+
 
 class HomeManager:
     """ Class for managing home page data
