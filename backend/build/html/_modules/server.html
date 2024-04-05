@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>server &#8212; NParkBuddy 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for server</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Main module for the server. &quot;&quot;&quot;</span>
+<span class="c1"># Install required packages manually</span>
+<span class="c1"># Run the following command in the terminal:</span>
+<span class="c1"># pip install -r requirements.txt</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">text</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span><span class="p">,</span> <span class="n">relationship</span>
+<span class="kn">from</span> <span class="nn">classes.park</span> <span class="kn">import</span> <span class="n">Park</span>
+<span class="kn">from</span> <span class="nn">classes.facility</span> <span class="kn">import</span> <span class="n">Facility</span><span class="p">,</span> <span class="n">FacilityType</span>
+<span class="kn">from</span> <span class="nn">classes.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
+<span class="kn">from</span> <span class="nn">classes.booking</span> <span class="kn">import</span> <span class="n">Booking</span>
+<span class="kn">from</span> <span class="nn">classes.review</span> <span class="kn">import</span> <span class="n">Review</span>
+<span class="kn">from</span> <span class="nn">logger</span> <span class="kn">import</span> <span class="n">prepare_logger</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="c1">#import threading</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">prepare_logger</span><span class="p">()</span>
+
+<span class="c1"># Create a SQLAlchemy engine</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///database/nparkbuddy.db&#39;</span><span class="p">,</span> <span class="n">echo</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Database">
+<a class="viewcode-back" href="../index.html#server.Database">[docs]</a>
+<span class="k">class</span> <span class="nc">Database</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Class to represent the database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to initialize the database</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bookings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="Database.init_db">
+<a class="viewcode-back" href="../index.html#server.Database.init_db">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to create all objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Query parks table from the database and create a list of Park objects</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM parks&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">park</span> <span class="o">=</span> <span class="n">Park</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">latitude</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">longitude</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">park</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM facilities&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">park_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">park</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">park</span> <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parks</span> <span class="k">if</span> <span class="n">park</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">park_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">park</span><span class="p">:</span>
+                <span class="n">facility</span> <span class="o">=</span> <span class="n">Facility</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">park</span><span class="o">=</span><span class="n">park</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">convert_to_enum</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">avg_rating</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">num_ratings</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">park</span><span class="o">.</span><span class="n">set_facilities</span><span class="p">(</span><span class="n">facility</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">facility</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Park with id </span><span class="si">{</span><span class="n">park_id</span><span class="si">}</span><span class="s1"> not found&#39;</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM profiles&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">profile</span> <span class="o">=</span> <span class="n">Profile</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">username</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">email</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">password</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM bookings&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">booker_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">booker</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">profile</span> <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booker_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">park_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">park</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">park</span> <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parks</span> <span class="k">if</span> <span class="n">park</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">park_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">facility_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="n">facility</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">facility</span> <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span> <span class="k">if</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">facility_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">booking</span> <span class="o">=</span> <span class="n">Booking</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">booker</span><span class="o">=</span><span class="n">booker</span><span class="p">,</span> <span class="n">datetime</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cancelled</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">park</span><span class="o">=</span><span class="n">park</span><span class="p">,</span> <span class="n">facility</span><span class="o">=</span><span class="n">facility</span><span class="p">)</span>
+            <span class="n">booker</span><span class="o">.</span><span class="n">set_bookings</span><span class="p">(</span><span class="n">booking</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bookings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">booking</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM reviews&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="n">booking_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">booking</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">booking</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bookings</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">facility_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">facility</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">facility</span> <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">facilities</span> <span class="k">if</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">facility_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">review</span> <span class="o">=</span> <span class="n">Review</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">booking_id</span><span class="p">,</span> <span class="n">rating</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">comment</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">booking</span><span class="o">.</span><span class="n">set_reviews</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+            <span class="n">facility</span><span class="o">.</span><span class="n">set_reviews</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reviews</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Database initialized&#39;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="convert_to_enum">
+<a class="viewcode-back" href="../index.html#server.convert_to_enum">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_to_enum</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FacilityType</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to convert a string to an enum</span>
+<span class="sd">    Args:</span>
+<span class="sd">        value (string): string to convert</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        FacilityType: enum value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;BBQ Pit&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FacilityType</span><span class="o">.</span><span class="n">BBQ_PIT</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Campsite&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FacilityType</span><span class="o">.</span><span class="n">CAMPSITE</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;Venues&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">FacilityType</span><span class="o">.</span><span class="n">VENUES</span></div>
+
+
+<span class="c1"># Log all requests</span>
+<div class="viewcode-block" id="log_requests">
+<a class="viewcode-back" href="../index.html#server.log_requests">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+<span class="k">def</span> <span class="nf">log_requests</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to log all requests</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        f: function to decorate</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        decorated_function: Method to decorate the function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">decorated_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to decorate the function</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            f: decorated function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Request: </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> - Remote Address: </span><span class="si">%s</span><span class="s1"> - User Agent: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">user_agent</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decorated_function</span></div>
+
+
+<span class="c1"># Log all responses</span>
+<div class="viewcode-block" id="log_responses">
+<a class="viewcode-back" href="../index.html#server.log_responses">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+<span class="k">def</span> <span class="nf">log_responses</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to log all responses</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        response: response object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        response: response object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Response: </span><span class="si">%s</span><span class="s1"> - Status Code: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="hello">
+<a class="viewcode-back" href="../index.html#server.hello">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to say hello</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        string: This is the server for NParkBuddy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;This is the server for NParkBuddy&#39;</span></div>
+
+
+<div class="viewcode-block" id="get_parks">
+<a class="viewcode-back" href="../index.html#server.get_parks">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/parks&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_parks</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all parks</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of parks</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">parks</span><span class="p">:</span>
+        <span class="n">parks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                      <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_latitude</span><span class="p">(),</span>
+                      <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_longitude</span><span class="p">(),</span>
+                      <span class="s1">&#39;facilities&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="n">park</span><span class="o">.</span><span class="n">get_facilities</span><span class="p">()]</span>
+                      <span class="p">})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">parks</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_park">
+<a class="viewcode-back" href="../index.html#server.get_park">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/parks/&lt;string:park_name&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_park</span><span class="p">(</span><span class="n">park_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a park by name</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        park_name (string): name of the park</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: park details</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">park</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">park</span> <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">parks</span> <span class="k">if</span> <span class="n">park</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">park_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">park</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                        <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_latitude</span><span class="p">(),</span>
+                        <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="n">park</span><span class="o">.</span><span class="n">get_longitude</span><span class="p">(),</span>
+                        <span class="s1">&#39;facilities&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="n">park</span><span class="o">.</span><span class="n">get_facilities</span><span class="p">()]</span>
+                        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Park not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_facilities_by_park">
+<a class="viewcode-back" href="../index.html#server.get_facilities_by_park">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/parks/&lt;string:park_name&gt;/facilities&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_facilities_by_park</span><span class="p">(</span><span class="n">park_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all facilities by park</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        park_name (string): name of the park</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of facilities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">park</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">park</span> <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">parks</span> <span class="k">if</span> <span class="n">park</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">park_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">park</span><span class="p">:</span>
+        <span class="n">facilities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="n">park</span><span class="o">.</span><span class="n">get_facilities</span><span class="p">():</span>
+            <span class="n">facilities</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                               <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                               <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                               <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                               <span class="s1">&#39;avg_rating&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_avg_rating</span><span class="p">(),</span>
+                               <span class="s1">&#39;num_ratings&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_num_ratings</span><span class="p">(),</span>
+                               <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span>
+                               <span class="p">})</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">facilities</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Park not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_facilities">
+<a class="viewcode-back" href="../index.html#server.get_facilities">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/facilities&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_facilities</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all facilities</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of facilities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">facilities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">facilities</span><span class="p">:</span>
+        <span class="n">facilities</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                           <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                           <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                           <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                           <span class="s1">&#39;avg_rating&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_avg_rating</span><span class="p">(),</span>
+                           <span class="s1">&#39;num_ratings&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_num_ratings</span><span class="p">(),</span>
+                           <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span>
+                           <span class="p">})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">facilities</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_facility_by_name">
+<a class="viewcode-back" href="../index.html#server.get_facility_by_name">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/parks/&lt;string:park_name&gt;/facility/&lt;string:facility_name&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_facility_by_name</span><span class="p">(</span><span class="n">park_name</span><span class="p">,</span> <span class="n">facility_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a facility by name</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        park_name (string): name of the park</span>
+<span class="sd">        facility_name (string): name of the facility</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: facility details</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">park</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">park</span> <span class="k">for</span> <span class="n">park</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">parks</span> <span class="k">if</span> <span class="n">park</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">park_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">park</span><span class="p">:</span>
+        <span class="n">facility</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">facility</span> <span class="k">for</span> <span class="n">facility</span> <span class="ow">in</span> <span class="n">park</span><span class="o">.</span><span class="n">get_facilities</span><span class="p">()</span> <span class="k">if</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">==</span> <span class="n">facility_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">facility</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                            <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                            <span class="s1">&#39;avg_rating&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_avg_rating</span><span class="p">(),</span>
+                            <span class="s1">&#39;num_ratings&#39;</span><span class="p">:</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_num_ratings</span><span class="p">(),</span>
+                            <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">facility</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span>
+                            <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Facility not found&#39;</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Park not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_profiles">
+<a class="viewcode-back" href="../index.html#server.get_profiles">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profiles&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_profiles</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all profiles</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of profiles</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">profiles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">profiles</span><span class="p">:</span>
+        <span class="n">profiles</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                         <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">(),</span>
+                         <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_email</span><span class="p">(),</span>
+                         <span class="s1">&#39;bookings&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()]</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No bookings available&#39;</span>
+                         <span class="p">})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">profiles</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_profile">
+<a class="viewcode-back" href="../index.html#server.get_profile">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profiles/&lt;string:username&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_profile</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a profile by username</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (string): username of the profile</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: profile details</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">profile</span> <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">profiles</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">()</span> <span class="o">==</span> <span class="n">username</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">(),</span>
+                        <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_email</span><span class="p">(),</span>
+                        <span class="s1">&#39;bookings&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()]</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No bookings available&#39;</span>
+                        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Profile not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_bookings_by_profile">
+<a class="viewcode-back" href="../index.html#server.get_bookings_by_profile">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profiles/&lt;string:username&gt;/bookings&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_bookings_by_profile</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all bookings by profile</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (string): username of the profile</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of bookings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">profile</span> <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">profiles</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">()</span> <span class="o">==</span> <span class="n">username</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+        <span class="n">bookings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">():</span>
+            <span class="n">bookings</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                             <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(),</span>
+                             <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_cancelled</span><span class="p">(),</span>
+                             <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                             <span class="s1">&#39;facility&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_facility</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                             <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No reviews available&#39;</span>
+                             <span class="p">})</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">bookings</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Profile not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_booking_by_profile">
+<a class="viewcode-back" href="../index.html#server.get_booking_by_profile">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profiles/&lt;string:username&gt;/bookings/&lt;int:booking_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_booking_by_profile</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">booking_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a booking by profile</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (string): username of the profile</span>
+<span class="sd">        booking_id (int): id of the booking</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: booking object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">profile</span> <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">profiles</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">()</span> <span class="o">==</span> <span class="n">username</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+        <span class="n">booking</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">booking</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">booking</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                            <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(),</span>
+                            <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_cancelled</span><span class="p">(),</span>
+                            <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                            <span class="s1">&#39;facility&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_facility</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                            <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No reviews available&#39;</span>
+                            <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Booking not found&#39;</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Profile not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_review_by_profile">
+<a class="viewcode-back" href="../index.html#server.get_review_by_profile">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profiles/&lt;string:username&gt;/bookings/&lt;int:booking_id&gt;/reviews&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_review_by_profile</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">booking_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get review by profile</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        username (string): username of the profile</span>
+<span class="sd">        booking_id (int): id of the booking</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: review object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">profile</span> <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">profiles</span> <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_username</span><span class="p">()</span> <span class="o">==</span> <span class="n">username</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+        <span class="n">booking</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">booking</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_bookings</span><span class="p">()</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">booking</span><span class="p">:</span>
+            <span class="n">review</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">review</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">reviews</span> <span class="k">if</span> <span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">review</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;rating&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">(),</span>
+                                <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_comment</span><span class="p">()</span>
+                                <span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Review not found&#39;</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Booking not found&#39;</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Profile not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_bookings">
+<a class="viewcode-back" href="../index.html#server.get_bookings">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/bookings&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_bookings</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all bookings</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of bookings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bookings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">bookings</span><span class="p">:</span>
+        <span class="n">bookings</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                         <span class="s1">&#39;booker&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_booker</span><span class="p">()</span><span class="o">.</span><span class="n">get_username</span><span class="p">(),</span>
+                         <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(),</span>
+                         <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_cancelled</span><span class="p">(),</span>
+                         <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                         <span class="s1">&#39;facility&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_facility</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                         <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No reviews available&#39;</span>
+                         <span class="p">})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">bookings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_booking">
+<a class="viewcode-back" href="../index.html#server.get_booking">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/bookings/&lt;int:booking_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_booking</span><span class="p">(</span><span class="n">booking_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a booking by id</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        booking_id (int): id of the booking</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: booking details</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">booking</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">booking</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">bookings</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">booking</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">(),</span>
+                        <span class="s1">&#39;booker&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_booker</span><span class="p">()</span><span class="o">.</span><span class="n">get_username</span><span class="p">(),</span>
+                        <span class="s1">&#39;datetime&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_datetime</span><span class="p">(),</span>
+                        <span class="s1">&#39;cancelled&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_cancelled</span><span class="p">(),</span>
+                        <span class="s1">&#39;park&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_park</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                        <span class="s1">&#39;facility&#39;</span><span class="p">:</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_facility</span><span class="p">()</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                        <span class="s1">&#39;reviews&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()]</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_reviews</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;No reviews available&#39;</span>
+                        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Booking not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_review_by_booking">
+<a class="viewcode-back" href="../index.html#server.get_review_by_booking">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/bookings/&lt;int:booking_id&gt;/reviews&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_review_by_booking</span><span class="p">(</span><span class="n">booking_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get review by booking</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        booking_id (int): id of the booking</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: review object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">booking</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">booking</span> <span class="k">for</span> <span class="n">booking</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">bookings</span> <span class="k">if</span> <span class="n">booking</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">booking</span><span class="p">:</span>
+        <span class="n">review</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">review</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">reviews</span> <span class="k">if</span> <span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">booking_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">review</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;rating&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">(),</span>
+                            <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_comment</span><span class="p">()</span>
+                            <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Review not found&#39;</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Booking not found&#39;</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="get_reviews">
+<a class="viewcode-back" href="../index.html#server.get_reviews">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_reviews</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get all reviews</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: list of reviews</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">reviews</span><span class="p">:</span>
+        <span class="n">reviews</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;rating&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">(),</span>
+                        <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_comment</span><span class="p">()})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">reviews</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_review">
+<a class="viewcode-back" href="../index.html#server.get_review">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reviews/&lt;int:review_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_review</span><span class="p">(</span><span class="n">review_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to get a review by id</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        review_id (int): id of the review</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        json: review details</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">review</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">review</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">reviews</span> <span class="k">if</span> <span class="n">review</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">==</span> <span class="n">review_id</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">review</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;rating&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_rating</span><span class="p">(),</span>
+                        <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="n">review</span><span class="o">.</span><span class="n">get_comment</span><span class="p">()})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Review not found&#39;</span><span class="p">})</span></div>
+
+
+<span class="c1"># Flag to check if the server has been initialized</span>
+<span class="n">server_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Flag to check if the server has been shutdown</span>
+<span class="n">server_shutdown</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">#@app.before_request</span>
+<span class="c1">#def init_server(db):</span>
+<span class="c1">#    &quot;&quot;&quot; Method to initialize the server</span>
+<span class="c1">#    &quot;&quot;&quot;</span>
+<span class="c1">#    global server_initialized</span>
+<span class="c1">#    if not server_initialized:</span>
+<span class="c1">#        logger.info(&#39;Initializing server...&#39;)</span>
+<span class="c1">#</span>
+<span class="c1">#        server_initialized = True</span>
+<span class="c1">#        logger.info(&#39;Server initialized&#39;)</span>
+
+<div class="viewcode-block" id="trigger_request">
+<a class="viewcode-back" href="../index.html#server.trigger_request">[docs]</a>
+<span class="k">def</span> <span class="nf">trigger_request</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Method to trigger a request to the server</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Triggering request to server...&#39;</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://127.0.0.1:5000/&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Server is running&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Server is not running&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error connecting to server&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># Function to handle shutdown signal</span>
+<div class="viewcode-block" id="shutdown_signal_handler">
+<a class="viewcode-back" href="../index.html#server.shutdown_signal_handler">[docs]</a>
+<span class="k">def</span> <span class="nf">shutdown_signal_handler</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Shutting down server...&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># Register signal handler for SIGINT (Ctrl+C) and SIGTERM</span>
+<span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">shutdown_signal_handler</span><span class="p">)</span>
+<span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">shutdown_signal_handler</span><span class="p">)</span>
+
+<div class="viewcode-block" id="shutdown">
+<a class="viewcode-back" href="../index.html#server.shutdown">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/shutdown&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">shutdown</span><span class="p">():</span>
+    <span class="n">shutdown_signal_handler</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">server_shutdown</span>
+    <span class="n">server_shutdown</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="s1">&#39;Server shutting down...&#39;</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+    <span class="c1">##flask_thread = threading.Thread(target=app.run, kwargs={&#39;host&#39;: &#39;127.0.0.1&#39;, &#39;port&#39; : 5000, &#39;debug&#39;: True, &#39;use_reloader&#39;: False})</span>
+    <span class="c1">##flask_thread.start()</span>
+
+    <span class="n">db</span><span class="o">.</span><span class="n">init_db</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#trigger_request()</span>
+
+    <span class="c1">#flask_thread.join()</span>
+
+    <span class="k">if</span> <span class="n">server_shutdown</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Server shutdown complete&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">NParkBuddy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, zhihao.hong.52.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
