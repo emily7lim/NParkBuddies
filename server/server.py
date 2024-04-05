@@ -370,7 +370,7 @@ def Login() -> Response:
         return jsonify(login), 200
     
 @staticmethod
-@app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
+@app.route('/profiles/change_password', methods=['POST'])
 def changePassword() -> Response:
     """Method to change a user's password
 
@@ -397,7 +397,7 @@ def changePassword() -> Response:
         return jsonify(result), 200
     
 @staticmethod
-@app.route('/profiles/<string:username>/change_username', methods=['POST'])
+@app.route('/profiles/change_username', methods=['POST'])
 def changeUsername() -> Response:
     """Method to change a user's username
 
@@ -424,7 +424,7 @@ def changeUsername() -> Response:
         return jsonify(result), 200
     
 @staticmethod
-@app.route('/profiles/<string:username>/change_email', methods=['POST'])
+@app.route('/profiles/change_email', methods=['POST'])
 def changeEmail() -> Response:
     """Method to change a user's email
 
@@ -437,6 +437,7 @@ def changeEmail() -> Response:
     """
     # Extract data from request payload
     payload = request.json
+    
     old_email = payload.get('old_email')
     new_email = payload.get('new_email')
 
@@ -452,7 +453,7 @@ def changeEmail() -> Response:
 
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
-def deleteAccount() -> Response:
+def deleteAccount(user_identifier) -> Response:
     """Method to delete a user's account
 
     Args:
@@ -462,8 +463,8 @@ def deleteAccount() -> Response:
         Response: JSON response with status of the account deletion
     """
     # Extract data from request payload
-    payload = request.json
-    user_identifier = payload.get('user_identifier')
+    #payload = request.json
+    #user_identifier = payload.get('user_identifier')
 
     # Check if all required fields are present
     if user_identifier is None:
