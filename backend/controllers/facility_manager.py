@@ -19,7 +19,7 @@ class FacilityManager:
             facilities.append({'id': facility.get_id(),
                                'name': facility.get_name(),
                                'park': facility.get_park().get_name(),
-                               'type': facility.get_type(),
+                               'type': facility.get_type().value,
                                'avg_rating': facility.get_avg_rating(),
                                'num_ratings': facility.get_num_ratings()
                                })

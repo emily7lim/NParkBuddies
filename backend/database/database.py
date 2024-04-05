@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Boolean, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.inspection import inspect
 
 # Create SQLAlchemy engine
 engine = create_engine('sqlite:///nparkbuddy.db')
@@ -87,9 +88,9 @@ if __name__ == "__main__":
                    "\n3. Check tables"
                    "\n4. Exit\n")
         if option == '1':
-            base.metadata.create_all(engine)
+            Base.metadata.create_all(engine)
         elif option == '2':
-            base.metadata.drop_all(engine)
+            Base.metadata.drop_all(engine)
         elif option == '3':
             inspector = inspect(engine)
             for table in inspector.get_table_names():
