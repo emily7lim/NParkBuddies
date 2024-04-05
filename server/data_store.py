@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 import logging
 from classes.booking import Booking
-from classes.facility import Facility, FacilityType, convert_to_enum
+from classes.facility import Facility, convert_to_enum
 from classes.park import Park
 from classes.profile import Profile
 from classes.review import Review
@@ -138,5 +138,15 @@ class Database:
             Review: review object
         """
         return next((review for review in self.reviews if review.get_id() == review_id), None)
+
+    def write_to_db(self, obj):
+        """ Method to write an object to the database
+        Args:
+            obj (object): object to write
+        """
+        from database.helper import Park, Facility, Profile, Booking, Review
+        self.session.add(obj)
+        self.session.commit()
+
 
 db = Database()

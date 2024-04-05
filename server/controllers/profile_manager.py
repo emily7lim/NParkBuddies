@@ -12,7 +12,7 @@ from classes.profile import Profile
 from classes.booking import Booking
 from classes.park import Park
 from classes.facility import Facility
-from bookings_manager import BookingsManager
+from controllers.bookings_manager import BookingsManager
 
 class ProfileManager:
     """ Class for managing profile data
@@ -33,7 +33,7 @@ class ProfileManager:
                 return {'message': 'Username changed successfully'}
 
         return {'error': 'Username does not exist'}
-    
+
     @staticmethod
     def changeEmail(old_email, new_email):
         """
@@ -59,14 +59,14 @@ class ProfileManager:
                 for booking in db.bookings:
                     if booking.get_booker().get_username() == user_identifier:
                         BookingsManager.cancel_booking(user_identifier, booking.get_park().get_name(), booking.get_facility().get_name(), booking.get_datetime())
-                
+
                 # Delete the user's profile
                 db.session.delete(profile)
                 db.session.commit()
                 return {'message': 'Account and all associated bookings deleted successfully'}
 
         return {'error': 'Username or email does not exist'}
-    
+
 
 
 

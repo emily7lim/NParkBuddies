@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 from fuzzywuzzy import process
-from server.classes.facility import FacilityType
+from classes.facility import FacilityType
 
 # OpenAI API key
 current_directory = os.getcwd()
@@ -201,6 +201,45 @@ def extract_park_name(geojson_entry):
         return name_tag
     else:
         return None
+
+def create_geosjon_from_db():
+    ''' Creates a GEOjson file from the database
+    '''
+
+    #format { "type": "Feature", "properties": { "Name": "kml_1", "Description": "<center><table><tr><th colspan='2' align='center'><em>Attributes<\/em><\/th><\/tr><tr bgcolor=\"#E3E3F3\"> <th>NAME<\/th> <td>MOUNT SINAI PLAIN PG<\/td> <\/tr><tr bgcolor=\"\"> <th>INC_CRC<\/th> <td>76B3737B12B84D59<\/td> <\/tr><tr bgcolor=\"#E3E3F3\"> <th>FMEL_UPD_D<\/th> <td>20220927161442<\/td> <\/tr><\/table><\/center>" }, "geometry": { "type": "Point", "coordinates": [ 103.781178037401006, 1.31567328963979, 0.0 ] } }
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    sql = text('SELECT * FROM parks')
+    result = session.execute(sql)
+
+    with open('selected_parks.geojson', 'a') as file:  # Open the file in append mode
+        # write as string literal
+        file.write('{"type": "FeatureCollection",\n"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },\n\n"features": [\n')
+        row_count = 0
+        for row in result:
+            if row_count > 0:
+                file.write(',\n')
+            feature = {
+                "type": "Feature",
+                "properties": {
+                    "Name": row[1],
+                    "Description": "<center><table><tr><th colspan='2' align='center'><em>Attributes<\/em><\/th><\/tr><tr bgcolor=\"#E3E3F3\"> <th>NAME<\/th> <td>" + row[1] + "<\/td> <\/tr><tr bgcolor=\"\"> <th>INC_CRC<\/th> <td>" + str(row[0]) + "<\/td> <\/tr><tr bgcolor=\"#E3E3F3\"> <th>FMEL_UPD_D<\/th> <td>20220927161442<\/td> <\/tr><\/table><\/center>"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [row[3], row[2], 0.0]
+                }
+            }
+            # Write the feature to the file
+            json.dump(feature, file)
+            row_count += 1
+        file.write('\n]\n}')
+
+    session.close()
+
+    session.close()
 
 def display_parks():
     ''' Displays all parks in the database
@@ -430,6 +469,16 @@ def display_profiles():
                 print('Review Id:', review[0], 'Rating:', review[1], 'Comment:', review[2], 'Booking Id:', review[3], 'Facility Id:', review[4])
     session.close()
 
+def display_bookings():
+    """ Method to display bookings from the database
+    """
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    sql = text('SELECT * FROM bookings')
+    result = session.execute(sql)
+    for row in result:
+        print('Id:', row[0], 'Booker Id:', row[1], 'Datetime:', row[2], 'Cancelled:', row[3], 'Park:', row[4], 'Facility:', row[5])
+
 def delete_profiles():
     """ Method to delete profiles from the database
     """
@@ -446,12 +495,60 @@ def delete_profiles():
     session.commit()
     session.close()
 
+def insert_profiles_from_csv(profiles, bookings, reviews):
+    """ Method to insert profiles from a CSV file
+
+    Args:
+        profiles (DataFrame): The profiles to insert into the database
+        bookings (DataFrame): The bookings to insert into the database
+        reviews (DataFrame): The reviews to insert into the database
+    """
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    profiles.reset_index(drop=True, inplace=True)
+    profiles.index += 1
+
+    for index, row in profiles.iterrows():
+        id = index
+        username = row['Username']
+        email = row['Email']
+        password = row['Password']
+        sql = text('INSERT INTO profiles (id, username, email, password) VALUES (:id, :username, :email, :password)')
+        session.execute(sql, {'id': id, 'username': username, 'email': email, 'password': password})
+
+    for index, row in bookings.iterrows():
+        id = row['id']
+        booker_id = row['booker_id']
+        datetime = row['datetime']
+        cancelled = row['cancelled']
+        park_id = row['park']
+        facility_id = row['facility']
+        sql = text('INSERT INTO bookings (id, booker_id, datetime, cancelled, park_id, facility_id) VALUES (:id, :booker_id, :datetime, :cancelled, :park_id, :facility_id)')
+        session.execute(sql, {'id': id, 'booker_id': booker_id, 'datetime': datetime, 'cancelled': cancelled, 'park_id': park_id, 'facility_id': facility_id})
+
+    for index, row in reviews.iterrows():
+        id = row['id']
+        rating = row['rating']
+        comment = row['comment']
+        booking_id = row['booking_id']
+        facility_id = row['facility_id']
+        sql = text('INSERT INTO reviews (id, rating, comment, booking_id, facility_id) VALUES (:id, :rating, :comment, :booking_id, :facility_id)')
+        session.execute(sql, {'id': id, 'rating': rating, 'comment': comment, 'booking_id': booking_id, 'facility_id': facility_id})
+
+    session.commit()
+    session.close()
+
 if __name__ == '__main__':
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(script_dir, 'Parks.geojson')
     parks = read_geojson(file_path)
 
+    create_geosjon_from_db()
+
     profiles = pd.read_csv('profiles.csv', delimiter=',')
+    bookings = pd.read_csv('bookings.csv', delimiter=',')
+    reviews = pd.read_csv('reviews.csv', delimiter=',')
 
     while True:
         option = input("Enter the function to run"
@@ -461,6 +558,8 @@ if __name__ == '__main__':
                        "\n4. Insert profiles"
                        "\n5. Display profiles"
                        "\n6. Delete profiles"
+                       "\n7. Display bookings"
+                       "\n8. Reload all data"
                        "\n0. Exit\n")
         if option == '1':
             insert_parks(parks)
@@ -474,6 +573,13 @@ if __name__ == '__main__':
             display_profiles()
         elif option == '6':
             delete_profiles()
+        elif option == '7':
+            display_bookings()
+        elif option == '8':
+            delete_parks()
+            insert_parks(parks)
+            delete_profiles()
+            insert_profiles_from_csv(profiles, bookings, reviews)
         elif option == '0':
             exit()
         else:

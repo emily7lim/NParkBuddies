@@ -84,6 +84,5 @@ def process_json(json_message):
 #    else:
 #        print(f"Error: {response.status_code}")
 
-print("1")
 test_booking()
 #test3()

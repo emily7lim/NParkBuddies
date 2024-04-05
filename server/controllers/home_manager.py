@@ -1,9 +1,7 @@
-import sys, os
-#sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
 from data_store import db
+import sys
+import os
 from classes.booking import Booking
-
 
 class HomeManager:
     """ Class for managing home page data
@@ -61,8 +59,8 @@ class HomeManager:
 
         booking = Booking(id=id, booker=user, datetime=datetime, cancelled=False, park=park, facility=facility)
         user.set_bookings(booking)
-        db.session.add(booking)
-        db.session.commit()
+        db.bookings.append(booking)
+        db.write_to_db(booking)
 
         return {'id': booking.get_id(),
                 'booker': booking.get_booker().get_username(),

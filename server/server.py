@@ -128,7 +128,6 @@ def create_booking() -> Response:
     """
     # Extract data from request payload
     payload = request.json
-    print(payload)
     user_id = payload.get('user_id')
     park_id = payload.get('park_id')
     facility_id = payload.get('facility_id')
@@ -140,8 +139,10 @@ def create_booking() -> Response:
 
     booking = HomeManager.create_booking(user_id, park_id, facility_id, datetime)
     if 'error' in booking:
+        logger.error(booking['error'])
         return jsonify({'error': booking['error']}), 400
     else:
+        logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
 
 # Bookings routes
@@ -368,7 +369,7 @@ def Login() -> Response:
         return jsonify({'error': login['error']}), 400
     else:
         return jsonify(login), 200
-    
+
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
 def changePassword() -> Response:
@@ -395,7 +396,7 @@ def changePassword() -> Response:
         return jsonify({'error': result['error']}), 400
     else:
         return jsonify(result), 200
-    
+
 @staticmethod
 @app.route('/profiles/<string:username>/change_username', methods=['POST'])
 def changeUsername() -> Response:
@@ -422,7 +423,7 @@ def changeUsername() -> Response:
         return jsonify({'error': result['error']}), 400
     else:
         return jsonify(result), 200
-    
+
 @staticmethod
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
 def changeEmail() -> Response:
@@ -474,7 +475,7 @@ def deleteAccount() -> Response:
         return jsonify({'error': result['error']}), 400
     else:
         return jsonify(result), 200
-    
+
 @staticmethod
 @app.route('/profiles/<string:username>', methods=['GET'])
 def get_profile(username):
@@ -495,7 +496,7 @@ def get_profile(username):
                         })
     else:
         return jsonify({'error': 'Profile not found'})
-    
+
 
 
 
