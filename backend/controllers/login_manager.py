@@ -13,6 +13,8 @@ from classes.profile import Profile
 from classes.booking import Booking
 from classes.park import Park
 from classes.facility import Facility
+from database.database import Profile as ProfileDB
+from sqlalchemy import or_
 
 #class LoginManager(db.Model):
 
@@ -29,6 +31,8 @@ class LoginManager:
         Creates a new user profile with username, email, password.
 
         """
+        print("username email password", username, email, password)
+       
         # Check if user has signed up before with same email
         for profile in db.profiles:
             if profile.email == email:
@@ -42,11 +46,12 @@ class LoginManager:
         # Create user_profile object and save it
         id = len(db.profiles) + 1
         new_profile = Profile(id=id,username=username, email=email, password=password)
-        db.session.add(new_profile)
-        db.session.commit()
+        db.profiles.append(new_profile)
+        profileDB = ProfileDB(id=id, username=username, email=email, password=password)
+        db.create_profile(profileDB)
 
         return {'id': new_profile.get_id(),
-                'username': new_profile.username().get_username(),
+                'username': new_profile.get_username(),
                 'email': new_profile.get_email(),
                 'password': new_profile.get_password(),
                 }
@@ -72,13 +77,27 @@ class LoginManager:
         """
         for profile in db.profiles:
             if profile.username == user_identifier or profile.email == user_identifier:
+               # Use the set_password method to update the password
+               profile.set_password(new_password)
+            
+               # Update the existing ProfileDB instance with the updated password
+               profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+               profileDB.password = new_password
+               db.session.commit()
+               return {'message': 'Password changed successfully'}
+    
+        return {'error': 'Username or email not registered'}
+
+        """
+        for profile in db.profiles:
+            if profile.username == user_identifier or profile.email == user_identifier:
                 profile.password = new_password
                 profile.set_password(new_password)
                 db.session.commit()
                 return {'message': 'Password changed successfully'}
 
         return {'error': 'Username or email not registered'}
-    
+        """
 
     
 

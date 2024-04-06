@@ -335,6 +335,8 @@ def CreateAccount() -> Response:
     email = payload.get('email')
     password = payload.get('password')
 
+    print("username email password", username, email, password)
+
     # Check if all required fields are present
     if username is None or email is None or password is None:
         return jsonify({'error': 'Missing required fields'}), 400
@@ -374,7 +376,7 @@ def Login() -> Response:
 
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
-def changePassword() -> Response:
+def changePassword(user_identifier) -> Response:
     """Method to change a user's password
 
     Args:
@@ -401,7 +403,7 @@ def changePassword() -> Response:
 
 @staticmethod
 @app.route('/profiles/<string:username>/change_username', methods=['POST'])
-def changeUsername() -> Response:
+def changeUsername(username) -> Response:
     """Method to change a user's username
 
     Args:
@@ -428,7 +430,7 @@ def changeUsername() -> Response:
 
 @staticmethod
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
-def changeEmail() -> Response:
+def changeEmail(username) -> Response:
     """Method to change a user's email
 
     Args:
@@ -455,7 +457,7 @@ def changeEmail() -> Response:
 
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
-def deleteAccount() -> Response:
+def deleteAccount(user_identifier) -> Response:
     """Method to delete a user's account
 
     Args:

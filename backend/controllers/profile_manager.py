@@ -13,6 +13,8 @@ from classes.booking import Booking
 from classes.park import Park
 from classes.facility import Facility
 from controllers.bookings_manager import BookingsManager
+from database.database import Profile as ProfileDB
+from database.database import Booking as BookingDB
 
 class ProfileManager:
     """ Class for managing profile data
@@ -26,11 +28,15 @@ class ProfileManager:
         Changes the username for a user.
         """
         for profile in db.profiles:
-            if profile.username == old_username:
-                profile.username = new_username
-                profile.set_username(new_username)
-                db.session.commit()
-                return {'message': 'Username changed successfully'}
+           if profile.username == old_username:
+              # Use the set_username method to update the username
+              profile.set_username(new_username)
+            
+              # Update the existing ProfileDB instance with the updated username
+              profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+              profileDB.username = new_username
+              db.session.commit()
+              return {'message': 'Username changed successfully'}
 
         return {'error': 'Username does not exist'}
 
@@ -40,11 +46,12 @@ class ProfileManager:
         Changes the email for a user.
         """
         for profile in db.profiles:
-            if profile.email == old_email:
-                profile.email = new_email
-                profile.set_email(new_email)
-                db.session.commit()
-                return jsonify({'message': 'Email changed successfully'})
+           if profile.email == old_email:
+              # Update the existing ProfileDB instance with the updated email
+              profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+              profileDB.email = new_email
+              db.session.commit()
+              return {'message': 'Email changed successfully'}
 
         return {'error': 'Email does not exist'}
 
@@ -53,20 +60,23 @@ class ProfileManager:
         """
         Deletes a user's account with username or email, and all their bookings.
         """
-        for profile in db.profiles:
-            if profile.username == user_identifier or profile.email == user_identifier:
-                # Delete all bookings made by the user
-                for booking in db.bookings:
-                    if booking.get_booker().get_username() == user_identifier:
-                        BookingsManager.cancel_booking(user_identifier, booking.get_park().get_name(), booking.get_facility().get_name(), booking.get_datetime())
+        # Query the user's profile
+        profileDB = db.session.query(ProfileDB).filter((ProfileDB.username == user_identifier) | (ProfileDB.email == user_identifier)).first()
 
-                # Delete the user's profile
-                db.session.delete(profile)
-                db.session.commit()
-                return {'message': 'Account and all associated bookings deleted successfully'}
+        if profileDB:
+           # Query all bookings made by the user
+           bookings = db.session.query(BookingDB).filter(BookingDB.booker_id == profileDB.id).all()
+
+           # Cancel all bookings made by the user
+           for booking in bookings:
+               db.session.delete(booking)
+
+           # Delete the user's profile
+           db.session.delete(profileDB)
+           db.session.commit()
+           return {'message': 'Account and all associated bookings deleted successfully'}
 
         return {'error': 'Username or email does not exist'}
-
 
 
 
