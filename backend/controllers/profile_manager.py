@@ -23,7 +23,7 @@ class ProfileManager:
         ProfileManager: A class to manage profile data
     """
     @staticmethod
-    def changeUsername(old_username, new_username):
+    def change_username(old_username, new_username):
         """
         Changes the username for a user.
         """
@@ -31,7 +31,7 @@ class ProfileManager:
            if profile.username == old_username:
               # Use the set_username method to update the username
               profile.set_username(new_username)
-            
+
               # Update the existing ProfileDB instance with the updated username
               profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
               profileDB.username = new_username
@@ -41,7 +41,7 @@ class ProfileManager:
         return {'error': 'Username does not exist'}
 
     @staticmethod
-    def changeEmail(old_email, new_email):
+    def change_email(old_email, new_email):
         """
         Changes the email for a user.
         """
@@ -49,7 +49,7 @@ class ProfileManager:
            if profile.email == old_email:
               # Use the set_email method to update the email
               profile.set_email(new_email)
-              
+
               # Update the existing ProfileDB instance with the updated email
               profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
               profileDB.email = new_email
@@ -59,7 +59,7 @@ class ProfileManager:
         return {'error': 'Email does not exist'}
 
     @staticmethod
-    def deleteAccount(user_identifier):
+    def delete_account(user_identifier):
         """
         Deletes a user's account with username or email, and all their bookings.
         """

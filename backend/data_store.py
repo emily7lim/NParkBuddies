@@ -85,7 +85,7 @@ class Database:
             park = next((park for park in self.parks if park.get_id() == park_id), None)
             facility_id = row[5]
             facility = next((facility for facility in self.facilities if facility.get_id() == facility_id), None)
-            booking = Booking(id=row[0], booker=booker, datetime=datetime, cancelled=cancelled, park=park, facility=facility)
+            booking = Booking(id=row[0], booker=booker_id, datetime=datetime, cancelled=cancelled, park=park, facility=facility)
             booker.set_bookings(booking)
             self.bookings.append(booking)
 
@@ -101,7 +101,8 @@ class Database:
             facility.set_reviews(review)
             self.reviews.append(review)
 
-        self.write_to_db()
+        self.session.commit()
+        #self.write_to_db()
 
         logger.info('Database initialized in data_store.py')
 

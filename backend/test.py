@@ -1,6 +1,7 @@
 import requests
 import json
 import datetime
+from geopy.geocoders import Nominatim
 
 # Format for JSON GET requests
 
@@ -28,9 +29,9 @@ def test2():
 def test_booking():
     url = 'http://localhost:5000/bookings'
 
-    user_id = 20
+    user_id = 2
     park_id = 4
-    facility_id = 6
+    facility_id = 15
     booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0)
 
     payload = {
@@ -77,7 +78,7 @@ def test3():
         'email': email,
         'password': password,
     }
-    
+
     response = requests.post(url, json=payload)
 
     print(response.text)
@@ -88,7 +89,7 @@ def test3():
     else:
         print(f"Error: {response.status_code}")
 
-    
+
 def testlogin():
     url = 'http://localhost:5000/profiles/login'
 
@@ -202,13 +203,31 @@ def testdeleteaccount():
     else:
         print(f"Error: {response.status_code}")
 
+def get_user_location():
+    """ Method to get user location
 
+    Returns:
+        location: user location
+    """
+    geolocator = Nominatim(user_agent="nparkbuddy")
+    ip_address = '192.168.0.0'
+    try:
+        location = geolocator.geocode(ip_address)
+    except:
+        location = geolocator.geocode("Singapore")
+
+    return {
+        'latitude': location.latitude,
+        'longitude': location.longitude
+    }
 
 #test2()
 #test3()
-testlogin()
+#testlogin()
 #testpw()
 #testchangeusername()
 #testchangeemail()
 #testdeleteaccount()
-
+#test_booking()
+location = get_user_location()
+print(location['latitude'], location['longitude'])

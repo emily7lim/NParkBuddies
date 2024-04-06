@@ -8,22 +8,71 @@ class FacilityManager:
     """
 
     @staticmethod
-    def view_facilities() -> list:
+    def view_facilities(user_lat, user_lon) -> list:
         """ Method to view all facilities
+
+        Args:
+            user_lat (float): The latitude of the user
+            user_lon (float): The longitude of the user
 
         Returns:
             list: A list of all facilities
         """
+
         facilities = []
         for facility in db.facilities:
             facilities.append({'id': facility.get_id(),
                                'name': facility.get_name(),
-                               'park': facility.get_park().get_name(),
+                               'park': facility.get_park().get_id(),
                                'type': facility.get_type().value,
                                'avg_rating': facility.get_avg_rating(),
                                'num_ratings': facility.get_num_ratings()
                                })
-        return facilities
+
+        # Sort facilities by distance from user
+        for facility in facilities:
+            park = [park for park in db.parks if park.get_id() == facility['park']][0]
+            facility_lat = park.get_latitude()
+            facility_lon = park.get_longitude()
+            facility['distance'] = FacilityManager.calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
+
+        sorted_facilities = sorted(facilities, key=lambda x: x['distance'])
+        return sorted_facilities
+
+    @staticmethod
+    def calculate_distance(lat1, lat2, lon1, lon2):
+        """ Method to calculate distance between two points
+
+        Args:
+            lat1 (float): The latitude of the first point
+            lat2 (float): The latitude of the second point
+            lon1 (float): The longitude of the first point
+            lon2 (float): The longitude of the second point
+
+        Returns:
+            float: The distance between the two points
+        """
+        from math import radians, sin, cos, sqrt, atan2
+
+        # Convert latitude and longitude from degrees to radians
+        lat1_rad = radians(lat1)
+        lat2_rad = radians(lat2)
+        lon1_rad = radians(lon1)
+        lon2_rad = radians(lon2)
+
+        # Radius of the Earth in km
+        R = 6371.0
+
+        # Calculate the difference between in latitude and longitude
+        dlat = lat2_rad - lat1_rad
+        dlon = lon2_rad - lon1_rad
+
+        # Calculate the distance between the two points using the Haversine formula
+        a = sin(dlat / 2)**2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        distance = R * c
+
+        return distance
 
     @staticmethod
     def filter_facilities(facility_type) -> list:
