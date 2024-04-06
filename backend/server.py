@@ -442,6 +442,7 @@ def changeEmail(username) -> Response:
     """
     # Extract data from request payload
     payload = request.json
+    
     old_email = payload.get('old_email')
     new_email = payload.get('new_email')
 
@@ -458,6 +459,7 @@ def changeEmail(username) -> Response:
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
 def deleteAccount(user_identifier) -> Response:
+def deleteAccount(user_identifier) -> Response:
     """Method to delete a user's account
 
     Args:
@@ -467,8 +469,8 @@ def deleteAccount(user_identifier) -> Response:
         Response: JSON response with status of the account deletion
     """
     # Extract data from request payload
-    payload = request.json
-    user_identifier = payload.get('user_identifier')
+    #payload = request.json
+    #user_identifier = payload.get('user_identifier')
 
     # Check if all required fields are present
     if user_identifier is None:
