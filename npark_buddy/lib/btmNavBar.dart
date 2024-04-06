@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'profile.dart';
+import 'home.dart';
 
 /// Flutter code sample for [BottomNavigationBar].
 
@@ -31,10 +32,7 @@ class _BottomNavigationBarExampleState
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    Home(),
     Text(
       'Index 1: Business',
       style: optionStyle,
@@ -87,7 +85,7 @@ class _BottomNavigationBarExampleState
                   color: Colors.black,
                   spreadRadius: -5,
                   blurRadius: 10,
-                  offset: Offset(0,-10))
+                  offset: Offset(0,-1))
             ]
         ),
         child: BottomNavigationBar(

@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:npark_buddy/btmNavBar.dart';
 import 'package:npark_buddy/view_review.dart';
 
 
 class ReviewPage extends StatefulWidget {
-  const ReviewPage({Key? key}) : super(key: key);
+  const ReviewPage({super.key});
 
   @override
   State<ReviewPage> createState() => _ReviewPageState();
