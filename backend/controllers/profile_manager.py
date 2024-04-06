@@ -47,6 +47,9 @@ class ProfileManager:
         """
         for profile in db.profiles:
            if profile.email == old_email:
+              # Use the set_email method to update the email
+              profile.set_email(new_email)
+              
               # Update the existing ProfileDB instance with the updated email
               profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
               profileDB.email = new_email

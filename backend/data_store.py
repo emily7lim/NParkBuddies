@@ -170,6 +170,15 @@ class Database:
         self.session.add(bookingDB)
         self.session.commit()
 
+    def create_profile(self, profileDB):
+        """ Method to store profile into DB
+
+        Args:
+            profileDB (ProfileDB): profile object
+        """
+        self.session.add(profileDB)
+        self.session.commit()
+
     def write_to_db(self):
         """ Method to write all objects to the database"""
         for park_obj in self.parks:
