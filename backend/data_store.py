@@ -47,7 +47,6 @@ class Database:
     def init_db(self):
         """ Method to create all objects
         """
-        from server import logger # Import logger here to prevent circular import
         # Query parks table from the database and create a list of Park objects
         sql = text('SELECT * FROM parks')
         result = self.session.execute(sql)
@@ -65,7 +64,7 @@ class Database:
                 park.set_facilities(facility)
                 self.facilities.append(facility)
             else:
-                logger.error(f'Park with id {park_id} not found')
+                raise ValueError('Park not found for facility')
 
         sql = text('SELECT * FROM profiles')
         result = self.session.execute(sql)
@@ -104,7 +103,7 @@ class Database:
         self.session.commit()
         #self.write_to_db()
 
-        logger.info('Database initialized in data_store.py')
+        sql_logger.info('Database initialized')
 
     def get_park_by_id(self, park_id):
         """ Method to get park by id

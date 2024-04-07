@@ -11,6 +11,7 @@ import signal
 import sys
 from functools import wraps
 from geopy.geocoders import Nominatim
+from ip2geotools.databases.noncommercial import DbIpCity
 from data_store import db
 from classes.facility import convert_to_enum
 from classes.weather import Weather
@@ -376,9 +377,16 @@ def get_user_location():
     """
     geolocator = Nominatim(user_agent="nparkbuddy")
     try:
-        location = geolocator.geocode(request.remote_addr)
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        # Client IP address will be the first in the list
+        client_ip = ip_address.split(',')[0].strip()
+        logger.info('Client IP address: %s', client_ip)
+        location = DbIpCity.get(client_ip, api_key='free')
     except:
+        logger.error("Error getting user location using IP address, defaulting to Singapore")
         location = geolocator.geocode('singapore')
+
+    logger.info('User location: %s, %s', location.latitude, location.longitude)
 
     return {
         'latitude': location.latitude,

@@ -1,2 +1,4 @@
 
 
+*.pyc
+/env/Lib/site-packages
