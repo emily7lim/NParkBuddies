@@ -6,18 +6,20 @@
 from flask import Flask, request, jsonify, Response
 import requests
 import time
-#import threading
+import threading
 import signal
 import sys
 from functools import wraps
 from geopy.geocoders import Nominatim
 from data_store import db
 from classes.facility import convert_to_enum
+from classes.weather import Weather
 from controllers.login_manager import LoginManager
 from controllers.home_manager import HomeManager
 from controllers.bookings_manager import BookingsManager
 from controllers.facility_manager import FacilityManager
 from controllers.profile_manager import ProfileManager
+from controllers.weather_manager import WeatherManager
 from logger import prepare_logger
 
 app = Flask(__name__)
@@ -217,6 +219,63 @@ def create_booking() -> Response:
         logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
 
+@app.route('/weather', methods=['GET'])
+def get_weather_warning() -> Response:
+    """ Method to get weather warning
+
+    Returns:
+        Response: JSON response with weather warning
+    """
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+
+    try:
+        user_lat = float(lat)
+        user_lng = float(lng)
+    except (ValueError, TypeError):
+        user_location = get_user_location()
+        user_lat = user_location['latitude']
+        user_lng = user_location['longitude']
+
+    global weather_instance
+    weather_manager = WeatherManager(weather_instance)
+    region = get_region(user_lat, user_lng)
+    if region is None:
+        weather_warning = weather_manager.send_weather_warning('central')
+    else:
+        weather_warning = weather_manager.send_weather_warning(region)
+    return jsonify({'message': weather_warning})
+
+def get_region(lat, lng) -> str:
+        """ Method to get the region based on the latitude and longitude
+
+        Args:
+            lat (float): Latitude
+            lng (float): Longitude
+
+        Returns:
+            str: The region based on the latitude and longitude
+        """
+        # Check if the coordinates are outside the bounds of Singapore
+        if not (1.158 <= lat <= 1.472 and 103.600 <= lng <= 104.090):
+            return None
+
+        # Determine the region based on longitude
+        if lng <= 103.762:
+            return 'west' if lat <= 1.366 else 'None'
+        elif lng <= 103.897:
+            # In this range, the region depends on latitude
+            if lat < 1.260:
+                return None
+            elif lat <= 1.338:
+                return 'south'
+            elif lat <= 1.393:
+                return 'central'
+            else:
+                return 'north'
+        else:
+            return 'east'
+
 # Bookings routes
 
 @app.route('/profiles/<string:username>/bookings', methods=['GET'])
@@ -291,9 +350,21 @@ def view_facilities():
     Returns:
         json: list of facilities
     """
-    user_location = get_user_location()
-    user_lat = user_location['latitude']
-    user_lon = user_location['longitude']
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+
+    try:
+        user_lat = float(lat)
+        user_lon = float(lon)
+    except (ValueError, TypeError):
+        user_lat = None
+        user_lon = None
+
+    if user_lat is None or user_lon is None:
+        user_location = get_user_location()
+        user_lat = user_location['latitude']
+        user_lon = user_location['longitude']
+
     facilities = FacilityManager.view_facilities(user_lat, user_lon)
     return jsonify(facilities)
 
@@ -691,10 +762,6 @@ def trigger_request():
 def shutdown_signal_handler(signal, frame):
     logger.info('Shutting down server...')
 
-# Register signal handler for SIGINT (Ctrl+C) and SIGTERM
-signal.signal(signal.SIGINT, shutdown_signal_handler)
-signal.signal(signal.SIGTERM, shutdown_signal_handler)
-
 @app.route('/shutdown', methods=['POST'])
 def shutdown():
     shutdown_signal_handler(signal.SIGINT, None)
@@ -702,15 +769,35 @@ def shutdown():
     server_shutdown = True
     return 'Server shutting down...'
 
-if __name__ == '__main__':
-    ##flask_thread = threading.Thread(target=app.run, kwargs={'host': '127.0.0.1', 'port' : 5000, 'debug': True, 'use_reloader': False})
-    ##flask_thread.start()
+def init_db_in_thread():
+    """ Method to initialize the database in a separate thread
+    """
     db.init_db()
+
+weather_instance = Weather()
+
+def main():
+    """ Main function for the server
+    """
+    # Register signal handler for SIGINT (Ctrl+C) and SIGTERM in main thread
+    signal.signal(signal.SIGINT, shutdown_signal_handler)
+    signal.signal(signal.SIGTERM, shutdown_signal_handler)
+
+    # Initialize the database
+    db_thread = threading.Thread(target=init_db_in_thread)
+    db_thread.start()
+
+    # Initialize and start weather polling
+    global weather_instance
+    weather_thread = threading.Thread(target=weather_instance.start_polling)
+    weather_thread.daemon = True
+    weather_thread.start()
+
+    # Wait for database initialization to complete
+    db_thread.join()
+
+    # Start the server
     app.run(host='127.0.0.1', port=5000, debug=True)
-    #trigger_request()
 
-    #flask_thread.join()
-
-    if server_shutdown:
-        logger.info('Server shutdown complete')
-        sys.exit(0)
+if __name__ == '__main__':
+    main()

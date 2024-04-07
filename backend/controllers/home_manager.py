@@ -2,6 +2,7 @@ from datetime import datetime as dt
 from data_store import db
 from classes.booking import Booking
 from database.database import Booking as BookingDB
+from controllers.weather_manager import WeatherManager
 
 class HomeManager:
     """ Class for managing home page data
@@ -101,7 +102,3 @@ class HomeManager:
                         'facilities': [facility.get_name() for facility in park.get_facilities()]
                         }
         return None
-
-    @staticmethod
-    def check_weather():
-        pass
