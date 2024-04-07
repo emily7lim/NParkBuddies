@@ -1,0 +1,52 @@
+2024-04-08 00:48:12,269 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-08 00:48:12,270 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-08 00:48:12,270 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00023s] ()
+2024-04-08 00:48:12,271 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-08 00:48:12,271 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00025s] ()
+2024-04-08 00:48:12,272 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-08 00:48:12,273 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00029s] ()
+2024-04-08 00:48:12,273 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-08 00:48:12,274 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00036s] ()
+2024-04-08 00:48:12,292 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-08 00:48:12,292 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00035s] ()
+2024-04-08 00:48:12,300 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-08 00:48:12,300 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-08 00:48:12,425 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-08 00:48:12,427 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-08 00:48:12,428 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00087s] ()
+2024-04-08 00:48:12,429 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-08 00:48:12,429 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00037s] ()
+2024-04-08 00:48:12,431 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-08 00:48:12,431 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00040s] ()
+2024-04-08 00:48:12,432 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-08 00:48:12,432 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00050s] ()
+2024-04-08 00:48:12,450 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-08 00:48:12,450 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00048s] ()
+2024-04-08 00:48:12,459 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-08 00:48:12,459 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-08 00:48:17,543 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-08 00:48:17,545 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-08 00:48:17,545 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00057s] ()
+2024-04-08 00:48:17,547 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-08 00:48:17,547 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00071s] ()
+2024-04-08 00:48:17,549 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-08 00:48:17,550 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00039s] ()
+2024-04-08 00:48:17,550 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-08 00:48:17,551 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00027s] ()
+2024-04-08 00:48:17,569 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-08 00:48:17,570 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00048s] ()
+2024-04-08 00:48:17,577 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-08 00:48:17,579 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-08 00:48:17,764 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-08 00:48:17,765 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-08 00:48:17,766 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00073s] ()
+2024-04-08 00:48:17,767 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-08 00:48:17,767 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00048s] ()
+2024-04-08 00:48:17,769 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-08 00:48:17,770 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00047s] ()
+2024-04-08 00:48:17,771 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-08 00:48:17,771 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00056s] ()
+2024-04-08 00:48:17,789 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-08 00:48:17,790 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00066s] ()
+2024-04-08 00:48:17,799 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-08 00:48:17,799 - sqlalchemy.engine         - INFO - Database initialized

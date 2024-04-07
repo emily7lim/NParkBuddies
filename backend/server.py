@@ -45,7 +45,8 @@ def log_requests(f):
         Returns:
             f: decorated function
         """
-        logger.info('Request: %s %s - Remote Address: %s - User Agent: %s', request.method, request.path, request.remote_addr, request.user_agent)
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr).split(',')[0].strip()
+        logger.info('Request: %s %s - Remote Address: %s - User Agent: %s', request.method, request.path, ip_address, request.user_agent)
         return f(*args, **kwargs)
     return decorated_function
 

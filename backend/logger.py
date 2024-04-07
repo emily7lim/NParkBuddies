@@ -10,13 +10,13 @@ console_handler.setLevel(logging.INFO)
 console_handler.setFormatter(log_format)
 
 # Create file handler
-file_handler = logging.FileHandler('server.log')
+file_handler = logging.FileHandler('logfile.log')
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(log_format)
 
 # Configure logger
 def prepare_logger():
-    logger = logging.getLogger('logger')
+    logger = logging.getLogger('__name__')
     logger.setLevel(logging.INFO)
 
     if not logger.hasHandlers():
