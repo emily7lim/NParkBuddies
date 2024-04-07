@@ -71,7 +71,7 @@ class _BottomNavigationBarExampleState
             ),
           ],
         ),
-        backgroundColor: Color(0xFF2B512F),
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -118,7 +118,6 @@ class _BottomNavigationBarExampleState
           currentIndex: _selectedIndex,
           selectedIconTheme: IconThemeData(
               color: Colors.green[900],
-            // shadows: <Shadow>[Shadow(color: Colors.black45, blurRadius: 20.0, offset: Offset(0, 10))]
           ),
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.bold,

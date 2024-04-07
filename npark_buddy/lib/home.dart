@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'bookings.dart';
+import 'view_facility.dart';
 import 'src/locations.dart' as locations;
 //main for debugging
 void main() => runApp(const MaterialApp(
@@ -21,7 +21,6 @@ class _MyHomeState extends State<Home> {
     setState(() {
       _markers.clear();
       for (final office in googleOffices.offices) {
-        // String locations = office.name;
         final marker = Marker(
           markerId: MarkerId(office.name),
           position: LatLng(office.lat, office.lng),
@@ -32,8 +31,7 @@ class _MyHomeState extends State<Home> {
               String locations = office.name;
               Navigator.push(
                 context,
-                // MaterialPageRoute(builder: (context) => const ReviewPage()),
-                MaterialPageRoute(builder: (context) => Bookings(location: locations)),
+                MaterialPageRoute(builder: (context) => ViewFacility(location: locations)),
               );
             },
           ),

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'select_datetime.dart';
 //main for debugging
 // void main() => runApp(const MaterialApp(
 //   home: ConfirmBooking(),
 // ));
 
 class ConfirmBooking extends StatelessWidget {
-  const ConfirmBooking({super.key});
+  final String location;
+  final String time;
+
+  const ConfirmBooking({super.key, required this.location, required this.time});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +62,9 @@ class ConfirmBooking extends StatelessWidget {
                 border: Border.all(color: Colors.black),
               ),
         
-              child: const Column(
+              child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
                       'BBQ Pits',
@@ -74,14 +77,14 @@ class ConfirmBooking extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
                     child: Text(
-                      'East Coast Park',
-                      style: TextStyle(
+                      location,
+                      style: const TextStyle(
                       fontSize: 30,
-                      fontWeight: FontWeight.w900                  
+                      fontWeight: FontWeight.w900
                     )
                     ),
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -111,7 +114,12 @@ class ConfirmBooking extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    // Navigator.push(
+                      // context,
+                      // MaterialPageRoute(builder: (context) => SelectDateTime(location: location)),
+                    // );
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.green[900],
                     side: const BorderSide(color: Color(0x008b0000)),
@@ -137,7 +145,12 @@ class ConfirmBooking extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SelectDateTime(location: location)),
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color(0xFCF9F9E8),
                     side: const BorderSide(color: Colors.black),
