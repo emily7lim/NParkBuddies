@@ -48,7 +48,7 @@ class ViewFacility extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: const Text(
-              'Selected park is',
+              'Selected park is:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
           ),
@@ -63,25 +63,66 @@ class ViewFacility extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-              height: 400,
-              child: ListView(
-                children: [
-                  for (int i = 0; i < 8; i++) ...{
-                    TextButton(
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SelectDateTime(location: location)),
-                        );
-                      },
-                      child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(20),
-                          child: Text("Item List - $i")),
-                    )
-                  },
-                ],
-              ),
+            height: 400,
+            width: 350,
+            child: ListView(
+              children: [
+                for (int i = 0; i < 10; i++) ...{
+                  OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                        backgroundColor: const Color(0xFCF9F9E8),
+                        side: const BorderSide(color: Colors.black),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'BBQ pits',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Text(
+                                location,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors.black,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Transform.scale(
+                          alignment: const Alignment(4,0),
+                          scale: 0.6,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SelectDateTime(location: location)),
+                              );
+                            },
+                            icon: Image.asset('assets/book_arrow.png'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                },
+              ],
+            ),
           ),
           FractionallySizedBox(
             child: Container(
@@ -93,7 +134,7 @@ class ViewFacility extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                        const BottomNavigationBarExampleApp()),
+                            const BottomNavigationBarExampleApp()),
                   );
                 },
                 style: OutlinedButton.styleFrom(
@@ -101,9 +142,7 @@ class ViewFacility extends StatelessWidget {
                     minimumSize: const Size(300, 50),
                     side: const BorderSide(color: Colors.black),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                    )
-                ),
+                        borderRadius: BorderRadius.circular(15))),
                 child: const Text(
                   'Back',
                   style: TextStyle(
@@ -113,7 +152,6 @@ class ViewFacility extends StatelessWidget {
                   ),
                 ),
               ),
-
             ),
           ),
         ],
