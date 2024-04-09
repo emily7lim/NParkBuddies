@@ -227,6 +227,17 @@ def get_user_location():
         'longitude': location.longitude
     }
 
+def testweather():
+    url = 'http://localhost:5000/weather'
+
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        weather_info = json.loads(response.text)
+        print(weather_info)
+    else:
+        print(f"Error: {response.status_code}")
+
 #test2()
 #test3()
 #testlogin()
