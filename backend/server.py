@@ -471,7 +471,7 @@ def change_username(username) -> Response:
     if 'error' in result:
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
 def change_email(username) -> Response:
@@ -498,7 +498,7 @@ def change_email(username) -> Response:
     if 'error' in result:
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
 
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
@@ -523,7 +523,7 @@ def delete_account(user_identifier) -> Response:
     if 'error' in result:
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
 
