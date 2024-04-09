@@ -121,15 +121,22 @@ class FacilityManager:
         reviews = []
         # Reviews does not have park and facility infomation, need to query booking first
         park = [park for park in db.parks if park.get_name() == park_name][0]
+        if park is None:
+            return {'error': 'Park not found'}
         facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
+        if facility is None:
+            return {'error': 'Facility not found'}
         for booking in db.bookings:
             if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
                 booking_id = booking.get_id()
+                if booking is None:
+                    return {'error': 'Booking not found'}
                 for review in db.reviews:
                     if review.get_id() == booking_id:
                         reviews.append({'rating': review.get_rating(),
                                         'comment': review.get_comment()
                                         })
+                        break
 
         # Sort reviews by rating, highest to lowest
         sorted_reviews = sorted(reviews, key=lambda x: x['rating'], reverse=True)

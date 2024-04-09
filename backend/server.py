@@ -181,6 +181,7 @@ def get_park(park_name) -> Response:
     Returns:
         Response: JSON response containing the park
     """
+    park_name = park_name.replace('_', ' ').title()
     park = HomeManager.select_park(park_name)
     if park:
         return jsonify(park)
@@ -246,37 +247,42 @@ def get_weather_warning() -> Response:
         weather_warning = weather_manager.send_weather_warning('central')
     else:
         weather_warning = weather_manager.send_weather_warning(region)
-    return jsonify({'message': weather_warning})
+
+    # Return when no error warning
+    if weather_warning is None:
+        return jsonify({'message': 'No weather warning'}), 200
+    else:
+        return jsonify({'message': weather_warning}), 200
 
 def get_region(lat, lng) -> str:
-        """ Method to get the region based on the latitude and longitude
+    """ Method to get the region based on the latitude and longitude
 
-        Args:
-            lat (float): Latitude
-            lng (float): Longitude
+    Args:
+        lat (float): Latitude
+        lng (float): Longitude
 
-        Returns:
-            str: The region based on the latitude and longitude
-        """
-        # Check if the coordinates are outside the bounds of Singapore
-        if not (1.158 <= lat <= 1.472 and 103.600 <= lng <= 104.090):
+    Returns:
+        str: The region based on the latitude and longitude
+    """
+    # Check if the coordinates are outside the bounds of Singapore
+    if not (1.158 <= lat <= 1.472 and 103.600 <= lng <= 104.090):
+        return None
+
+    # Determine the region based on longitude
+    if lng <= 103.762:
+        return 'west' if lat <= 1.366 else 'None'
+    elif lng <= 103.897:
+        # In this range, the region depends on latitude
+        if lat < 1.260:
             return None
-
-        # Determine the region based on longitude
-        if lng <= 103.762:
-            return 'west' if lat <= 1.366 else 'None'
-        elif lng <= 103.897:
-            # In this range, the region depends on latitude
-            if lat < 1.260:
-                return None
-            elif lat <= 1.338:
-                return 'south'
-            elif lat <= 1.393:
-                return 'central'
-            else:
-                return 'north'
+        elif lat <= 1.338:
+            return 'south'
+        elif lat <= 1.393:
+            return 'central'
         else:
-            return 'east'
+            return 'north'
+    else:
+        return 'east'
 
 # Bookings routes
 
@@ -402,7 +408,12 @@ def filter_facilities():
         json: list of facilities
     """
     type = request.args.get('type')
-    facility_type = convert_to_enum(type)
+
+    try:
+        facility_type = convert_to_enum(type)
+    except Exception:
+        return jsonify({'error': 'Invalid facility type'}), 400
+
     lat = request.args.get('lat')
     lon = request.args.get('lon')
 
@@ -431,7 +442,6 @@ def view_reviews(park_name, facility_name):
     # Convert park name and facility name to title case from underscore case
     park_name = park_name.replace('_', ' ').title()
     facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
-    print(park_name, facility_name)
     reviews = FacilityManager.view_reviews(park_name, facility_name)
     return jsonify(reviews)
 

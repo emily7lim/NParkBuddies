@@ -60,7 +60,7 @@ class WeatherManager:
             time_of_day = "Morning" if time_component == '06:00' else "Afternoon" if time_component == '12:00' else "Night"
             forecasts[time_of_day] = period.get("regions").get(region)
 
-        message = ""
+        message = None
         # Generate the weather warning message
         for time, forecast in forecasts.items():
             label = time_labels.get(time)
