@@ -14,14 +14,16 @@ class BookingsManager:
         """ Method to view all bookings of a user
 
         Args:
-            user_id (int): The id of the user
+            username (string): The username of the user
 
         Returns:
             list: A list of all bookings of the user
         """
+        user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
+
         bookings = []
         for booking in db.bookings:
-            if booking.get_booker().get_username() == username:
+            if booking.get_booker() == user_id:
                 bookings.append({'id': booking.get_id(),
                                 'datetime': booking.get_datetime(),
                                 'park': booking.get_park().get_name(),
@@ -35,16 +37,17 @@ class BookingsManager:
         """ Method to cancel a booking
 
         Args:
-            user_id (int): The id of the user
-            park_id (int): The id of the park
-            facility_id (int): The id of the facility
+            username (string): The username of the user
+            park (string): The name of the park
+            facility (string): The name of the facility
             datetime (datetime): The datetime of the booking
 
         Returns:
             Booking: The booking that was cancelled
         """
+        user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
         for booking in db.bookings:
-            if booking.get_booker().get_username() == username and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
+            if booking.get_booker() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
                 booking.set_cancelled(True)
                 return booking
         return None
@@ -54,9 +57,9 @@ class BookingsManager:
         """ Method to review a booking
 
         Args:
-            user_id (int): The id of the user
-            park_id (int): The id of the park
-            facility_id (int): The id of the facility
+            username (string): The username of the user
+            park (string): The name of the park
+            facility (string): The name of the facility
             datetime (datetime): The datetime of the booking
             rating (int): The rating of the review
             comment (string): The comment of the review
@@ -64,8 +67,9 @@ class BookingsManager:
         Returns:
             Review: The review that was added
         """
+        user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
         for booking in db.bookings:
-            if booking.get_booker().get_username() == username and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
+            if booking.get_booker().get_id() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
                 review = Review(id=booking.get_id(), rating=rating, comment=comment)
                 booking.set_reviews(review)
                 return review

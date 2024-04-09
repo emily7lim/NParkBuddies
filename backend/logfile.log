@@ -713,3 +713,65 @@
 2024-04-09 16:45:55,171 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00040s] ()
 2024-04-09 16:45:55,177 - sqlalchemy.engine.Engine  - INFO - COMMIT
 2024-04-09 16:45:55,178 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 16:47:17,238 - __name__                  - INFO - Response: GET - Status Code: 200
+2024-04-09 16:47:17,238 - __name__                  - INFO - Request: GET /profiles - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 16:47:39,650 - __name__                  - INFO - Response: GET - Status Code: 200
+2024-04-09 16:47:39,650 - __name__                  - INFO - Request: GET /profiles - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 16:49:45,616 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-09 16:49:45,616 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-09 16:49:45,617 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00029s] ()
+2024-04-09 16:49:45,617 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-09 16:49:45,617 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00024s] ()
+2024-04-09 16:49:45,619 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-09 16:49:45,619 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00027s] ()
+2024-04-09 16:49:45,619 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-09 16:49:45,620 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00028s] ()
+2024-04-09 16:49:45,639 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-09 16:49:45,639 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00045s] ()
+2024-04-09 16:49:45,646 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-09 16:49:45,646 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 16:49:46,284 - __name__                  - INFO - Response: GET - Status Code: 200
+2024-04-09 16:49:46,285 - __name__                  - INFO - Request: GET /profiles/zhiyong78/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 16:50:43,181 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-09 16:50:43,182 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-09 16:50:43,183 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00054s] ()
+2024-04-09 16:50:43,184 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-09 16:50:43,184 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00041s] ()
+2024-04-09 16:50:43,186 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-09 16:50:43,187 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00080s] ()
+2024-04-09 16:50:43,188 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-09 16:50:43,188 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00032s] ()
+2024-04-09 16:50:43,204 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-09 16:50:43,205 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00062s] ()
+2024-04-09 16:50:43,213 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-09 16:50:43,213 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 16:52:11,713 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-09 16:52:11,714 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-09 16:52:11,715 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00050s] ()
+2024-04-09 16:52:11,716 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-09 16:52:11,716 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00039s] ()
+2024-04-09 16:52:11,717 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-09 16:52:11,719 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00055s] ()
+2024-04-09 16:52:11,720 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-09 16:52:11,720 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00033s] ()
+2024-04-09 16:52:11,737 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-09 16:52:11,738 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00033s] ()
+2024-04-09 16:52:11,745 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-09 16:52:11,745 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 16:53:36,763 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-09 16:53:36,764 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-09 16:53:36,765 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00055s] ()
+2024-04-09 16:53:36,766 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-09 16:53:36,767 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00079s] ()
+2024-04-09 16:53:36,769 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-09 16:53:36,769 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00041s] ()
+2024-04-09 16:53:36,770 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-09 16:53:36,771 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00031s] ()
+2024-04-09 16:53:36,785 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-09 16:53:36,785 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00054s] ()
+2024-04-09 16:53:36,791 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-09 16:53:36,791 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 16:53:40,838 - __name__                  - INFO - Response: GET - Status Code: 200
+2024-04-09 16:53:40,838 - __name__                  - INFO - Request: GET /profiles/zhiyong78/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 16:53:44,652 - __name__                  - INFO - Response: GET - Status Code: 200
+2024-04-09 16:53:44,652 - __name__                  - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
