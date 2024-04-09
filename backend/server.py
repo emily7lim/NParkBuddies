@@ -394,15 +394,31 @@ def get_user_location():
         'longitude': location.longitude
     }
 
-@app.route('/facilities/filter/<string:type>', methods=['GET'])
+@app.route('/facilities/filter', methods=['GET'])
 def filter_facilities():
     """ Method to filter facilities
 
     Returns:
         json: list of facilities
     """
+    type = request.args.get('type')
     facility_type = convert_to_enum(type)
-    facilities = FacilityManager.filter_facilities(facility_type)
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
+
+    try:
+        user_lat = float(lat)
+        user_lon = float(lon)
+    except (ValueError, TypeError):
+        user_lat = None
+        user_lon = None
+
+    if user_lat is None or user_lon is None:
+        user_location = get_user_location()
+        user_lat = user_location['latitude']
+        user_lon = user_location['longitude']
+
+    facilities = FacilityManager.filter_facilities(facility_type, user_lat, user_lon)
     return jsonify(facilities)
 
 @app.route('/reviews/<string:park_name>/<string:facility_name>', methods=['GET'])
@@ -412,6 +428,10 @@ def view_reviews(park_name, facility_name):
     Returns:
         json: list of reviews
     """
+    # Convert park name and facility name to title case from underscore case
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
+    print(park_name, facility_name)
     reviews = FacilityManager.view_reviews(park_name, facility_name)
     return jsonify(reviews)
 

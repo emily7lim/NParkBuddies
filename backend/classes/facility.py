@@ -163,9 +163,11 @@ def convert_to_enum(value) -> FacilityType:
     Returns:
         FacilityType: enum value
     """
-    if value == 'BBQ Pit':
+    # Convert value to lowercase
+    value = value.lower()
+    if value == 'bbq pit' or value == 'bbq_pit' or value == 'bbqpit' or value == 'bbq':
         return FacilityType.BBQ_PIT
-    elif value == 'Campsite':
+    elif value == 'campsite':
         return FacilityType.CAMPSITE
-    elif value == 'Venues':
+    elif value == 'venues':
         return FacilityType.VENUES
