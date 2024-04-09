@@ -775,3 +775,20 @@
 2024-04-09 16:53:40,838 - __name__                  - INFO - Request: GET /profiles/zhiyong78/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
 2024-04-09 16:53:44,652 - __name__                  - INFO - Response: GET - Status Code: 200
 2024-04-09 16:53:44,652 - __name__                  - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 19:25:45,473 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-09 19:25:45,474 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-09 19:25:45,475 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00065s] ()
+2024-04-09 19:25:45,476 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-09 19:25:45,477 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00051s] ()
+2024-04-09 19:25:45,478 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-09 19:25:45,479 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00044s] ()
+2024-04-09 19:25:45,480 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-09 19:25:45,480 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00044s] ()
+2024-04-09 19:25:45,502 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-09 19:25:45,502 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00046s] ()
+2024-04-09 19:25:45,512 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-09 19:25:45,513 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-09 19:26:22,567 - __name__                  - INFO - Response: GET - Status Code: 405
+2024-04-09 19:26:22,567 - __name__                  - INFO - Request: GET /shutdown - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-09 19:26:22,698 - __name__                  - INFO - Response: GET - Status Code: 404
+2024-04-09 19:26:22,698 - __name__                  - INFO - Request: GET /favicon.ico - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
