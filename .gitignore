@@ -2,3 +2,4 @@
 
 *.pyc
 /env/Lib/site-packages
+backend/logfile.log
