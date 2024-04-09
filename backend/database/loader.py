@@ -1,6 +1,7 @@
 """ This file reads geojson data from the database and returns it as a JSON response
 """
 import os
+import sys
 import json
 import datetime
 import pandas as pd
@@ -13,6 +14,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 from fuzzywuzzy import process
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from classes.facility import FacilityType
 
 # OpenAI API key
