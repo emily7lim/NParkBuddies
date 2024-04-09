@@ -16,11 +16,20 @@ class ReviewPage extends StatefulWidget {
 class _ReviewPageState extends State<ReviewPage> {
 
   final _reviewController = TextEditingController();
+  double _rating = 0.0; 
+  final List<double> _ratingsList = []; 
+  final List<String> _allReviews = [];
 
   void Review() {
+    setState(() {
+      _allReviews.add(_reviewController.text.trim()); // Add new review to the list
+    });
+
     Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ViewReviews(reviewText: _reviewController.text.trim(),)), 
+                MaterialPageRoute(
+                  builder: (context) => ViewReviews(
+                    reviewText: _reviewController.text.trim(), rating: _rating, ratingsList: _ratingsList, allReviews: _allReviews,)), 
     );
     showDialog(context: context, builder: (context){
       return Center(
@@ -103,19 +112,18 @@ class _ReviewPageState extends State<ReviewPage> {
                 const SizedBox(height: 20),
 
 
-
-
-
-
-
-
-
-
-                RatingBar.builder(
-                  minRating: 1,
+              //Stars
+               RatingBar.builder(
+                  minRating: 0,
                   itemSize: 60,
-                  itemBuilder: (context, _) => Icon(Icons.star,color: Colors.amber,), 
-                  onRatingUpdate: (rating){}),
+                  itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
+                  onRatingUpdate: (rating) {
+                    setState(() {
+                      _rating = rating;
+                      _ratingsList.add(rating); // Add rating to the list
+                    });
+                  },
+                ),
               const SizedBox(height: 10),
             
               //Review textfield

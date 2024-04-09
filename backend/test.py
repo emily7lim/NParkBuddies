@@ -3,6 +3,12 @@ import json
 import datetime
 from geopy.geocoders import Nominatim
 
+from ip2geotools.databases.noncommercial import DbIpCity
+
+def get_location(ip):
+    res = DbIpCity.get(ip, api_key='free')
+    print(res.latitude, res.longitude)
+
 # Format for JSON GET requests
 
 def test():
@@ -240,6 +246,7 @@ def testweather():
 #testchangeemail()
 #testdeleteaccount()
 #test_booking()
-location = get_user_location()
-print(location['latitude'], location['longitude'])
-testweather()
+#location = get_user_location()
+#print(location['latitude'], location['longitude'])
+
+get_location('155.69.180.5')

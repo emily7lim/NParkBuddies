@@ -23,7 +23,7 @@ class FacilityManager:
         for facility in db.facilities:
             facilities.append({'id': facility.get_id(),
                                'name': facility.get_name(),
-                               'park': facility.get_park().get_id(),
+                               'park': facility.get_park().get_name(),
                                'type': facility.get_type().value,
                                'avg_rating': facility.get_avg_rating(),
                                'num_ratings': facility.get_num_ratings()
@@ -31,7 +31,7 @@ class FacilityManager:
 
         # Sort facilities by distance from user
         for facility in facilities:
-            park = [park for park in db.parks if park.get_id() == facility['park']][0]
+            park = [park for park in db.parks if park.get_name() == facility['park']][0]
             facility_lat = park.get_latitude()
             facility_lon = park.get_longitude()
             facility['distance'] = FacilityManager.calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
@@ -75,26 +75,37 @@ class FacilityManager:
         return distance
 
     @staticmethod
-    def filter_facilities(facility_type) -> list:
+    def filter_facilities(facility_type, user_lat, user_lon) -> list:
         """ Method to filter facilities by type
 
         Args:
-            type (string): The type of the facility
+            facility_type (FacilityType): The type of facility
+            user_lat (float): The latitude of the user
+            user_lon (float): The longitude of the user
 
         Returns:
             list: A list of all facilities of the given type
         """
         facilities = []
         for facility in db.facilities:
-            if facility.get_type() == type:
+            if facility.get_type() == facility_type:
                 facilities.append({'id': facility.get_id(),
                                    'name': facility.get_name(),
                                    'park': facility.get_park().get_name(),
-                                   'type': facility.get_type(),
+                                   'type': facility.get_type().value,
                                    'avg_rating': facility.get_avg_rating(),
                                    'num_ratings': facility.get_num_ratings()
                                    })
-        return facilities
+
+        # Sort facilities by distance from user
+        for facility in facilities:
+            park = [park for park in db.parks if park.get_name() == facility['park']][0]
+            facility_lat = park.get_latitude()
+            facility_lon = park.get_longitude()
+            facility['distance'] = FacilityManager.calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
+
+        sorted_facilities = sorted(facilities, key=lambda x: x['distance'])
+        return sorted_facilities
 
     @staticmethod
     def view_reviews(park_name, facility_name) -> list:
@@ -109,12 +120,17 @@ class FacilityManager:
         """
         reviews = []
         # Reviews does not have park and facility infomation, need to query booking first
+        park = [park for park in db.parks if park.get_name() == park_name][0]
+        facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
         for booking in db.bookings:
-            if booking.get_park().get_name() == park_name and booking.get_facility().get_name() == facility_name:
+            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
                 booking_id = booking.get_id()
                 for review in db.reviews:
                     if review.get_id() == booking_id:
                         reviews.append({'rating': review.get_rating(),
                                         'comment': review.get_comment()
                                         })
-        return reviews
+
+        # Sort reviews by rating, highest to lowest
+        sorted_reviews = sorted(reviews, key=lambda x: x['rating'], reverse=True)
+        return sorted_reviews
