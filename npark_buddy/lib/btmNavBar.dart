@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:npark_buddy/view_facility.dart';
 import 'profile.dart';
 import 'home.dart';
 
@@ -45,9 +46,17 @@ class _BottomNavigationBarExampleState
   ];
 
   void _onItemTapped(int index) {
+    if (index == 2) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ViewFacility(location: '',)),
+    );
+  } 
+  else {
     setState(() {
       _selectedIndex = index;
     });
+  }
   }
 
   @override

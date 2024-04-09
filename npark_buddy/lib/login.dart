@@ -121,14 +121,14 @@ class _LoginState extends State<Login> {
             Row(
               children: [
                 const Padding(
-                    padding: EdgeInsets.fromLTRB(80, 200, 0, 20),
+                    padding: EdgeInsets.fromLTRB(80, 30, 0, 20),
                     child: Text(
                       'Don\'t have an Account? ',
                       style: TextStyle(fontSize: 14),
                     )),
                 GestureDetector(
                   child: const Padding(
-                      padding: EdgeInsets.fromLTRB(0, 200, 0, 20),
+                      padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
                       child: Text(
                         'Create Account',
                         style: TextStyle(fontSize: 14, color: Color(0xFF5F7B5D)),
