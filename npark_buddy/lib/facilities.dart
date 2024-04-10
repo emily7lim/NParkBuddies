@@ -10,7 +10,7 @@ class Facilities extends StatefulWidget {
 }
 
 class _FacilitiesState extends State<Facilities> {
-  late final String location;
+  late final String location = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
