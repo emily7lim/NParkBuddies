@@ -95,16 +95,17 @@ def create_account() -> Response:
     email = payload.get('email')
     password = payload.get('password')
 
-    print("username email password", username, email, password)
-
     # Check if all required fields are present
     if username is None or email is None or password is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     profile = LoginManager.create_account(username, email, password)
     if 'error' in profile:
+        logger.error(profile['error'])
         return jsonify({'error': profile['error']}), 400
     else:
+        logger.info('Profile created successfully: %s', profile['username'], profile['email'])
         return jsonify({'message': 'Profile created successfully', 'profile': profile}), 200
 
 @app.route('/profiles/login', methods=['POST'])

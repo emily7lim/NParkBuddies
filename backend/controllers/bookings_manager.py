@@ -33,6 +33,9 @@ class BookingsManager:
                                 'facility': booking.get_facility().get_name(),
                                 'cancelled': booking.get_cancelled()
                                 })
+        # Sort bookings by datetime
+        bookings = sorted(bookings, key=lambda x: x['datetime'], reverse=True)
+        # Split bookings into past and current bookings
         past_bookings = [booking for booking in bookings if booking['datetime'] < dt.now()]
         current_bookings = [booking for booking in bookings if booking['datetime'] >= dt.now()]
         return {'past_bookings': past_bookings, 'current_bookings': current_bookings}
