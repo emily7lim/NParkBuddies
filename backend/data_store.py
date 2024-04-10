@@ -79,7 +79,10 @@ class Database:
             booker = next((profile for profile in self.profiles if profile.get_id() == booker_id), None)
             datetime_str = row[2].split('.')[0]  # Split at dot and take only the part before the dot
             datetime = dt.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
-            cancelled = bool(row[3]) and row[3] != b'\x00'
+            if row[3] == "b'\\x01'":
+                cancelled = True
+            else:
+                cancelled = False
             park_id = row[4]
             park = next((park for park in self.parks if park.get_id() == park_id), None)
             facility_id = row[5]
