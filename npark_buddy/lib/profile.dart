@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:npark_buddy/editprofile.dart';
+import 'main.dart';
+import 'resetPW.dart';
 
 //main for debugging
 void main() => runApp(const MaterialApp(
@@ -81,6 +84,22 @@ class Profile extends StatelessWidget {
                             ),
                           ),
                         ),
+                        IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:(context) => 
+                                  const EditProfile(),
+                              )
+                            );
+                          },
+                        )
                       ],
                     ),
         
@@ -105,7 +124,14 @@ class Profile extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                          const ResetPW()),
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -172,7 +198,15 @@ class Profile extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
                               child: OutlinedButton(
-                                onPressed: () => Navigator.pop(context, 'Logout'),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                        const Landing(),
+                                    ),
+                                  );
+                                },
                                 style: OutlinedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                                   backgroundColor: Colors.red[900],
