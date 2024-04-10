@@ -4,6 +4,57 @@ import 'btmNavBar.dart';
 import 'resetPW.dart';
 import 'allStyle.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> login(BuildContext context, username, String password) async {
+  const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/login'; //server
+
+  try { //http post stuff
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'user_identifier': username,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, then go in home page
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()));
+      
+    } else {
+      // If the server did not return a 200 OK response, shld give a popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Login Failed"),
+            content: Text("Failed to login. Please check your credentials and try again."),
+            backgroundColor: Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } catch (e) {
+    print("ERROR EXCEPTION");
+    //just in case 
+  }
+}
+
+
 class Login extends StatefulWidget {
   const Login({super.key});
   @override
@@ -128,13 +179,8 @@ class _LoginState extends State<Login> {
 
                 print(username);
                 print(pw);
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BottomNavigationBarExample()
-                    
-                  )
-                );
+                login(context, username, pw);
+                
               },
               style: TextButton.styleFrom(
                   minimumSize: const Size(280, 0),
