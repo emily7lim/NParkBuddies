@@ -8,9 +8,28 @@ class Login extends StatefulWidget {
   const Login({super.key});
   @override
   _LoginState createState() => _LoginState();
+  
 }
 
 class _LoginState extends State<Login> {
+
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final usernameController = TextEditingController();
+  final pwController = TextEditingController();
+  
+  var username = '';
+  var pw = '';
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    usernameController.dispose();
+    pwController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,27 +76,29 @@ class _LoginState extends State<Login> {
                 fontSize: 20,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 50, 70, 10),
+             Padding(
+              padding: const EdgeInsets.fromLTRB(70, 50, 70, 10),
               child: TextField(
-                decoration: InputDecoration(
+                controller: usernameController,
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Username or email',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 0, 70, 20),
+             Padding(
+              padding: const EdgeInsets.fromLTRB(70, 0, 70, 20),
               child: TextField(
+                controller: pwController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Password',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
             GestureDetector(
@@ -101,10 +122,12 @@ class _LoginState extends State<Login> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
-                );
+              
+                username = usernameController.text;
+                pw = pwController.text;
+
+                print(username);
+                print(pw);
               },
               style: TextButton.styleFrom(
                   minimumSize: const Size(280, 0),
