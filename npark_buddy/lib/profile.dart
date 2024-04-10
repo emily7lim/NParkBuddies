@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:npark_buddy/editprofile.dart';
 import 'main.dart';
 import 'resetPW.dart';
-
 //main for debugging
 void main() => runApp(const MaterialApp(
   home: Profile(),
