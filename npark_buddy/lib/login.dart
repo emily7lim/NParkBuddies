@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
-        backgroundColor: Color(0xFF2B512F),
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -212,7 +212,7 @@ class _LoginState extends State<Login> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Register()),
+                      MaterialPageRoute(builder: (context) => Register()),
                     );
                   },
                 ),
