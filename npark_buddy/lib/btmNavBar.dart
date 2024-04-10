@@ -57,7 +57,7 @@ class _BottomNavigationBarExampleState
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
                 height: 70,

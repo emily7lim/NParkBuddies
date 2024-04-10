@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
-        backgroundColor: Colors.green[900],
+        backgroundColor: Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -128,6 +128,13 @@ class _LoginState extends State<Login> {
 
                 print(username);
                 print(pw);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BottomNavigationBarExample()
+                    
+                  )
+                );
               },
               style: TextButton.styleFrom(
                   minimumSize: const Size(280, 0),

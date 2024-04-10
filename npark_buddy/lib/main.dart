@@ -11,7 +11,7 @@ class Landing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[900],
+      backgroundColor: const Color(0xFF2B512F),
       body: Column(
         children: <Widget>[
           const SizedBox(height: 180),
