@@ -46,17 +46,9 @@ class _BottomNavigationBarExampleState
   ];
 
   void _onItemTapped(int index) {
-    if (index == 2) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ViewFacility(location: '',)),
-    );
-  } 
-  else {
     setState(() {
       _selectedIndex = index;
     });
-  }
   }
 
   @override
