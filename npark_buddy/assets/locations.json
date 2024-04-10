@@ -1,1 +1,76 @@
-{"offices": [{"name": "Bedok Reservoir Park", "lat": 1.33910391657726, "lng": 103.922534729838, "region": "southeast-asia"}, {"name": "one-north Park", "lat": 1.30305352685859, "lng": 103.790773072532, "region": "southeast-asia"}, {"name": "Kallang Riverside Park", "lat": 1.3072299898419, "lng": 103.868325680577, "region": "southeast-asia"}, {"name": "East Coast Park", "lat": 1.31344608581828, "lng": 103.957841983501, "region": "southeast-asia"}, {"name": "Bishan-Ang Mo Kio Park", "lat": 1.36111471465928, "lng": 103.847705468677, "region": "southeast-asia"}, {"name": "Pulau Ubin", "lat": 1.40868148177813, "lng": 103.959624087759, "region": "southeast-asia"}, {"name": "Labrador Nature Reserve", "lat": 1.26661219023455, "lng": 103.802539662916, "region": "southeast-asia"}, {"name": "Dhoby Ghaut Green", "lat": 1.29818382527735, "lng": 103.846504124738, "region": "southeast-asia"}, {"name": "Changi Beach Park", "lat": 1.38113130696929, "lng": 104.002571191104, "region": "southeast-asia"}, {"name": "Sembawang Park", "lat": 1.46136162644487, "lng": 103.836500475057, "region": "southeast-asia"}, {"name": "Pasir Ris Park", "lat": 1.3812338688554, "lng": 103.95048148047, "region": "southeast-asia"}, {"name": "West Coast Park", "lat": 1.29671519960425, "lng": 103.762725076206, "region": "southeast-asia"}]}
+{
+    "offices": [
+        {
+            "name": "Bedok Reservoir Park",
+            "lat": 1.33910391657726,
+            "lng": 103.922534729838,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "one-north Park",
+            "lat": 1.30305352685859,
+            "lng": 103.790773072532,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Kallang Riverside Park",
+            "lat": 1.3072299898419,
+            "lng": 103.868325680577,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "East Coast Park",
+            "lat": 1.31344608581828,
+            "lng": 103.957841983501,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Bishan-Ang Mo Kio Park",
+            "lat": 1.36111471465928,
+            "lng": 103.847705468677,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Pulau Ubin",
+            "lat": 1.40868148177813,
+            "lng": 103.959624087759,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Labrador Nature Reserve",
+            "lat": 1.26661219023455,
+            "lng": 103.802539662916,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Dhoby Ghaut Green",
+            "lat": 1.29818382527735,
+            "lng": 103.846504124738,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Changi Beach Park",
+            "lat": 1.38113130696929,
+            "lng": 104.002571191104,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Sembawang Park",
+            "lat": 1.46136162644487,
+            "lng": 103.836500475057,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "Pasir Ris Park",
+            "lat": 1.3812338688554,
+            "lng": 103.95048148047,
+            "region": "southeast-asia"
+        },
+        {
+            "name": "West Coast Park",
+            "lat": 1.29671519960425,
+            "lng": 103.762725076206,
+            "region": "southeast-asia"
+        }
+    ]
+}
