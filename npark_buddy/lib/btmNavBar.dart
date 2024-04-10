@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:npark_buddy/view_facility.dart';
 import 'profile.dart';
 import 'home.dart';
+import 'bookings.dart';
 
 /// Flutter code sample for [BottomNavigationBar].
 
@@ -34,10 +35,7 @@ class _BottomNavigationBarExampleState
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    Bookings(),
     Text(
       'Index 2: School',
       style: optionStyle,
@@ -59,7 +57,7 @@ class _BottomNavigationBarExampleState
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
                 height: 70,

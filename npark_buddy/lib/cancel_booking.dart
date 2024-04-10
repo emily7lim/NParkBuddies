@@ -29,7 +29,7 @@ class CancelBooking extends StatelessWidget {
         ],
       ),
 
-        backgroundColor: Colors.green[900],
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -137,7 +137,9 @@ class CancelBooking extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color(0xFCF9F9E8),
                     side: const BorderSide(color: Colors.black),
