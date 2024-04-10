@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:npark_buddy/view_facility.dart';
+import 'package:npark_buddy/facilities.dart';
 import 'profile.dart';
 import 'home.dart';
 import 'bookings.dart';
@@ -36,10 +36,7 @@ class _BottomNavigationBarExampleState
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Bookings(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    Facilities(location: ''),
     Profile(),
   ];
 
