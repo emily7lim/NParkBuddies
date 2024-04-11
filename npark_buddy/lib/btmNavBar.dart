@@ -9,9 +9,15 @@ import 'bookings.dart';
 
 void main() => runApp(const BottomNavigationBarExampleApp());
 
-class BottomNavigationBarExampleApp extends StatelessWidget {
+class BottomNavigationBarExampleApp extends StatefulWidget {
   const BottomNavigationBarExampleApp({super.key});
 
+  @override
+  State<BottomNavigationBarExampleApp> createState() =>
+      _BottomNavigationBarExampleApp();
+}
+
+class _BottomNavigationBarExampleApp extends State<BottomNavigationBarExampleApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -36,7 +42,7 @@ class _BottomNavigationBarExampleState
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Bookings(),
-    Facilities(location: ''),
+    Text('g'),
     Profile(),
   ];
 
