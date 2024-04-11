@@ -213,6 +213,12 @@ def render_homepage() -> str:
                 </tr>
                 <tr>
                     <td>GET</td>
+                    <td>/timeslots/&lt;park_name&gt;/&lt;facility_name&gt;</td>
+                    <td>Gets booked timeslots</td>
+                    <td>Example:<a href='/timeslots/East_Coast_Park/BBQ_Pit_47' target='_blank'>/timeslots/East_Coast_Park/BBQ_Pit_47</a></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
                     <td><a href='/weather' target='_blank'>/weather</a></td>
                     <td>Gets weather warning</td>
                     <td></td>
@@ -422,6 +428,23 @@ def create_booking() -> Response:
     else:
         logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
+
+@app.route('/timeslots/<string:park_name>/<string:facility_name>', methods=['GET'])
+def get_booked_timeslots(park_name, facility_name) -> Response:
+    """ Method to get booked timeslots
+
+    Args:
+        park_name (string): The name of the park
+        facility_name (string): The name of the facility
+
+    Returns:
+        Response: JSON response with booked timeslots
+    """
+    # Convert park name and facility name to title case from underscore case
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
+    timeslots = HomeManager.get_booked_timeslots(park_name, facility_name)
+    return jsonify(timeslots)
 
 @app.route('/weather', methods=['GET'])
 def get_weather_warning() -> Response:
