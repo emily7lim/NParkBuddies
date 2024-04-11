@@ -24,6 +24,9 @@ class BookingsManager:
         """
         user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
 
+        if user_id is None:
+            return {'error': 'User not found'}
+
         bookings = []
         for booking in db.bookings:
             if booking.get_booker() == user_id:
@@ -33,6 +36,8 @@ class BookingsManager:
                                 'facility': booking.get_facility().get_name(),
                                 'cancelled': booking.get_cancelled()
                                 })
+        if len(bookings) == 0:
+            return {'info': 'No bookings found'}
         # Sort bookings by datetime
         bookings = sorted(bookings, key=lambda x: x['datetime'], reverse=True)
         # Split bookings into past and current bookings
@@ -54,11 +59,16 @@ class BookingsManager:
             Booking: The booking that was cancelled
         """
         user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
+
+        if user_id is None:
+            return {'error': 'User not found'}
+
         for booking in db.bookings:
             if booking.get_booker() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
                 booking.set_cancelled(True)
                 return booking
-        return None
+
+        return {'error': 'Booking not found'}
 
     @staticmethod
     def review_booking(username, park, facility, datetime, rating, comment) -> Review:

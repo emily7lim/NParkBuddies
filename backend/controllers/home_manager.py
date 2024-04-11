@@ -99,6 +99,8 @@ class HomeManager:
         if park is None:
             return {'error': 'Park not found'}
         facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
+        if facility is None:
+            return {'error': 'Facility not found'}
         timeslots = []
         for booking in db.bookings:
             if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
@@ -106,7 +108,7 @@ class HomeManager:
 
         if len(timeslots) == 0:
             return {'info': 'No bookings'}
-        return {'timeslots': timeslots}
+        return {'booked timeslots': timeslots}
 
 
     @staticmethod

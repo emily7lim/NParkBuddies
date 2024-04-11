@@ -336,8 +336,10 @@ def login() -> Response:
 
     login = LoginManager.login(user_identifier, password)
     if 'error' in login:
+        logger.error(login['error'])
         return jsonify({'error': login['error']}), 400
     else:
+        logger.info('Login successful: %s', login['username'], login['email'])
         return jsonify(login), 200
 
 @app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
@@ -358,12 +360,15 @@ def change_password(user_identifier) -> Response:
 
     # Check if all required fields are present
     if user_identifier is None or new_password is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = LoginManager.change_password(user_identifier, new_password)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
+        logger.info('Password changed successfully: %s', result['username'], result['email'])
         return jsonify(result), 200
 
 # Home routes
@@ -393,6 +398,7 @@ def get_park(park_name) -> Response:
     if park:
         return jsonify(park)
     else:
+        logger.error('Park not found: %s', park_name)
         return jsonify({'error': 'Park not found'})
 
 @app.route('/bookings', methods=['POST'])
@@ -444,7 +450,12 @@ def get_booked_timeslots(park_name, facility_name) -> Response:
     park_name = park_name.replace('_', ' ').title()
     facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
     timeslots = HomeManager.get_booked_timeslots(park_name, facility_name)
-    return jsonify(timeslots)
+    if 'error' in timeslots:
+        logger.error(timeslots['error'])
+        return jsonify({'error': timeslots['error']}), 400
+    else:
+        logger.info('Booked timeslots retrieved successfully: %s %s', park_name, facility_name)
+        return jsonify(timeslots)
 
 @app.route('/weather', methods=['GET'])
 def get_weather_warning() -> Response:
@@ -467,6 +478,7 @@ def get_weather_warning() -> Response:
     global weather_instance
     weather_manager = WeatherManager(weather_instance)
     region = get_region(user_lat, user_lng)
+    logger.info('Fetching weather warning for region: %s', region)
     if region is None:
         weather_warning = weather_manager.send_weather_warning('central')
     else:
@@ -474,8 +486,10 @@ def get_weather_warning() -> Response:
 
     # Return when no error warning
     if weather_warning is None:
+        logger.info('No weather warning')
         return jsonify({'message': 'No weather warning'}), 200
     else:
+        logger.info('Weather warning: %s', weather_warning)
         return jsonify({'message': weather_warning}), 200
 
 def get_region(lat, lng) -> str:
@@ -521,7 +535,12 @@ def get_bookings(username) -> Response:
         Response: JSON response containing all bookings
     """
     bookings = BookingsManager.view_bookings(username)
-    return jsonify(bookings)
+    if 'error' in bookings:
+        logger.error(bookings['error'])
+        return jsonify({'error': bookings['error']}), 400
+    else:
+        logger.info('Bookings retrieved successfully: %s', username)
+        return jsonify(bookings)
 
 @app.route('/bookings/cancel', methods=['POST'])
 def cancel_booking():
@@ -539,13 +558,16 @@ def cancel_booking():
 
     # Check if all required fields are present
     if username is None or park is None or facility is None or datetime is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     booking = BookingsManager.cancel_booking(username, park, facility, datetime)
-    if booking:
-        return jsonify({'message': 'Booking cancelled', 'booking': booking}), 200
+    if 'error' in booking:
+        logger.error(booking['error'])
+        return jsonify({'error': booking['error']}), 40
     else:
-        return jsonify({'error': 'Booking not found'}), 404
+        logger.info('Booking cancelled successfully: %s', booking['id'])
+        return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200
 
 @app.route('/reviews', methods=['POST'])
 def review_booking():
@@ -565,13 +587,16 @@ def review_booking():
 
     # Check if all required fields are present
     if username is None or park is None or facility is None or datetime is None or rating is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     review = BookingsManager.review_booking(username, park, facility, datetime, rating, comment)
-    if review:
-        return jsonify({'message': 'Review submitted', 'review': review}), 200
+    if 'error' in review:
+        logger.error(review['error'])
+        return jsonify({'error': review['error']}), 404
     else:
-        return jsonify({'error': 'Booking not found'}), 404
+        logger.info('Review added successfully: %s', review['id'])
+        return jsonify({'message': 'Review added successfully', 'review': review}), 200
 
 # Facility routes
 
@@ -636,6 +661,7 @@ def filter_facilities():
     try:
         facility_type = convert_to_enum(type)
     except Exception:
+        logger.error('Invalid facility type provided: %s', type)
         return jsonify({'error': 'Invalid facility type'}), 400
 
     lat = request.args.get('lat')
@@ -667,7 +693,12 @@ def view_reviews(park_name, facility_name):
     park_name = park_name.replace('_', ' ').title()
     facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
     reviews = FacilityManager.view_reviews(park_name, facility_name)
-    return jsonify(reviews)
+    if 'error' in reviews:
+        logger.error(reviews['error'])
+        return jsonify({'error': reviews['error']}), 400
+    else:
+        logger.info('Reviews retrieved successfully: %s %s', park_name, facility_name)
+        return jsonify(reviews), 200
 
 # Profile routes
 
@@ -689,12 +720,15 @@ def change_username(username) -> Response:
 
     # Check if all required fields are present
     if old_username is None or new_username is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.change_username(old_username, new_username)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
+        logger.info('Username changed successfully: %s', result['username'])
         return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
@@ -716,12 +750,15 @@ def change_email(username) -> Response:
 
     # Check if all required fields are present
     if old_email is None or new_email is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.change_email(old_email, new_email)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
+        logger.info('Email changed successfully: %s', result['email'])
         return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
 
 @staticmethod
@@ -735,18 +772,17 @@ def delete_account(user_identifier) -> Response:
     Returns:
         Response: JSON response with status of the account deletion
     """
-    # Extract data from request payload
-    #payload = request.json
-    #user_identifier = payload.get('user_identifier')
-
     # Check if all required fields are present
     if user_identifier is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.delete_account(user_identifier)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
+        logger.info('Account deleted successfully: %s', result['username'])
         return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
