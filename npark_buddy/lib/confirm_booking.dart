@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'select_datetime.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 //main for debugging
 // void main() => runApp(const MaterialApp(
 //   home: ConfirmBooking(),
@@ -7,9 +9,10 @@ import 'select_datetime.dart';
 
 class ConfirmBooking extends StatelessWidget {
   final String location;
+  final String facility;
   final String time;
-
-  const ConfirmBooking({super.key, required this.location, required this.time});
+  final String dates;
+  const ConfirmBooking({super.key, required this.location, required this.facility, required this.dates, required this.time});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,38 +67,42 @@ class ConfirmBooking extends StatelessWidget {
         
               child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: Text(
-                      'BBQ Pits',
-                      style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900                  
-                    )
-                    ),
-                  ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                    child: Text(
-                      location,
-                      style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900
-                    )
+                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: Container(
+                      height: 60,
+                      child: AutoSizeText(
+                        facility,
+                          textAlign: TextAlign.center,
+                        style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900
+                      )
+                      ),
                     ),
                   ),
-                  const Column(
+                    Container(
+                      height: 50,
+                      child: AutoSizeText(
+                        location,
+                        style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900
+                      )
+                    ),
+                  ),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Date:\t\t\t\t1 January 2025',
+                          'Date:\t\t\t\t' + dates,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
                         )
                       ),
                       Text(
-                        'Time:\t\t\t6:00 PM',
+                        'Time:\t\t\t\t' + time,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
@@ -148,7 +155,7 @@ class ConfirmBooking extends StatelessWidget {
                   onPressed: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SelectDateTime(location: location)),
+                      MaterialPageRoute(builder: (context) => SelectDateTime(location: location, facility: facility,)),
                     );
                   },
                   style: OutlinedButton.styleFrom(

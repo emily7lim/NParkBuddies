@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'btmNavBar.dart';
 import 'select_datetime.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 Future<Album> fetchAlbum(location) async {
   final response = await http
@@ -67,6 +68,7 @@ class _ViewFacilityState extends State<ViewFacility> {
 
   @override
   _ViewFacilityState({required this.location});
+
   @override
   void initState() {
     super.initState();
@@ -122,10 +124,11 @@ class _ViewFacilityState extends State<ViewFacility> {
             const SizedBox(height: 10),
             SizedBox(
               height: 400,
-              width: 350,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: FutureBuilder<Album>(
                 future: futureAlbum,
                 builder: (context, snapshot) {
+                  String selectFacility;
                   if (snapshot.hasData) {
                     return ListView(
                       children: [
@@ -141,48 +144,65 @@ class _ViewFacilityState extends State<ViewFacility> {
                                     borderRadius: BorderRadius.circular(15))),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                Expanded(
+                                  child: Stack(
                                     children: [
-                                      Text(
-                                        snapshot.data!.facilities[i],
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.black,
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 10, 0, 10),
+                                        child: Container(
+                                          width: 250,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              AutoSizeText(
+                                                snapshot.data!.facilities[i],
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              AutoSizeText(
+                                                snapshot.data!.name,
+                                                style: const TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black,
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        snapshot.data!.name,
-                                        style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w800,
-                                          color: Colors.black,
+                                      Positioned(
+                                        right: 0,
+                                        child: Transform.scale(
+                                          alignment: Alignment.centerRight,
+                                          scale: 0.6,
+                                          child: IconButton(
+                                            onPressed: () {
+                                              selectFacility =
+                                                  snapshot.data!.facilities[i];
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SelectDateTime(
+                                                            location: location,
+                                                            facility:
+                                                                selectFacility)),
+                                              );
+                                            },
+                                            icon: Image.asset(
+                                                'assets/book_arrow.png'),
+                                          ),
                                         ),
                                       )
                                     ],
                                   ),
-                                ),
-                                Spacer(),
-                                Transform.scale(
-                                  scale: 0.6,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SelectDateTime(
-                                                    location: location)),
-                                      );
-                                    },
-                                    icon: Image.asset('assets/book_arrow.png'),
-                                  ),
-                                ),
+                                )
                               ],
                             ),
                           ),
@@ -191,9 +211,11 @@ class _ViewFacilityState extends State<ViewFacility> {
                       ],
                     );
                   } else if (snapshot.hasError) {
+                    selectFacility = '';
                     return Text('${snapshot.error}');
                   }
 
+                  selectFacility = '';
                   // By default, show a loading spinner.
                   return const CircularProgressIndicator();
                 },
