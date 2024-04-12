@@ -169,7 +169,6 @@ class Database:
         Args:
             bookingDB (BookingDB): booking object
         """
-        print(bookingDB.id, bookingDB.booker, bookingDB.datetime, bookingDB.cancelled, bookingDB.park_id, bookingDB.facility_id)
         self.session.add(bookingDB)
         self.session.commit()
 
