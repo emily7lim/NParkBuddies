@@ -1,162 +1,191 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:npark_buddy/select_datetime.dart';
+import 'package:http/http.dart' as http;
+import 'package:npark_buddy/btmNavBar.dart';
+import 'package:flutter/services.dart';
 
-class Facilities extends StatefulWidget {
-  final String location;
-  const Facilities({Key? key, required this.location}) : super(key: key);
+void main() => runApp(MaterialApp(
+      home: selectFacility(),
+    ));
 
-  @override
-  State<Facilities> createState() => _FacilitiesState();
+class Facility {
+  final int id;
+  final String name;
+  final String type;
+  final double avgRating;
+  final int numRatings;
+  final String park;
+
+  Facility({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.avgRating,
+    required this.numRatings, 
+    required this.park,
+  });
+
+  factory Facility.fromJson(Map<String, dynamic> json) {
+    return Facility(
+      id: json['id'],
+      name: json['name'],
+      type: json['type'],
+      park: json['park'],
+      avgRating: json['avg_rating'].toDouble(),
+      numRatings: json['num_ratings'],
+    );
+  }
 }
 
-class _FacilitiesState extends State<Facilities> {
-  late final String location = '';
+class selectFacility extends StatefulWidget {
+
+  selectFacility({Key? key}) : super(key: key);
+
+  @override
+  State<selectFacility> createState() => _selectFacilityState();
+}
+
+class _selectFacilityState extends State<selectFacility> {
+  late Future<List<Facility>> futureFacilities;
+
+  _selectFacilityState();
+
+  @override
+  void initState() {
+    super.initState();
+    futureFacilities = fetchFacilities();
+  }
+
+  Future<List<Facility>> fetchFacilities({String? type}) async {
+  final response = await http.get(Uri.parse('https://hookworm-solid-tahr.ngrok-free.app/facilities'));
+
+  if (response.statusCode == 200) {
+    final List<dynamic> data = jsonDecode(response.body);
+    final List<Facility> facilities = data.map((item) => Facility.fromJson(item)).toList();
+
+    // Filter facilities based on type
+    if (type != null) {
+      return facilities.where((facility) => facility.type == type).toList();
+    } else {
+      return facilities;
+    }
+  } else {
+    throw Exception('Failed to load facilities');
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEFBEA),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Center(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/filter.png', 
-                        height: 40,
-                        width: 40,
-                      ),
-                        
-                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: GestureDetector(
-                            onTap: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.green[900],
-                                borderRadius: BorderRadius.circular(12),
-                                ),
-                              child: const Center(
-                                
-                                child: Text(
-                                  '  BBQ  ',
-                                  style: TextStyle(color: Colors.white,
-                                  fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: GestureDetector(
-                            onTap: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.green[900],
-                                borderRadius: BorderRadius.circular(12),
-                                ),
-                              child: const Center(
-                                
-                                child: Text(
-                                  '  Camps sites  ',
-                                  style: TextStyle(color: Colors.white,
-                                  fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: GestureDetector(
-                            onTap: (){},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.green[900],
-                                borderRadius: BorderRadius.circular(12),
-                                ),
-                              child: const Center(
-                                
-                                child: Text(
-                                  '  Venues  ',
-                                  style: TextStyle(color: Colors.white,
-                                  fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                        
-                  Text(
-                    'Facilities near me',
-                    style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),
-                    ),
-                  
-                   Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height:10),
+            Row(
+              children: [
+                Image.asset('assets/filter.png',height:50,width:50,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: GestureDetector(
-                    onTap: (){
-
+                    onTap: () {
+                      futureFacilities = fetchFacilities(type: 'BBQ Pit');
+                      setState(() {});
                     },
-                    child: SizedBox(
-                      width: double.infinity, // Make the SizedBox width to match parent width
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black), // Border color
-                          borderRadius: BorderRadius.circular(12), // Border radius
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    //Activity
-                                    Text(
-                                      'BBQ pits',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                    ),
-                                
-                                    //location
-                                    Text(
-                                      'East Coast Park',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Text('4.87',style: TextStyle(
-                                  fontSize: 30,fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 40,
-                              ),  
-                            ],
-                            ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green[900],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '  BBQ  ',
+                          style: TextStyle(color: Colors.white, fontSize: 18,),
                         ),
                       ),
                     ),
                   ),
                 ),
-                ],
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      futureFacilities = fetchFacilities(type: 'Campsite');
+                      setState(() {});
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green[900],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '  Campsites  ',
+                          style: TextStyle(color: Colors.white, fontSize: 18,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      futureFacilities = fetchFacilities(type: 'Venues');
+                      setState(() {});
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green[900],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '  Venues  ',
+                          style: TextStyle(color: Colors.white, fontSize: 18,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+            const SizedBox(height: 20),
+            const Text(
+              'Facilities',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 10),
+            FutureBuilder<List<Facility>>(
+              future: futureFacilities,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return Column(
+                    children: snapshot.data!.map((facility) {
+                      return ListTile(
+                        title: Text(facility.name),
+                        subtitle: Text('${facility.park}, Avg Rating: ${facility.avgRating}'),
+                        onTap: () {
+                          // Handle facility tap
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavigationBarExampleApp(),
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
+                  );
+                }
+              },
+            ),
+            
+          ],
         ),
       ),
     );
