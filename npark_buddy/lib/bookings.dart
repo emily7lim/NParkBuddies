@@ -208,11 +208,15 @@ class _BookingsState extends State<Bookings> {
                                             onPressed: () {
                                               String facility = snapshot.data!.facility[i];
                                               String park = snapshot.data!.park[i];
+                                              String username = Provider.of<UserData>(context, listen:false).username;
+                                              String datetime = snapshot.data!.datetime[i];
+                                              String date = snapshot.data!.date[i];
+                                              String time = snapshot.data!.time[i];
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      CancelBooking(facility: facility, park: park),
+                                                      CancelBooking(facility: facility, park: park, username: username, datetime: datetime, date:date, time:time),
                                                 ),
                                               );
                                             },

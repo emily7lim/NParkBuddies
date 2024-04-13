@@ -102,12 +102,12 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                           child: AutoSizeText(
                             username,
                             softWrap: true,
                             style: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 25,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
                             ),
@@ -122,7 +122,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         email,
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
                         ),

@@ -6,7 +6,7 @@ import 'checker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<void> register(BuildContext context, username, String email, String password) async {
+Future<void> register(BuildContext context, String username, String email, String password) async {
   const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/create'; //server
 
   try {
