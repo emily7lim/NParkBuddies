@@ -73,9 +73,15 @@ def process_json(json_message):
 def test3():
     url = 'http://localhost:5000/profiles/create'
 
-    username = 'kkhoo'
-    password = 'kkhoo'
-    email = 'kkhoo.com'
+    #username = 'kkhoo'
+    #password = '_fc8$"IuD<xY'
+    #email = 'kkhoo@gmail.com'
+
+
+    username = 'chongming80'
+    password = 'MyP@ssword'
+    email = 'chongming80@yahoo.com'
+
 
     print(f"Creating account with username: {username}, email: {email}, password: {password}")
 
@@ -248,5 +254,6 @@ def testweather():
 #test_booking()
 #location = get_user_location()
 #print(location['latitude'], location['longitude'])
+test3()
 
-get_location('155.69.180.5')
+#get_location('155.69.180.5')
