@@ -1,9 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:npark_buddy/login.dart';
 import 'allStyle.dart';
+import 'checker.dart';
+
+import 'package:provider/provider.dart';
+import 'provider.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> changePW(BuildContext context, username, String password) async {
+  const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/<string:user_identifier>/change_password'; //server
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'user_identifier': username,
+        'new_password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, then go back to home page
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login()));
+      
+    } else {
+      //show some dialog, also need some controller to format the input
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("http Failed"),
+            content: Text('$response.statusCode'),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } catch (e) {
+    print("ERROR CHANGE PASSWORD");
+  }
+}
 
 class ResetPW extends StatelessWidget {
-  const ResetPW({super.key});
+  ResetPW({super.key});
+
+  final pwControllerOne =TextEditingController();
+  final pwControllerTwo =TextEditingController();
+
+  var passwordOne = '';
+  var passwordTwo = '';
 
   @override
   Widget build(BuildContext context) {
@@ -54,36 +113,109 @@ class ResetPW extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 20, 70, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 20, 70, 10),
               child: TextField(
+                controller: pwControllerOne,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Enter New password',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 0, 70, 30),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 0, 70, 30),
               child: TextField(
+                controller: pwControllerTwo,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Confirm password',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()),
-                );
+                passwordOne = pwControllerOne.text;
+                passwordTwo = pwControllerTwo.text;
+                var username = Provider.of<UserData>(context, listen:false).username;
+                
+                if (passwordOne == '' || passwordTwo == ''){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Password Reset Failed"),
+                        content: const Text("Empty Fields!"),
+                        backgroundColor: const Color(0xFCF9F9E8),
+                        surfaceTintColor: Colors.white,
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+
+                else if (passwordOne == passwordTwo){ //passwords match
+                  if (Checker.checkPassword(passwordOne)){ //check password format 
+                    print('newpassword: $passwordOne');
+                    changePW(context, username, passwordOne);
+                  }
+                  else{
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Password Reset Failed"),
+                          content: const Text("Password must be minimum 12 characters and contain at least 1 Uppercase and 1 Special Character!"),
+                          backgroundColor: const Color(0xFCF9F9E8),
+                          surfaceTintColor: Colors.white,
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }
+
+                else{ 
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Password Reset Failed"),
+                        content: const Text("Passwords do not match!"),
+                        backgroundColor: const Color(0xFCF9F9E8),
+                        surfaceTintColor: Colors.white,
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
               },
               style: TextButton.styleFrom(
                   minimumSize: const Size(280, 0),

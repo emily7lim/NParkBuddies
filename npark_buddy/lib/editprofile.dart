@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'provider.dart';
 
 void main() => runApp(const MaterialApp(
   home: EditProfile(),
@@ -10,6 +12,9 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+  String username = Provider.of<UserData>(context, listen:false).username;
+  String email = Provider.of<UserData>(context, listen:false).email;
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
       appBar: AppBar(
@@ -60,21 +65,21 @@ class EditProfile extends StatelessWidget {
               )
             ),
         
-            const Padding(
-              padding: EdgeInsets.fromLTRB(40, 40, 40, 0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 40, 40, 0),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'John Doe',
-                  border: OutlineInputBorder(),
+                  hintText: username,
+                  border: const OutlineInputBorder(),
                 )
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(40, 10, 40, 40),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 40),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'johndoe123@gmail.com',
-                  border: OutlineInputBorder(),
+                  hintText: email,
+                  border: const OutlineInputBorder(),
                 )
               ),
             ),

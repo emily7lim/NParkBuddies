@@ -39,11 +39,11 @@ class _BottomNavigationBarExampleState
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.black);
-  static  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Bookings(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Home(),
+    const Bookings(),
     selectFacility(),
-    Profile(),
+    const Profile(),
   ];
 
   void _onItemTapped(int index) {

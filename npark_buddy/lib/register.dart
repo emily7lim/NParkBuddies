@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:npark_buddy/login.dart';
 import 'allStyle.dart';
 
+import 'checker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,7 +33,7 @@ Future<void> register(BuildContext context, username, String email, String passw
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Registration Failed"),
-            content: const Text("Username already exists"),
+            content: const Text("Account already exists"),
             backgroundColor: const Color(0xFCF9F9E8),
             surfaceTintColor: Colors.white,
             actions: <Widget>[
@@ -76,6 +77,54 @@ int checkInput(context, username, email, password){
       );
     return 0;
   }
+
+  if (!Checker.checkPassword(password)){ //checkpassword returns false if problem
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Registration Failed"),
+            content: const Text("Password must be minimum 12 characters and contain at least 1 Uppercase and 1 Special Character!"),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    return 0;
+  }
+
+  if (!Checker.checkEmail(email)){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Registration Failed"),
+            content: const Text("Invalid Email Format!"),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    return 0;
+  }
+
+
   return 1;
 }
 

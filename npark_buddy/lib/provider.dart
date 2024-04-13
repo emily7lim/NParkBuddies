@@ -20,3 +20,7 @@ class UserData extends ChangeNotifier {
 
 //everytime you need the data, just call this, and store into a string: Provider.of<UserData>(context, listen:false).username;
 //everytime you want to set the username, call this : Provider.of<UserData>(context, listen: false).username = username;
+
+//import this two if you want to use
+//import 'package:provider/provider.dart';
+// import 'provider.dart';
