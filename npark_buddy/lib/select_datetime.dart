@@ -5,10 +5,14 @@ import 'package:table_calendar/table_calendar.dart';
 import 'view_facility.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-//main for debugging
-// void main() => runApp(const MaterialApp(
-//   home: ConfirmBooking(),
-// ));
+// main for debugging
+void main() => runApp(const MaterialApp(
+      home: SelectDateTime(
+        location: '',
+        facility: '',
+      ),
+    ));
+
 extension DateTimeFormat on DateTime {
   String fullDate() {
     return DateFormat.yMMMMd('en_US').format(
@@ -102,60 +106,150 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                     ),
                   ],
                 )),
-            const Text('Pick a date'),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text('Pick a date', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+            ),
             Container(
               color: Colors.white,
               width: 300,
               height: 400,
               child: TableCalendar(
                 focusedDay: today,
+                calendarStyle: const CalendarStyle(
+                    selectedDecoration: BoxDecoration(
+                        color: Color(0xFF2B512F), shape: BoxShape.circle),
+                    todayDecoration: BoxDecoration(
+                        color: Color(0xFF7DAF7E), shape: BoxShape.circle)),
                 firstDay: DateTime.utc(2010, 1, 1),
                 lastDay: DateTime.utc(2040, 1, 1),
-                headerStyle: HeaderStyle(
+                headerStyle: const HeaderStyle(
                     formatButtonVisible: false, titleCentered: true),
                 availableGestures: AvailableGestures.all,
                 selectedDayPredicate: (day) => isSameDay(day, today),
                 onDaySelected: _onDaySelected,
               ),
             ),
-            const Text('Available time slots'),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+              child: Text('Available time slots',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+            ),
             Wrap(
               children: [
-                for (int i = 0; i < 6; i++) ...{
-                  OutlinedButton(
-                    onPressed: () {
-                      String dates =
-                          today.fullDate().toString().replaceAll(",", "");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ConfirmBooking(
-                                  location: location,
-                                  facility: facility,
-                                  dates: dates.split(" ")[1] +
-                                      " " +
-                                      dates.split(" ")[0] +
-                                      " " +
-                                      dates.split(" ")[2],
-                                  time: 'time',
-                                )),
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: const Color(0xFCF9F9E8),
-                        minimumSize: const Size(100, 50),
-                        side: const BorderSide(color: Colors.black),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    child: const Text(
-                      '11',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
+                for (int i = 8; i < 20; i++) ...{
+                  //how to put TextButton into one fn or should I stful it
+                  if (i == 12) ...[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          String dates =
+                              today.fullDate().toString().replaceAll(",", "");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfirmBooking(
+                                      location: location,
+                                      facility: facility,
+                                      dates: dates.split(" ")[1] +
+                                          " " +
+                                          dates.split(" ")[0] +
+                                          " " +
+                                          dates.split(" ")[2],
+                                      time: i.toString() + ':00 PM',
+                                    )),
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFFE4E4E4),
+                            minimumSize: const Size(105, 55),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: Text(
+                          i.toString() + ':00 PM',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ] else if (i < 12) ...[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          String dates =
+                              today.fullDate().toString().replaceAll(",", "");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfirmBooking(
+                                      location: location,
+                                      facility: facility,
+                                      dates: dates.split(" ")[1] +
+                                          " " +
+                                          dates.split(" ")[0] +
+                                          " " +
+                                          dates.split(" ")[2],
+                                      time: i.toString() + ':00 AM',
+                                    )),
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFFE4E4E4),
+                            minimumSize: const Size(105, 55),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: Text(
+                          i.toString() + ':00 AM',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                      child: TextButton(
+                        onPressed: () {
+                          String dates =
+                              today.fullDate().toString().replaceAll(",", "");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfirmBooking(
+                                      location: location,
+                                      facility: facility,
+                                      dates: dates.split(" ")[1] +
+                                          " " +
+                                          dates.split(" ")[0] +
+                                          " " +
+                                          dates.split(" ")[2],
+                                      time: (i - 12).toString() + ':00 PM',
+                                    )),
+                          );
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xFFE4E4E4),
+                            minimumSize: const Size(105, 55),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: Text(
+                          (i - 12).toString() + ':00 PM',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]
                 },
               ],
             ),
