@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 
-void main() => runApp(const MaterialApp(
-      home: Landing(),
-    ));
+import 'provider.dart';
+import 'package:provider/provider.dart';
+
+
+void main() => runApp(
+  
+    ChangeNotifierProvider(
+      create: (context) => UserData(),
+      child: const MaterialApp(
+          home: Landing(),
+      ),
+    )
+  );
 
 class Landing extends StatelessWidget {
   const Landing({super.key});

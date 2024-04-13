@@ -191,7 +191,7 @@ class Register extends StatelessWidget {
                 password = pwController.text;
                 if (checkInput(context, username, email, password) == 1){
                   print('success');
-                  // register(context, username, email, password);
+                  register(context, username, email, password);
                 }                
                 // Navigator.push(
                 // context,

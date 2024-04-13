@@ -4,6 +4,9 @@ import 'btmNavBar.dart';
 import 'resetPW.dart';
 import 'allStyle.dart';
 
+import 'package:provider/provider.dart';
+import 'provider.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -179,6 +182,13 @@ class _LoginState extends State<Login> {
 
                 print(username);
                 print(pw);
+
+                var test = Provider.of<UserData>(context, listen:false).username;
+                print(test);
+
+                // Getting the UserData object and setting a new username
+                Provider.of<UserData>(context, listen: false).username = username;
+                print(Provider.of<UserData>(context, listen: false).username);
                 login(context, username, pw);
                 
               },
