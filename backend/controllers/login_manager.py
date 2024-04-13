@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify
 import os, sys
 #sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import profile
 from flask_sqlalchemy import SQLAlchemy
 import re
 from data_store import db
@@ -31,9 +30,6 @@ class LoginManager:
         Creates a new user profile with username, email, password.
 
         """
-        print("username email password", username, email, password)
-
-
         for profile in db.profiles:
             # Check if user has signed up before with same email
             if profile.get_email() == email:
@@ -63,7 +59,12 @@ class LoginManager:
         for profile in db.profiles:
             if profile.get_username() == user_identifier or profile.get_email() == user_identifier:
                 if profile.get_password() == password:
-                    return {'message': 'Login successful'}
+                    # Make profile a dictionary
+                    profile_dict = {'id': profile.get_id(),
+                                    'username': profile.get_username(),
+                                    'email': profile.get_email()
+                                    }
+                    return {'message': 'Login successful', 'profile': profile_dict}
                 else:
                     return {'error': 'Invalid credentials. Please try again'}
 
@@ -76,15 +77,14 @@ class LoginManager:
         """
         for profile in db.profiles:
             if profile.get_username() == user_identifier or profile.get_email() == user_identifier:
-               # Use the set_password method to update the password
-               profile.set_password(new_password)
+                # Use the set_password method to update the password
+                profile.set_password(new_password)
 
-               # Update the existing ProfileDB instance with the updated password
-               profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
-               profileDB.password = new_password
-               db.session.merge(profileDB)
-               db.session.commit()
-               return {'message': 'Password changed successfully'}
+                # Update the existing ProfileDB instance with the updated password
+                profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+                profileDB.password = new_password
+                db.session.merge(profileDB)
+                db.session.commit()
+                return {'message': 'Password changed successfully'}
 
         return {'error': 'Username or email not registered'}
-
