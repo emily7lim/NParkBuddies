@@ -15,7 +15,6 @@ import 'provider.dart';
 //   home: ConfirmBooking(),
 // ));
 
-//by gpt 
 String mergeDateTime (selected_date, selected_time){
 
   // Parse the date string
@@ -24,7 +23,7 @@ String mergeDateTime (selected_date, selected_time){
   print(date);
 
   // Parse the time string
-  DateTime time = DateFormat('h:mm').parse(selected_time);
+  DateTime time = DateFormat('h:mm a').parse(selected_time);
   print(time);
 
   // Combine the date and time into a new DateTime object
@@ -34,6 +33,7 @@ String mergeDateTime (selected_date, selected_time){
     date.day,
     time.hour,
     time.minute,
+    time.second,
   );
 
   print (combinedDateTime);
@@ -92,14 +92,36 @@ Future<void> confirmBooking(BuildContext context, String username, String park, 
       );
 
       
-    } else {
+    } else if (response.body == 'Invalid datetime') {
       //cancellation failed from posting
+      print(response.statusCode);
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Booking Failed"),
-            content: const Text("An error has occurred."),
+            content: const Text("Invalid Booking Time!"),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+    else if (response.body == 'Timeslot not available'){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Booking Failed"),
+            content: const Text("Time Slot not available"),
             backgroundColor: const Color(0xFCF9F9E8),
             surfaceTintColor: Colors.white,
             actions: <Widget>[
@@ -151,7 +173,7 @@ class ConfirmBooking extends StatelessWidget {
         ],
       ),
 
-        backgroundColor: Colors.green[900],
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),

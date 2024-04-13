@@ -1,13 +1,28 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'btmNavBar.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 //main for debugging
 // void main() => runApp(const MaterialApp(
 //   home: CancelBooking(),
 // ));
+
+String formatDateTime(String datetime){
+
+  DateTime dateTime = DateFormat('d MMM yyyy h:mm a').parse(datetime, true).toUtc();
+
+  // Formatting DateTime to the desired format
+  String formattedDate = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(dateTime);
+
+  print(formattedDate);
+
+  return(formattedDate);
+}
 
 //HTTP POST to cancel booking, JUST NEED CHECK WHETHER FORMAT OF THE DATE TIME IS OK
 Future<void> cancelBooking(BuildContext context, String username, String park, String facility, String datetime) async {
@@ -52,9 +67,9 @@ Future<void> cancelBooking(BuildContext context, String username, String park, S
         },
       );
 
-      
     } else {
       //cancellation failed from posting
+      print(response.statusCode);
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -140,7 +155,7 @@ class _CancelBookingState extends State<CancelBooking> {
                 child: Text(
                   'Cancel Booking?',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 30,
                     fontWeight: FontWeight.w900                  
                   )
                 ),
@@ -161,9 +176,10 @@ class _CancelBookingState extends State<CancelBooking> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
+                      softWrap: true,
                       facility,
                       style: const TextStyle(
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w900                  
                     )
                     ),
@@ -183,14 +199,14 @@ class _CancelBookingState extends State<CancelBooking> {
                     children: [
                       Text(
                         'Date:\t\t\t' + date,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
                         )
                       ),
                       Text(
                         'Time:\t\t\t' + time,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
                         )
@@ -210,7 +226,8 @@ class _CancelBookingState extends State<CancelBooking> {
                 child: OutlinedButton(
                   onPressed: (){
                     
-                    // cancelBooking(context, username, park, facility, datetime);
+                    String format_datetime = formatDateTime(datetime);
+                    cancelBooking(context, username, park, facility, format_datetime);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.red[900],
