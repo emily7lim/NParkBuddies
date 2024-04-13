@@ -42,7 +42,7 @@ class _BottomNavigationBarExampleState
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     Bookings(),
-    Text('g'),
+    Facilities(location: ''),
     Profile(),
   ];
 

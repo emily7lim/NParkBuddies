@@ -106,13 +106,7 @@ class _FacilitiesState extends State<Facilities> {
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SelectDateTime(
-                                                    location: location)),
-                      );
+
                     },
                     child: SizedBox(
                       width: double.infinity, // Make the SizedBox width to match parent width
