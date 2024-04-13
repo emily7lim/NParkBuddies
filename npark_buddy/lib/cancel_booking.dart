@@ -6,8 +6,21 @@ import 'btmNavBar.dart';
 //   home: CancelBooking(),
 // ));
 
-class CancelBooking extends StatelessWidget {
-  const CancelBooking({super.key});
+class CancelBooking extends StatefulWidget {
+  final String facility;
+  final String park;
+  CancelBooking({super.key, required this.facility, required this.park});
+  @override
+  State<CancelBooking> createState() => _CancelBookingState(facility: facility, park: park);
+}
+
+class _CancelBookingState extends State<CancelBooking> {
+  final String facility;
+  final String park;
+
+  @override
+  _CancelBookingState({required this.facility, required this.park});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,12 +73,12 @@ class CancelBooking extends StatelessWidget {
                 border: Border.all(color: Colors.black),
               ),
         
-              child: const Column(
+              child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
-                      'BBQ Pits',
+                      facility,
                       style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900                  
@@ -75,7 +88,7 @@ class CancelBooking extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
                     child: Text(
-                      'East Coast Park',
+                      park,
                       style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900                  
