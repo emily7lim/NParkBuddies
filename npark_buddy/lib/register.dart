@@ -278,10 +278,11 @@ class Register extends StatelessWidget {
                         ),
                       )),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
+                    Navigator.pop(context);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => const Login()),
+                    // );
                   },
                 ),
               ],

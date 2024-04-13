@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'btmNavBar.dart';
-import 'resetPW.dart';
+import 'forgetPW.dart';
 import 'allStyle.dart';
 
 import 'package:provider/provider.dart';
@@ -178,7 +178,7 @@ class _LoginState extends State<Login> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ResetPW()),
+                  MaterialPageRoute(builder: (context) => ForgetPW()),
                 );
               },
             ),
