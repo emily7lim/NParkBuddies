@@ -1,6 +1,7 @@
 """ This file reads geojson data from the database and returns it as a JSON response
 """
 import os
+import sys
 import json
 import datetime
 import pandas as pd
@@ -13,6 +14,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 from fuzzywuzzy import process
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from classes.facility import FacilityType
 
 # OpenAI API key
@@ -544,8 +547,6 @@ if __name__ == '__main__':
     file_path = os.path.join(script_dir, 'Parks.geojson')
     parks = read_geojson(file_path)
 
-    create_geosjon_from_db()
-
     profiles = pd.read_csv('profiles.csv', delimiter=',')
     bookings = pd.read_csv('bookings.csv', delimiter=',')
     reviews = pd.read_csv('reviews.csv', delimiter=',')
@@ -580,6 +581,7 @@ if __name__ == '__main__':
             insert_parks(parks)
             delete_profiles()
             insert_profiles_from_csv(profiles, bookings, reviews)
+            create_geosjon_from_db()
         elif option == '0':
             exit()
         else:

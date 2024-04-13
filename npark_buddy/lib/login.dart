@@ -4,13 +4,83 @@ import 'btmNavBar.dart';
 import 'resetPW.dart';
 import 'allStyle.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> login(BuildContext context, username, String password) async {
+  const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/login'; //server
+
+  try { //http post stuff
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'user_identifier': username,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, then go in home page
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()));
+      
+    } else {
+      // If the server did not return a 200 OK response, shld give a popup
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Login Failed"),
+            content: Text("Failed to login. Please check your credentials and try again."),
+            backgroundColor: Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } catch (e) {
+    print("ERROR EXCEPTION");
+    //just in case 
+  }
+}
+
+
 class Login extends StatefulWidget {
   const Login({super.key});
   @override
   _LoginState createState() => _LoginState();
+  
 }
 
 class _LoginState extends State<Login> {
+
+  // Create a text controller and use it to retrieve the current value
+  // of the TextField.
+  final usernameController = TextEditingController();
+  final pwController = TextEditingController();
+  
+  var username = '';
+  var pw = '';
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    usernameController.dispose();
+    pwController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +102,7 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
-        backgroundColor: Colors.green[900],
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -57,27 +127,29 @@ class _LoginState extends State<Login> {
                 fontSize: 20,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 50, 70, 10),
+             Padding(
+              padding: const EdgeInsets.fromLTRB(70, 50, 70, 10),
               child: TextField(
-                decoration: InputDecoration(
+                controller: usernameController,
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Username or email',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 0, 70, 20),
+             Padding(
+              padding: const EdgeInsets.fromLTRB(70, 0, 70, 20),
               child: TextField(
+                controller: pwController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Password',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
             GestureDetector(
@@ -101,10 +173,14 @@ class _LoginState extends State<Login> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
-                );
+              
+                username = usernameController.text;
+                pw = pwController.text;
+
+                print(username);
+                print(pw);
+                login(context, username, pw);
+                
               },
               style: TextButton.styleFrom(
                   minimumSize: const Size(280, 0),
@@ -136,7 +212,7 @@ class _LoginState extends State<Login> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Register()),
+                      MaterialPageRoute(builder: (context) => Register()),
                     );
                   },
                 ),

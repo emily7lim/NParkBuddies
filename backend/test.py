@@ -11,6 +11,10 @@ def get_location(ip):
 
 # Format for JSON GET requests
 
+def home_test():
+    response = requests.get('https://hookworm-solid-tahr.ngrok-free.app/')
+    print(response.text)
+
 def test():
     _ = ['parks', 'facilities', 'profiles', 'bookings', 'reviews']
     for item in _:
@@ -257,3 +261,5 @@ def testweather():
 test3()
 
 #get_location('155.69.180.5')
+
+home_test()

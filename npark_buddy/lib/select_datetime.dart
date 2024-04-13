@@ -1,16 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:npark_buddy/confirm_booking.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'view_facility.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
-//main for debugging
-// void main() => runApp(const MaterialApp(
-//   home: ConfirmBooking(),
-// ));
+// main for debugging
+void main() => runApp(const MaterialApp(
+      home: SelectDateTime(
+        location: '',
+        facility: '',
+      ),
+    ));
 
-class SelectDateTime extends StatelessWidget {
+extension DateTimeFormat on DateTime {
+  String fullDate() {
+    return DateFormat.yMMMMd('en_US').format(
+        DateTime.fromMicrosecondsSinceEpoch((this).microsecondsSinceEpoch));
+  }
+}
+
+timeSlots(DateTime today, BuildContext context, location, facility, timing) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+    child: TextButton(
+      onPressed: () {
+        String dates = today.fullDate().toString().replaceAll(",", "");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ConfirmBooking(
+                    location: location,
+                    facility: facility,
+                    dates: dates.split(" ")[1] +
+                        " " +
+                        dates.split(" ")[0] +
+                        " " +
+                        dates.split(" ")[2],
+                    time: timing,
+                  )),
+        );
+      },
+      style: TextButton.styleFrom(
+          backgroundColor: const Color(0xFFE4E4E4),
+          minimumSize: const Size(105, 55),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      child: Text(
+        timing,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+      ),
+    ),
+  );
+}
+
+class SelectDateTime extends StatefulWidget {
   final String location;
+  final String facility;
 
-  const SelectDateTime({super.key, required this.location});
+  const SelectDateTime(
+      {super.key, required this.location, required this.facility});
+
+  @override
+  State<SelectDateTime> createState() =>
+      _SelectDateTimeState(location: location, facility: facility);
+}
+
+class _SelectDateTimeState extends State<SelectDateTime> {
+  final String location;
+  String facility;
+  DateTime today = DateTime.now();
+
+  void _onDaySelected(DateTime day, DateTime focusedDay) {
+    setState(() {
+      today = day;
+    });
+  }
+
+  @override
+  _SelectDateTimeState({required this.location, required this.facility});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +113,8 @@ class SelectDateTime extends StatelessWidget {
           child: Column(children: [
             const SizedBox(height: 20),
             Container(
-                width: 350,
-                height: 110,
+                width: 380,
+                height: 90,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                   color: const Color(0xFCF9F9E8),
@@ -49,46 +122,77 @@ class SelectDateTime extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: Text('BBQ Pits',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w900)),
+                      child: Container(
+                        height: 32,
+                        width: 366,
+                        child: AutoSizeText(
+                          facility,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      child: Text(location,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w900)),
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      child: Container(
+                        height: 30,
+                        child: AutoSizeText(location,
+                            style: const TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold)),
+                      ),
                     ),
                   ],
                 )),
-            Text('Available time slots'),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ConfirmBooking(
-                            location: location,
-                            time: 'time',
-                          )),
-                );
-              },
-              style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color(0xFCF9F9E8),
-                  minimumSize: const Size(100, 50),
-                  side: const BorderSide(color: Colors.black),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15))),
-              child: const Text(
-                '11',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Pick a date',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
+            ),
+            Container(
+              color: Colors.white,
+              width: 300,
+              height: 400,
+              child: TableCalendar(
+                focusedDay: today,
+                calendarStyle: const CalendarStyle(
+                    selectedDecoration: BoxDecoration(
+                        color: Color(0xFF2B512F), shape: BoxShape.circle),
+                    todayDecoration: BoxDecoration(
+                        color: Color(0xFF7DAF7E), shape: BoxShape.circle)),
+                firstDay: DateTime.utc(2010, 1, 1),
+                lastDay: DateTime.utc(2040, 1, 1),
+                headerStyle: const HeaderStyle(
+                    formatButtonVisible: false, titleCentered: true),
+                availableGestures: AvailableGestures.all,
+                selectedDayPredicate: (day) => isSameDay(day, today),
+                onDaySelected: _onDaySelected,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+              child: Text(
+                'Available time slots',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Wrap(
+              children: [
+                for (int i = 8; i < 20; i++) ...{
+                  if (i == 12) ...[
+                    timeSlots(today, context, location, facility, '$i:00 PM')
+                  ] else if (i < 12) ...[
+                    timeSlots(today, context, location, facility, '$i:00 AM')
+                  ] else ...[
+                    timeSlots(
+                        today, context, location, facility, '${i - 12}:00 PM')
+                  ]
+                },
+              ],
             ),
             FractionallySizedBox(
               child: Container(

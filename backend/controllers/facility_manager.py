@@ -34,13 +34,86 @@ class FacilityManager:
             park = [park for park in db.parks if park.get_name() == facility['park']][0]
             facility_lat = park.get_latitude()
             facility_lon = park.get_longitude()
-            facility['distance'] = FacilityManager.calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
+            facility['distance'] = calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
 
         sorted_facilities = sorted(facilities, key=lambda x: x['distance'])
+        # Drop the distance key from the dictionary
+        for facility in sorted_facilities:
+            facility.pop('distance')
         return sorted_facilities
 
     @staticmethod
-    def calculate_distance(lat1, lat2, lon1, lon2):
+    def filter_facilities(facility_type, user_lat, user_lon) -> list:
+        """ Method to filter facilities by type
+
+        Args:
+            facility_type (FacilityType): The type of facility
+            user_lat (float): The latitude of the user
+            user_lon (float): The longitude of the user
+
+        Returns:
+            list: A list of all facilities of the given type
+        """
+        facilities = []
+        for facility in db.facilities:
+            if facility.get_type() == facility_type:
+                facilities.append({'id': facility.get_id(),
+                                   'name': facility.get_name(),
+                                   'park': facility.get_park().get_name(),
+                                   'type': facility.get_type().value,
+                                   'avg_rating': facility.get_avg_rating(),
+                                   'num_ratings': facility.get_num_ratings()
+                                   })
+
+        # Sort facilities by distance from user
+        for facility in facilities:
+            park = [park for park in db.parks if park.get_name() == facility['park']][0]
+            facility_lat = park.get_latitude()
+            facility_lon = park.get_longitude()
+            facility['distance'] = calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
+
+        sorted_facilities = sorted(facilities, key=lambda x: x['distance'])
+        # Drop the distance key from the dictionary
+        for facility in sorted_facilities:
+            facility.pop('distance')
+        return sorted_facilities
+
+    @staticmethod
+    def view_reviews(park_name, facility_name) -> list:
+        """ Method to view reviews of a facility
+
+        Args:
+            park_name (string): The name of the park
+            facility_name (string): The name of the facility
+
+        Returns:
+            list: A list of reviews of the facility
+        """
+        reviews = []
+        # Reviews does not have park and facility infomation, need to query booking first
+        park = [park for park in db.parks if park.get_name() == park_name][0]
+        if park is None:
+            return {'error': 'Park not found'}
+        facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
+        if facility is None:
+            return {'error': 'Facility not found'}
+        for booking in db.bookings:
+            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
+                booking_id = booking.get_id()
+                if booking is None:
+                    return {'error': 'Booking not found'}
+                for review in db.reviews:
+                    if review.get_id() == booking_id:
+                        reviews.append({'rating': review.get_rating(),
+                                        'comment': review.get_comment()
+                                        })
+                        break
+
+        # Sort reviews by rating, highest to lowest
+        sorted_reviews = sorted(reviews, key=lambda x: x['rating'], reverse=True)
+        return sorted_reviews
+
+def calculate_distance(lat1, lat2, lon1, lon2):
         """ Method to calculate distance between two points
 
         Args:
@@ -73,64 +146,3 @@ class FacilityManager:
         distance = R * c
 
         return distance
-
-    @staticmethod
-    def filter_facilities(facility_type, user_lat, user_lon) -> list:
-        """ Method to filter facilities by type
-
-        Args:
-            facility_type (FacilityType): The type of facility
-            user_lat (float): The latitude of the user
-            user_lon (float): The longitude of the user
-
-        Returns:
-            list: A list of all facilities of the given type
-        """
-        facilities = []
-        for facility in db.facilities:
-            if facility.get_type() == facility_type:
-                facilities.append({'id': facility.get_id(),
-                                   'name': facility.get_name(),
-                                   'park': facility.get_park().get_name(),
-                                   'type': facility.get_type().value,
-                                   'avg_rating': facility.get_avg_rating(),
-                                   'num_ratings': facility.get_num_ratings()
-                                   })
-
-        # Sort facilities by distance from user
-        for facility in facilities:
-            park = [park for park in db.parks if park.get_name() == facility['park']][0]
-            facility_lat = park.get_latitude()
-            facility_lon = park.get_longitude()
-            facility['distance'] = FacilityManager.calculate_distance(user_lat, facility_lat, user_lon, facility_lon)
-
-        sorted_facilities = sorted(facilities, key=lambda x: x['distance'])
-        return sorted_facilities
-
-    @staticmethod
-    def view_reviews(park_name, facility_name) -> list:
-        """ Method to view reviews of a facility
-
-        Args:
-            park_name (string): The name of the park
-            facility_name (string): The name of the facility
-
-        Returns:
-            list: A list of reviews of the facility
-        """
-        reviews = []
-        # Reviews does not have park and facility infomation, need to query booking first
-        park = [park for park in db.parks if park.get_name() == park_name][0]
-        facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
-        for booking in db.bookings:
-            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
-                booking_id = booking.get_id()
-                for review in db.reviews:
-                    if review.get_id() == booking_id:
-                        reviews.append({'rating': review.get_rating(),
-                                        'comment': review.get_comment()
-                                        })
-
-        # Sort reviews by rating, highest to lowest
-        sorted_reviews = sorted(reviews, key=lambda x: x['rating'], reverse=True)
-        return sorted_reviews

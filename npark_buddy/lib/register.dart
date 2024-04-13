@@ -2,8 +2,93 @@ import 'package:flutter/material.dart';
 import 'package:npark_buddy/login.dart';
 import 'allStyle.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> register(BuildContext context, username, String email, String password) async {
+  const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/create'; //server
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': username,
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, then go back to home page
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+      
+    } else {
+      //show some dialog, also need some controller to format the input
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Registration Failed"),
+            content: const Text("Username already exists"),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } catch (e) {
+    print("ERROR REGISTER");
+  }
+}
+
+int checkInput(context, username, email, password){
+
+  if (username == '' || email == '' || password == ''){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Registration Failed"),
+            content: const Text("Empty Fields!"),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    return 0;
+  }
+  return 1;
+}
+
 class Register extends StatelessWidget {
-  const Register({super.key});
+  Register({super.key});
+
+  final usernameController =TextEditingController();
+  final emailController = TextEditingController();
+  final pwController =TextEditingController();
+
+  var username = '';
+  var email = '';
+  var password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +111,7 @@ class Register extends StatelessWidget {
             ),
           ],
         ),
-        backgroundColor: Colors.green[900],
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -51,38 +136,41 @@ class Register extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 20, 70, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 20, 70, 10),
               child: TextField(
-                decoration: InputDecoration(
+                controller: usernameController,
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Username',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 0, 70, 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 0, 70, 10),
               child: TextField(
-                decoration: InputDecoration(
+                controller: emailController,
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'E-mail',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(70, 0, 70, 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 0, 70, 20),
               child: TextField(
+                controller: pwController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: TextFieldStyle.unclickedTF,
                   focusedBorder: TextFieldStyle.clickedTF,
                   hintText: 'Password',
                 ),
-                style: TextStyle(height: 0.1),
+                style: const TextStyle(height: 0.1),
               ),
             ),
             const Padding(
@@ -98,6 +186,13 @@ class Register extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
+                username = usernameController.text;
+                email = emailController.text;
+                password = pwController.text;
+                if (checkInput(context, username, email, password) == 1){
+                  print('success');
+                  // register(context, username, email, password);
+                }                
                 // Navigator.push(
                 // context,
                 // MaterialPageRoute(builder: (context) => Home()),

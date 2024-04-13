@@ -67,13 +67,219 @@ def log_responses(response):
 # Root route
 
 @app.route('/')
-def hello():
+def hello() -> str:
     """ Method to say hello
 
     Returns:
-        string: This is the server for NParkBuddy
+        str: Hello message
     """
-    return 'This is the server for NParkBuddy'
+    # Check if user agent is from a browser
+    user_agent = request.headers.get('User-Agent', '').lower()
+    common_browsers = ['mozilla', 'chrome', 'safari', 'firefox', 'opera', 'edge']
+
+    if any(common_browsers in user_agent for common_browsers in common_browsers):
+        page = render_homepage()
+    else:
+        page = "Hello! Welcome to the NParkBuddy server!"
+
+    return page
+
+def render_homepage() -> str:
+    """ Method to render the homepage
+
+    Returns:
+        str: HTML content for the homepage
+    """
+    endpoints_summary = f"""
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>NParkBuddy Server</title>
+            <style>
+                body {{
+                    background-color: #2B512F;
+                    color: white;
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }}
+                #header {{
+                    display: flex;
+                    align-items: center;
+                    margin: 10px;
+                }}
+                #logo {{
+                    width: 50px;
+                    height: auto;
+                }}
+                #title-container {{
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 15px;
+                }}
+                #content {{
+                    margin: 10px;
+                }}
+                h1 {{
+                    margin: 0;
+                    padding: 0;
+                    font-size: 24px;
+                }}
+                h2 {{
+                    margin: 0;
+                    padding: 0;
+                    font-size: 16px;
+                }}
+                table {{
+                    color: white;
+                    width: 100%;
+                    border-collapse: collapse;
+                }}
+                a {{
+                    color: #ADD8E6;
+                }}
+                caption {{
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }}
+                th, td {{
+                    padding: 8px;
+                    text-align: left;
+                    border-bottom: 1px solid white;
+                }}
+            </style>
+        </head>
+        <body>
+            <div id="header">
+                <img src="/static/favicon.ico" alt="NParkBuddy Logo">
+                <div id="title-container">
+                    <h1>NParkBuddy Server</h1>
+                </div>
+            </div>
+            <div id="content">
+            <p>Welcome to the NParkBuddy server!</p>
+            <p>Code for the NParkBuddy server can be found <a href="https://github.com/NParkBuddies/testing" target="_blank">here</a>.</p>
+            <p>Endpoints for the NParkBuddy server are as follows:</p>
+            </div>
+            <table>
+                <caption>Endpoints Summary</caption>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><a href='/' target='_blank'>/</a></td>
+                    <td>Root endpoint</td>
+                    <td></td>
+                </tr>
+                    <td>POST</td>
+                    <td>/profiles/create</td>
+                    <td>Creates a new user account>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/profiles/login</td>
+                    <td>Logs in a user</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/profiles/&lt;username&gt;/change_password</td>
+                    <td>Changes a user's password</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><a href='/parks' target='_blank'>/parks</a></td>
+                    <td>Gets all parks</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/parks/&lt;park_name&gt;</td>
+                    <td>Gets a park by name</td>
+                    <td>Example:<a href='/parks/East_Coast_Park' target='_blank'>/parks/East_Coast_Park</a></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/bookings</td>
+                    <td>Creates a booking</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/timeslots/&lt;park_name&gt;/&lt;facility_name&gt;</td>
+                    <td>Gets booked timeslots</td>
+                    <td>Example:<a href='/timeslots/East_Coast_Park/BBQ_Pit_47' target='_blank'>/timeslots/East_Coast_Park/BBQ_Pit_47</a></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><a href='/weather' target='_blank'>/weather</a></td>
+                    <td>Gets weather warning</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/profiles/&lt;username&gt;/bookings</td>
+                    <td>Gets all bookings by profile</td>
+                    <td>Example:<a href='/profiles/nparkadmin/bookings' target='_blank'>/profiles/nparkadmin/bookings</a></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/bookings/cancel</td>
+                    <td>Cancels a booking</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/reviews</td>
+                    <td>Reviews a booking</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><a href='/facilities' target='_blank'>/facilities</a></td>
+                    <td>Gets all facilities</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/facilities/filter</td>
+                    <td>Filters facilities</td>
+                    <td>Example:<a href='/facilities/filter?type=BBQ_pit' target='_blank'>/facilities/filter?type=BBQ_pit</a></td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/reviews/&lt;park_name&gt;/&lt;facility_name&gt;</td>
+                    <td>Views reviews</td>
+                    <td>Example:<a href='/reviews/East_Coast_Park/BBQ_Pit_47' target='_blank'>/reviews/East_Coast_Park/BBQ_Pit_47</a></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/profiles/&lt;username&gt;/change_username</td>
+                    <td>Changes a user's username</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/profiles/&lt;username&gt;/change_email</td>
+                    <td>Changes a user's email</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/profiles/&lt;username&gt;/delete_account</td>
+                    <td>Deletes a user's account</td>
+                    <td></td>
+                </tr>
+        </body>
+    </html>"""
+    return endpoints_summary
 
 # Login routes
 
@@ -95,16 +301,17 @@ def create_account() -> Response:
     email = payload.get('email')
     password = payload.get('password')
 
-    print("username email password", username, email, password)
-
     # Check if all required fields are present
     if username is None or email is None or password is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     profile = LoginManager.create_account(username, email, password)
     if 'error' in profile:
+        logger.error(profile['error'])
         return jsonify({'error': profile['error']}), 400
     else:
+        logger.info('Profile created successfully: %s', profile['username'], profile['email'])
         return jsonify({'message': 'Profile created successfully', 'profile': profile}), 200
 
 @app.route('/profiles/login', methods=['POST'])
@@ -129,8 +336,10 @@ def login() -> Response:
 
     login = LoginManager.login(user_identifier, password)
     if 'error' in login:
+        logger.error(login['error'])
         return jsonify({'error': login['error']}), 400
     else:
+        logger.info('Login successful: %s', login['username'], login['email'])
         return jsonify(login), 200
 
 @app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
@@ -151,12 +360,15 @@ def change_password(user_identifier) -> Response:
 
     # Check if all required fields are present
     if user_identifier is None or new_password is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = LoginManager.change_password(user_identifier, new_password)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
+        logger.info('Password changed successfully: %s', result['username'], result['email'])
         return jsonify(result), 200
 
 # Home routes
@@ -181,10 +393,12 @@ def get_park(park_name) -> Response:
     Returns:
         Response: JSON response containing the park
     """
+    park_name = park_name.replace('_', ' ').title()
     park = HomeManager.select_park(park_name)
     if park:
         return jsonify(park)
     else:
+        logger.error('Park not found: %s', park_name)
         return jsonify({'error': 'Park not found'})
 
 @app.route('/bookings', methods=['POST'])
@@ -221,6 +435,28 @@ def create_booking() -> Response:
         logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
 
+@app.route('/timeslots/<string:park_name>/<string:facility_name>', methods=['GET'])
+def get_booked_timeslots(park_name, facility_name) -> Response:
+    """ Method to get booked timeslots
+
+    Args:
+        park_name (string): The name of the park
+        facility_name (string): The name of the facility
+
+    Returns:
+        Response: JSON response with booked timeslots
+    """
+    # Convert park name and facility name to title case from underscore case
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
+    timeslots = HomeManager.get_booked_timeslots(park_name, facility_name)
+    if 'error' in timeslots:
+        logger.error(timeslots['error'])
+        return jsonify({'error': timeslots['error']}), 400
+    else:
+        logger.info('Booked timeslots retrieved successfully: %s %s', park_name, facility_name)
+        return jsonify(timeslots)
+
 @app.route('/weather', methods=['GET'])
 def get_weather_warning() -> Response:
     """ Method to get weather warning
@@ -242,41 +478,49 @@ def get_weather_warning() -> Response:
     global weather_instance
     weather_manager = WeatherManager(weather_instance)
     region = get_region(user_lat, user_lng)
+    logger.info('Fetching weather warning for region: %s', region)
     if region is None:
         weather_warning = weather_manager.send_weather_warning('central')
     else:
         weather_warning = weather_manager.send_weather_warning(region)
-    return jsonify({'message': weather_warning})
+
+    # Return when no error warning
+    if weather_warning is None:
+        logger.info('No weather warning')
+        return jsonify({'message': 'No weather warning'}), 200
+    else:
+        logger.info('Weather warning: %s', weather_warning)
+        return jsonify({'message': weather_warning}), 200
 
 def get_region(lat, lng) -> str:
-        """ Method to get the region based on the latitude and longitude
+    """ Method to get the region based on the latitude and longitude
 
-        Args:
-            lat (float): Latitude
-            lng (float): Longitude
+    Args:
+        lat (float): Latitude
+        lng (float): Longitude
 
-        Returns:
-            str: The region based on the latitude and longitude
-        """
-        # Check if the coordinates are outside the bounds of Singapore
-        if not (1.158 <= lat <= 1.472 and 103.600 <= lng <= 104.090):
+    Returns:
+        str: The region based on the latitude and longitude
+    """
+    # Check if the coordinates are outside the bounds of Singapore
+    if not (1.158 <= lat <= 1.472 and 103.600 <= lng <= 104.090):
+        return None
+
+    # Determine the region based on longitude
+    if lng <= 103.762:
+        return 'west' if lat <= 1.366 else 'None'
+    elif lng <= 103.897:
+        # In this range, the region depends on latitude
+        if lat < 1.260:
             return None
-
-        # Determine the region based on longitude
-        if lng <= 103.762:
-            return 'west' if lat <= 1.366 else 'None'
-        elif lng <= 103.897:
-            # In this range, the region depends on latitude
-            if lat < 1.260:
-                return None
-            elif lat <= 1.338:
-                return 'south'
-            elif lat <= 1.393:
-                return 'central'
-            else:
-                return 'north'
+        elif lat <= 1.338:
+            return 'south'
+        elif lat <= 1.393:
+            return 'central'
         else:
-            return 'east'
+            return 'north'
+    else:
+        return 'east'
 
 # Bookings routes
 
@@ -291,7 +535,12 @@ def get_bookings(username) -> Response:
         Response: JSON response containing all bookings
     """
     bookings = BookingsManager.view_bookings(username)
-    return jsonify(bookings)
+    if 'error' in bookings:
+        logger.error(bookings['error'])
+        return jsonify({'error': bookings['error']}), 400
+    else:
+        logger.info('Bookings retrieved successfully: %s', username)
+        return jsonify(bookings)
 
 @app.route('/bookings/cancel', methods=['POST'])
 def cancel_booking():
@@ -309,13 +558,16 @@ def cancel_booking():
 
     # Check if all required fields are present
     if username is None or park is None or facility is None or datetime is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     booking = BookingsManager.cancel_booking(username, park, facility, datetime)
-    if booking:
-        return jsonify({'message': 'Booking cancelled', 'booking': booking}), 200
+    if 'error' in booking:
+        logger.error(booking['error'])
+        return jsonify({'error': booking['error']}), 40
     else:
-        return jsonify({'error': 'Booking not found'}), 404
+        logger.info('Booking cancelled successfully: %s', booking['id'])
+        return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200
 
 @app.route('/reviews', methods=['POST'])
 def review_booking():
@@ -335,13 +587,16 @@ def review_booking():
 
     # Check if all required fields are present
     if username is None or park is None or facility is None or datetime is None or rating is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     review = BookingsManager.review_booking(username, park, facility, datetime, rating, comment)
-    if review:
-        return jsonify({'message': 'Review submitted', 'review': review}), 200
+    if 'error' in review:
+        logger.error(review['error'])
+        return jsonify({'error': review['error']}), 404
     else:
-        return jsonify({'error': 'Booking not found'}), 404
+        logger.info('Review added successfully: %s', review['id'])
+        return jsonify({'message': 'Review added successfully', 'review': review}), 200
 
 # Facility routes
 
@@ -402,7 +657,13 @@ def filter_facilities():
         json: list of facilities
     """
     type = request.args.get('type')
-    facility_type = convert_to_enum(type)
+
+    try:
+        facility_type = convert_to_enum(type)
+    except Exception:
+        logger.error('Invalid facility type provided: %s', type)
+        return jsonify({'error': 'Invalid facility type'}), 400
+
     lat = request.args.get('lat')
     lon = request.args.get('lon')
 
@@ -431,9 +692,13 @@ def view_reviews(park_name, facility_name):
     # Convert park name and facility name to title case from underscore case
     park_name = park_name.replace('_', ' ').title()
     facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
-    print(park_name, facility_name)
     reviews = FacilityManager.view_reviews(park_name, facility_name)
-    return jsonify(reviews)
+    if 'error' in reviews:
+        logger.error(reviews['error'])
+        return jsonify({'error': reviews['error']}), 400
+    else:
+        logger.info('Reviews retrieved successfully: %s %s', park_name, facility_name)
+        return jsonify(reviews), 200
 
 # Profile routes
 
@@ -455,13 +720,16 @@ def change_username(username) -> Response:
 
     # Check if all required fields are present
     if old_username is None or new_username is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.change_username(old_username, new_username)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        logger.info('Username changed successfully: %s', result['username'])
+        return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
 def change_email(username) -> Response:
@@ -482,13 +750,16 @@ def change_email(username) -> Response:
 
     # Check if all required fields are present
     if old_email is None or new_email is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.change_email(old_email, new_email)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        logger.info('Email changed successfully: %s', result['email'])
+        return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
 
 @staticmethod
 @app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
@@ -501,19 +772,18 @@ def delete_account(user_identifier) -> Response:
     Returns:
         Response: JSON response with status of the account deletion
     """
-    # Extract data from request payload
-    #payload = request.json
-    #user_identifier = payload.get('user_identifier')
-
     # Check if all required fields are present
     if user_identifier is None:
+        logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
     result = ProfileManager.delete_account(user_identifier)
     if 'error' in result:
+        logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        return jsonify(result), 200
+        logger.info('Account deleted successfully: %s', result['username'])
+        return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
 

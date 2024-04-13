@@ -16,7 +16,7 @@ file_handler.setFormatter(log_format)
 
 # Configure logger
 def prepare_logger():
-    logger = logging.getLogger('__name__')
+    logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
     if not logger.hasHandlers():

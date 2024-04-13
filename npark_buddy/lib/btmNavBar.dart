@@ -1,16 +1,23 @@
 
 import 'package:flutter/material.dart';
-import 'package:npark_buddy/view_facility.dart';
+import 'package:npark_buddy/facilities.dart';
 import 'profile.dart';
 import 'home.dart';
+import 'bookings.dart';
 
 /// Flutter code sample for [BottomNavigationBar].
 
 void main() => runApp(const BottomNavigationBarExampleApp());
 
-class BottomNavigationBarExampleApp extends StatelessWidget {
+class BottomNavigationBarExampleApp extends StatefulWidget {
   const BottomNavigationBarExampleApp({super.key});
 
+  @override
+  State<BottomNavigationBarExampleApp> createState() =>
+      _BottomNavigationBarExampleApp();
+}
+
+class _BottomNavigationBarExampleApp extends State<BottomNavigationBarExampleApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -34,29 +41,15 @@ class _BottomNavigationBarExampleState
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    Bookings(),
+    Facilities(location: ''),
     Profile(),
   ];
 
   void _onItemTapped(int index) {
-    if (index == 2) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ViewFacility(location: '',)),
-    );
-  } 
-  else {
     setState(() {
       _selectedIndex = index;
     });
-  }
   }
 
   @override
