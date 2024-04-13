@@ -143,10 +143,11 @@ class _BookingsState extends State<Bookings> {
         backgroundColor: const Color(0xFFFEFBEA),
         body: SingleChildScrollView(
             child: Column(
+              
               children: [
                 const Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                  child: Text('Current Booking',
+                  child: Text('Current Bookings',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w900,
@@ -173,7 +174,7 @@ class _BookingsState extends State<Bookings> {
                                     color: Color(0xFF2B512F),
                                   ),
                                   child: Container(
-                                    padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -222,7 +223,7 @@ class _BookingsState extends State<Bookings> {
                                             },
                                             style: OutlinedButton.styleFrom(
                                               padding: const EdgeInsets.symmetric(
-                                                  horizontal: 120, vertical: 6),
+                                                  horizontal: 130, vertical: 6),
                                               backgroundColor: Colors.red[900],
                                               side: const BorderSide(
                                                   color: Colors.red),
@@ -232,7 +233,7 @@ class _BookingsState extends State<Bookings> {
                                             ),
                                             child: const Text('Cancel',
                                                 style: TextStyle(
-                                                  fontSize: 28,
+                                                  fontSize: 20,
                                                   fontWeight: FontWeight.w800,
                                                   color: Colors.white,
                                                 )),
@@ -253,7 +254,7 @@ class _BookingsState extends State<Bookings> {
                   },
                 ),
                 const Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(10, 25, 0, 0),
                     child: Center(
                       child: Text('Past Bookings',
                           style: TextStyle(
@@ -274,10 +275,10 @@ class _BookingsState extends State<Bookings> {
                             i < snapshot.data!.facility.length;
                             i++) ...{
                               if(snapshot.data!.cancel[i]==false)...[//todo
-                                Text('todo Checked', style: const TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
+                                const Text('todo Checked', style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
                                 const Divider()
                               ]else...[
-                                Text('todo Not Checked', style: const TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
+                                const Text('todo Not Checked', style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
                                 const Divider()
                               ],
                               OutlinedButton(
