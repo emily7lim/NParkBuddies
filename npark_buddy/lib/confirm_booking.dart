@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:npark_buddy/btmNavBar.dart';
 import 'select_datetime.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -122,10 +123,29 @@ class ConfirmBooking extends StatelessWidget {
                 height: 50,
                 child: OutlinedButton(
                   onPressed: (){
-                    // Navigator.push(
-                      // context,
-                      // MaterialPageRoute(builder: (context) => SelectDateTime(location: location)),
-                    // );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Success!"),
+                          content: Text("Your booking has been confirmed."),
+                          backgroundColor: Color(0xFCF9F9E8),
+                          surfaceTintColor: Colors.white,
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("Ok", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.green[900],

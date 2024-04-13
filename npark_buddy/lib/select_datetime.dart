@@ -20,9 +20,48 @@ extension DateTimeFormat on DateTime {
   }
 }
 
+timeSlots(DateTime today, BuildContext context, location, facility, timing) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+    child: TextButton(
+      onPressed: () {
+        String dates = today.fullDate().toString().replaceAll(",", "");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ConfirmBooking(
+                    location: location,
+                    facility: facility,
+                    dates: dates.split(" ")[1] +
+                        " " +
+                        dates.split(" ")[0] +
+                        " " +
+                        dates.split(" ")[2],
+                    time: timing,
+                  )),
+        );
+      },
+      style: TextButton.styleFrom(
+          backgroundColor: const Color(0xFFE4E4E4),
+          minimumSize: const Size(105, 55),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      child: Text(
+        timing,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+      ),
+    ),
+  );
+}
+
 class SelectDateTime extends StatefulWidget {
   final String location;
   final String facility;
+
   const SelectDateTime(
       {super.key, required this.location, required this.facility});
 
@@ -35,6 +74,7 @@ class _SelectDateTimeState extends State<SelectDateTime> {
   final String location;
   String facility;
   DateTime today = DateTime.now();
+
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
@@ -108,7 +148,10 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                 )),
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Pick a date', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+              child: Text(
+                'Pick a date',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
             ),
             Container(
               color: Colors.white,
@@ -132,123 +175,21 @@ class _SelectDateTimeState extends State<SelectDateTime> {
             ),
             const Padding(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-              child: Text('Available time slots',style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+              child: Text(
+                'Available time slots',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
             ),
             Wrap(
               children: [
                 for (int i = 8; i < 20; i++) ...{
-                  //how to put TextButton into one fn or should I stful it
                   if (i == 12) ...[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: TextButton(
-                        onPressed: () {
-                          String dates =
-                              today.fullDate().toString().replaceAll(",", "");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ConfirmBooking(
-                                      location: location,
-                                      facility: facility,
-                                      dates: dates.split(" ")[1] +
-                                          " " +
-                                          dates.split(" ")[0] +
-                                          " " +
-                                          dates.split(" ")[2],
-                                      time: i.toString() + ':00 PM',
-                                    )),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xFFE4E4E4),
-                            minimumSize: const Size(105, 55),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: Text(
-                          i.toString() + ':00 PM',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
+                    timeSlots(today, context, location, facility, '$i:00 PM')
                   ] else if (i < 12) ...[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: TextButton(
-                        onPressed: () {
-                          String dates =
-                              today.fullDate().toString().replaceAll(",", "");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ConfirmBooking(
-                                      location: location,
-                                      facility: facility,
-                                      dates: dates.split(" ")[1] +
-                                          " " +
-                                          dates.split(" ")[0] +
-                                          " " +
-                                          dates.split(" ")[2],
-                                      time: i.toString() + ':00 AM',
-                                    )),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xFFE4E4E4),
-                            minimumSize: const Size(105, 55),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: Text(
-                          i.toString() + ':00 AM',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
+                    timeSlots(today, context, location, facility, '$i:00 AM')
                   ] else ...[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                      child: TextButton(
-                        onPressed: () {
-                          String dates =
-                              today.fullDate().toString().replaceAll(",", "");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ConfirmBooking(
-                                      location: location,
-                                      facility: facility,
-                                      dates: dates.split(" ")[1] +
-                                          " " +
-                                          dates.split(" ")[0] +
-                                          " " +
-                                          dates.split(" ")[2],
-                                      time: (i - 12).toString() + ':00 PM',
-                                    )),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: const Color(0xFFE4E4E4),
-                            minimumSize: const Size(105, 55),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        child: Text(
-                          (i - 12).toString() + ':00 PM',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
+                    timeSlots(
+                        today, context, location, facility, '${i - 12}:00 PM')
                   ]
                 },
               ],

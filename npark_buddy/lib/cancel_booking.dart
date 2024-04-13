@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'btmNavBar.dart';
 
 //main for debugging
 // void main() => runApp(const MaterialApp(
@@ -111,7 +112,30 @@ class CancelBooking extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Success!"),
+                          content: Text("Your booking has been cancelled."),
+                          backgroundColor: Color(0xFCF9F9E8),
+                          surfaceTintColor: Colors.white,
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text("Ok", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.red[900],
                     side: const BorderSide(color: Color(0x008b0000)),
