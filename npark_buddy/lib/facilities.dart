@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:npark_buddy/btmNavBar.dart';
 import 'package:flutter/services.dart';
@@ -153,7 +154,7 @@ class _selectFacilityState extends State<selectFacility> {
             const SizedBox(height: 20),
             const Text(
               'Facilities',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             FutureBuilder<List<Facility>>(
@@ -164,20 +165,46 @@ class _selectFacilityState extends State<selectFacility> {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  return Column(
+                 return Column(
                     children: snapshot.data!.map((facility) {
-                      return ListTile(
-                        title: Text(facility.name),
-                        subtitle: Text('${facility.park}, Avg Rating: ${facility.avgRating}'),
-                        onTap: () {
-                          // Handle facility tap
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomNavigationBarExampleApp(),
-                            ),
-                          );
-                        },
+                      return Container(
+                        
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black), // Add border
+                          borderRadius: BorderRadius.circular(12), // Add border radius
+                        ),
+                        margin: EdgeInsets.symmetric(vertical: 5), // Add margin for spacing
+                        child: ListTile(
+                          title: Text(facility.name, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                          subtitle: Row(
+                            children: [
+                              Text('${facility.park}',
+                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),                        
+                                ),
+                              Spacer(),
+                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                 children: [
+                                   Text('${facility.avgRating}', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                                   Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                  size: 30,
+                                ),
+                                 ],
+                               ),
+                            ],
+                          ),
+                          onTap: () {
+                            // Handle facility tap
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BottomNavigationBarExampleApp(),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     }).toList(),
                   );
