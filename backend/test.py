@@ -109,8 +109,8 @@ def test3():
 def testlogin():
     url = 'http://localhost:5000/profiles/login'
 
-    user_identifier = 'kkhoo123'
-    password = 'kkhoo123'
+    user_identifier = 'nparkadmin'
+    password = 'password12345!'
 
     print(f"Logging in with username: {user_identifier}, password: {password}")
 
@@ -248,6 +248,22 @@ def testweather():
     else:
         print(f"Error: {response.status_code}")
 
+def find_no_current_booking():
+    profiles = requests.get('http://localhost:5000/profiles')
+    usernames = []
+    for profile in profiles.json():
+        usernames.append(profile['username'])
+    for username in usernames:
+        bookings = requests.get(f'http://localhost:5000/profiles/{username}/bookings').json()
+        current_bookings = bookings.get('current_bookings')
+        past_bookings = bookings.get('past_bookings')
+        if current_bookings is None:
+            if past_bookings is not None:
+                print(username)
+
+
+find_no_current_booking()
+
 #test2()
 #test3()
 #testlogin()
@@ -258,8 +274,8 @@ def testweather():
 #test_booking()
 #location = get_user_location()
 #print(location['latitude'], location['longitude'])
-test3()
+#test3()
 
 #get_location('155.69.180.5')
 
-home_test()
+#home_test()
