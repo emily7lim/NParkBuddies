@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:npark_buddy/btmNavBar.dart';
 import 'package:flutter/services.dart';
+import 'package:npark_buddy/view_review.dart';
 
 void main() => runApp(MaterialApp(
       home: selectFacility(),
@@ -197,12 +198,15 @@ class _selectFacilityState extends State<selectFacility> {
                           ),
                           onTap: () {
                             // Handle facility tap
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavigationBarExampleApp(),
-                              ),
-                            );
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ViewReviews(
+                                    parkName: facility.park,
+                                    facilityName: facility.name,
+                                  ),
+                                ),
+                              );
                           },
                         ),
                       );
