@@ -65,7 +65,7 @@ class HomeManager:
             if booking.get_park() == park and booking.get_facility() == facility and booking.get_datetime() == datetime and not booking.get_cancelled():
                 return {'error': 'Time slot not available'}
 
-        booking = Booking(id=id, booker=username, datetime=datetime, cancelled=False, park=park, facility=facility)
+        booking = Booking(id=id, booker=user.get_id(), datetime=datetime, cancelled=False, park=park, facility=facility)
         user.set_bookings(booking)
         db.bookings.append(booking)
         bookingDB = BookingDB(id=booking.get_id(), booker_id=user.get_id(), datetime=datetime, cancelled=False, park_id=park.get_id(), facility_id=facility.get_id())

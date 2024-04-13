@@ -555,19 +555,25 @@ def cancel_booking():
     # Extract data from request payload
     payload = request.json
     username = payload.get('username')
-    park = payload.get('park')
-    facility = payload.get('facility')
+    park_name = payload.get('park')
+    facility_name = payload.get('facility')
     datetime = payload.get('datetime')
 
+    # Convert park name and facility name to title case from underscore case
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
+
     # Check if all required fields are present
-    if username is None or park is None or facility is None or datetime is None:
+    if username is None or park_name is None or facility_name is None or datetime is None:
         logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
-    booking = BookingsManager.cancel_booking(username, park, facility, datetime)
+    booking = BookingsManager.cancel_booking(username, park_name, facility_name, datetime)
+
+    # Check if 'error' key is present in the booking dictionary
     if 'error' in booking:
         logger.error(booking['error'])
-        return jsonify({'error': booking['error']}), 40
+        return jsonify({'error': booking['error']}), 404
     else:
         #logger.info('Booking cancelled successfully: %s', booking['id'])
         return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200

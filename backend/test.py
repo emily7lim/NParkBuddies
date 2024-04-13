@@ -42,13 +42,40 @@ def test_booking():
     username = 'nparkadmin'
     park = 'East Coast Park'
     facility = 'BBQ Pit 1'
-    booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0)
+    booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0).strftime('%a, %d %b %Y %H:%M:%S GMT')
+
+    print(booking_datetime)
 
     payload = {
         'username': username,
         'park': park,
         'facility': facility,
-        'datetime': booking_datetime.isoformat()
+        'datetime': booking_datetime
+    }
+
+    response = requests.post(url, json=payload)
+
+    if response.status_code == 200:
+        booking_info = json.loads(response.text)
+        print(booking_info)
+    else:
+        print(f"Error: {response.status_code}")
+
+def test_booking_cancel():
+    url = 'http://localhost:5000/bookings/cancel'
+
+    username = 'diontest'
+    park = 'Bishan-Ang Mo Kio Park'
+    facility = 'Ficus Green'
+    #booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0).strftime('%a, %d %b %Y %H:%M:%S GMT')
+    booking_datetime = "Sat, 20 Apr 2024 15:00:00 GMT"
+    print(booking_datetime)
+
+    payload = {
+        'username': username,
+        'park': park,
+        'facility': facility,
+        'datetime': booking_datetime
     }
 
     response = requests.post(url, json=payload)
@@ -272,7 +299,7 @@ def find_no_current_booking():
 #testchangeusername()
 #testchangeemail()
 #testdeleteaccount()
-#test_booking()
+test_booking_cancel()
 #location = get_user_location()
 #print(location['latitude'], location['longitude'])
 #test3()
@@ -281,6 +308,6 @@ def find_no_current_booking():
 
 #home_test()
 
-dt = "Sat, 13 Apr 2024 00:00:00 GMT"
+#dt = "Sat, 13 Apr 2024 00:00:00 GMT"
 
-print(datetime.datetime.strptime(dt, '%a, %d %b %Y %H:%M:%S %Z'))
+#print(datetime.datetime.strptime(dt, '%a, %d %b %Y %H:%M:%S %Z'))
