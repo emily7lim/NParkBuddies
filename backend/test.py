@@ -39,15 +39,15 @@ def test2():
 def test_booking():
     url = 'http://localhost:5000/bookings'
 
-    user_id = 2
-    park_id = 4
-    facility_id = 15
+    username = 'nparkadmin'
+    park = 'East Coast Park'
+    facility = 'BBQ Pit 1'
     booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0)
 
     payload = {
-        'user_id': user_id,
-        'park_id': park_id,
-        'facility_id': facility_id,
+        'username': username,
+        'park': park,
+        'facility': facility,
         'datetime': booking_datetime.isoformat()
     }
 
@@ -258,11 +258,12 @@ def find_no_current_booking():
         current_bookings = bookings.get('current_bookings')
         past_bookings = bookings.get('past_bookings')
         if current_bookings is None:
+            print("No current bookings")
             if past_bookings is not None:
                 print(username)
 
 
-find_no_current_booking()
+#find_no_current_booking()
 
 #test2()
 #test3()
@@ -279,3 +280,7 @@ find_no_current_booking()
 #get_location('155.69.180.5')
 
 #home_test()
+
+dt = "Sat, 13 Apr 2024 00:00:00 GMT"
+
+print(datetime.datetime.strptime(dt, '%a, %d %b %Y %H:%M:%S %Z'))
