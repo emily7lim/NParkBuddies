@@ -61,7 +61,7 @@ def log_responses(response):
     Returns:
         response: response object
     """
-    logger.info('Response: %s - Status Code: %s', request.method, response.status_code)
+    logger.info('Response: %s %s - Status Code: %s', request.method, request.path, response.status_code)
     return response
 
 # Root route
@@ -311,7 +311,7 @@ def create_account() -> Response:
         logger.error(profile['error'])
         return jsonify({'error': profile['error']}), 400
     else:
-        logger.info('Profile created successfully: %s', profile['username'], profile['email'])
+        logger.info('Profile created successfully: %s', profile['username'])
         return jsonify({'message': 'Profile created successfully', 'profile': profile}), 200
 
 @app.route('/profiles/login', methods=['POST'])
@@ -339,7 +339,7 @@ def login() -> Response:
         logger.error(login['error'])
         return jsonify({'error': login['error']}), 400
     else:
-        logger.info('Login successful: %s', login['username'], login['email'])
+        #logger.info('Login successful: %s', login['username'])
         return jsonify(login), 200
 
 @app.route('/profiles/<string:user_identifier>/change_password', methods=['POST'])
@@ -368,7 +368,7 @@ def change_password(user_identifier) -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        logger.info('Password changed successfully: %s', result['username'], result['email'])
+        #logger.info('Password changed successfully: %s', result['username'])
         return jsonify(result), 200
 
 # Home routes
@@ -432,7 +432,7 @@ def create_booking() -> Response:
         logger.error(booking['error'])
         return jsonify({'error': booking['error']}), 400
     else:
-        logger.info('Booking created successfully: %s', booking['id'])
+        #logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
 
 @app.route('/timeslots/<string:park_name>/<string:facility_name>', methods=['GET'])
@@ -454,7 +454,7 @@ def get_booked_timeslots(park_name, facility_name) -> Response:
         logger.error(timeslots['error'])
         return jsonify({'error': timeslots['error']}), 400
     else:
-        logger.info('Booked timeslots retrieved successfully: %s %s', park_name, facility_name)
+        #logger.info('Booked timeslots retrieved successfully: %s %s', park_name, facility_name)
         return jsonify(timeslots)
 
 @app.route('/weather', methods=['GET'])
@@ -539,7 +539,7 @@ def get_bookings(username) -> Response:
         logger.error(bookings['error'])
         return jsonify({'error': bookings['error']}), 400
     else:
-        logger.info('Bookings retrieved successfully: %s', username)
+        #logger.info('Bookings retrieved successfully: %s', username)
         return jsonify(bookings)
 
 @app.route('/bookings/cancel', methods=['POST'])
@@ -566,7 +566,7 @@ def cancel_booking():
         logger.error(booking['error'])
         return jsonify({'error': booking['error']}), 40
     else:
-        logger.info('Booking cancelled successfully: %s', booking['id'])
+        #logger.info('Booking cancelled successfully: %s', booking['id'])
         return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200
 
 @app.route('/reviews', methods=['POST'])
@@ -595,7 +595,7 @@ def review_booking():
         logger.error(review['error'])
         return jsonify({'error': review['error']}), 404
     else:
-        logger.info('Review added successfully: %s', review['id'])
+        #logger.info('Review added successfully: %s', review['id'])
         return jsonify({'message': 'Review added successfully', 'review': review}), 200
 
 # Facility routes
@@ -697,7 +697,7 @@ def view_reviews(park_name, facility_name):
         logger.error(reviews['error'])
         return jsonify({'error': reviews['error']}), 400
     else:
-        logger.info('Reviews retrieved successfully: %s %s', park_name, facility_name)
+        #logger.info('Reviews retrieved successfully: %s %s', park_name, facility_name)
         return jsonify(reviews), 200
 
 # Profile routes
@@ -728,7 +728,7 @@ def change_username(username) -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        logger.info('Username changed successfully: %s', result['username'])
+        #logger.info('Username changed successfully: %s', result['username'])
         return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
@@ -758,7 +758,7 @@ def change_email(username) -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        logger.info('Email changed successfully: %s', result['email'])
+        #logger.info('Email changed successfully: %s', result['email'])
         return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
 
 @staticmethod
@@ -782,7 +782,7 @@ def delete_account(user_identifier) -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        logger.info('Account deleted successfully: %s', result['username'])
+        #logger.info('Account deleted successfully: %s', result['username'])
         return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
@@ -940,7 +940,6 @@ def view_bookings():
     """
     bookings = []
     for booking in db.bookings:
-        print(booking.get_id(), booking.get_booker(), booking.get_datetime(), booking.get_cancelled(), booking.get_park().get_name(), booking.get_facility().get_name(), booking.get_review().get_id() if booking.get_review() else 'No reviews available')
         bookings.append({'id': booking.get_id(),
                         'booker': booking.get_booker(),
                         'datetime': booking.get_datetime(),
