@@ -39,10 +39,17 @@ def test2():
 def test_booking():
     url = 'http://localhost:5000/bookings'
 
-    user_id = 2
+    #user_id = 2
+    #park_id = 4
+    #facility_id = 15
+    #booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0)
+
+    user_id = 3
     park_id = 4
-    facility_id = 15
+    facility_id = 12
     booking_datetime = datetime.datetime(2024, 11, 26, 12, 0, 0)
+
+
 
     payload = {
         'user_id': user_id,
@@ -255,11 +262,11 @@ def testweather():
 #testchangeusername()
 #testchangeemail()
 #testdeleteaccount()
-#test_booking()
+test_booking()
 #location = get_user_location()
 #print(location['latitude'], location['longitude'])
-test3()
+#test3()
 
 #get_location('155.69.180.5')
 
-home_test()
+#home_test()
