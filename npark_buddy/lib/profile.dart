@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:npark_buddy/editprofile.dart';
 import 'main.dart';
 import 'resetPW.dart';
+
+import 'package:provider/provider.dart';
+import 'provider.dart';
 //main for debugging
 void main() => runApp(const MaterialApp(
   home: Profile(),
@@ -10,8 +13,11 @@ void main() => runApp(const MaterialApp(
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
+  
   @override
   Widget build(BuildContext context) {
+
+    String username = Provider.of<UserData>(context, listen:false).username;
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
       // appBar: AppBar(
@@ -72,12 +78,12 @@ class Profile extends StatelessWidget {
                             child: Image.asset('assets/profilepic.png'),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Text(
-                            'John Doe',
-                            style: TextStyle(
-                              fontSize: 30,
+                            username,
+                            style: const TextStyle(
+                              fontSize: 20,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
                             ),
@@ -155,7 +161,7 @@ class Profile extends StatelessWidget {
                 width: 300,
                 height: 50,
                 child: OutlinedButton(
-                  onPressed: () => showDialog<String>(
+                  onPressed: (){showDialog<String>(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
                       titlePadding: const EdgeInsets.fromLTRB(50, 50, 50, 20),
@@ -230,7 +236,8 @@ class Profile extends StatelessWidget {
                         
                       ]
                     )
-                  ),
+                  );
+                  },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.red[900],
                     side: const BorderSide(color: Colors.red),

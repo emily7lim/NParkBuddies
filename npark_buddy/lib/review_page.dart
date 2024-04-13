@@ -1,48 +1,93 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_const_declarations
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:npark_buddy/btmNavBar.dart';
-import 'package:npark_buddy/view_review.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'btmNavBar.dart';
 
 
 class ReviewPage extends StatefulWidget {
-  const ReviewPage({super.key});
+  const ReviewPage({Key? key}) : super(key: key);
 
   @override
   State<ReviewPage> createState() => _ReviewPageState();
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-
   final _reviewController = TextEditingController();
-  double _rating = 0.0; 
-  final List<double> _ratingsList = []; 
-  final List<String> _allReviews = [];
+  double _rating = 0.0;
 
-  void Review() {
-    setState(() {
-      _allReviews.add(_reviewController.text.trim()); // Add new review to the list
-    });
+  void _submitReview() async {
+    final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
 
-    Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ViewReviews(
-                    reviewText: _reviewController.text.trim(), rating: _rating, ratingsList: _ratingsList, allReviews: _allReviews,)), 
-    );
-    showDialog(context: context, builder: (context){
-      return Center(
-        child: AlertDialog(
-          content:Text('             Review uploaded', style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-        ),
+    // Create a map representing the review data
+    final Map<String, dynamic> reviewData = {
+      // 'username': 
+      // 'park':
+      // 'facility': 
+      // 'datetime':
+      'rating': _rating,
+      'comment': _reviewController.text.trim(),
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(reviewData),
       );
-    });
-
+      //success
+      if (response.statusCode == 200) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Review Uploaded'),
+              content: Text('Your review has been successfully uploaded.'),
+              actions: [
+                TextButton(
+                  onPressed: (){ Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()));
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+        //unsuccessful
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Failed to upload review. Please try again later.'),
+              actions: [
+                TextButton(
+                  onPressed: (){ Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()));
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      // Handle any errors that occur during the request
+      print('Error submitting review: $e');
+    }
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _reviewController.dispose();
     super.dispose();
   }
@@ -74,11 +119,11 @@ class _ReviewPageState extends State<ReviewPage> {
                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: SizedBox(
-                    width: double.infinity, // Make the SizedBox width to match parent width
+                    width: double.infinity, 
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black), // Border color
-                        borderRadius: BorderRadius.circular(12), // Border radius
+                        border: Border.all(color: Colors.black), 
+                        borderRadius: BorderRadius.circular(12), 
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -120,7 +165,6 @@ class _ReviewPageState extends State<ReviewPage> {
                   onRatingUpdate: (rating) {
                     setState(() {
                       _rating = rating;
-                      _ratingsList.add(rating); // Add rating to the list
                     });
                   },
                 ),
@@ -154,26 +198,26 @@ class _ReviewPageState extends State<ReviewPage> {
             
               //Review button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: GestureDetector(
-                onTap: Review,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.green[900],
-                    borderRadius: BorderRadius.circular(12),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: GestureDetector(
+                  onTap: _submitReview, 
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green[900],
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  child: const Center(
-                    
-                    child: Text(
-                      'Review',
-                      style: TextStyle(color: Colors.white,
-                      fontSize: 30,
+                    child: const Center(
+                      child: Text(
+                        'Review',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
             SizedBox(height: 10),
 
              //Back button
