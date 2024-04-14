@@ -220,7 +220,7 @@ class ViewReviews extends StatelessWidget {
       final double avgRating = getAverageRating(reviews);
       return {'reviews': reviews, 'avgRating': avgRating};
     } else {
-      throw Exception('Failed to load reviews');
+      throw Exception('No reviews currently');
     }
   }
 
