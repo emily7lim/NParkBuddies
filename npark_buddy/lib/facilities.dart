@@ -85,6 +85,7 @@ class _selectFacilityState extends State<selectFacility> {
           children: <Widget>[
             SizedBox(height:10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset('assets/filter.png',height:50,width:50,),
                 Padding(
@@ -152,7 +153,7 @@ class _selectFacilityState extends State<selectFacility> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             const Text(
               'Facilities',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
