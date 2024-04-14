@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'provider.dart';
 import 'btmNavBar.dart';
@@ -38,26 +39,48 @@ class _ReviewPageState extends State<ReviewPage> {
     _username = Provider.of<UserData>(context, listen: false).username;
   }
 
+  String formatDateTime(String datetime){
+
+  DateTime dateTime = DateFormat('d MMM yyyy h:mm a').parse(datetime, true).toUtc();
+
+  // Formatting DateTime to the desired format
+  String formattedDate = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(dateTime);
+
+  print(formattedDate);
+
+  return(formattedDate);
+}
+
   void _submitReview() async {
-    final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews/${widget.park}/${widget.facility}';
+    final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
 
-    final Map<String, dynamic> reviewData = {
-      'username': _username,
-      'park': widget.park,
-      'facility': widget.facility,
-      'datetime': widget.datetime,
-      'rating': _rating,
-      'comment': _reviewController.text.trim(),
-    };
-
+    // final Map<String, dynamic> reviewData = {
+    //   'username': _username,
+    //   'park': widget.park,
+    //   'facility': widget.facility,
+    //   'datetime': widget.datetime,
+    //   'rating': _rating,
+    //   'comment': _reviewController.text.trim(),
+    // };
+    String rate = _rating.toString();
+  
     try {
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(reviewData),
+        body: jsonEncode(<String, String>{
+          'username': _username,
+          'park': widget.park,
+          'facility': widget.facility,
+          'datetime': widget.datetime,
+          'rating': rate,
+          'comment': _reviewController.text.trim(),
+        }),
       );
+
+      print('Response status: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         showDialog(
