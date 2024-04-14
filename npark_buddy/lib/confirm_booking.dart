@@ -20,11 +20,11 @@ String mergeDateTime (selected_date, selected_time){
   // Parse the date string
   try{
   DateTime date = DateFormat("dd MMMM yyyy").parse(selected_date);
-  print(date);
+  // print(date);
 
   // Parse the time string
   DateTime time = DateFormat('h:mm a').parse(selected_time);
-  print(time);
+  // print(time);
 
   // Combine the date and time into a new DateTime object
   DateTime combinedDateTime = DateTime(
@@ -36,11 +36,11 @@ String mergeDateTime (selected_date, selected_time){
     time.second,
   );
 
-  print (combinedDateTime);
+  // print (combinedDateTime);
 
   // Format the combined DateTime object to the desired format
   String formattedDateTime = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(combinedDateTime.toUtc());
-  print(formattedDateTime);
+  // print(formattedDateTime);
   return(formattedDateTime);
   // return('hello');
   } catch (e){
@@ -92,7 +92,7 @@ Future<void> confirmBooking(BuildContext context, String username, String park, 
       );
 
       
-    } else if (response.body == 'Invalid datetime') {
+    } else if (jsonDecode(response.body)['error'] == 'Invalid datetime') {
       //cancellation failed from posting
       print(response.statusCode);
       showDialog(
@@ -115,7 +115,7 @@ Future<void> confirmBooking(BuildContext context, String username, String park, 
         },
       );
     }
-    else if (response.body == 'Timeslot not available'){
+    else if (jsonDecode(response.body)['error'] == 'Timeslot not available'){
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -136,6 +136,8 @@ Future<void> confirmBooking(BuildContext context, String username, String park, 
         },
       );
     }
+
+    print(jsonDecode(response.body));
   } catch (e) {
     print("ERROR BOOKING");
   }
