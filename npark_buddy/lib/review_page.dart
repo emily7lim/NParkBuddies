@@ -1,42 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'provider.dart';
 import 'btmNavBar.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-// UserProvider class to hold user data
-class UserProvider extends ChangeNotifier {
-  late String _username;
-
-  String get username => _username;
-
-  void setUsername(String username) {
-    _username = username;
-    notifyListeners();
-  }
-}
-
-// Function to log in the user
-void loginUser(BuildContext context, String username) {
-  final userProvider = Provider.of<UserProvider>(context, listen: false);
-  userProvider.setUsername(username);
-}
+import 'package:http/http.dart' as http;
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({
     Key? key,
     required this.facility,
     required this.park,
-    required this.username,
     required this.datetime,
     required this.date,
-    required this.time,
+    required this.time, required String username,
   }) : super(key: key);
 
   final String facility;
   final String park;
-  final String username;
   final String datetime;
   final String date;
   final String time;
@@ -53,11 +35,11 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   void initState() {
     super.initState();
-    _username = Provider.of<UserProvider>(context, listen: false).username;
+    _username = Provider.of<UserData>(context, listen: false).username;
   }
 
   void _submitReview() async {
-    final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
+    final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews/${widget.park}/${widget.facility}';
 
     final Map<String, dynamic> reviewData = {
       'username': _username,
