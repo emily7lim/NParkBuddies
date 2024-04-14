@@ -80,6 +80,7 @@ class _selectFacilityState extends State<selectFacility> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFEFBEA),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
