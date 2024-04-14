@@ -123,7 +123,7 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Container(
                         height: 32,
                         width: 366,
@@ -136,7 +136,7 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Container(
                         height: 30,
                         child: AutoSizeText(location,
