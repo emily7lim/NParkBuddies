@@ -10,11 +10,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 // main for debugging
 void main() => runApp(const MaterialApp(
-  home: SelectDateTime(
-    location: '',
-    facility: '',
-  ),
-));
+      home: SelectDateTime(
+        location: '',
+        facility: '',
+      ),
+    ));
 
 extension DateTimeFormat on DateTime {
   String fullDate() {
@@ -33,22 +33,22 @@ timeSlots(DateTime today, BuildContext context, location, facility, timing) {
           context,
           MaterialPageRoute(
               builder: (context) => ConfirmBooking(
-                location: location,
-                facility: facility,
-                dates: dates.split(" ")[1] +
-                    " " +
-                    dates.split(" ")[0] +
-                    " " +
-                    dates.split(" ")[2],
-                time: timing,
-              )),
+                    location: location,
+                    facility: facility,
+                    dates: dates.split(" ")[1] +
+                        " " +
+                        dates.split(" ")[0] +
+                        " " +
+                        dates.split(" ")[2],
+                    time: timing,
+                  )),
         );
       },
       style: TextButton.styleFrom(
           backgroundColor: const Color(0xFFE4E4E4),
           minimumSize: const Size(105, 55),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
       child: Text(
         timing,
         style: const TextStyle(
@@ -64,8 +64,8 @@ timeSlots(DateTime today, BuildContext context, location, facility, timing) {
 Future<Album> fetchAlbum(park, facility, date) async {
   final response = await http.get(Uri.parse(
       'https://hookworm-solid-tahr.ngrok-free.app/timeslots/$park/$facility/$date'));
-  print(jsonDecode(response.body)['available_timeslots']);
-  print('f');
+  // print(jsonDecode(response.body)['available_timeslots']);
+
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   } else {
@@ -85,7 +85,6 @@ class Album {
   });
 
   factory Album.fromJson(Map<String, dynamic> json) {
-
     List<String> timeList = [];
     List<String> dateList = [];
     DateFormat inputFormat = DateFormat('EEE, dd MMM yyyy HH:mm:ss zzz');
@@ -99,10 +98,6 @@ class Album {
 
       dateList.add(formattedDate);
       timeList.add(formattedTime);
-      print(formattedTime);
-      print('hhhhh');
-      print(formattedDate);
-      // facilityList.add(element['facility']);
     }
     return Album(
       date: dateList,
@@ -133,8 +128,8 @@ class _SelectDateTimeState extends State<SelectDateTime> {
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
-      print(today);
-      print('yy');
+      String formattedDate = DateFormat('dd-MMM-yyyy').format(today);
+      futureAlbum = fetchAlbum(location, facility, formattedDate);
     });
   }
 
@@ -248,69 +243,52 @@ class _SelectDateTimeState extends State<SelectDateTime> {
             FutureBuilder<Album>(
               future: futureAlbum,
               builder: (context, snapshot) {
-
-                // Parse the input date string into a DateTime object
-                DateTime dateTime = DateTime.parse(today.toString());
-
-                // Define the desired date format
-                DateFormat outputDateFormat = DateFormat('dd MMM yyyy');
-
-                // Format the DateTime object to the desired format
-                String formatedDate = outputDateFormat.format(dateTime);
-
-                // print(formattedDate);
-                print(today);
                 if (snapshot.hasData) {
-
                   return Container(
                       height: 250,
                       width: 350,
                       child: Wrap(children: [
                         for (int i = 0;
-                        i < snapshot.data!.time.length;
-                        i++) ...{
-
-                          // if(snapshot.data!.date[i] == formatedDate)...{
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                              child: TextButton(
-                                onPressed: () {
-                                  String dates = today
-                                      .fullDate()
-                                      .toString()
-                                      .replaceAll(",", "");
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ConfirmBooking(
-                                          location: location,
-                                          facility: facility,
-                                          dates: dates.split(" ")[1] +
-                                              " " +
-                                              dates.split(" ")[0] +
-                                              " " +
-                                              dates.split(" ")[2],
-                                          time: snapshot.data!.time[i],
-                                        )),
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                    backgroundColor: const Color(0xFFE4E4E4),
-                                    minimumSize: const Size(105, 55),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10))),
-                                child: Text(
-                                  snapshot.data!.time[i],
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black,
-                                  ),
+                            i < snapshot.data!.time.length;
+                            i++) ...{
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
+                            child: TextButton(
+                              onPressed: () {
+                                String dates = today
+                                    .fullDate()
+                                    .toString()
+                                    .replaceAll(",", "");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ConfirmBooking(
+                                            location: location,
+                                            facility: facility,
+                                            dates: dates.split(" ")[1] +
+                                                " " +
+                                                dates.split(" ")[0] +
+                                                " " +
+                                                dates.split(" ")[2],
+                                            time: snapshot.data!.time[i],
+                                          )),
+                                );
+                              },
+                              style: TextButton.styleFrom(
+                                  backgroundColor: const Color(0xFFE4E4E4),
+                                  minimumSize: const Size(105, 55),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              child: Text(
+                                snapshot.data!.time[i],
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
                                 ),
                               ),
-                            )
-                          // }
-
+                            ),
+                          )
                         } //forloop
                       ]));
                 } else if (snapshot.hasError) {
@@ -321,32 +299,13 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                 return const CircularProgressIndicator();
               },
             ),
-            // Wrap(
-            //   children: [
-            //     for (int i = 0; i < 20; i++) ...{
-            //       if (i == 12) ...[
-            //         timeSlots(today, context, location, facility, '$i:00 PM')
-            //       ] else if (i < 12) ...[
-            //         timeSlots(today, context, location, facility, '$i:00 AM')
-            //       ] else ...[
-            //         timeSlots(
-            //             today, context, location, facility, '${i - 12}:00 PM')
-            //       ]
-            //     },
-            //   ],
-            // ),
             FractionallySizedBox(
               child: Container(
                 height: 100,
                 alignment: Alignment.bottomCenter,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewFacility(location: location)),
-                    );
+                    Navigator.pop(context);
                   },
                   style: OutlinedButton.styleFrom(
                       backgroundColor: const Color(0xFCF9F9E8),
