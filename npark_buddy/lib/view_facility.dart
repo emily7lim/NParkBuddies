@@ -228,11 +228,8 @@ class _ViewFacilityState extends State<ViewFacility> {
                 alignment: Alignment.bottomCenter,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const BottomNavigationBarExampleApp()),
+                    Navigator.pop(
+                      context
                     );
                   },
                   style: OutlinedButton.styleFrom(

@@ -275,7 +275,7 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                                 );
                               },
                               style: TextButton.styleFrom(
-                                  backgroundColor: const Color(0xFFE4E4E4),
+                                  backgroundColor: const Color(0xFF373737),
                                   minimumSize: const Size(105, 55),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10))),
@@ -284,7 +284,7 @@ class _SelectDateTimeState extends State<SelectDateTime> {
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
