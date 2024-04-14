@@ -97,21 +97,20 @@ class FacilityManager:
         facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
         if facility is None:
             return {'error': 'Facility not found'}
-        booking_found = False
-        for booking in db.bookings:
-            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
-                booking_found = True
-                booking_id = booking.get_id()
-                booker = [profile for profile in db.profiles if profile.get_id() == booking.get_booker()][0]
-                for review in db.reviews:
-                    if review.get_id() == booking_id:
-                        reviews.append({'rating': review.get_rating(),
-                                        'comment': review.get_comment(),
-                                        'reviewer': booker.get_username()
-                                        })
-                        break
-        if not booking_found:
-            return {'error': 'No bookings found'}
+
+        booking_dict = {booking.get_id(): booking for booking in db.bookings}
+        profile_dict = {profile.get_id(): profile for profile in db.profiles}
+        review_dict = {review.get_id(): review for review in db.reviews}
+
+        for booking in (b for b in db.bookings if b.get_park() == park and b.get_facility() == facility):
+            booker = profile_dict.get(booking.get_booker())
+            review = review_dict.get(booking.get_id())
+
+            if booker and review:
+                reviews.append({'rating': review.get_rating(),
+                                'comment': review.get_comment(),
+                                'reviewer': booker.get_username()
+                                })
 
         if len(reviews) == 0:
             return {'error': 'No reviews found'}
