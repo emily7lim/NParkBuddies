@@ -79,7 +79,6 @@ class Database:
             booker = next((profile for profile in self.profiles if profile.get_id() == booker_id), None)
             datetime_str = row[2].split('.')[0]  # Split at dot and take only the part before the dot
             datetime = dt.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
-            print(row[3])
             if row[3] == "b'\\x01'" or row[3] == 1:
                 cancelled = True
             else:
