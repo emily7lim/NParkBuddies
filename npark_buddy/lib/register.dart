@@ -33,7 +33,7 @@ Future<void> register(BuildContext context, String username, String email, Strin
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Registration Failed"),
-            content: const Text("Account already exists"),
+            content: const Text("Account already exists. Please proceed to login."),
             backgroundColor: const Color(0xFCF9F9E8),
             surfaceTintColor: Colors.white,
             actions: <Widget>[
