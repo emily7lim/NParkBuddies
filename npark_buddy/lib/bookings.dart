@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:npark_buddy/provider.dart';
+import 'package:npark_buddy/review_page.dart';
 import 'package:provider/provider.dart';
 import 'cancel_booking.dart';
 import 'package:http/http.dart' as http;
@@ -165,85 +165,88 @@ class _BookingsState extends State<Bookings> {
                             for (int i = 0;
                             i < snapshot.data!.facility.length;
                             i++) ...{
-                              Container(
-                                  width: 390,
-                                  height: 210,
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                    color: Color(0xFF2B512F),
-                                  ),
-                                  child: Container(
-                                    padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(snapshot.data!.date[i],
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            )),
-                                        Text(snapshot.data!.time[i],
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            )),
-                                        Text(snapshot.data!.park[i],
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            )),
-                                        Text(snapshot.data!.facility[i],
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            )),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              15, 10, 0, 0),
-                                          child: OutlinedButton(
-                                            onPressed: () {
-                                              String facility = snapshot.data!.facility[i];
-                                              String park = snapshot.data!.park[i];
-                                              String username = Provider.of<UserData>(context, listen:false).username;
-                                              String datetime = snapshot.data!.datetime[i];
-                                              String date = snapshot.data!.date[i];
-                                              String time = snapshot.data!.time[i];
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CancelBooking(facility: facility, park: park, username: username, datetime: datetime, date:date, time:time),
-                                                ),
-                                              );
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 130, vertical: 6),
-                                              backgroundColor: Colors.red[900],
-                                              side: const BorderSide(
-                                                  color: Colors.red),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(15)),
-                                            ),
-                                            child: const Text('Cancel',
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: Colors.white,
-                                                )),
-                                          ),
-                                        ),
-                                      ],
+                              if(snapshot.data!.cancel[i]==false)...[
+                                Container(
+                                    width: 390,
+                                    height: 210,
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                      color: Color(0xFF2B512F),
                                     ),
-                                  )),
-                              const SizedBox(height: 10),
-                            }
+                                    child: Container(
+                                      padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(snapshot.data!.date[i],
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              )),
+                                          Text(snapshot.data!.time[i],
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              )),
+                                          Text(snapshot.data!.park[i],
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              )),
+                                          Text(snapshot.data!.facility[i],
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              )),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 10, 0, 0),
+                                            child: OutlinedButton(
+                                              onPressed: () {
+                                                String facility = snapshot.data!.facility[i];
+                                                String park = snapshot.data!.park[i];
+                                                String username = Provider.of<UserData>(context, listen:false).username;
+                                                String datetime = snapshot.data!.datetime[i];
+                                                String date = snapshot.data!.date[i];
+                                                String time = snapshot.data!.time[i];
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CancelBooking(facility: facility, park: park, username: username, datetime: datetime, date:date, time:time),
+                                                  ),
+                                                );
+                                              },
+                                              style: OutlinedButton.styleFrom(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 130, vertical: 6),
+                                                backgroundColor: Colors.red[900],
+                                                side: const BorderSide(
+                                                    color: Colors.red),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(15)),
+                                              ),
+                                              child: const Text('Cancel',
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: Colors.white,
+                                                  )),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                const SizedBox(height: 10),
+                              ]
+
+                            } //forloop
                           ]));
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
@@ -274,74 +277,141 @@ class _BookingsState extends State<Bookings> {
                             for (int i = 0;
                             i < snapshot.data!.facility.length;
                             i++) ...{
-                              if(snapshot.data!.cancel[i]==false)...[//todo
-                                const Text('todo Checked', style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
-                                const Divider()
-                              ]else...[
-                                const Text('todo Not Checked', style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,),),
-                                const Divider()
-                              ],
-                              OutlinedButton(
-                                onPressed: () {},
-                                style: OutlinedButton.styleFrom(
-                                    backgroundColor: const Color(0xFCF9F9E8),
-                                    side: const BorderSide(color: Colors.black),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15))),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Stack(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 10, 0, 10),
-                                            child: Container(
-                                              width: 250,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: [
-                                                  AutoSizeText(
-                                                    snapshot.data!.datetime[i],
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.black,
+                              if(snapshot.data!.cancel[i]==false)...[
+                                OutlinedButton(
+                                  onPressed: () {},
+                                  style: OutlinedButton.styleFrom(
+                                      backgroundColor: const Color(0xFCF9F9E8),
+                                      side: const BorderSide(color: Colors.black),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15))),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Stack(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  0, 10, 0, 10),
+                                              child: Container(
+                                                width: 250,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    AutoSizeText(
+                                                      snapshot.data!.datetime[i],
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  AutoSizeText(
-                                                    snapshot.data!.park[i],
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.black,
-                                                    ),
-                                                  )
-                                                ],
+                                                    AutoSizeText(
+                                                      snapshot.data!.park[i],
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            right: 0,
-                                            child: Transform.scale(
-                                              alignment: Alignment.centerRight,
-                                              scale: 0.6,
-                                              child: IconButton(
-                                                onPressed: () {},
-                                                icon: Image.asset(
-                                                    'assets/rate_arrow.png'),
+                                            Positioned(
+                                              right: 0,
+                                              child: Transform.scale(
+                                                alignment: Alignment.centerRight,
+                                                scale: 0.6,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    String facility = snapshot.data!.facility[i];
+                                                    String park = snapshot.data!.park[i];
+                                                    String username = Provider.of<UserData>(context, listen:false).username;
+                                                    String datetime = snapshot.data!.datetime[i];
+                                                    String date = snapshot.data!.date[i];
+                                                    String time = snapshot.data!.time[i];
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              ReviewPage(facility: facility, park: park, username: username, datetime: datetime, date:date, time:time)),
+                                                    );
+                                                  },
+                                                  icon: Image.asset(
+                                                      'assets/rate_arrow.png'),
+                                                ),
                                               ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                            },
+                                const SizedBox(height: 10),
+                              ]else...[
+                                OutlinedButton(
+                                  onPressed: () {},
+                                  style: OutlinedButton.styleFrom(
+                                      backgroundColor: const Color(0xFCF9F9E8),
+                                      side: const BorderSide(color: Colors.black),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15))),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Stack(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                  0, 10, 0, 10),
+                                              child: Container(
+                                                width: 250,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    AutoSizeText(
+                                                      'Cancelled',
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                    AutoSizeText(
+                                                      snapshot.data!.datetime[i],
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                    AutoSizeText(
+                                                      snapshot.data!.park[i],
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.red,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                              ],
+
+                            }, //forloop
                           ]));
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');

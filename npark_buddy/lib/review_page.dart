@@ -8,15 +8,31 @@ import 'btmNavBar.dart';
 
 
 class ReviewPage extends StatefulWidget {
-  const ReviewPage({Key? key}) : super(key: key);
+  final String facility;
+  final String park;
+  final String username;
+  final String datetime;
+  final String date;
+  final String time;
+  ReviewPage({super.key, required this.facility, required this.park, required this. username, required this.datetime, required this.date, required this.time});
 
   @override
-  State<ReviewPage> createState() => _ReviewPageState();
+  State<ReviewPage> createState() => _ReviewPageState(facility: facility, park: park, username: username, datetime: datetime, date: date, time:time);
 }
 
 class _ReviewPageState extends State<ReviewPage> {
+  final String facility;
+  final String park;
+  final String username;
+  final String datetime;
+  final String date;
+  final String time;
+
   final _reviewController = TextEditingController();
   double _rating = 0.0;
+
+  @override
+  _ReviewPageState({required this.facility, required this.park, required this.username, required this.datetime, required this.date, required this.time});
 
   void _submitReview() async {
     final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
@@ -132,19 +148,19 @@ class _ReviewPageState extends State<ReviewPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'BBQ pits',
+                                facility,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'East Coast Park',
+                                park,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'Date: 1 January 2024',
+                                'Date: $date',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'Time: 4:30PM',
+                                'Time: $time',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ],
