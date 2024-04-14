@@ -105,7 +105,7 @@ class _MyHomeState extends State<Home> {
                     child: 
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.warning,
                             color: Colors.black,
                             size: 30,

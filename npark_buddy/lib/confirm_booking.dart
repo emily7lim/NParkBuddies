@@ -299,10 +299,7 @@ class ConfirmBooking extends StatelessWidget {
                 height: 50,
                 child: OutlinedButton(
                   onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SelectDateTime(location: location, facility: facility,)),
-                    );
+                    Navigator.pop(context);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: const Color(0xFCF9F9E8),

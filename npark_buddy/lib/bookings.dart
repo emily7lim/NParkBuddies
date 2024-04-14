@@ -390,9 +390,9 @@ class _BookingsState extends State<Bookings> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                AutoSizeText(
+                                                const AutoSizeText(
                                                   'Cancelled',
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.red,

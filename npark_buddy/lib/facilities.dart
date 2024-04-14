@@ -80,10 +80,11 @@ class _selectFacilityState extends State<selectFacility> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFEFBEA),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height:10),
+            const SizedBox(height:10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -163,7 +164,7 @@ class _selectFacilityState extends State<selectFacility> {
               future: futureFacilities,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
@@ -175,20 +176,20 @@ class _selectFacilityState extends State<selectFacility> {
                           border: Border.all(color: Colors.black), // Add border
                           borderRadius: BorderRadius.circular(12), // Add border radius
                         ),
-                        margin: EdgeInsets.symmetric(vertical: 5), // Add margin for spacing
+                        margin: const EdgeInsets.symmetric(vertical: 5), // Add margin for spacing
                         child: ListTile(
-                          title: Text(facility.name, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                          title: Text(facility.name, style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                           subtitle: Row(
                             children: [
                               Text('${facility.park}',
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),                        
+                                  style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),                        
                                 ),
-                              Spacer(),
+                              const Spacer(),
                                Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                  children: [
-                                   Text('${facility.avgRating}', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-                                   Icon(
+                                   Text('${facility.avgRating}', style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                                   const Icon(
                                   Icons.star,
                                   color: Colors.orange,
                                   size: 30,

@@ -213,12 +213,12 @@ class Profile extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                        const Landing(),
+                                      builder: (context) => const Landing(),
                                     ),
+                                    (Route<dynamic> route) => false, // Removes all routes below the new route
                                   );
                                 },
                                 style: OutlinedButton.styleFrom(

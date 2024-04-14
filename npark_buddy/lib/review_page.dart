@@ -79,8 +79,8 @@ class _ReviewPageState extends State<ReviewPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Review Uploaded'),
-              content: Text('Your review has been successfully uploaded.'),
+              title: const Text('Review Uploaded'),
+              content: const Text('Your review has been successfully uploaded.'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -89,7 +89,7 @@ class _ReviewPageState extends State<ReviewPage> {
                       MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
                     );
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -100,8 +100,8 @@ class _ReviewPageState extends State<ReviewPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Error'),
-              content: Text('Failed to upload review. Please try again later.'),
+              title: const Text('Error'),
+              content: const Text('Failed to upload review. Please try again later.'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -110,7 +110,7 @@ class _ReviewPageState extends State<ReviewPage> {
                       MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
                     );
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -131,21 +131,21 @@ class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFCF9F9E8),
+      backgroundColor: const Color(0xFCF9F9E8),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Rate and review',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: SizedBox(
@@ -163,19 +163,19 @@ class _ReviewPageState extends State<ReviewPage> {
                             children: [
                               Text(
                                 widget.facility,
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 widget.park,
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Date: ${widget.date}',
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Time: ${widget.time}',
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -184,31 +184,31 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 RatingBar.builder(
                   minRating: 0,
                   itemSize: 60,
-                  itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
+                  itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
                   onRatingUpdate: (rating) {
                     setState(() {
                       _rating = rating;
                     });
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: TextField(
                     controller: _reviewController,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 12.0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 12.0),
                       alignLabelWithHint: true,
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       hintText: 'Leave a review',
@@ -217,9 +217,9 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0),
                   child: GestureDetector(
                     onTap: _submitReview,
                     child: Container(
@@ -227,7 +227,7 @@ class _ReviewPageState extends State<ReviewPage> {
                         color: Colors.green[900],
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Review',
                           style: TextStyle(
@@ -239,7 +239,7 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
@@ -255,7 +255,7 @@ class _ReviewPageState extends State<ReviewPage> {
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.black),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Back',
                           style: TextStyle(
