@@ -13,7 +13,7 @@ class Checker {
     // Requirement 2: Must contain at least 1 uppercase
     bool hasUppercase = false;
     for (int i = 0; i < password.length; i++) {
-      if (password[i].toUpperCase() == password[i]) {
+      if (password[i].toUpperCase() == password[i] && password[i].toLowerCase() != password[i]) {
         hasUppercase = true;
         break;
       }
