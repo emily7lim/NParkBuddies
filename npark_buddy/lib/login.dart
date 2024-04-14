@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
 import 'btmNavBar.dart';
-import 'resetPW.dart';
+import 'forgetPW.dart';
 import 'allStyle.dart';
 
 import 'package:provider/provider.dart';
@@ -26,7 +26,15 @@ Future<void> login(BuildContext context, username, String password) async {
     );
 
     if (response.statusCode == 200) {
-      // If the server returns a 200 OK response, then go in home page
+      // If the server returns a 200 OK response, store username and email, then go in home page
+      Map<String, dynamic> responseData = json.decode(response.body);
+      String user = responseData['profile']['username'];
+      String email = responseData['profile']['email'];
+      print("stored data:");
+      Provider.of<UserData>(context, listen: false).username = user;
+      Provider.of<UserData>(context, listen: false).email = email;
+      print(Provider.of<UserData>(context, listen: false).username);
+      print(Provider.of<UserData>(context, listen: false).email);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()));
       
     } else {
@@ -170,7 +178,7 @@ class _LoginState extends State<Login> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ResetPW()),
+                  MaterialPageRoute(builder: (context) => ForgetPW()),
                 );
               },
             ),
@@ -180,15 +188,12 @@ class _LoginState extends State<Login> {
                 username = usernameController.text;
                 pw = pwController.text;
 
-                print(username);
-                print(pw);
+                print('username input: $username');
+                print('pw input: $pw');
 
-                var test = Provider.of<UserData>(context, listen:false).username;
-                print(test);
-
-                // Getting the UserData object and setting a new username
-                Provider.of<UserData>(context, listen: false).username = username;
-                print(Provider.of<UserData>(context, listen: false).username);
+                // // Getting the UserData object and setting a new username
+                // Provider.of<UserData>(context, listen: false).username = username;
+                // print(Provider.of<UserData>(context, listen: false).username);
                 login(context, username, pw);
                 
               },

@@ -9,7 +9,7 @@ import 'provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<void> changePW(BuildContext context, username, String password) async {
+Future<void> forgetPW(BuildContext context, username, String password) async {
   const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/profiles/<string:user_identifier>/change_password'; //server
 
   try {
@@ -51,18 +51,20 @@ Future<void> changePW(BuildContext context, username, String password) async {
       );
     }
   } catch (e) {
-    print("ERROR CHANGE PASSWORD");
+    print("ERROR FORGET PASSWORD");
   }
 }
 
-class ResetPW extends StatelessWidget {
-  ResetPW({super.key});
+class ForgetPW extends StatelessWidget{
+  ForgetPW({super.key});
 
   final pwControllerOne =TextEditingController();
   final pwControllerTwo =TextEditingController();
+  final usernameController = TextEditingController();
 
   var passwordOne = '';
   var passwordTwo = '';
+  var username = '';
 
   @override
   Widget build(BuildContext context) {
@@ -93,24 +95,36 @@ class ResetPW extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const SizedBox(height: 190),
+            const SizedBox(height: 100),
             const Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 70, 0),
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Text(
-                'Create New Password',
+                'Forget Password',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 20,
+                  fontSize: 30,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 85, 0),
-              child: Text(
-                'Enter new password',
-                style: TextStyle(
-                  fontSize: 20,
+            // const Padding(
+            //   padding: EdgeInsets.fromLTRB(0, 0, 85, 0),
+            //   child: Text(
+            //     'Enter new password',
+            //     style: TextStyle(
+            //       fontSize: 20,
+            //     ),
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(70, 20, 70, 10),
+              child: TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  enabledBorder: TextFieldStyle.unclickedTF,
+                  focusedBorder: TextFieldStyle.clickedTF,
+                  hintText: 'Username',
                 ),
+                style: const TextStyle(height: 0.1),
               ),
             ),
             Padding(
@@ -143,9 +157,9 @@ class ResetPW extends StatelessWidget {
               onPressed: () {
                 passwordOne = pwControllerOne.text;
                 passwordTwo = pwControllerTwo.text;
-                var username = Provider.of<UserData>(context, listen:false).username;
+                username = usernameController.text;
                 
-                if (passwordOne == '' || passwordTwo == ''){
+                if (passwordOne == '' || passwordTwo == '' || username == ''){
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -170,7 +184,7 @@ class ResetPW extends StatelessWidget {
                 else if (passwordOne == passwordTwo){ //passwords match
                   if (Checker.checkPassword(passwordOne)){ //check password format 
                     print('newpassword: $passwordOne');
-                    changePW(context, username, passwordOne);
+                    forgetPW(context, username, passwordOne);
                   }
                   else{
                     showDialog(

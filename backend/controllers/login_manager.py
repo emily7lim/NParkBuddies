@@ -1,19 +1,6 @@
-# Description: This file contains the controller for login management, including creating, login, and change user password
-
-from flask import Flask, request, jsonify
-
-import os, sys
-#sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from flask_sqlalchemy import SQLAlchemy
-import re
 from data_store import db
 from classes.profile import Profile
-from classes.booking import Booking
-from classes.park import Park
-from classes.facility import Facility
 from database.database import Profile as ProfileDB
-from sqlalchemy import or_
 
 #class LoginManager(db.Model):
 

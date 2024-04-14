@@ -406,28 +406,31 @@ def create_booking() -> Response:
     """ Method to create a booking
 
     Args:
-        user_id (int): The id of the user
-        park_id (int): The id of the park
-        facility_id (int): The id of the facility
-        datetime (datetime): The date and time of the booking
+        username (string): The username of the profile
+        park (string): The name of the park
+        facility (string): The name of the facility
+        datetime (datetime): The datetime of the booking
 
     Returns:
         Response: JSON response with status of the booking
     """
     # Extract data from request payload
     payload = request.json
-    user_id = payload.get('user_id')
-    park_id = payload.get('park_id')
-    facility_id = payload.get('facility_id')
+    username = payload.get('username')
+    # Convert park name and facility name to title case from underscore case
+    park_name = payload.get('park')
+    facility_name = payload.get('facility')
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
     datetime = payload.get('datetime')
 
-    logger.info('Request to create booking: %s %s %s %s', user_id, park_id, facility_id, datetime)
+    logger.info('Request to create booking: %s %s %s %s', username, park_name, facility_name, datetime)
 
     # Check if all required fields are present
-    if user_id is None or park_id is None or facility_id is None or datetime is None:
+    if username is None or park_name is None or facility_name is None or datetime is None:
         return jsonify({'error': 'Missing required fields'}), 400
 
-    booking = HomeManager.create_booking(user_id, park_id, facility_id, datetime)
+    booking = HomeManager.create_booking(username, park_name, facility_name, datetime)
     if 'error' in booking:
         logger.error(booking['error'])
         return jsonify({'error': booking['error']}), 400
@@ -552,19 +555,25 @@ def cancel_booking():
     # Extract data from request payload
     payload = request.json
     username = payload.get('username')
-    park = payload.get('park')
-    facility = payload.get('facility')
+    park_name = payload.get('park')
+    facility_name = payload.get('facility')
     datetime = payload.get('datetime')
 
+    # Convert park name and facility name to title case from underscore case
+    park_name = park_name.replace('_', ' ').title()
+    facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
+
     # Check if all required fields are present
-    if username is None or park is None or facility is None or datetime is None:
+    if username is None or park_name is None or facility_name is None or datetime is None:
         logger.error('Missing required fields')
         return jsonify({'error': 'Missing required fields'}), 400
 
-    booking = BookingsManager.cancel_booking(username, park, facility, datetime)
+    booking = BookingsManager.cancel_booking(username, park_name, facility_name, datetime)
+
+    # Check if 'error' key is present in the booking dictionary
     if 'error' in booking:
         logger.error(booking['error'])
-        return jsonify({'error': booking['error']}), 40
+        return jsonify({'error': booking['error']}), 404
     else:
         #logger.info('Booking cancelled successfully: %s', booking['id'])
         return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200
@@ -703,7 +712,7 @@ def view_reviews(park_name, facility_name):
 # Profile routes
 
 @app.route('/profiles/<string:username>/change_username', methods=['POST'])
-def change_username(username) -> Response:
+def change_username() -> Response:
     """Method to change a user's username
 
     Args:
@@ -732,7 +741,7 @@ def change_username(username) -> Response:
         return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
-def change_email(username) -> Response:
+def change_email() -> Response:
     """Method to change a user's email
 
     Args:

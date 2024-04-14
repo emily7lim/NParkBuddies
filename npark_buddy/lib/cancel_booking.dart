@@ -1,13 +1,124 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'btmNavBar.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:intl/intl.dart';
 
 //main for debugging
 // void main() => runApp(const MaterialApp(
 //   home: CancelBooking(),
 // ));
 
-class CancelBooking extends StatelessWidget {
-  const CancelBooking({super.key});
+String formatDateTime(String datetime){
+
+  DateTime dateTime = DateFormat('d MMM yyyy h:mm a').parse(datetime, true).toUtc();
+
+  // Formatting DateTime to the desired format
+  String formattedDate = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(dateTime);
+
+  print(formattedDate);
+
+  return(formattedDate);
+}
+
+//HTTP POST to cancel booking, JUST NEED CHECK WHETHER FORMAT OF THE DATE TIME IS OK
+Future<void> cancelBooking(BuildContext context, String username, String park, String facility, String datetime) async {
+  const String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/bookings/cancel'; //server
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': username,
+        'park': park,
+        'facility': facility,
+        'datetime': datetime,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, then go back to home page
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Booking Cancelled"),
+            content: const Text("Your booking has been cancelled successfully."),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+    } else {
+      //cancellation failed from posting
+      print(response.statusCode);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Cancellation Failed"),
+            content: const Text("An error has occurred."),
+            backgroundColor: const Color(0xFCF9F9E8),
+            surfaceTintColor: Colors.white,
+            actions: <Widget>[
+              TextButton(
+                child: const Text("Close", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } catch (e) {
+    print("ERROR CANCELLATION");
+  }
+}
+
+
+class CancelBooking extends StatefulWidget {
+  final String facility;
+  final String park;
+  final String username;
+  final String datetime;
+  final String date;
+  final String time;
+  CancelBooking({super.key, required this.facility, required this.park, required this. username, required this.datetime, required this.date, required this.time});
+  @override
+  State<CancelBooking> createState() => _CancelBookingState(facility: facility, park: park, username: username, datetime: datetime, date: date, time:time);
+}
+
+class _CancelBookingState extends State<CancelBooking> {
+  final String facility;
+  final String park;
+  final String username;
+  final String datetime;
+  final String date;
+  final String time;
+
+  @override
+  _CancelBookingState({required this.facility, required this.park, required this.username, required this.datetime, required this.date, required this.time});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +155,7 @@ class CancelBooking extends StatelessWidget {
                 child: Text(
                   'Cancel Booking?',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 30,
                     fontWeight: FontWeight.w900                  
                   )
                 ),
@@ -60,23 +171,24 @@ class CancelBooking extends StatelessWidget {
                 border: Border.all(color: Colors.black),
               ),
         
-              child: const Column(
+              child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Text(
-                      'BBQ Pits',
-                      style: TextStyle(
-                      fontSize: 30,
+                      softWrap: true,
+                      facility,
+                      style: const TextStyle(
+                      fontSize: 25,
                       fontWeight: FontWeight.w900                  
                     )
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                     child: Text(
-                      'East Coast Park',
-                      style: TextStyle(
+                      park,
+                      style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900                  
                     )
@@ -86,15 +198,15 @@ class CancelBooking extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Date:\t\t\t\t1 January 2025',
-                        style: TextStyle(
+                        'Date:\t\t\t' + date,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
                         )
                       ),
                       Text(
-                        'Time:\t\t\t6:00 PM',
-                        style: TextStyle(
+                        'Time:\t\t\t' + time,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w900                  
                         )
@@ -113,28 +225,9 @@ class CancelBooking extends StatelessWidget {
                 height: 50,
                 child: OutlinedButton(
                   onPressed: (){
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text("Success!"),
-                          content: Text("Your booking has been cancelled."),
-                          backgroundColor: Color(0xFCF9F9E8),
-                          surfaceTintColor: Colors.white,
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text("Ok", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()),
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                    
+                    String format_datetime = formatDateTime(datetime);
+                    cancelBooking(context, username, park, facility, format_datetime);
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.red[900],

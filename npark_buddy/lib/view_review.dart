@@ -1,85 +1,88 @@
-// ignore_for_file: unused_import, prefer_const_constructors, use_super_parameters, prefer_const_literals_to_create_immutables, unnecessary_new
-
+import 'dart:convert';
+import 'dart:ffi';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:npark_buddy/btmNavBar.dart';
 
-double calculateAverageRating(List<double> ratings) {
-  if (ratings.isEmpty) return 0.0;
-  double totalRating = ratings.reduce((value, element) => value + element);
-  double averageRating = totalRating / ratings.length;
-  return double.parse(averageRating.toStringAsFixed(1));
+class Review {
+  final String comment;
+  final double rating;
+
+  Review({required this.comment, required this.rating});
+
+  factory Review.fromJson(Map<String, dynamic> json) {
+    return Review(
+      comment: json['comment'],
+      rating: json['rating'], 
+    );
+  }
 }
 
-class ViewReviews extends StatelessWidget {
-  final String reviewText;
-  final double rating;
-  final List<double> ratingsList;
-  final List<String> allReviews;
 
-  const ViewReviews({Key? key, required this.reviewText, required this.rating, required this.ratingsList, required this.allReviews}) : super(key: key);
+
+class ViewReviews extends StatelessWidget {
+  final String parkName;
+  final String facilityName;
+
+  const ViewReviews({
+    Key? key,
+    required this.parkName,
+    required this.facilityName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    double averageRating = calculateAverageRating(ratingsList);
-    
     return Scaffold(
-      backgroundColor: const Color(0xFCF9F9E8),
-    appBar: AppBar(
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()),
-          );
-        },
-      ),
-      title: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-            child: Image.asset(
-              'assets/logo.png',
-              height: 70,
-              width: 70,
+      // backgroundColor: const Color(0xFCF9F9E8),
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: Icon(Icons.arrow_back),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   title: Text('Reviews of $facilityName at $parkName'),
+      //   backgroundColor: Colors.green[900],
+      //   foregroundColor: Colors.white,
+      //   toolbarHeight: 110,
+      // ),
+      backgroundColor: const Color(0xFFFEFBEA),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Image.asset(
+                'assets/logo.png',
+                height: 70,
+                width: 70,
+              ),
             ),
-          ),
-          const Text(
-            'ParkBuddy',
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-          ),
-        ],
+            const Text(
+              'ParkBuddy',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xFF2B512F),
+        foregroundColor: Colors.white,
+        toolbarHeight: 110,
       ),
-      backgroundColor: Colors.green[900],
-      foregroundColor: Colors.white,
-      toolbarHeight: 110,
-    ),
 
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              children: [
-                SizedBox(height: 30,),
+      
 
-                Center(
-                  child: Text(
-                    'Reviews',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(height: 10),
-
-                 //Venue, Activity, Date and Time
-               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
+      body: Column(
+        children: [
+          SizedBox(height: 30,),
+          Text('Reviews', style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+           Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: SizedBox(
-                    width: double.infinity, // Make the SizedBox width to match parent width
+                    width: double.infinity, 
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black), // Border color
-                        borderRadius: BorderRadius.circular(12), // Border radius
+                        border: Border.all(color: Colors.black), 
+                        borderRadius: BorderRadius.circular(12), 
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -87,26 +90,18 @@ class ViewReviews extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-
-                              //Activity
                               Text(
-                                '      BBQ pits',
+                                '$facilityName',
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-
-                              //location
                               Text(
-                                'East Coast Park',
+                                '$parkName',
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              
-                              //date
                               Text(
                                 'Date: 1 January 2024',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
-
-                              //time
                               Text(
                                 'Time: 4:30PM',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -118,103 +113,71 @@ class ViewReviews extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
 
-                //Average reviews displayed 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      averageRating.toStringAsFixed(1), // Display numerical value
-                      style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 5), // Add spacing between stars and numerical value
-                    RatingBarIndicator(
-                      rating: averageRating, // Display stars
-                      itemBuilder: (context, index) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      itemCount: 5,
-                      itemSize: 50.0,
-                      direction: Axis.horizontal,
-                    ),
-                  ],
-                ),
+          
 
 
-                //past reviews
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: allReviews.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          SizedBox(height: 20), // Add spacing between each review
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'John Doe',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '${ratingsList[index]}',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                        RatingBarIndicator(
-                                          rating: ratingsList[index],
-                                          itemBuilder: (context, index) => Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
-                                          ),
-                                          itemCount: 5,
-                                          itemSize: 20.0,
-                                          direction: Axis.horizontal,
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      allReviews[index],
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    Text(
-                                      '5 March 2024',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+          FutureBuilder<List<Review>>(
+            future: fetchReviews(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    final review = snapshot.data![index];
+                    return ListTile(
+                        title: Text(review.comment,
+                        style: TextStyle(
+                          fontWeight: 
+                          FontWeight.bold,
+                          fontSize: 20
                           ),
-                        ],
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RatingBarIndicator(
+                              rating: review.rating, 
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              direction: Axis.horizontal,
+                            ),
+                          ],
+                        ),
                       );
-                    },
-                  ),
-                ),
 
-              ],
-            ),
+                  },
+                );
+              }
+            },
           ),
-        ),
-      );
+        ],
+      ),
+    );
+  }
+
+  Future<List<Review>> fetchReviews() async {
+    final response = await http.get(Uri.parse(
+        'https://hookworm-solid-tahr.ngrok-free.app/reviews/$parkName/$facilityName'));
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      final List<Review> reviews =
+          data.map((item) => Review.fromJson(item)).toList();
+      return reviews;
+    } else {
+      throw Exception('Failed to load reviews');
+    }
   }
 }

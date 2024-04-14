@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:npark_buddy/editprofile.dart';
 import 'main.dart';
@@ -18,6 +19,8 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     String username = Provider.of<UserData>(context, listen:false).username;
+    String email = Provider.of<UserData>(context, listen: false).email;
+
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
       // appBar: AppBar(
@@ -46,17 +49,37 @@ class Profile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-              child: Center(
-                child: Text(
-                  'My Profile',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
+            Row(
+              children:[
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(120, 30, 0, 30),
+                  child: Center(
+                    child: Text(
+                      'My Profile',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:(context) => 
+                          const EditProfile(),
+                      )
+                    );
+                  },
+                )
+              ]
             ),
         
             Container(
@@ -71,7 +94,7 @@ class Profile extends StatelessWidget {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(40),
+                          padding: const EdgeInsets.all(30),
                           child: SizedBox(
                             width: 100,
                             height: 100,
@@ -79,41 +102,27 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          child: Text(
+                          padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
+                          child: AutoSizeText(
                             username,
+                            softWrap: true,
                             style: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 25,
                               fontWeight: FontWeight.w800,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:(context) => 
-                                  const EditProfile(),
-                              )
-                            );
-                          },
-                        )
+                        
                       ],
                     ),
         
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(100, 0, 0, 0),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                       child: Text(
-                        'johndoe123@gmail.com',
-                        style: TextStyle(
-                          fontSize: 20,
+                        email,
+                        style: const TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
                         ),
@@ -134,7 +143,7 @@ class Profile extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                          const ResetPW()),
+                          ResetPW()),
                     );
                   },
                   style: OutlinedButton.styleFrom(

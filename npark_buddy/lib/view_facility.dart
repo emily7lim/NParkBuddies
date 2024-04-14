@@ -34,7 +34,7 @@ class Album {
 
   const Album({
     required this.facilities,
-    required this.id,
+    required this.id, //facility id
     required this.name,
   });
 
@@ -96,7 +96,7 @@ class _ViewFacilityState extends State<ViewFacility> {
             ),
           ],
         ),
-        backgroundColor: Colors.green[900],
+        backgroundColor: const Color(0xFF2B512F),
         foregroundColor: Colors.white,
         toolbarHeight: 110,
       ),
@@ -190,8 +190,8 @@ class _ViewFacilityState extends State<ViewFacility> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         SelectDateTime(
-                                                            location: location,
-                                                            facility:
+                                                            location: location, //park name
+                                                            facility: //facility name
                                                                 selectFacility)),
                                               );
                                             },

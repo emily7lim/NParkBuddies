@@ -4,7 +4,6 @@ from flask import Flask, request, jsonify
 import os, sys
 #sys.path.insert(1, "/".join(os.path.realpath(__file__).split('/')[0:-2]))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import profile
 from flask_sqlalchemy import SQLAlchemy
 import re
 from data_store import db
@@ -28,15 +27,19 @@ class ProfileManager:
         Changes the username for a user.
         """
         for profile in db.profiles:
-           if profile.username == old_username:
-              # Use the set_username method to update the username
-              profile.set_username(new_username)
+            if profile.get_username() == new_username:
+                return {'error': 'Username already taken'}
 
-              # Update the existing ProfileDB instance with the updated username
-              profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
-              profileDB.username = new_username
-              db.session.commit()
-              return {'message': 'Username changed successfully'}
+        for profile in db.profiles:
+            if profile.get_username() == old_username:
+                # Use the set_username method to update the username
+                profile.set_username(new_username)
+
+                # Update the existing ProfileDB instance with the updated username
+                profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+                profileDB.username = new_username
+                db.session.commit()
+                return {'message': 'Username changed successfully'}
 
         return {'error': 'Username does not exist'}
 
@@ -46,15 +49,19 @@ class ProfileManager:
         Changes the email for a user.
         """
         for profile in db.profiles:
-           if profile.email == old_email:
-              # Use the set_email method to update the email
-              profile.set_email(new_email)
+            if profile.get_email() == new_email:
+                return {'error': 'Email already taken'}
 
-              # Update the existing ProfileDB instance with the updated email
-              profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
-              profileDB.email = new_email
-              db.session.commit()
-              return {'message': 'Email changed successfully'}
+        for profile in db.profiles:
+            if profile.get_email() == old_email:
+                # Use the set_email method to update the email
+                profile.set_email(new_email)
+
+                # Update the existing ProfileDB instance with the updated email
+                profileDB = db.session.query(ProfileDB).filter(ProfileDB.id == profile.id).first()
+                profileDB.email = new_email
+                db.session.commit()
+                return {'message': 'Email changed successfully'}
 
         return {'error': 'Email does not exist'}
 
@@ -67,17 +74,17 @@ class ProfileManager:
         profileDB = db.session.query(ProfileDB).filter((ProfileDB.username == user_identifier) | (ProfileDB.email == user_identifier)).first()
 
         if profileDB:
-           # Query all bookings made by the user
-           bookings = db.session.query(BookingDB).filter(BookingDB.booker_id == profileDB.id).all()
+            # Query all bookings made by the user
+            bookings = db.session.query(BookingDB).filter(BookingDB.booker_id == profileDB.id).all()
 
-           # Cancel all bookings made by the user
-           for booking in bookings:
-               db.session.delete(booking)
+            # Cancel all bookings made by the user
+            for booking in bookings:
+                db.session.delete(booking)
 
-           # Delete the user's profile
-           db.session.delete(profileDB)
-           db.session.commit()
-           return {'message': 'Account and all associated bookings deleted successfully'}
+            # Delete the user's profile
+            db.session.delete(profileDB)
+            db.session.commit()
+            return {'message': 'Account and all associated bookings deleted successfully'}
 
         return {'error': 'Username or email does not exist'}
 
