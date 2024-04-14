@@ -107,6 +107,7 @@ class BookingsManager:
             if booking.get_booker() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
                 review = Review(id=booking.get_id(), rating=rating, comment=comment)
                 booking.set_review(review)
+                db.reviews.append(review)
                 reviewDB = ReviewDB(id=review.get_id(), rating=rating, comment=comment)
                 db.session.add(reviewDB)
                 db.session.commit()
