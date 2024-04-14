@@ -136,32 +136,45 @@ class ViewReviews extends StatelessWidget {
 
 
             // Reviews
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: SizedBox(
-                width: double.infinity, 
-                child: FutureBuilder<List<Review>>(
-                  future: fetchReviews().then((reviewsMap) => reviewsMap['reviews']),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    } else {
-                      return Column(
-                        children: snapshot.data!.map((review) {
-                          return Container(
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
-                            padding: EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: ListTile(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: SizedBox(
+                          width: double.infinity, 
+                          child: FutureBuilder<List<Review>>(
+                            future: fetchReviews().then((reviewsMap) => reviewsMap['reviews']),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else if (snapshot.hasError) {
+                                // Check if the error is due to no reviews available
+                                if (snapshot.error.toString().contains('No reviews currently')) {
+                                  // Don't display anything if there are no reviews
+                                  return SizedBox.shrink();
+                                } else {
+                                  // Display the error message for other types of errors
+                                  return Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  );
+                                }
+                              } else {
+                                // Check if there are no reviews available
+                                if (snapshot.data == null || snapshot.data!.isEmpty) {
+                                  // Don't display anything if there are no reviews
+                                  return Center(child: Text('No reviews currently',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),));
+                                } else {
+                                  // Display the reviews
+                                  return Column(
+                                    children: snapshot.data!.map((review) {
+                                      return Container(
+                                        margin: EdgeInsets.symmetric(vertical: 8.0),
+                                        padding: EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.black),
+                                          borderRadius: BorderRadius.circular(12.0),
+                                        ),
+                                        child: ListTile(
                                           title: Text(
                                             '${review.reviewer}',
                                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -171,10 +184,13 @@ class ViewReviews extends StatelessWidget {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text('${review.rating.toStringAsFixed(2)}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),), // Fixed to 2 decimal places
+                                                  Text(
+                                                    '${review.rating.toStringAsFixed(2)}',
+                                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                                  ), // Fixed to 2 decimal places
                                                   SizedBox(width: 5), // Add some spacing between the rating and stars
                                                   RatingBarIndicator(
-                                                    rating: review.rating, 
+                                                    rating: review.rating,
                                                     itemBuilder: (context, index) => Icon(
                                                       Icons.star,
                                                       color: Colors.orange,
@@ -196,33 +212,38 @@ class ViewReviews extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                          );
-                        }).toList(),
-                      );
-                    }
-                  },
-                ),
-              ),
-            ),
+                                      );
+                                    }).toList(),
+                                  );
+                                }
+                              }
+                            },
+                          ),
+                        ),
+                      ),
           ],
         ),
       ),
     );
   }
 
-  Future<Map<String, dynamic>> fetchReviews() async {
-    final response = await http.get(Uri.parse(
-        'https://hookworm-solid-tahr.ngrok-free.app/reviews/$parkName/$facilityName'));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      final List<Review> reviews =
-          data.map((item) => Review.fromJson(item)).toList();
-      final double avgRating = getAverageRating(reviews);
-      return {'reviews': reviews, 'avgRating': avgRating};
-    } else {
-      throw Exception('No reviews currently');
-    }
+Future<Map<String, dynamic>> fetchReviews() async {
+  final response = await http.get(Uri.parse(
+      'https://hookworm-solid-tahr.ngrok-free.app/reviews/$parkName/$facilityName'));
+  if (response.statusCode == 200) {
+    final List<dynamic> data = jsonDecode(response.body);
+    final List<Review> reviews =
+        data.map((item) => Review.fromJson(item)).toList();
+    final double avgRating = getAverageRating(reviews);
+    return {'reviews': reviews, 'avgRating': avgRating};
+  } else {
+    // Return a default value indicating no reviews
+    return {'reviews': <Review>[], 'avgRating': 0.0};
   }
+}
+
+
+
 
   double getAverageRating(List<Review> reviews) {
     double sum = 0;
