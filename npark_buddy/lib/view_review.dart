@@ -113,7 +113,7 @@ class ViewReviews extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('$avgRating',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                              Text('${avgRating.toStringAsFixed(1)}',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
                                 
                               SizedBox(height: 5),
                               RatingBarIndicator(
