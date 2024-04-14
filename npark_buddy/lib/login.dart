@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
                 height: 70,

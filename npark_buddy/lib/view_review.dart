@@ -227,7 +227,6 @@ class ViewReviews extends StatelessWidget {
     );
   }
 
-<<<<<<< Updated upstream
 Future<Map<String, dynamic>> fetchReviews() async {
   final response = await http.get(Uri.parse(
       'https://hookworm-solid-tahr.ngrok-free.app/reviews/$parkName/$facilityName'));
@@ -240,25 +239,8 @@ Future<Map<String, dynamic>> fetchReviews() async {
   } else {
     // Return a default value indicating no reviews
     return {'reviews': <Review>[], 'avgRating': 0.0};
-=======
-  Future<Map<String, dynamic>> fetchReviews() async {
-    final response = await http.get(Uri.parse(
-        'https://hookworm-solid-tahr.ngrok-free.app/reviews/$parkName/$facilityName'));
-    if (response.statusCode == 200) {
-      final List<dynamic> data = jsonDecode(response.body);
-      final List<Review> reviews =
-          data.map((item) => Review.fromJson(item)).toList();
-      final double avgRating = getAverageRating(reviews);
-      return {'reviews': reviews, 'avgRating': avgRating};
-    } else {
-      throw Exception('No reviews currently');
-    } 
->>>>>>> Stashed changes
   }
 }
-
-
-
 
   double getAverageRating(List<Review> reviews) {
     double sum = 0;

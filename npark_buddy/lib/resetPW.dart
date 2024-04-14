@@ -26,7 +26,11 @@ Future<void> changePW(BuildContext context, username, String password) async {
 
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, then go back to home page
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login()));
+      Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Login(),
+                                    ),
+                                    (Route<dynamic> route) => false,);
       
     } else {
       //show some dialog, also need some controller to format the input
