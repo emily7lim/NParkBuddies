@@ -271,12 +271,6 @@ def render_homepage() -> str:
                     <td>Changes a user's email</td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/profiles/&lt;username&gt;/delete_account</td>
-                    <td>Deletes a user's account</td>
-                    <td></td>
-                </tr>
         </body>
     </html>"""
     return endpoints_summary
@@ -763,29 +757,6 @@ def change_email() -> Response:
         return jsonify({'error': result['error']}), 400
     else:
         return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
-
-@staticmethod
-@app.route('/profiles/<string:user_identifier>/delete_account', methods=['POST'])
-def delete_account(user_identifier) -> Response:
-    """Method to delete a user's account
-
-    Args:
-        user_identifier (string): The username or email of the profile
-
-    Returns:
-        Response: JSON response with status of the account deletion
-    """
-    # Check if all required fields are present
-    if user_identifier is None:
-        logger.error('Missing required fields')
-        return jsonify({'error': 'Missing required fields'}), 400
-
-    result = ProfileManager.delete_account(user_identifier)
-    if 'error' in result:
-        logger.error(result['error'])
-        return jsonify({'error': result['error']}), 400
-    else:
-        return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
 

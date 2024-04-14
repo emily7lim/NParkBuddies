@@ -64,30 +64,3 @@ class ProfileManager:
                 return {'message': 'Email changed successfully'}
 
         return {'error': 'Email does not exist'}
-
-    @staticmethod
-    def delete_account(user_identifier):
-        """
-        Deletes a user's account with username or email, and all their bookings.
-        """
-        # Query the user's profile
-        profileDB = db.session.query(ProfileDB).filter((ProfileDB.username == user_identifier) | (ProfileDB.email == user_identifier)).first()
-
-        if profileDB:
-            # Query all bookings made by the user
-            bookings = db.session.query(BookingDB).filter(BookingDB.booker_id == profileDB.id).all()
-
-            # Cancel all bookings made by the user
-            for booking in bookings:
-                db.session.delete(booking)
-
-            # Delete the user's profile
-            db.session.delete(profileDB)
-            db.session.commit()
-            return {'message': 'Account and all associated bookings deleted successfully'}
-
-        return {'error': 'Username or email does not exist'}
-
-
-
-
