@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +25,19 @@ class ReviewPage extends StatefulWidget {
 
   @override
   State<ReviewPage> createState() => _ReviewPageState();
+
+  static String formatDateTime(String datetime) {
+    // Define the format string for parsing the datetime
+    String inputFormat = 'dd MMM yyyy h:mm a';
+
+    // Parse the datetime string using the input format
+    DateTime dateTime = DateFormat(inputFormat).parse(datetime, true);
+
+    // Formatting DateTime to the desired format
+    String formattedDate = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(dateTime);
+
+    return formattedDate;
+  }
 }
 
 class _ReviewPageState extends State<ReviewPage> {
@@ -39,49 +51,28 @@ class _ReviewPageState extends State<ReviewPage> {
     _username = Provider.of<UserData>(context, listen: false).username;
   }
 
-  String formatDateTime(String datetime){
-
-  DateTime dateTime = DateFormat('d MMM yyyy h:mm a').parse(datetime, true).toUtc();
-
-  // Formatting DateTime to the desired format
-  String formattedDate = DateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'").format(dateTime);
-
-  print(formattedDate);
-
-  return(formattedDate);
-}
-
   void _submitReview() async {
     final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
 
-    // final Map<String, dynamic> reviewData = {
-    //   'username': _username,
-    //   'park': widget.park,
-    //   'facility': widget.facility,
-    //   'datetime': widget.datetime,
-    //   'rating': _rating,
-    //   'comment': _reviewController.text.trim(),
-    // };
-    String rate = _rating.toString();
-  
+    int rate = _rating.toInt();
+    String date = ReviewPage.formatDateTime(widget.datetime);
+
     try {
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: jsonEncode(<String, String>{
+        body: jsonEncode({
           'username': _username,
           'park': widget.park,
           'facility': widget.facility,
-          'datetime': widget.datetime,
+          'datetime': date,
           'rating': rate,
           'comment': _reviewController.text.trim(),
         }),
       );
-
-      print('Response status: ${response.statusCode}');
-
+      print (response.statusCode);
       if (response.statusCode == 200) {
         showDialog(
           context: context,
