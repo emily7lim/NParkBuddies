@@ -81,15 +81,16 @@ class HomeManager:
                 }
 
     @staticmethod
-    def get_booked_timeslots(park_name, facility_name) -> dict:
-        """ Method to get booked timeslots
+    def get_available_timeslots(park_name, facility_name, date) -> dict:
+        """ Method to get available timeslots
 
         Args:
-            park_id (int): The id of the park
-            facility_id (int): The
+            park_name (string): The name of the park
+            facility_name (string): The name of the facility
+            date (datetime): The date of the booking
 
         Returns:
-            dict: A dictionary of the booked timeslots
+            dict: A dictionary of the available timeslots
         """
         park = [park for park in db.parks if park.get_name() == park_name][0]
         if park is None:
@@ -97,15 +98,19 @@ class HomeManager:
         facility = [facility for facility in park.get_facilities() if facility.get_name() == facility_name][0]
         if facility is None:
             return {'error': 'Facility not found'}
+        date = dt.strptime(date, '%d-%b-%Y')
+        # Create timeslots from 08:00 to 19:00
         timeslots = []
+        for i in range(8, 20):
+            timeslots.append(dt(date.year, date.month, date.day, i, 0, 0))
+
+        booked_timeslots = []
         for booking in db.bookings:
             if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
-                timeslots.append(booking.get_datetime())
-
-        if len(timeslots) == 0:
-            return {'info': 'No bookings'}
-        return {'booked timeslots': timeslots}
-
+                booked_timeslots.append(booking.get_datetime())
+        # Check if timeslot is available by removing booked timeslots
+        available_timeslots = [timeslot for timeslot in timeslots if timeslot not in booked_timeslots]
+        return {'available_timeslots': available_timeslots}
 
     @staticmethod
     def select_park(park_name) -> dict:

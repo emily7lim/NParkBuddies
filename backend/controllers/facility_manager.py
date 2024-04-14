@@ -25,7 +25,7 @@ class FacilityManager:
                                'name': facility.get_name(),
                                'park': facility.get_park().get_name(),
                                'type': facility.get_type().value,
-                               'avg_rating': facility.get_avg_rating(),
+                               'avg_rating': round(facility.get_avg_rating(), 1),
                                'num_ratings': facility.get_num_ratings()
                                })
 
@@ -61,7 +61,7 @@ class FacilityManager:
                                    'name': facility.get_name(),
                                    'park': facility.get_park().get_name(),
                                    'type': facility.get_type().value,
-                                   'avg_rating': facility.get_avg_rating(),
+                                   'avg_rating': round(facility.get_avg_rating(), 1),
                                    'num_ratings': facility.get_num_ratings()
                                    })
 

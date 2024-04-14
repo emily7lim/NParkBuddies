@@ -213,9 +213,9 @@ def render_homepage() -> str:
                 </tr>
                 <tr>
                     <td>GET</td>
-                    <td>/timeslots/&lt;park_name&gt;/&lt;facility_name&gt;</td>
-                    <td>Gets booked timeslots</td>
-                    <td>Example:<a href='/timeslots/East_Coast_Park/BBQ_Pit_47' target='_blank'>/timeslots/East_Coast_Park/BBQ_Pit_47</a></td>
+                    <td>/timeslots/&lt;park_name&gt;/&lt;facility_name&gt;/&lt;date&gt;</td>
+                    <td>Gets available timeslots</td>
+                    <td>Example:<a href='/timeslots/East_Coast_Park/BBQ_Pit_47/23-May-2025' target='_blank'>/timeslots/East_Coast_Park/BBQ_Pit_47/23-May-2025</a></td>
                 </tr>
                 <tr>
                     <td>GET</td>
@@ -438,13 +438,14 @@ def create_booking() -> Response:
         #logger.info('Booking created successfully: %s', booking['id'])
         return jsonify({'message': 'Booking created successfully', 'booking': booking}), 200
 
-@app.route('/timeslots/<string:park_name>/<string:facility_name>', methods=['GET'])
-def get_booked_timeslots(park_name, facility_name) -> Response:
+@app.route('/timeslots/<string:park_name>/<string:facility_name>/<string:date>', methods=['GET'])
+def get_available_timeslots(park_name, facility_name, date) -> Response:
     """ Method to get booked timeslots
 
     Args:
         park_name (string): The name of the park
         facility_name (string): The name of the facility
+        date (string): The date of the booking
 
     Returns:
         Response: JSON response with booked timeslots
@@ -452,12 +453,11 @@ def get_booked_timeslots(park_name, facility_name) -> Response:
     # Convert park name and facility name to title case from underscore case
     park_name = park_name.replace('_', ' ').title()
     facility_name = facility_name.replace('_', ' ').title().replace('Bbq', 'BBQ')
-    timeslots = HomeManager.get_booked_timeslots(park_name, facility_name)
+    timeslots = HomeManager.get_available_timeslots(park_name, facility_name, date)
     if 'error' in timeslots:
         logger.error(timeslots['error'])
         return jsonify({'error': timeslots['error']}), 400
     else:
-        #logger.info('Booked timeslots retrieved successfully: %s %s', park_name, facility_name)
         return jsonify(timeslots)
 
 @app.route('/weather', methods=['GET'])
@@ -542,7 +542,6 @@ def get_bookings(username) -> Response:
         logger.error(bookings['error'])
         return jsonify({'error': bookings['error']}), 400
     else:
-        #logger.info('Bookings retrieved successfully: %s', username)
         return jsonify(bookings)
 
 @app.route('/bookings/cancel', methods=['POST'])
@@ -575,7 +574,6 @@ def cancel_booking():
         logger.error(booking['error'])
         return jsonify({'error': booking['error']}), 404
     else:
-        #logger.info('Booking cancelled successfully: %s', booking['id'])
         return jsonify({'message': 'Booking cancelled successfully', 'booking': booking}), 200
 
 @app.route('/reviews', methods=['POST'])
@@ -604,7 +602,6 @@ def review_booking():
         logger.error(review['error'])
         return jsonify({'error': review['error']}), 404
     else:
-        #logger.info('Review added successfully: %s', review['id'])
         return jsonify({'message': 'Review added successfully', 'review': review}), 200
 
 # Facility routes
@@ -706,7 +703,6 @@ def view_reviews(park_name, facility_name):
         logger.error(reviews['error'])
         return jsonify({'error': reviews['error']}), 400
     else:
-        #logger.info('Reviews retrieved successfully: %s %s', park_name, facility_name)
         return jsonify(reviews), 200
 
 # Profile routes
@@ -737,7 +733,6 @@ def change_username() -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        #logger.info('Username changed successfully: %s', result['username'])
         return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
@@ -767,7 +762,6 @@ def change_email() -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        #logger.info('Email changed successfully: %s', result['email'])
         return jsonify({'message': 'Email changed successfully', 'profile': result}), 200
 
 @staticmethod
@@ -791,7 +785,6 @@ def delete_account(user_identifier) -> Response:
         logger.error(result['error'])
         return jsonify({'error': result['error']}), 400
     else:
-        #logger.info('Account deleted successfully: %s', result['username'])
         return jsonify({'message': 'Account deleted successfully'}), 200
 
 # Admin routes
@@ -1039,17 +1032,6 @@ server_initialized = False
 
 # Flag to check if the server has been shutdown
 server_shutdown = False
-
-#@app.before_request
-#def init_server(db):
-#    """ Method to initialize the server
-#    """
-#    global server_initialized
-#    if not server_initialized:
-#        logger.info('Initializing server...')
-#
-#        server_initialized = True
-#        logger.info('Server initialized')
 
 def trigger_request():
     """ Method to trigger a request to the server
