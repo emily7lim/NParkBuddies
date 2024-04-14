@@ -104,6 +104,9 @@ class FacilityManager:
 
         for booking in (b for b in db.bookings if b.get_park() == park and b.get_facility() == facility):
             booker = profile_dict.get(booking.get_booker())
+            if booker is None:
+                return {'error': 'Booker not found'}
+
             review = review_dict.get(booking.get_id())
 
             if booker and review:
