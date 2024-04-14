@@ -98,7 +98,6 @@ class FacilityManager:
         if facility is None:
             return {'error': 'Facility not found'}
 
-        booking_dict = {booking.get_id(): booking for booking in db.bookings}
         profile_dict = {profile.get_id(): profile for profile in db.profiles}
         review_dict = {review.get_id(): review for review in db.reviews}
 
