@@ -2433,3 +2433,84 @@
 2024-04-11 01:51:35,669 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00045s] ()
 2024-04-11 01:51:35,675 - sqlalchemy.engine.Engine  - INFO - COMMIT
 2024-04-11 01:51:35,677 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-13 17:19:13,633 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:19:13,633 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-13 17:19:13,635 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00056s] ()
+2024-04-13 17:19:13,635 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-13 17:19:13,635 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00063s] ()
+2024-04-13 17:19:13,639 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-13 17:19:13,640 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00083s] ()
+2024-04-13 17:19:13,641 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-13 17:19:13,642 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00061s] ()
+2024-04-13 17:19:13,675 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-13 17:19:13,675 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00063s] ()
+2024-04-13 17:19:13,688 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:19:13,688 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-13 17:19:14,532 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:19:14,532 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-13 17:19:14,532 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00062s] ()
+2024-04-13 17:19:14,548 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-13 17:19:14,548 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00065s] ()
+2024-04-13 17:19:14,550 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-13 17:19:14,550 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00062s] ()
+2024-04-13 17:19:14,553 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-13 17:19:14,553 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00073s] ()
+2024-04-13 17:19:14,590 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-13 17:19:14,590 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00081s] ()
+2024-04-13 17:19:14,610 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:19:14,612 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-13 17:19:47,963 - logger                    - INFO - Request to create booking: 2 4 15 2024-11-26T12:00:00
+2024-04-13 17:19:47,991 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:19:47,994 - sqlalchemy.engine.Engine  - INFO - INSERT INTO bookings (id, booker_id, datetime, cancelled, park_id, facility_id) VALUES (?, ?, ?, ?, ?, ?)
+2024-04-13 17:19:47,994 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00076s] (750, 2, '2024-11-26 12:00:00.000000', 0, 4, 15)
+2024-04-13 17:19:47,997 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:19:48,000 - logger                    - INFO - Booking created successfully: 750
+2024-04-13 17:19:48,002 - logger                    - INFO - Response: POST - Status Code: 200
+2024-04-13 17:19:48,002 - logger                    - INFO - Request: POST /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-13 17:36:13,980 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:36:13,982 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-13 17:36:13,983 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00054s] ()
+2024-04-13 17:36:13,985 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-13 17:36:13,987 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00122s] ()
+2024-04-13 17:36:13,989 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-13 17:36:13,991 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00053s] ()
+2024-04-13 17:36:13,992 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-13 17:36:13,992 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00052s] ()
+2024-04-13 17:36:14,035 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-13 17:36:14,035 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00050s] ()
+2024-04-13 17:36:14,047 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:36:14,047 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-13 17:36:38,604 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:36:38,605 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-13 17:36:38,607 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00087s] ()
+2024-04-13 17:36:38,608 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-13 17:36:38,609 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00088s] ()
+2024-04-13 17:36:38,613 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-13 17:36:38,614 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00088s] ()
+2024-04-13 17:36:38,616 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-13 17:36:38,616 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00045s] ()
+2024-04-13 17:36:38,646 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-13 17:36:38,647 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00085s] ()
+2024-04-13 17:36:38,662 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:36:38,662 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-13 17:36:43,170 - logger                    - INFO - Request to create booking: 3 4 12 2024-11-26T12:00:00
+2024-04-13 17:36:43,190 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 17:36:43,192 - sqlalchemy.engine.Engine  - INFO - INSERT INTO bookings (id, booker_id, datetime, cancelled, park_id, facility_id) VALUES (?, ?, ?, ?, ?, ?)
+2024-04-13 17:36:43,193 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00097s] (751, 3, '2024-11-26 12:00:00.000000', 0, 4, 12)
+2024-04-13 17:36:43,196 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 17:36:43,199 - logger                    - INFO - Booking created successfully: 751
+2024-04-13 17:36:43,201 - logger                    - INFO - Response: POST - Status Code: 200
+2024-04-13 17:36:43,201 - logger                    - INFO - Request: POST /bookings - Remote Address: 127.0.0.1 - User Agent: python-requests/2.31.0
+2024-04-13 22:27:40,045 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-13 22:27:40,047 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-13 22:27:40,048 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00118s] ()
+2024-04-13 22:27:40,050 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-13 22:27:40,050 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00108s] ()
+2024-04-13 22:27:40,053 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-13 22:27:40,054 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00072s] ()
+2024-04-13 22:27:40,057 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-13 22:27:40,057 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00085s] ()
+2024-04-13 22:27:40,112 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-13 22:27:40,112 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00077s] ()
+2024-04-13 22:27:40,127 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-13 22:27:40,128 - sqlalchemy.engine         - INFO - Database initialized
