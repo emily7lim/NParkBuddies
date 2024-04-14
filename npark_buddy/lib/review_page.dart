@@ -1,48 +1,69 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_const_declarations
-
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'btmNavBar.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+// UserProvider class to hold user data
+class UserProvider extends ChangeNotifier {
+  late String _username;
+
+  String get username => _username;
+
+  void setUsername(String username) {
+    _username = username;
+    notifyListeners();
+  }
+}
+
+// Function to log in the user
+void loginUser(BuildContext context, String username) {
+  final userProvider = Provider.of<UserProvider>(context, listen: false);
+  userProvider.setUsername(username);
+}
 
 class ReviewPage extends StatefulWidget {
+  const ReviewPage({
+    Key? key,
+    required this.facility,
+    required this.park,
+    required this.username,
+    required this.datetime,
+    required this.date,
+    required this.time,
+  }) : super(key: key);
+
   final String facility;
   final String park;
   final String username;
   final String datetime;
   final String date;
   final String time;
-  ReviewPage({super.key, required this.facility, required this.park, required this. username, required this.datetime, required this.date, required this.time});
 
   @override
-  State<ReviewPage> createState() => _ReviewPageState(facility: facility, park: park, username: username, datetime: datetime, date: date, time:time);
+  State<ReviewPage> createState() => _ReviewPageState();
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-  final String facility;
-  final String park;
-  final String username;
-  final String datetime;
-  final String date;
-  final String time;
-
+  late String _username;
   final _reviewController = TextEditingController();
   double _rating = 0.0;
 
   @override
-  _ReviewPageState({required this.facility, required this.park, required this.username, required this.datetime, required this.date, required this.time});
+  void initState() {
+    super.initState();
+    _username = Provider.of<UserProvider>(context, listen: false).username;
+  }
 
   void _submitReview() async {
     final String apiUrl = 'https://hookworm-solid-tahr.ngrok-free.app/reviews';
 
-    // Create a map representing the review data
     final Map<String, dynamic> reviewData = {
-      // 'username': 
-      // 'park':
-      // 'facility': 
-      // 'datetime':
+      'username': _username,
+      'park': widget.park,
+      'facility': widget.facility,
+      'datetime': widget.datetime,
       'rating': _rating,
       'comment': _reviewController.text.trim(),
     };
@@ -55,7 +76,7 @@ class _ReviewPageState extends State<ReviewPage> {
         },
         body: jsonEncode(reviewData),
       );
-      //success
+
       if (response.statusCode == 200) {
         showDialog(
           context: context,
@@ -65,9 +86,11 @@ class _ReviewPageState extends State<ReviewPage> {
               content: Text('Your review has been successfully uploaded.'),
               actions: [
                 TextButton(
-                  onPressed: (){ Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()));
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+                    );
                   },
                   child: Text('OK'),
                 ),
@@ -75,7 +98,6 @@ class _ReviewPageState extends State<ReviewPage> {
             );
           },
         );
-        //unsuccessful
       } else {
         showDialog(
           context: context,
@@ -85,9 +107,11 @@ class _ReviewPageState extends State<ReviewPage> {
               content: Text('Failed to upload review. Please try again later.'),
               actions: [
                 TextButton(
-                  onPressed: (){ Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()));
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+                    );
                   },
                   child: Text('OK'),
                 ),
@@ -97,7 +121,6 @@ class _ReviewPageState extends State<ReviewPage> {
         );
       }
     } catch (e) {
-      // Handle any errors that occur during the request
       print('Error submitting review: $e');
     }
   }
@@ -108,11 +131,9 @@ class _ReviewPageState extends State<ReviewPage> {
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       backgroundColor: Color(0xFCF9F9E8),
       body: SafeArea(
         child: Center(
@@ -120,26 +141,22 @@ class _ReviewPageState extends State<ReviewPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
                 Text(
                   'Rate and review',
-                  style:TextStyle(
+                  style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                  )
+                  ),
                 ),
-                SizedBox(height: 15,),
-
-
-                //Venue, Activity, Date and Time
-               Padding(
+                SizedBox(height: 15),
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: SizedBox(
-                    width: double.infinity, 
+                    width: double.infinity,
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black), 
-                        borderRadius: BorderRadius.circular(12), 
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
@@ -148,19 +165,19 @@ class _ReviewPageState extends State<ReviewPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                facility,
+                                widget.facility,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                park,
+                                widget.park,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'Date: $date',
+                                'Date: ${widget.date}',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                'Time: $time',
+                                'Time: ${widget.time}',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -170,11 +187,8 @@ class _ReviewPageState extends State<ReviewPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-
-
-              //Stars
-               RatingBar.builder(
+                SizedBox(height: 20),
+                RatingBar.builder(
                   minRating: 0,
                   itemSize: 60,
                   itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber),
@@ -184,92 +198,83 @@ class _ReviewPageState extends State<ReviewPage> {
                     });
                   },
                 ),
-              const SizedBox(height: 10),
-            
-              //Review textfield
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40.0,),
-                child: TextField(
-                  controller: _reviewController,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 12.0),
-                    alignLabelWithHint: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(12),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  child: TextField(
+                    controller: _reviewController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 12.0),
+                      alignLabelWithHint: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Leave a review',
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Leave a review',
-                    fillColor: Colors.white,
-                    filled: true,
                   ),
                 ),
-              ),
-              const SizedBox(height: 60),
-            
-    
-            
-              //Review button
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: GestureDetector(
-                  onTap: _submitReview, 
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.green[900],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Review',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
+                SizedBox(height: 60),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: GestureDetector(
+                    onTap: _submitReview,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green[900],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Review',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            SizedBox(height: 10),
-
-             //Back button
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: GestureDetector(
-                onTap: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()), 
-                );
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black),
-                    ),
-                  child: const Center(
-                    
-                    child: Text(
-                      'Back',
-                      style: TextStyle(color: Colors.black,
-                      fontSize: 30,
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Back',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-
-          
-            ],),
           ),
         ),
-      )
+      ),
     );
   }
 }
