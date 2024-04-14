@@ -213,10 +213,11 @@ class EditProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
                 height: 70,
@@ -301,6 +302,34 @@ class EditProfile extends StatelessWidget {
                       fontSize: 20, 
                       fontWeight: FontWeight.w500, 
                       color: Colors.white,
+                    ),
+                  )
+                  
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,15,0,0),
+              child: SizedBox(
+                width: 300,
+                height: 50,
+                child: OutlinedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFEFBEA),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )
+                  ),
+                  child: const Text(
+                    'Back',
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.w500, 
+                      color: Colors.black,
                     ),
                   )
                   

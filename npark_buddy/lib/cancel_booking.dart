@@ -124,10 +124,11 @@ class _CancelBookingState extends State<CancelBooking> {
     return Scaffold(
       backgroundColor: const Color(0xFCF9F9E8),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
               child: Image.asset(
                 'assets/logo.png',
                 height: 70,
