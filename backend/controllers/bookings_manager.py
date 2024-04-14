@@ -104,10 +104,12 @@ class BookingsManager:
         datetime = dt.strptime(datetime, '%a, %d %b %Y %H:%M:%S %Z')
         user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
         for booking in db.bookings:
-            if booking.get_booker().get_id() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
+            if booking.get_booker() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
                 review = Review(id=booking.get_id(), rating=rating, comment=comment)
-                booking.set_reviews(review)
+                booking.set_review(review)
                 reviewDB = ReviewDB(id=review.get_id(), rating=rating, comment=comment)
-                db.session.commit(reviewDB)
-                return review
+                db.session.add(reviewDB)
+                db.session.commit()
+                return {'rating': review.get_rating(),
+                        'comment': review.get_comment()}
         return {'error': 'Booking not found'}

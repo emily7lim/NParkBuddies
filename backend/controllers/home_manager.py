@@ -101,7 +101,7 @@ class HomeManager:
         date = dt.strptime(date, '%d-%b-%Y')
         # Create timeslots from 08:00 to 19:00
         timeslots = []
-        for i in range(8, 20):
+        for i in range(9, 20):
             timeslots.append(dt(date.year, date.month, date.day, i, 0, 0))
 
         booked_timeslots = []

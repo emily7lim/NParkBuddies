@@ -13,7 +13,7 @@ time = bookings['datetime'].str.split(' ', expand=True)[1]
 time = time.str.split(':', expand=True)[0] + ':00:00'
 
 # Restrict to 8am to 7pm, if time is outside this range, randomly select a time between 8am and 7pm
-time = time.apply(lambda x: x if '08:00:00' <= x <= '19:00:00' else f'{str(random.randint(8, 19)).zfill(2)}:00:00')
+time = time.apply(lambda x: x if '09:00:00' <= x <= '19:00:00' else f'{str(random.randint(8, 19)).zfill(2)}:00:00')
 
 # Combine date and time back together
 datetime = date + ' ' + time
