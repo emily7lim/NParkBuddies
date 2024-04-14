@@ -102,10 +102,12 @@ class FacilityManager:
             if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
                 booking_found = True
                 booking_id = booking.get_id()
+                booker = [profile for profile in db.profiles if profile.get_id() == booking.get_booker()][0]
                 for review in db.reviews:
                     if review.get_id() == booking_id:
                         reviews.append({'rating': review.get_rating(),
-                                        'comment': review.get_comment()
+                                        'comment': review.get_comment(),
+                                        'reviewer': booker.get_username()
                                         })
                         break
         if not booking_found:
