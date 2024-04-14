@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:npark_buddy/bookings.dart';
 import 'package:provider/provider.dart';
 import 'provider.dart';
 import 'btmNavBar.dart';
@@ -243,9 +244,9 @@ class _ReviewPageState extends State<ReviewPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pop(
                         context,
-                        MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
+                        MaterialPageRoute(builder: (context) => const Bookings()),
                       );
                     },
                     child: Container(
