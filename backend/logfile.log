@@ -4164,3 +4164,79 @@
 2024-04-14 16:33:11,955 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
 2024-04-14 16:33:43,407 - logger                    - INFO - Response: GET /parks - Status Code: 200
 2024-04-14 16:33:43,409 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:34:15,939 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:34:15,939 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:34:15,940 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:34:15,941 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:34:24,117 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:34:24,117 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:34:25,984 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:34:26,939 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:34:26,940 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:34:26,940 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:34:26,941 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:34:26,941 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:34:31,402 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:34:31,403 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:35:04,056 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:35:04,056 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:35:04,775 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:35:05,897 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:35:05,898 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:35:05,930 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:35:05,933 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:35:06,268 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:35:06,269 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:35:06,269 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:35:06,269 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:35:06,270 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:35:50,840 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:35:51,890 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:35:51,895 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:35:51,895 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:36:08,182 - logger                    - INFO - Response: POST /profiles/login - Status Code: 200
+2024-04-14 16:36:08,182 - logger                    - INFO - Request: POST /profiles/login - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:36:12,885 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:36:12,886 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:36:12,887 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:36:12,887 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:37:09,740 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:37:09,740 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:37:09,741 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:37:09,742 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:38:31,174 - logger                    - INFO - Response: POST /profiles/login - Status Code: 200
+2024-04-14 16:38:31,175 - logger                    - INFO - Request: POST /profiles/login - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:38:31,367 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:38:32,426 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:38:32,427 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:38:32,428 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:38:32,428 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:38:32,429 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:42:57,856 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:42:57,857 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:42:57,858 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:42:57,859 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:43:10,155 - logger                    - INFO - Response: GET /favicon.ico - Status Code: 404
+2024-04-14 16:43:10,155 - logger                    - INFO - Request: GET /favicon.ico - Remote Address: 116.15.173.26 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-14 16:44:00,939 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:44:00,939 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:44:00,942 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:44:00,942 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:45:41,111 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:45:41,112 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:45:41,114 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:45:41,115 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:46:01,969 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:46:03,284 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:46:03,286 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:46:03,287 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:46:03,287 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:46:03,288 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:47:04,851 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:47:04,853 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:47:04,853 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:47:04,854 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:47:21,596 - logger                    - INFO - Client IP address: 115.66.99.12
+2024-04-14 16:47:22,803 - logger                    - INFO - User location: 1.30099225, 103.7753332983043
+2024-04-14 16:47:22,810 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:47:22,811 - logger                    - INFO - Request: GET /facilities - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
