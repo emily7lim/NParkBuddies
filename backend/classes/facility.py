@@ -156,6 +156,15 @@ class Facility:
             else:
                 raise ValueError('Invalid reviews')
 
+    def add_rating(self, rating) -> None:
+        """ Method to add a rating to the facility
+
+        Args:
+            rating (int): rating to add
+        """
+        self.avg_rating = (self.avg_rating * self.num_ratings + rating) / (self.num_ratings + 1)
+        self.num_ratings += 1
+
 def convert_to_enum(value) -> FacilityType:
     """ Method to convert a string to an enum
     Args:

@@ -4,6 +4,7 @@ from classes.booking import Booking
 from classes.review import Review
 from database.database import Booking as BookingDB
 from database.database import Review as ReviewDB
+from database.database import Facility as FacilityDB
 
 class BookingsManager:
     """ Class to manage booking page"
@@ -108,8 +109,15 @@ class BookingsManager:
                 review = Review(id=booking.get_id(), rating=rating, comment=comment)
                 booking.set_review(review)
                 db.reviews.append(review)
-                reviewDB = ReviewDB(id=review.get_id(), rating=rating, comment=comment)
+                reviewDB = ReviewDB(id=review.get_id(), rating=rating, comment=comment, booking_id=booking.get_id(), facility_id=booking.get_facility().get_id())
                 db.session.add(reviewDB)
+                facility = [facility for facility in db.facilities if facility.get_id() == booking.get_facility().get_id()][0]
+                facility.set_reviews(review)
+                facility.add_rating(rating)
+                facilityDB = db.session.query(FacilityDB).filter(FacilityDB.id == facility.get_id()).first()
+                facilityDB.avg_rating = facility.get_avg_rating()
+                facilityDB.num_ratings = facility.get_num_ratings()
+                db.session.merge(facilityDB)
                 db.session.commit()
                 return {'rating': review.get_rating(),
                         'comment': review.get_comment()}
