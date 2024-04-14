@@ -4,4 +4,5 @@
 /env/Lib/site-packages
 backend/logfile.log
 *.log
+*.db
 flutter/

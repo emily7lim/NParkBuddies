@@ -498,10 +498,11 @@ def delete_profiles():
     session.commit()
     session.close()
 
-def insert_profiles_from_csv(profiles, bookings, reviews):
+def insert_profiles_from_csv(facilities, profiles, bookings, reviews):
     """ Method to insert profiles from a CSV file
 
     Args:
+        facilities (DataFrame): The facilities to insert into the database
         profiles (DataFrame): The profiles to insert into the database
         bookings (DataFrame): The bookings to insert into the database
         reviews (DataFrame): The reviews to insert into the database
@@ -511,6 +512,13 @@ def insert_profiles_from_csv(profiles, bookings, reviews):
 
     profiles.reset_index(drop=True, inplace=True)
     profiles.index += 1
+
+    for index, row in facilities.iterrows():
+        id = row['id']
+        avg_rating = row['avg_rating']
+        num_ratings = row['num_ratings']
+        sql = text('UPDATE facilities SET avg_rating = :avg_rating, num_ratings = :num_ratings WHERE id = :id')
+        session.execute(sql, {'id': id, 'avg_rating': avg_rating, 'num_ratings': num_ratings})
 
     for index, row in profiles.iterrows():
         id = index
@@ -547,6 +555,7 @@ if __name__ == '__main__':
     file_path = os.path.join(script_dir, 'Parks.geojson')
     parks = read_geojson(file_path)
 
+    facilities = pd.read_csv('facilities.csv', delimiter=',')
     profiles = pd.read_csv('profiles.csv', delimiter=',')
     bookings = pd.read_csv('bookings.csv', delimiter=',')
     reviews = pd.read_csv('reviews.csv', delimiter=',')
@@ -580,7 +589,7 @@ if __name__ == '__main__':
             delete_parks()
             insert_parks(parks)
             delete_profiles()
-            insert_profiles_from_csv(profiles, bookings, reviews)
+            insert_profiles_from_csv(facilities, profiles, bookings, reviews)
             create_geosjon_from_db()
         elif option == '0':
             exit()
