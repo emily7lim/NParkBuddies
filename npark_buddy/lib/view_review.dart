@@ -34,6 +34,7 @@ class ViewReviews extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
       appBar: AppBar(
+        leading: null,
         title: Row(
           children: [
             Padding(
