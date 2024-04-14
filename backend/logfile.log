@@ -3775,3 +3775,392 @@
 2024-04-14 16:13:35,655 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00039s] ()
 2024-04-14 16:13:35,665 - sqlalchemy.engine.Engine  - INFO - COMMIT
 2024-04-14 16:13:35,665 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-14 16:16:35,851 - logger                    - INFO - Response: POST /profiles/login - Status Code: 200
+2024-04-14 16:16:35,854 - logger                    - INFO - Request: POST /profiles/login - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:16:40,268 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:16:40,269 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:16:40,275 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:16:40,276 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:16:46,195 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:16:46,196 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:16:46,199 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:16:46,201 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:02,652 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:17:02,652 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:02,655 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:17:02,658 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:03,430 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:17:03,464 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:03,465 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:17:03,466 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:54,143 - logger                    - INFO - Response: GET /static/favicon.ico - Status Code: 304
+2024-04-14 16:17:54,143 - logger                    - INFO - Request: GET /static/favicon.ico - Remote Address: 115.66.99.12 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0
+2024-04-14 16:17:56,852 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:17:56,853 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:17:56,855 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:17:56,856 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:18:23,235 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:18:23,236 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:18:23,236 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:18:23,238 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:18:50,430 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:18:50,430 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:18:50,431 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:18:50,432 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:21,770 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:21,770 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:22,774 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:22,774 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:24,202 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:19:25,485 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:19:25,491 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:19:25,491 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:28,238 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:28,238 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:28,250 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:28,250 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:34,301 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:19:34,301 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:34,325 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:19:34,325 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:34,539 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:19:35,097 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:35,098 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:35,099 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:35,099 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:35,707 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:19:35,713 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:19:35,714 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:36,697 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:19:37,080 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:37,080 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:19:37,080 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:37,081 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:37,399 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:19:37,404 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:19:37,405 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:46,263 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:19:46,263 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:46,264 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:19:46,264 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:19:50,355 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-14 16:19:50,358 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-14 16:19:50,359 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00107s] ()
+2024-04-14 16:19:50,360 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-14 16:19:50,362 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00166s] ()
+2024-04-14 16:19:50,365 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-14 16:19:50,365 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00051s] ()
+2024-04-14 16:19:50,367 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-14 16:19:50,367 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00052s] ()
+2024-04-14 16:19:50,397 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-14 16:19:50,397 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00057s] ()
+2024-04-14 16:19:50,415 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-14 16:19:50,415 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-14 16:19:53,958 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:19:54,860 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:19:54,861 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:19:54,861 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:19:54,862 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:20:03,069 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:20:03,070 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:20:03,070 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:20:03,071 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:20:14,178 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-14 16:20:14,179 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-14 16:20:14,180 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00044s] ()
+2024-04-14 16:20:14,180 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-14 16:20:14,181 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00042s] ()
+2024-04-14 16:20:14,183 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-14 16:20:14,183 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00029s] ()
+2024-04-14 16:20:14,184 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-14 16:20:14,184 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00028s] ()
+2024-04-14 16:20:14,203 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-14 16:20:14,203 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00057s] ()
+2024-04-14 16:20:14,211 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-14 16:20:14,211 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-14 16:20:22,111 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:20:23,234 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:20:23,234 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:20:23,234 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:20:23,236 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:20:23,236 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:20:36,308 - logger                    - INFO - Response: POST /reviews/East Coast Park/BBQ Pit 48 - Status Code: 405
+2024-04-14 16:20:36,309 - logger                    - INFO - Request: POST /reviews/East Coast Park/BBQ Pit 48 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:20:53,587 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:20:53,588 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:01,260 - logger                    - INFO - Response: GET /reviews - Status Code: 200
+2024-04-14 16:21:01,261 - logger                    - INFO - Request: GET /reviews - Remote Address: 115.66.99.12 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0
+2024-04-14 16:21:07,155 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:21:07,155 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:09,548 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:21:09,549 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:09,552 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:21:09,553 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:09,984 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:21:10,695 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:21:10,697 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:21:10,698 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:21:10,698 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:21:10,699 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:12,751 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:21:12,752 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:29,410 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:21:29,410 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:30,697 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:21:31,970 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:21:31,971 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:21:31,972 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:21:31,972 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:21:31,973 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:41,407 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:21:41,408 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:41,432 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:21:41,433 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:21:43,317 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:21:44,528 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:21:44,528 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:21:44,529 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:21:44,529 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:21:44,530 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:22:13,535 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:22:13,535 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 116.15.173.26 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-14 16:22:24,288 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:22:24,289 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:22:24,290 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:22:24,291 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:22:25,003 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:22:26,252 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:22:26,259 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:22:26,259 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:22:26,259 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:22:26,260 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:13,198 - logger                    - INFO - Client IP address: 115.66.99.12
+2024-04-14 16:23:13,845 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:23:13,845 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:14,285 - logger                    - INFO - User location: 1.30099225, 103.7753332983043
+2024-04-14 16:23:14,291 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:23:14,291 - logger                    - INFO - Request: GET /facilities - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:15,904 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:23:17,542 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:23:17,543 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:17,557 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:23:17,558 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:17,812 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:23:17,813 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:23:17,813 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:23:17,814 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:23:17,814 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:18,762 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:18,763 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 41 - Status Code: 400
+2024-04-14 16:23:18,763 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:18,764 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 41 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:18,764 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 41 - Status Code: 400
+2024-04-14 16:23:18,764 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 41 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:18,964 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:23:19,661 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:23:19,662 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:23:19,662 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:23:19,663 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:23:19,664 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:21,921 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 43 - Status Code: 200
+2024-04-14 16:23:21,921 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 43 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:21,922 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 43 - Status Code: 200
+2024-04-14 16:23:21,923 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 43 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:26,985 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:26,985 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 45 - Status Code: 400
+2024-04-14 16:23:26,986 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:26,986 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 45 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:26,987 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 45 - Status Code: 400
+2024-04-14 16:23:26,988 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 45 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:29,135 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 44 - Status Code: 200
+2024-04-14 16:23:29,135 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 44 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:29,136 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 44 - Status Code: 200
+2024-04-14 16:23:29,137 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 44 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:31,584 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:31,584 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 50 - Status Code: 400
+2024-04-14 16:23:31,585 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 50 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:31,588 - logger                    - ERROR - No reviews found
+2024-04-14 16:23:31,589 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 50 - Status Code: 400
+2024-04-14 16:23:31,589 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 50 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:33,956 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 47 - Status Code: 200
+2024-04-14 16:23:33,957 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 47 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:23:33,958 - logger                    - INFO - Response: GET /reviews/East Coast Park/BBQ Pit 47 - Status Code: 200
+2024-04-14 16:23:33,959 - logger                    - INFO - Request: GET /reviews/East Coast Park/BBQ Pit 47 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:04,205 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:24:04,206 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:05,959 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-14 16:24:05,961 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-14 16:24:05,961 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00053s] ()
+2024-04-14 16:24:05,962 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-14 16:24:05,963 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00038s] ()
+2024-04-14 16:24:05,965 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-14 16:24:05,965 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00044s] ()
+2024-04-14 16:24:05,966 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-14 16:24:05,966 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00027s] ()
+2024-04-14 16:24:05,983 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-14 16:24:05,983 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00047s] ()
+2024-04-14 16:24:05,994 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-14 16:24:05,995 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-14 16:24:06,077 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:24:07,043 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:24:07,043 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:24:07,044 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:24:07,044 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:24:07,045 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:19,535 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:24:19,536 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:19,536 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:24:19,537 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:28,798 - logger                    - INFO - Response: GET /profiles - Status Code: 200
+2024-04-14 16:24:28,799 - logger                    - INFO - Request: GET /profiles - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-14 16:24:43,607 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:24:43,613 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-14 16:24:47,451 - logger                    - INFO - Response: POST /profiles/login - Status Code: 200
+2024-04-14 16:24:47,452 - logger                    - INFO - Request: POST /profiles/login - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:47,455 - logger                    - INFO - Response: POST /profiles/login - Status Code: 200
+2024-04-14 16:24:47,455 - logger                    - INFO - Request: POST /profiles/login - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:47,999 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:24:48,015 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:24:48,723 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:24:48,724 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:24:48,724 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:24:48,724 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:24:48,725 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:49,210 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:24:49,211 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:24:49,211 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:24:49,211 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:24:49,211 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:51,521 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:24:51,522 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:54,847 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:24:54,848 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:54,849 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:24:54,850 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:24:58,038 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:24:58,765 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:24:58,769 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:24:58,770 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:25:02,534 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:25:03,203 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:25:03,204 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:25:03,205 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:25:03,205 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:25:03,719 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:25:03,724 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:25:03,724 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:25:04,617 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:25:05,881 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:25:05,885 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:25:05,885 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:04,743 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:26:04,743 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:04,744 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:26:04,745 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:58,602 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:26:59,299 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:26:59,300 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:26:59,301 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:26:59,301 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:26:59,302 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:59,638 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:26:59,638 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:59,644 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:26:59,645 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:59,778 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:26:59,778 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:26:59,780 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:26:59,780 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:01,693 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:27:02,416 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:27:02,417 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:27:02,417 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:27:02,418 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:27:02,418 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:07,902 - logger                    - INFO - Response: POST /reviews/East Coast Park/BBQ Pit 48 - Status Code: 405
+2024-04-14 16:27:07,902 - logger                    - INFO - Request: POST /reviews/East Coast Park/BBQ Pit 48 - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:50,138 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:27:50,138 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:50,139 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:27:50,139 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:59,260 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:27:59,261 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:27:59,276 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:27:59,276 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:28:35,129 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:28:35,129 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:28:35,182 - logger                    - INFO - Response: GET /profiles/diontest/bookings - Status Code: 200
+2024-04-14 16:28:35,182 - logger                    - INFO - Request: GET /profiles/diontest/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:28:53,149 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-14 16:28:53,151 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-14 16:28:53,151 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00060s] ()
+2024-04-14 16:28:53,152 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-14 16:28:53,153 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00031s] ()
+2024-04-14 16:28:53,155 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-14 16:28:53,155 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00041s] ()
+2024-04-14 16:28:53,156 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-14 16:28:53,156 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00025s] ()
+2024-04-14 16:28:53,172 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-14 16:28:53,172 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00040s] ()
+2024-04-14 16:28:53,180 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-14 16:28:53,180 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-14 16:29:02,475 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:29:02,475 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:02,531 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:29:02,531 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:12,582 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:29:12,582 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:12,583 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:29:12,584 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:26,512 - logger                    - INFO - Response: GET /profiles/jingyi12/bookings - Status Code: 200
+2024-04-14 16:29:26,513 - logger                    - INFO - Request: GET /profiles/jingyi12/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:26,522 - logger                    - INFO - Response: GET /profiles/jingyi12/bookings - Status Code: 200
+2024-04-14 16:29:26,522 - logger                    - INFO - Request: GET /profiles/jingyi12/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:44,930 - logger                    - INFO - Response: GET /profiles/zhiyong78/bookings - Status Code: 200
+2024-04-14 16:29:44,930 - logger                    - INFO - Request: GET /profiles/zhiyong78/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:29:44,938 - logger                    - INFO - Response: GET /profiles/zhiyong78/bookings - Status Code: 200
+2024-04-14 16:29:44,939 - logger                    - INFO - Request: GET /profiles/zhiyong78/bookings - Remote Address: 116.15.173.26 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:30:40,539 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:30:40,540 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:31:18,701 - logger                    - INFO - Response: GET /timeslots/Sembawang_Park/BBQ_Pit_5/9-Feb-2025 - Status Code: 200
+2024-04-14 16:31:18,701 - logger                    - INFO - Request: GET /timeslots/Sembawang_Park/BBQ_Pit_5/9-Feb-2025 - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-14 16:32:15,637 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:15,637 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:15,638 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:15,638 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:24,820 - logger                    - INFO - Response: POST /reviews/ - Status Code: 404
+2024-04-14 16:32:24,820 - logger                    - INFO - Request: POST /reviews/ - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:30,408 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:30,409 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:30,411 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:30,412 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:45,675 - logger                    - INFO - Response: GET /reviews - Status Code: 200
+2024-04-14 16:32:45,675 - logger                    - INFO - Request: GET /reviews - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-14 16:32:55,807 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:55,808 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:32:55,808 - logger                    - INFO - Response: GET /profiles/rahul62/bookings - Status Code: 200
+2024-04-14 16:32:55,808 - logger                    - INFO - Request: GET /profiles/rahul62/bookings - Remote Address: 115.66.99.12 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:06,093 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:33:06,094 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:07,358 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:33:08,418 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:33:08,419 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:33:08,420 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:33:08,420 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:33:08,421 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:09,310 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:33:09,311 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:09,314 - logger                    - INFO - Response: GET /profiles/nparkadmin/bookings - Status Code: 200
+2024-04-14 16:33:09,314 - logger                    - INFO - Request: GET /profiles/nparkadmin/bookings - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:10,195 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:33:10,936 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-14 16:33:10,937 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:33:10,942 - logger                    - INFO - Response: GET /facilities - Status Code: 200
+2024-04-14 16:33:10,943 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:11,951 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-14 16:33:11,954 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-14 16:33:11,954 - logger                    - INFO - Weather warning: Warning! Expect showers this afternoon!
+2024-04-14 16:33:11,955 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-14 16:33:11,955 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-14 16:33:43,407 - logger                    - INFO - Response: GET /parks - Status Code: 200
+2024-04-14 16:33:43,409 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)

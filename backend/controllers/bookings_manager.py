@@ -38,8 +38,6 @@ class BookingsManager:
                                 'facility': booking.get_facility().get_name(),
                                 'cancelled': booking.get_cancelled()
                                 })
-        if len(bookings) == 0:
-            return {'info': 'No bookings found'}
         # Sort bookings by datetime
         bookings = sorted(bookings, key=lambda x: x['datetime'], reverse=True)
         # Split bookings into past and current bookings
@@ -103,6 +101,7 @@ class BookingsManager:
         Returns:
             Review: The review that was added
         """
+        datetime = dt.strptime(datetime, '%a, %d %b %Y %H:%M:%S %Z')
         user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
         for booking in db.bookings:
             if booking.get_booker().get_id() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
