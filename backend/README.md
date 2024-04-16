@@ -6,10 +6,6 @@ NParkBuddy is a server for managing parks and bookings.
 
 NParkBuddy provides functionalities for managing parks, facilities, user profiles, and bookings. It allows users to search for parks, view available facilities, make bookings, and more.
 
-## Documentation
-
-The full documentation for NParkBuddy can be found in the [documentation website](./build/html/index.html). Please refer to the documentation for detailed information on how to set up and use NParkBuddy.
-
 ## Installation
 
 To install NParkBuddy, you can follow these steps:
