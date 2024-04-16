@@ -3,12 +3,13 @@
 # Run the following command in the terminal:
 # pip install -r requirements.txt
 
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, render_template, make_response
 import requests
 import time
 import threading
 import signal
-import sys
+import os
+from pygtail import Pygtail
 from functools import wraps
 from geopy.geocoders import Nominatim
 from ip2geotools.databases.noncommercial import DbIpCity
@@ -26,6 +27,12 @@ from logger import prepare_logger
 app = Flask(__name__)
 
 logger = prepare_logger()
+
+offset_file_path = 'logfile.log.offset'
+
+# Reset the offset file
+if os.path.exists(offset_file_path):
+    os.remove(offset_file_path)
 
 # Log all requests
 @app.after_request
@@ -78,202 +85,33 @@ def hello() -> str:
     common_browsers = ['mozilla', 'chrome', 'safari', 'firefox', 'opera', 'edge']
 
     if any(common_browsers in user_agent for common_browsers in common_browsers):
-        page = render_homepage()
+        page = render_template('index.html')
     else:
         page = "Hello! Welcome to the NParkBuddy server!"
 
     return page
 
-def render_homepage() -> str:
-    """ Method to render the homepage
+# Log file route
 
-    Returns:
-        str: HTML content for the homepage
-    """
-    endpoints_summary = f"""
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>NParkBuddy Server</title>
-            <style>
-                body {{
-                    background-color: #2B512F;
-                    color: white;
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                }}
-                #header {{
-                    display: flex;
-                    align-items: center;
-                    margin: 10px;
-                }}
-                #logo {{
-                    width: 50px;
-                    height: auto;
-                }}
-                #title-container {{
-                    display: flex;
-                    flex-direction: column;
-                    margin-left: 15px;
-                }}
-                #content {{
-                    margin: 10px;
-                }}
-                h1 {{
-                    margin: 0;
-                    padding: 0;
-                    font-size: 24px;
-                }}
-                h2 {{
-                    margin: 0;
-                    padding: 0;
-                    font-size: 16px;
-                }}
-                table {{
-                    color: white;
-                    width: 100%;
-                    border-collapse: collapse;
-                }}
-                a {{
-                    color: #ADD8E6;
-                }}
-                caption {{
-                    font-size: 20px;
-                    font-weight: bold;
-                    margin-bottom: 10px;
-                }}
-                th, td {{
-                    padding: 8px;
-                    text-align: left;
-                    border-bottom: 1px solid white;
-                }}
-            </style>
-        </head>
-        <body>
-            <div id="header">
-                <img src="/static/favicon.ico" alt="NParkBuddy Logo">
-                <div id="title-container">
-                    <h1>NParkBuddy Server</h1>
-                </div>
-            </div>
-            <div id="content">
-            <p>Welcome to the NParkBuddy server!</p>
-            <p>Code for the NParkBuddy server can be found <a href="https://github.com/NParkBuddies/testing" target="_blank">here</a>.</p>
-            <p>Endpoints for the NParkBuddy server are as follows:</p>
-            </div>
-            <table>
-                <caption>Endpoints Summary</caption>
-                <tr>
-                    <th>Method</th>
-                    <th>Endpoint</th>
-                    <th>Description</th>
-                    <th>Example</th>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td><a href='/' target='_blank'>/</a></td>
-                    <td>Root endpoint</td>
-                    <td></td>
-                </tr>
-                    <td>POST</td>
-                    <td>/profiles/create</td>
-                    <td>Creates a new user account>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/profiles/login</td>
-                    <td>Logs in a user</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/profiles/&lt;username&gt;/change_password</td>
-                    <td>Changes a user's password</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td><a href='/parks' target='_blank'>/parks</a></td>
-                    <td>Gets all parks</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/parks/&lt;park_name&gt;</td>
-                    <td>Gets a park by name</td>
-                    <td>Example:<a href='/parks/East_Coast_Park' target='_blank'>/parks/East_Coast_Park</a></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/bookings</td>
-                    <td>Creates a booking</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/timeslots/&lt;park_name&gt;/&lt;facility_name&gt;/&lt;date&gt;</td>
-                    <td>Gets available timeslots</td>
-                    <td>Example:<a href='/timeslots/East_Coast_Park/BBQ_Pit_47/23-May-2025' target='_blank'>/timeslots/East_Coast_Park/BBQ_Pit_47/23-May-2025</a></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td><a href='/weather' target='_blank'>/weather</a></td>
-                    <td>Gets weather warning</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/profiles/&lt;username&gt;/bookings</td>
-                    <td>Gets all bookings by profile</td>
-                    <td>Example:<a href='/profiles/nparkadmin/bookings' target='_blank'>/profiles/nparkadmin/bookings</a></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/bookings/cancel</td>
-                    <td>Cancels a booking</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/reviews</td>
-                    <td>Reviews a booking</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td><a href='/facilities' target='_blank'>/facilities</a></td>
-                    <td>Gets all facilities</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/facilities/filter</td>
-                    <td>Filters facilities</td>
-                    <td>Example:<a href='/facilities/filter?type=BBQ_pit' target='_blank'>/facilities/filter?type=BBQ_pit</a></td>
-                </tr>
-                <tr>
-                    <td>GET</td>
-                    <td>/reviews/&lt;park_name&gt;/&lt;facility_name&gt;</td>
-                    <td>Views reviews</td>
-                    <td>Example:<a href='/reviews/East_Coast_Park/BBQ_Pit_47' target='_blank'>/reviews/East_Coast_Park/BBQ_Pit_47</a></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/profiles/&lt;username&gt;/change_username</td>
-                    <td>Changes a user's username</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>POST</td>
-                    <td>/profiles/&lt;username&gt;/change_email</td>
-                    <td>Changes a user's email</td>
-                    <td></td>
-                </tr>
-        </body>
-    </html>"""
-    return endpoints_summary
+@app.route('/get-log')
+def get_log():
+    log_file_path = 'logfile.log'
+    try:
+        with open(log_file_path, 'r') as file:
+            lines = file.readlines()
+        filtered_lines = [line for line in lines if 'get-log' not in line and 'log-viewer' not in line]
+        response = make_response(''.join(filtered_lines))
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'  # Prevent caching
+        response.headers['Pragma'] = 'no-cache'  # Legacy HTTP 1.0 backward compatibility
+        response.headers['Expires'] = '0'  # Proxies
+        return response
+    except IOError:
+        return "Log file not found.", 404
+
+@app.route('/log-viewer')
+def view_log():
+    """Render the HTML page that displays the log."""
+    return render_template('log_viewer.html')
 
 # Login routes
 

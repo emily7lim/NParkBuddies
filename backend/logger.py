@@ -1,6 +1,9 @@
 import logging
 import sys
 
+# Clean logfile
+open('logfile.log', 'w').close()
+
 # Create log format
 log_format = logging.Formatter('%(asctime)s - %(name)-25s - %(levelname)s - %(message)s')
 

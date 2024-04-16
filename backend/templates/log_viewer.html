@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>livelog</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #log {
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 10px;
+            overflow-y: auto;
+            height: 70vh; /* Use viewport height (vh) for responsive height */
+            white-space: pre-wrap; /* Preserve whitespaces and newlines */
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        /* Style for the refresh button */
+        .refresh-button {
+            background-color: #4caf50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Style for the filter input */
+        .filter-input {
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Log Updates</h1>
+    <button class="refresh-button" onclick="fetchLog()">Refresh Log</button>
+    <input type="text" class="filter-input" placeholder="Filter log..." oninput="filterLog(this.value)">
+    <div id="log"></div>
+    <script>
+        function fetchLog() {
+            const url = '/get-log?t=' + new Date().getTime();  // Append current timestamp
+            fetch(url)
+                .then(response => response.text())
+                .then(text => {
+                    const logElement = document.getElementById('log');
+                    logElement.innerText = text;
+                    logElement.scrollTop = logElement.scrollHeight; // Scroll to the bottom
+                })
+                .catch(err => console.error('Failed to fetch log:', err));
+        }
+
+        function filterLog(query) {
+            const log = document.getElementById('log').innerText;
+            const filteredLog = log.split('\n').filter(line => line.toLowerCase().includes(query.toLowerCase())).join('\n');
+            document.getElementById('log').innerText = filteredLog;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchLog();
+            setInterval(fetchLog, 5000); // Refresh the log every 5 seconds
+        });
+
+
+    </script>
+</body>
+</html>
