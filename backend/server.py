@@ -540,7 +540,7 @@ def view_reviews(park_name, facility_name):
 # Profile routes
 
 @app.route('/profiles/<string:username>/change_username', methods=['POST'])
-def change_username() -> Response:
+def change_username(username) -> Response:
     """Method to change a user's username
 
     Args:

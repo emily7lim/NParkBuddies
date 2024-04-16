@@ -1,309 +1,66 @@
-2024-04-16 19:34:53,834 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
-2024-04-16 19:34:53,835 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
-2024-04-16 19:34:53,837 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00129s] ()
-2024-04-16 19:34:53,838 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
-2024-04-16 19:34:53,838 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00051s] ()
-2024-04-16 19:34:53,840 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
-2024-04-16 19:34:53,840 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00047s] ()
-2024-04-16 19:34:53,842 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
-2024-04-16 19:34:53,842 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00062s] ()
-2024-04-16 19:34:53,859 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
-2024-04-16 19:34:53,859 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00056s] ()
-2024-04-16 19:34:53,867 - sqlalchemy.engine.Engine  - INFO - COMMIT
-2024-04-16 19:34:53,868 - sqlalchemy.engine         - INFO - Database initialized
-2024-04-16 19:34:53,924 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:34:53,925 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:34:58,303 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:34:58,303 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:34:58,409 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:34:58,409 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:00,999 - logger                    - INFO - Client IP address: 155.69.180.5
-2024-04-16 19:35:01,907 - logger                    - INFO - User location: 1.3487577, 103.6784309
-2024-04-16 19:35:01,908 - logger                    - INFO - Fetching weather warning for region: west
-2024-04-16 19:35:01,909 - logger                    - INFO - Weather warning: Warning! Expect showers tomorrow afternoon!
-2024-04-16 19:35:01,910 - logger                    - INFO - Response: GET /weather - Status Code: 200
-2024-04-16 19:35:01,910 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:03,443 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:03,443 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:09,295 - logger                    - INFO - Client IP address: 155.69.180.5
-2024-04-16 19:35:09,389 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:09,389 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:10,339 - logger                    - INFO - User location: 1.3487577, 103.6784309
-2024-04-16 19:35:10,343 - logger                    - INFO - Response: GET /facilities - Status Code: 200
-2024-04-16 19:35:10,344 - logger                    - INFO - Request: GET /facilities - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:14,398 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:14,398 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:19,387 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:19,387 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:25,266 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:25,266 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:30,450 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:30,451 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:35,637 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:35,637 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:40,703 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:40,703 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:45,816 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:45,816 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:51,165 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:51,165 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:35:56,278 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:35:56,278 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:01,675 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:01,675 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:06,740 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:06,740 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:11,835 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:11,836 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:16,946 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:16,946 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:22,049 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:22,049 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:27,136 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:27,136 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:30,590 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:36:30,590 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:30,698 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:30,698 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:35,749 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:35,750 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:40,752 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:40,752 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:45,764 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:45,764 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:50,771 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:50,772 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:36:55,781 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:36:55,782 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:01,522 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:01,522 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:06,599 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:06,599 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:11,662 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:11,662 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:16,726 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:16,727 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:21,800 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:21,800 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:27,181 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:27,182 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:32,260 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:32,260 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:37,335 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:37,336 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:42,462 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:42,462 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:46,483 - logger                    - INFO - Response: GET / - Status Code: 200
-2024-04-16 19:37:46,483 - logger                    - INFO - Request: GET / - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:46,562 - logger                    - INFO - Response: GET /static/favicon.ico - Status Code: 304
-2024-04-16 19:37:46,563 - logger                    - INFO - Request: GET /static/favicon.ico - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:46,564 - logger                    - INFO - Response: GET /static/styles.css - Status Code: 200
-2024-04-16 19:37:46,564 - logger                    - INFO - Request: GET /static/styles.css - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:47,528 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:47,528 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:48,476 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:37:48,476 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:48,584 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:48,584 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:52,588 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:52,589 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:53,584 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:53,585 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:37:57,662 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:57,663 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:37:58,586 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:37:58,586 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:38:02,716 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:02,717 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:07,801 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:07,801 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:12,858 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:12,858 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:17,917 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:17,918 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:22,963 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:22,963 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:28,081 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:28,082 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:33,142 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:33,143 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:38,207 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:38,207 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:43,258 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:43,258 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:48,376 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:48,376 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:53,471 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:53,471 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:38:58,467 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:38:58,467 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:03,469 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:03,469 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:08,485 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:08,486 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:13,494 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:13,494 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:18,496 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:18,497 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:23,515 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:23,515 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:28,922 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:28,923 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:34,018 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:34,018 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:39,071 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:39,072 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:44,152 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:44,152 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:49,168 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:49,168 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:54,449 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:54,449 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:39:59,535 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:39:59,535 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:04,800 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:04,801 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:09,951 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:09,951 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:15,048 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:15,048 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:20,126 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:20,127 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:25,202 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:25,202 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:30,274 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:30,274 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:35,357 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:35,358 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:40,425 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:40,426 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:45,498 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:45,499 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:50,675 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:50,676 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:40:55,744 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:40:55,745 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:00,817 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:00,817 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:05,881 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:05,882 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:11,017 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:11,017 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:16,109 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:16,110 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:21,051 - logger                    - INFO - Response: GET / - Status Code: 200
-2024-04-16 19:41:21,052 - logger                    - INFO - Request: GET / - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:21,112 - logger                    - INFO - Response: GET /static/styles.css - Status Code: 200
-2024-04-16 19:41:21,113 - logger                    - INFO - Response: GET /static/favicon.ico - Status Code: 304
-2024-04-16 19:41:21,113 - logger                    - INFO - Request: GET /static/styles.css - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:21,113 - logger                    - INFO - Request: GET /static/favicon.ico - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:21,607 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:21,608 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:23,177 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:41:23,177 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:23,290 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:23,291 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:27,274 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:27,274 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:27,374 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:27,374 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:28,284 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:28,285 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:32,445 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:32,446 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:33,284 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:33,285 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:37,713 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:37,713 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:38,296 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:38,296 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:43,258 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:43,258 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:43,507 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:43,507 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:48,329 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:48,329 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:48,591 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:48,591 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:53,423 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:53,423 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:53,718 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:53,718 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:58,495 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:58,495 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:41:58,819 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:41:58,819 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:03,818 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:03,818 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:03,890 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:03,890 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:09,234 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:42:09,234 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:09,282 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:09,283 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:09,535 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:09,536 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:09,536 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:09,537 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:14,283 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:14,283 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:14,650 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:14,651 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:14,669 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:14,670 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:19,284 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:19,285 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:19,782 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:19,782 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:19,806 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:19,807 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:24,283 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:24,284 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:24,910 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:24,910 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:24,982 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:24,982 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:29,364 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:29,365 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1
-2024-04-16 19:42:30,045 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:30,046 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:30,046 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:30,046 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:35,124 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:35,126 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:35,126 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:35,126 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:40,237 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:40,237 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:40,267 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:40,267 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:45,341 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:45,342 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:45,343 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:45,343 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:50,417 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:50,418 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:42:51,138 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:42:51,138 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:27,889 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:44:27,889 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:28,014 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:28,015 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:31,454 - logger                    - INFO - Response: GET /parks - Status Code: 200
-2024-04-16 19:44:31,454 - logger                    - INFO - Request: GET /parks - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:32,958 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:32,959 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:38,036 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:38,036 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:41,460 - logger                    - INFO - Response: GET /log-viewer - Status Code: 200
-2024-04-16 19:44:41,460 - logger                    - INFO - Request: GET /log-viewer - Remote Address: 149.154.161.198 - User Agent: TelegramBot (like TwitterBot)
-2024-04-16 19:44:43,046 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:43,046 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:48,115 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:48,116 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:53,239 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:53,240 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:44:58,481 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:44:58,481 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
-2024-04-16 19:45:03,807 - logger                    - INFO - Response: GET /get-log - Status Code: 200
-2024-04-16 19:45:03,808 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:04,991 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-16 21:57:04,992 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM parks
+2024-04-16 21:57:04,993 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00066s] ()
+2024-04-16 21:57:04,994 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM facilities
+2024-04-16 21:57:04,995 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00047s] ()
+2024-04-16 21:57:04,996 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM profiles
+2024-04-16 21:57:04,998 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00045s] ()
+2024-04-16 21:57:04,998 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM bookings
+2024-04-16 21:57:04,999 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00044s] ()
+2024-04-16 21:57:05,020 - sqlalchemy.engine.Engine  - INFO - SELECT * FROM reviews
+2024-04-16 21:57:05,021 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00067s] ()
+2024-04-16 21:57:05,029 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-16 21:57:05,030 - sqlalchemy.engine         - INFO - Database initialized
+2024-04-16 21:57:05,133 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:05,134 - logger                    - INFO - Request: GET /get-log - Remote Address: 180.129.88.249 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-16 21:57:05,142 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:05,142 - logger                    - INFO - Request: GET /get-log - Remote Address: 180.129.88.249 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-16 21:57:05,147 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:05,147 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:10,231 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:10,232 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:15,298 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:15,299 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:20,366 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:20,366 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:25,446 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:25,447 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:30,522 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:30,523 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:35,594 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:35,595 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:40,684 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:40,685 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:45,786 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:45,786 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:47,799 - sqlalchemy.engine.Engine  - INFO - BEGIN (implicit)
+2024-04-16 21:57:47,802 - sqlalchemy.engine.Engine  - INFO - SELECT profiles.id AS profiles_id, profiles.username AS profiles_username, profiles.email AS profiles_email, profiles.password AS profiles_password 
+FROM profiles 
+WHERE profiles.id = ?
+ LIMIT ? OFFSET ?
+2024-04-16 21:57:47,802 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00070s] (151, 1, 0)
+2024-04-16 21:57:47,806 - sqlalchemy.engine.Engine  - INFO - UPDATE profiles SET username=? WHERE profiles.id = ?
+2024-04-16 21:57:47,807 - sqlalchemy.engine.Engine  - INFO - [generated in 0.00053s] ('diontest2', 151)
+2024-04-16 21:57:47,810 - sqlalchemy.engine.Engine  - INFO - COMMIT
+2024-04-16 21:57:47,813 - logger                    - INFO - Response: POST /profiles/<string:username>/change_username - Status Code: 200
+2024-04-16 21:57:47,813 - logger                    - INFO - Request: POST /profiles/<string:username>/change_username - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-16 21:57:48,032 - logger                    - INFO - Client IP address: 155.69.181.16
+2024-04-16 21:57:49,361 - logger                    - INFO - User location: 1.3487577, 103.6784309
+2024-04-16 21:57:49,362 - logger                    - INFO - Fetching weather warning for region: west
+2024-04-16 21:57:49,362 - logger                    - INFO - Weather warning: Warning! Expect showers tomorrow afternoon!
+2024-04-16 21:57:49,363 - logger                    - INFO - Response: GET /weather - Status Code: 200
+2024-04-16 21:57:49,363 - logger                    - INFO - Request: GET /weather - Remote Address: 155.69.181.16 - User Agent: Dart/3.3 (dart:io)
+2024-04-16 21:57:50,861 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:50,861 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:57:55,939 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:57:55,940 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:58:00,990 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:58:00,991 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:58:02,326 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:58:02,326 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:58:02,326 - logger                    - INFO - Request: GET /get-log - Remote Address: 180.129.88.249 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-16 21:58:02,326 - logger                    - INFO - Request: GET /get-log - Remote Address: 180.129.88.249 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+2024-04-16 21:58:06,065 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:58:06,066 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
+2024-04-16 21:58:11,162 - logger                    - INFO - Response: GET /get-log - Status Code: 200
+2024-04-16 21:58:11,162 - logger                    - INFO - Request: GET /get-log - Remote Address: 155.69.180.5 - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0
