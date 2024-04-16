@@ -9,7 +9,6 @@ import time
 import threading
 import signal
 import os
-from pygtail import Pygtail
 from functools import wraps
 from geopy.geocoders import Nominatim
 from ip2geotools.databases.noncommercial import DbIpCity

@@ -142,14 +142,14 @@ def calculate_distance(lat1, lat2, lon1, lon2):
         lon2_rad = radians(lon2)
 
         # Radius of the Earth in km
-        R = 6371.0
+        R = 6373.0
 
         # Calculate the difference between in latitude and longitude
-        dlat = lat2_rad - lat1_rad
-        dlon = lon2_rad - lon1_rad
+        dlat = abs(lat2_rad - lat1_rad)
+        dlon = abs(lon2_rad - lon1_rad)
 
         # Calculate the distance between the two points using the Haversine formula
-        a = sin(dlat / 2)**2 + cos(lat1_rad) * cos(lat2_rad) * sin(dlon / 2)**2
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
         distance = R * c
 

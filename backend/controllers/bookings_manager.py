@@ -106,6 +106,8 @@ class BookingsManager:
         user_id = [profile.get_id() for profile in db.profiles if profile.get_username() == username][0]
         for booking in db.bookings:
             if booking.get_booker() == user_id and booking.get_park().get_name() == park and booking.get_facility().get_name() == facility and booking.get_datetime() == datetime:
+                if booking.get_review() is not None:
+                    return {'error': 'Review already exists'}
                 review = Review(id=booking.get_id(), rating=rating, comment=comment)
                 booking.set_review(review)
                 db.reviews.append(review)
