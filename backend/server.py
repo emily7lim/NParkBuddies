@@ -568,7 +568,7 @@ def change_username(username) -> Response:
         return jsonify({'message': 'Username changed successfully', 'profile': result}), 200
 
 @app.route('/profiles/<string:username>/change_email', methods=['POST'])
-def change_email() -> Response:
+def change_email(username) -> Response:
     """Method to change a user's email
 
     Args:

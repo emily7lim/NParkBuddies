@@ -106,7 +106,7 @@ class HomeManager:
 
         booked_timeslots = []
         for booking in db.bookings:
-            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id():
+            if booking.get_park().get_id() == park.get_id() and booking.get_facility().get_id() == facility.get_id() and booking.get_cancelled() is False:
                 booked_timeslots.append(booking.get_datetime())
         # Check if timeslot is available by removing booked timeslots
         available_timeslots = [timeslot for timeslot in timeslots if timeslot not in booked_timeslots]

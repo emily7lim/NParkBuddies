@@ -2,40 +2,40 @@
 |-- README.md
 |-- application_skeleton.txt
 |-- backend
-|   |               `-- API endpoints.xlsx
-|   |               `-- Makefile
-|   |               `-- README.md
-|   |               `-- __init__.py
-|   |               `-- __pycache__
+|   |-- API endpoints.xlsx
+|   |-- Makefile
+|   |-- README.md
+|   |-- __init__.py
+|   |-- __pycache__
 |   |-- classes
-|   |   |           `-- __init__.py
-|   |   |           `-- __pycache__
-|   |   |           `-- booking.py
-|   |   |           `-- facility.py
-|   |   |           `-- park.py
-|   |   |           `-- profile.py
-|   |   |           `-- review.py
-|   |               `-- weather.py
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |-- booking.py
+|   |   |-- facility.py
+|   |   |-- park.py
+|   |   |-- profile.py
+|   |   |-- review.py
+|   |   `-- weather.py
 |   |-- controllers
-|   |   |           `-- __init__.py
-|   |   |           `-- __pycache__
-|   |   |           `-- bookings_manager.py
-|   |   |           `-- facility_manager.py
-|   |   |           `-- home_manager.py
-|   |   |           `-- login_manager.py
-|   |   |           `-- profile_manager.py
-|   |               `-- weather_manager.py
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |-- bookings_manager.py
+|   |   |-- facility_manager.py
+|   |   |-- home_manager.py
+|   |   |-- login_manager.py
+|   |   |-- profile_manager.py
+|   |   `-- weather_manager.py
 |   |-- data_store.py
 |   |-- database
-|   |   |           `-- Parks.geojson
-|   |   |           `-- __init__.py
-|   |   |           `-- __pycache__
-|   |   |           `-- bookings.csv
-|   |   |           `-- bookings_changer.py
-|   |   |           `-- database.py
-|   |   |           `-- facilities.csv
-|   |   |           `-- llama
-|   |   |           `-- llama
+|   |   |-- Parks.geojson
+|   |   |-- __init__.py
+|   |   |-- __pycache__
+|   |   |-- bookings.csv
+|   |   |-- bookings_changer.py
+|   |   |-- database.py
+|   |   |-- facilities.csv
+|   |   |-- llama
+|   |   |   `-- llama
 |   |   |-- loader.py
 |   |   |-- parks.csv
 |   |   |-- profiles.csv
@@ -49,18 +49,22 @@
 |   |-- selected_parks.geojson
 |   |-- server.py
 |   |-- static
-|   |   `-- favicon.ico
+|   |   |-- favicon.ico
+|   |   `-- styles.css
+|   |-- templates
+|   |   |-- index.html
+|   |   `-- log_viewer.html
 |   `-- test.py
 `-- npark_buddy
     |-- README.md
     |-- analysis_options.yaml
     |-- android
     |   |-- app
-    |   |   |       `-- build.gradle
-    |   |           `-- src
+    |   |   |-- build.gradle
+    |   |   `-- src
     |   |-- build.gradle
     |   |-- gradle
-    |   |           `-- wrapper
+    |   |   `-- wrapper
     |   |-- gradle.properties
     |   |-- gradlew
     |   |-- gradlew.bat
@@ -84,63 +88,63 @@
     |   `-- tent.png
     |-- build
     |   |-- 030438bb0e01a0e8625b449acc02de1f
-    |   |   |       `-- _composite.stamp
-    |   |   |       `-- gen_dart_plugin_registrant.stamp
-    |   |           `-- gen_localizations.stamp
+    |   |   |-- _composite.stamp
+    |   |   |-- gen_dart_plugin_registrant.stamp
+    |   |   `-- gen_localizations.stamp
     |   |-- 129fe64d39a60f20f40290b7a749e2dc.cache.dill.track.dill
     |   |-- 637cfb43dc16fd18b5142e746e8882fb
-    |   |   |       `-- _composite.stamp
-    |   |   |       `-- gen_dart_plugin_registrant.stamp
-    |   |           `-- gen_localizations.stamp
+    |   |   |-- _composite.stamp
+    |   |   |-- gen_dart_plugin_registrant.stamp
+    |   |   `-- gen_localizations.stamp
     |   |-- app
-    |   |   |       `-- generated
-    |   |   |       `-- intermediates
-    |   |   |       `-- outputs
-    |   |           `-- tmp
+    |   |   |-- generated
+    |   |   |-- intermediates
+    |   |   |-- outputs
+    |   |   `-- tmp
     |   |-- flutter_assets
-    |   |   |       `-- AssetManifest.bin
-    |   |   |       `-- AssetManifest.bin.json
-    |   |   |       `-- AssetManifest.json
-    |   |   |       `-- FontManifest.json
-    |   |   |       `-- NOTICES
-    |   |   |       `-- assets
-    |   |   |       `-- fonts
-    |   |   |       `-- packages
-    |   |           `-- shaders
+    |   |   |-- AssetManifest.bin
+    |   |   |-- AssetManifest.bin.json
+    |   |   |-- AssetManifest.json
+    |   |   |-- FontManifest.json
+    |   |   |-- NOTICES
+    |   |   |-- assets
+    |   |   |-- fonts
+    |   |   |-- packages
+    |   |   `-- shaders
     |   |-- flutter_plugin_android_lifecycle
-    |   |   |       `-- generated
-    |   |   |       `-- intermediates
-    |   |   |       `-- outputs
-    |   |           `-- tmp
+    |   |   |-- generated
+    |   |   |-- intermediates
+    |   |   |-- outputs
+    |   |   `-- tmp
     |   `-- google_maps_flutter_android
-    |       |       `-- generated
-    |       |       `-- intermediates
-    |       |       `-- outputs
-    |               `-- tmp
+    |       |-- generated
+    |       |-- intermediates
+    |       |-- outputs
+    |       `-- tmp
     |-- ios
     |   |-- Flutter
-    |   |   |       `-- AppFrameworkInfo.plist
-    |   |   |       `-- Debug.xcconfig
-    |   |   |       `-- Generated.xcconfig
-    |   |   |       `-- Release.xcconfig
-    |   |           `-- flutter_export_environment.sh
+    |   |   |-- AppFrameworkInfo.plist
+    |   |   |-- Debug.xcconfig
+    |   |   |-- Generated.xcconfig
+    |   |   |-- Release.xcconfig
+    |   |   `-- flutter_export_environment.sh
     |   |-- Runner
-    |   |   |       `-- AppDelegate.swift
-    |   |   |       `-- Assets.xcassets
-    |   |   |       `-- Base.lproj
-    |   |   |       `-- GeneratedPluginRegistrant.h
-    |   |   |       `-- GeneratedPluginRegistrant.m
-    |   |   |       `-- Info.plist
-    |   |           `-- Runner-Bridging-Header.h
+    |   |   |-- AppDelegate.swift
+    |   |   |-- Assets.xcassets
+    |   |   |-- Base.lproj
+    |   |   |-- GeneratedPluginRegistrant.h
+    |   |   |-- GeneratedPluginRegistrant.m
+    |   |   |-- Info.plist
+    |   |   `-- Runner-Bridging-Header.h
     |   |-- Runner.xcodeproj
-    |   |   |       `-- project.pbxproj
-    |   |   |       `-- project.xcworkspace
-    |   |           `-- xcshareddata
+    |   |   |-- project.pbxproj
+    |   |   |-- project.xcworkspace
+    |   |   `-- xcshareddata
     |   |-- Runner.xcworkspace
-    |   |   |       `-- contents.xcworkspacedata
-    |   |           `-- xcshareddata
+    |   |   |-- contents.xcworkspacedata
+    |   |   `-- xcshareddata
     |   `-- RunnerTests
-    |               `-- RunnerTests.swift
+    |       `-- RunnerTests.swift
     |-- lib
     |   |-- allStyle.dart
     |   |-- bookings.dart
@@ -161,8 +165,8 @@
     |   |-- review_page.dart
     |   |-- select_datetime.dart
     |   |-- src
-    |   |   |       `-- locations.dart
-    |   |           `-- locations.g.dart
+    |   |   |-- locations.dart
+    |   |   `-- locations.g.dart
     |   |-- view_facility.dart
     |   |-- view_review.dart
     |   `-- weather.dart
@@ -173,53 +177,53 @@
     |   `-- my_application.h
     |-- macos
     |   |-- Flutter
-    |   |   |       `-- Flutter-Debug.xcconfig
-    |   |   |       `-- Flutter-Release.xcconfig
-    |   |   |       `-- GeneratedPluginRegistrant.swift
-    |   |           `-- ephemeral
+    |   |   |-- Flutter-Debug.xcconfig
+    |   |   |-- Flutter-Release.xcconfig
+    |   |   |-- GeneratedPluginRegistrant.swift
+    |   |   `-- ephemeral
     |   |-- Runner
-    |   |   |       `-- AppDelegate.swift
-    |   |   |       `-- Assets.xcassets
-    |   |   |       `-- Base.lproj
-    |   |   |       `-- Configs
-    |   |   |       `-- DebugProfile.entitlements
-    |   |   |       `-- Info.plist
-    |   |   |       `-- MainFlutterWindow.swift
-    |   |           `-- Release.entitlements
+    |   |   |-- AppDelegate.swift
+    |   |   |-- Assets.xcassets
+    |   |   |-- Base.lproj
+    |   |   |-- Configs
+    |   |   |-- DebugProfile.entitlements
+    |   |   |-- Info.plist
+    |   |   |-- MainFlutterWindow.swift
+    |   |   `-- Release.entitlements
     |   |-- Runner.xcodeproj
-    |   |   |       `-- project.pbxproj
-    |   |   |       `-- project.xcworkspace
-    |   |           `-- xcshareddata
+    |   |   |-- project.pbxproj
+    |   |   |-- project.xcworkspace
+    |   |   `-- xcshareddata
     |   |-- Runner.xcworkspace
-    |   |   |       `-- contents.xcworkspacedata
-    |   |           `-- xcshareddata
+    |   |   |-- contents.xcworkspacedata
+    |   |   `-- xcshareddata
     |   `-- RunnerTests
-    |               `-- RunnerTests.swift
+    |       `-- RunnerTests.swift
     |-- pubspec.lock
     |-- pubspec.yaml
     |-- web
     |   |-- favicon.png
     |   |-- icons
-    |   |   |       `-- Icon-192.png
-    |   |   |       `-- Icon-512.png
-    |   |   |       `-- Icon-maskable-192.png
-    |   |           `-- Icon-maskable-512.png
+    |   |   |-- Icon-192.png
+    |   |   |-- Icon-512.png
+    |   |   |-- Icon-maskable-192.png
+    |   |   `-- Icon-maskable-512.png
     |   |-- index.html
     |   `-- manifest.json
     `-- windows
         |-- CMakeLists.txt
         `-- runner
-            |       `-- CMakeLists.txt
-            |       `-- Runner.rc
-            |       `-- flutter_window.cpp
-            |       `-- flutter_window.h
-            |       `-- main.cpp
-            |       `-- resource.h
-            |       `-- resources
-            |       `-- runner.exe.manifest
-            |       `-- utils.cpp
-            |       `-- utils.h
-            |       `-- win32_window.cpp
-                    `-- win32_window.h
+            |-- CMakeLists.txt
+            |-- Runner.rc
+            |-- flutter_window.cpp
+            |-- flutter_window.h
+            |-- main.cpp
+            |-- resource.h
+            |-- resources
+            |-- runner.exe.manifest
+            |-- utils.cpp
+            |-- utils.h
+            |-- win32_window.cpp
+            `-- win32_window.h
 
-73 directories, 149 files
+74 directories, 152 files
