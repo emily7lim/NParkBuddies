@@ -84,7 +84,7 @@ class _ReviewPageState extends State<ReviewPage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
                     );
@@ -96,6 +96,7 @@ class _ReviewPageState extends State<ReviewPage> {
           },
         );
       } else {
+        print(response.statusCode);
         showDialog(
           context: context,
           builder: (context) {
@@ -105,10 +106,7 @@ class _ReviewPageState extends State<ReviewPage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const BottomNavigationBarExampleApp()),
-                    );
+                    Navigator.pop(context);
                   },
                   child: const Text('OK'),
                 ),

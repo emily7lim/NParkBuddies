@@ -29,6 +29,8 @@ Future<void> changeUsername(BuildContext context, String old_username, String ne
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()));
     } else {
       // username or email exists
+      print(response.body);
+      print(response.statusCode);
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -65,8 +67,8 @@ Future<void> changeEmail(BuildContext context, String old_email, String new_emai
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'old_username': old_email,
-        'new_username': new_email,
+        'old_email': old_email,
+        'new_email': new_email,
       }),
     );
 
@@ -76,6 +78,8 @@ Future<void> changeEmail(BuildContext context, String old_email, String new_emai
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavigationBarExampleApp()));
     } else {
       // username or email exists
+      print(response.statusCode);
+      print(response.body);
       showDialog(
         context: context,
         builder: (BuildContext context) {
