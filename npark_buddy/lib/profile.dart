@@ -18,8 +18,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String username = Provider.of<UserData>(context, listen:true).username;
-    String email = Provider.of<UserData>(context, listen:true).email;
+    String username = Provider.of<UserData>(context, listen:false).username;
+    String email = Provider.of<UserData>(context, listen:false).email;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFEFBEA),
